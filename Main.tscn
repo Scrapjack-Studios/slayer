@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Map1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Tank.tscn" type="PackedScene" id=4]
+
+[node name="Main" type="Node"]
+
+script = ExtResource( 1 )
+Map = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 3 )]
+
+margin_right = 335.0
+margin_bottom = 52.0
+
+[node name="Map1" parent="." instance=ExtResource( 2 )]
+
+[node name="Tank" parent="." instance=ExtResource( 4 )]
+
+position = Vector2( -145.992, 667.923 )
+
+[connection signal="health_changed" from="Tank" to="CanvasLayer/HUD" method="_on_health_changed"]
+
+
