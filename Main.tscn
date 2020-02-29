@@ -3,7 +3,7 @@
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Map1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Tank.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://art/onlyObjects_retina.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -19,7 +19,7 @@ Map = ExtResource( 2 )
 margin_right = 335.0
 margin_bottom = 52.0
 
-[node name="Tank" parent="." instance=ExtResource( 4 )]
+[node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 485.936, 312.503 )
 
 [node name="Platform2" type="StaticBody2D" parent="."]
@@ -79,4 +79,4 @@ scale = Vector2( 8.07433, 1.63333 )
 texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 40, 60, 30, 30 )
-[connection signal="health_changed" from="Tank" to="CanvasLayer/HUD" method="_on_health_changed"]
+[connection signal="health_changed" from="Player" to="CanvasLayer/HUD" method="_on_health_changed"]
