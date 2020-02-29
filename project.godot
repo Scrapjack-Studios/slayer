@@ -15,9 +15,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Tank Battle"
+config/name="Slayer"
 run/main_scene="res://Main.tscn"
-config/icon="res://tank_icon.png"
+config/icon="res://icon.png"
 
 [gdnative]
 
