@@ -10,7 +10,7 @@ export (int) var start_health
 export (float) var bullet_lifetime
 # Member variables
 # Member variables
-const GRAVITY = 600.0 # pixels/second/second
+const GRAVITY = 1000.0 # pixels/second/second
 
 # Angle in degrees towards either side that the player can consider "floor"
 const FLOOR_ANGLE_TOLERANCE = 40
@@ -18,7 +18,7 @@ const WALK_FORCE = 1200
 const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 200
 const STOP_FORCE = 1300
-const JUMP_SPEED = 400
+const JUMP_SPEED = 600
 const JUMP_MAX_AIRBORNE_TIME = 0.4
 
 var velocity = Vector2()
