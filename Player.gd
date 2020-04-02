@@ -10,7 +10,7 @@ export (int) var start_health
 export (float) var bullet_lifetime
 # Member variables
 # Member variables
-const GRAVITY = 1000.0 # pixels/second/second
+const GRAVITY = 1300.0 # pixels/second/second
 
 # Angle in degrees towards either side that the player can consider "floor"
 const FLOOR_ANGLE_TOLERANCE = 40
