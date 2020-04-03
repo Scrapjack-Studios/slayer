@@ -19,6 +19,7 @@ margin_bottom = 52.0
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 485.936, 312.503 )
+collision/safe_margin = 2.0
 
 [node name="Platform2" type="StaticBody2D" parent="."]
 position = Vector2( 713.506, 319.07 )
