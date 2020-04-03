@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://art/onlyObjects_retina_rotated.png" type="Texture" id=3]
+[ext_resource path="res://art/onlyObjects_retina.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 35.385, 35.24 )
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 459.615, 294.24 )
+collision_layer = 5
+collision_mask = 5
+collision/safe_margin = 0.001
+script = ExtResource( 1 )
+Bullet = ExtResource( 2 )
+rot_speed = 1
+damage = 10
+start_health = 100
+bullet_lifetime = 0.4
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.950042, 0.524978 )
+scale = Vector2( 1.47738, 1.43684 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 591.16, 134.007, 48.8704, 47.2414 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Turret" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+offset = Vector2( 23, 0 )
+region_enabled = true
+region_rect = Rect2( 199, 36, 60, 24 )
+
+[node name="Flash" type="Sprite" parent="Turret"]
+position = Vector2( 80, 0 )
+rotation = -1.5708
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 648, 644, 40, 50 )
+
+[node name="Muzzle" type="Position2D" parent="Turret"]
+position = Vector2( 65, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 2, 2 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="Bullets" type="Node" parent="."]
+
+[node name="GunTimer" type="Timer" parent="."]
+wait_time = 0.01
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 5000, 0 )
+[connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]

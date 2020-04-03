@@ -1,0 +1,161 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://art/onlyObjects_retina_rotated.png" type="Texture" id=1]
+
+[sub_resource type="CircleShape2D" id=4]
+
+custom_solver_bias = 0.0
+radius = 62.8951
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 31.2749
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 51.0756 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 18.1166, 30.5582 )
+
+[node name="ObstacleTilesSource" type="Node2D"]
+
+[node name="TreeGreen" type="Sprite" parent="."]
+
+editor/display_folded = true
+position = Vector2( 313.208, 64.0651 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 128, 654, 128, 128 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeGreen"]
+
+shape = SubResource( 4 )
+
+[node name="TreeBrown" type="Sprite" parent="."]
+
+editor/display_folded = true
+position = Vector2( 475.404, 65.082 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -1, 654, 129, 128 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeBrown"]
+
+shape = SubResource( 4 )
+
+[node name="BushGreen" type="Sprite" parent="."]
+
+editor/display_folded = true
+position = Vector2( 64, 64 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 694, 190, 72, 72 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BushGreen"]
+
+shape = SubResource( 1 )
+
+[node name="BushBrown" type="Sprite" parent="."]
+
+editor/display_folded = true
+position = Vector2( 192, 64 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 694, 118, 72, 72 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BushBrown"]
+
+shape = SubResource( 1 )
+
+[node name="BarrierYellow" type="Sprite" parent="."]
+
+editor/display_folded = true
+position = Vector2( 64, 192 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 216, 550, 32, 104 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrierYellow"]
+
+shape = SubResource( 2 )
+
+[node name="BarrierRed" type="Sprite" parent="."]
+
+editor/display_folded = true
+position = Vector2( 132.193, 188.622 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 337, 442, 31, 97 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrierRed"]
+
+shape = SubResource( 2 )
+
+[node name="SandbagBrown" type="Sprite" parent="."]
+
+editor/display_folded = true
+position = Vector2( 216.601, 219.652 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 622, 278, 44, 64 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SandbagBrown"]
+
+shape = SubResource( 3 )
+
+[node name="SandbagTan" type="Sprite" parent="."]
+
+editor/display_folded = true
+position = Vector2( 295.92, 219.144 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 164, 282, 44, 64 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SandbagTan"]
+
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+region_enabled = true
+_sections_unfolded = [ "Region" ]
+
+
