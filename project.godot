@@ -16,15 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Slayer"
-<<<<<<< HEAD
-=======
 run/main_scene="res://Main.tscn"
->>>>>>> player-revamp
 config/icon="res://icon.png"
-
-[gdnative]
-
-singletons=[  ]
 
 [input]
 
