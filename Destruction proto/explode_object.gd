@@ -171,8 +171,7 @@ func _ready():
 
 
 func _physics_process(delta):
-    if Input.is_key_pressed(KEY_Q) and object.can_detonate or \
-        Input.is_mouse_button_pressed(BUTTON_LEFT) and object.can_detonate:
+    if Input.is_key_pressed(KEY_Q) and object.can_detonate:
         # This is what triggers the explosion, setting 'object.detonate' to 'true'.
         object.detonate = true
 

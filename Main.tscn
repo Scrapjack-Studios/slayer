@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Destruction proto/destructible_object.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://art/onlyObjects_retina.png" type="Texture" id=5]
+[ext_resource path="res://Destruction proto/explode_object.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 121.872, 24.591 )
@@ -140,11 +141,27 @@ region_enabled = true
 region_rect = Rect2( 40, 60, 30, 30 )
 
 [node name="object" parent="." instance=ExtResource( 2 )]
-position = Vector2( 518.989, 81.3163 )
+position = Vector2( 113.983, 422.728 )
+scale = Vector2( 0.852092, 0.833995 )
+script = ExtResource( 6 )
 
-[node name="object" parent="object" instance=ExtResource( 2 )]
-position = Vector2( -265.606, -170.416 )
+[node name="object4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 220.131, 423.391 )
+scale = Vector2( 0.852092, 0.833995 )
+script = ExtResource( 6 )
+
+[node name="object6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 165.067, 422.065 )
+scale = Vector2( 0.852092, 0.833995 )
+script = ExtResource( 6 )
+
+[node name="object5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 275.858, 425.382 )
+scale = Vector2( 0.852092, 0.833995 )
+script = ExtResource( 6 )
 
 [node name="object2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 157.849, 165.024 )
+
+[node name="object3" parent="." instance=ExtResource( 2 )]
 [connection signal="health_changed" from="Player" to="CanvasLayer/HUD" method="_on_health_changed"]
