@@ -3,6 +3,8 @@
 [node name="particles" type="Particles2D"]
 emitting = false
 amount = 200
+lifetime = 5.23
 one_shot = true
-speed_scale = 3.0
-explosiveness = 0.5
+speed_scale = 2.0
+explosiveness = 0.74
+randomness = 0.1
