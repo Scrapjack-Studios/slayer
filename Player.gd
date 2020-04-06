@@ -13,11 +13,11 @@ export (float) var bullet_lifetime
 const GRAVITY = 1300.0 # pixels/second/second
 
 # Angle in degrees towards either side that the player can consider "floor"
-const FLOOR_ANGLE_TOLERANCE = 40
-const WALK_FORCE = 1200
+const FLOOR_ANGLE_TOLERANCE = 50
+const WALK_FORCE = 1600
 const WALK_MIN_SPEED = 10
-const WALK_MAX_SPEED = 200
-const STOP_FORCE = 1300
+const WALK_MAX_SPEED = 400
+const STOP_FORCE = 1500
 const JUMP_SPEED = 600
 const JUMP_MAX_AIRBORNE_TIME = 0.4
 
