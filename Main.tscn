@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Destruction proto/destructible_object.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://art/onlyObjects_retina.png" type="Texture" id=5]
@@ -110,7 +111,7 @@ region_enabled = true
 region_rect = Rect2( 40, 60, 30, 30 )
 
 [node name="Platform9" type="StaticBody2D" parent="."]
-position = Vector2( -90.2821, 622.457 )
+position = Vector2( -84.1305, 597.851 )
 rotation = 0.944074
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform9"]
@@ -137,4 +138,13 @@ scale = Vector2( 8.07433, 1.63333 )
 texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 40, 60, 30, 30 )
+
+[node name="object" parent="." instance=ExtResource( 2 )]
+position = Vector2( 518.989, 81.3163 )
+
+[node name="object" parent="object" instance=ExtResource( 2 )]
+position = Vector2( -265.606, -170.416 )
+
+[node name="object2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 157.849, 165.024 )
 [connection signal="health_changed" from="Player" to="CanvasLayer/HUD" method="_on_health_changed"]

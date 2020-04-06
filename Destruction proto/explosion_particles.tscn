@@ -1,0 +1,8 @@
+[gd_scene format=2]
+
+[node name="particles" type="Particles2D"]
+emitting = false
+amount = 200
+one_shot = true
+speed_scale = 3.0
+explosiveness = 0.5
