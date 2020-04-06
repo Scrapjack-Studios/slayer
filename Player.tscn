@@ -6,7 +6,7 @@
 [ext_resource path="res://art/onlyObjects_retina.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 35.385, 35.24 )
+extents = Vector2( 24.0234, 37.6377 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 459.615, 294.24 )
@@ -21,13 +21,14 @@ start_health = 100
 bullet_lifetime = 0.4
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -0.950042, 0.524978 )
-scale = Vector2( 1.47738, 1.43684 )
+position = Vector2( -1.70477, -2.49384 )
+scale = Vector2( 1.00569, 1.5653 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 591.16, 134.007, 48.8704, 47.2414 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1.88678, -3.01883 )
 shape = SubResource( 1 )
 
 [node name="Turret" type="Sprite" parent="."]
