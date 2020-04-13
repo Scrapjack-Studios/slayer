@@ -20,6 +20,8 @@ const WALK_MAX_SPEED = 400
 const STOP_FORCE = 1500
 const JUMP_SPEED = 600
 const JUMP_MAX_AIRBORNE_TIME = 0.4
+const SLIDE_SPEED = 600
+const MAX_SLIDE_TIME = 0.4
 
 var velocity = Vector2()
 var rot_dir
@@ -27,6 +29,9 @@ var can_shoot = true
 var health
 var on_air_time = 100
 var jumping = false
+var sliding = false
+var moving_left = false
+var moving_right = false
 
 var prev_jump_pressed = false
 
@@ -55,6 +60,7 @@ func _physics_process(delta):
     var move_left = Input.is_action_pressed("move_left")
     var move_right = Input.is_action_pressed("move_right")
     var jump = Input.is_action_pressed("jump")
+    var slide = Input.is_action_pressed("slide")
     
     var stop = true
     
@@ -62,10 +68,19 @@ func _physics_process(delta):
         if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
             force.x -= WALK_FORCE
             stop = false
+            moving_left = true
     elif move_right:
         if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
             force.x += WALK_FORCE
             stop = false
+            moving_right = true
+            
+    if slide && move_right:
+        velocity.x = +SLIDE_SPEED
+        sliding = true   
+    elif slide && move_left:
+        velocity.x = -SLIDE_SPEED
+        sliding = true 
     
     if stop:
         var vsign = sign(velocity.x)
