@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://art/music/CantBeSaved.ogg" type="AudioStream" id=2]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://art/onlyObjects_retina.png" type="Texture" id=5]
@@ -137,4 +138,8 @@ scale = Vector2( 8.07433, 1.63333 )
 texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 40, 60, 30, 30 )
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
 [connection signal="health_changed" from="Player" to="CanvasLayer/HUD" method="_on_health_changed"]
