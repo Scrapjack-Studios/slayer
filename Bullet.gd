@@ -4,6 +4,10 @@ export (int) var speed
 
 var damage
 
+
+func _ready():
+    set_process(true)
+    
 func start_at(pos, dir, type, dmg, lifetime):
     $Sprite.animation = type
     position = pos
@@ -25,6 +29,8 @@ func _on_Bullet_body_entered( body ):
     explode()
     if body.has_method("take_damage"):
         body.take_damage(damage)
+    
+   
     #call_deferred("set_contact_monitor",false)
 
 func _on_Explosion_animation_finished():

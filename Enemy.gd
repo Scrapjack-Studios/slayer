@@ -17,6 +17,8 @@ var health
 var parent
 var alive
 
+const object
+
 func _ready():
     alive = true
     $HealthBar.hide()

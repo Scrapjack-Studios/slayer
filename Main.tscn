@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://Destruction proto/destructible_object.tscn" type="PackedScene" id=2]
+[ext_resource path="res://block.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://art/onlyObjects_retina.png" type="Texture" id=5]
-[ext_resource path="res://Destruction proto/explode_object.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 121.872, 24.591 )
@@ -54,6 +53,38 @@ texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 40, 60, 30, 30 )
 
+[node name="Platform10" type="StaticBody2D" parent="."]
+position = Vector2( 2001.95, 551.777 )
+rotation = -0.00415611
+scale = Vector2( 7.80022, 4.2617 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform10"]
+position = Vector2( -245.487, 133.171 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Platform10/CollisionShape2D"]
+position = Vector2( -2.00494, -0.882263 )
+scale = Vector2( 8.07433, 1.63333 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 40, 60, 30, 30 )
+
+[node name="Platform11" type="StaticBody2D" parent="."]
+position = Vector2( 103.178, 427.848 )
+rotation = -0.00415611
+scale = Vector2( 7.80022, 4.2617 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform11"]
+position = Vector2( -245.487, 133.171 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Platform11/CollisionShape2D"]
+position = Vector2( -2.00494, -0.882263 )
+scale = Vector2( 8.07433, 1.63333 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 40, 60, 30, 30 )
+
 [node name="Platform4" type="StaticBody2D" parent="."]
 position = Vector2( 999.456, 387.47 )
 
@@ -83,7 +114,7 @@ region_enabled = true
 region_rect = Rect2( 40, 60, 30, 30 )
 
 [node name="Platform6" type="StaticBody2D" parent="."]
-position = Vector2( 809.908, 724.985 )
+position = Vector2( 764.583, 728.94 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform6"]
 position = Vector2( -245.487, 133.171 )
@@ -96,8 +127,22 @@ texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 40, 60, 30, 30 )
 
+[node name="Platform12" type="StaticBody2D" parent="."]
+position = Vector2( 537.688, 841.594 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform12"]
+position = Vector2( -245.487, 133.171 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Platform12/CollisionShape2D"]
+position = Vector2( -1.42494, 4.48227e-05 )
+scale = Vector2( 8.07433, 1.63333 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 40, 60, 30, 30 )
+
 [node name="Platform8" type="StaticBody2D" parent="."]
-position = Vector2( 157.834, 741.389 )
+position = Vector2( 131.526, 746.172 )
 rotation = 0.576765
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform8"]
@@ -112,8 +157,8 @@ region_enabled = true
 region_rect = Rect2( 40, 60, 30, 30 )
 
 [node name="Platform9" type="StaticBody2D" parent="."]
-position = Vector2( -84.1305, 597.851 )
-rotation = 0.944074
+position = Vector2( -169.31, 499.31 )
+rotation = 0.0235255
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform9"]
 position = Vector2( -245.487, 133.171 )
@@ -140,28 +185,29 @@ texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 40, 60, 30, 30 )
 
-[node name="object" parent="." instance=ExtResource( 2 )]
-position = Vector2( 113.983, 422.728 )
-scale = Vector2( 0.852092, 0.833995 )
-script = ExtResource( 6 )
+[node name="Blocks" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="object4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 220.131, 423.391 )
-scale = Vector2( 0.852092, 0.833995 )
-script = ExtResource( 6 )
+[node name="block2" parent="Blocks" instance=ExtResource( 2 )]
+position = Vector2( 47.3824, 310.943 )
+scale = Vector2( 0.980586, 0.901877 )
 
-[node name="object6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 165.067, 422.065 )
-scale = Vector2( 0.852092, 0.833995 )
-script = ExtResource( 6 )
+[node name="block" parent="Blocks" instance=ExtResource( 2 )]
+position = Vector2( 46.2527, 338.733 )
 
-[node name="object5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 275.858, 425.382 )
-scale = Vector2( 0.852092, 0.833995 )
-script = ExtResource( 6 )
+[node name="block3" parent="Blocks" instance=ExtResource( 2 )]
+position = Vector2( 45.3489, 280.442 )
 
-[node name="object2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 157.849, 165.024 )
+[node name="block4" parent="Blocks" instance=ExtResource( 2 )]
+position = Vector2( 76.528, 339.411 )
 
-[node name="object3" parent="." instance=ExtResource( 2 )]
+[node name="block6" parent="Blocks" instance=ExtResource( 2 )]
+position = Vector2( 79.4652, 308.684 )
+
+[node name="block5" parent="Blocks" instance=ExtResource( 2 )]
+position = Vector2( 76.3737, 277.679 )
 [connection signal="health_changed" from="Player" to="CanvasLayer/HUD" method="_on_health_changed"]

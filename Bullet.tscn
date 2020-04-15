@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Bullet.gd" type="Script" id=1]
 [ext_resource path="res://art/bulletDark1_outline.png" type="Texture" id=2]
@@ -6,7 +6,14 @@
 [ext_resource path="res://art/bulletRed2_outline.png" type="Texture" id=4]
 [ext_resource path="res://Explosion.tscn" type="PackedScene" id=5]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 8.32987 )
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 9.03965
+height = 8.51614
+
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
@@ -24,36 +31,36 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 9.03965
-height = 8.51614
-
 [node name="Bullet" type="RigidBody2D"]
-collision_layer = 2
-collision_mask = 23
 mode = 2
-mass = 0.09
-gravity_scale = 4.37
+continuous_cd = 2
 contacts_reported = 1
 contact_monitor = true
+angular_damp = 0.0
 script = ExtResource( 1 )
-speed = 10000
+speed = 2000
 
-[node name="Sprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
-animation = "red"
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -1.72849, -0.643528 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource( 2 )
-
-[node name="Lifetime" type="Timer" parent="."]
-wait_time = 50.0
-autostart = true
+shape = SubResource( 1 )
 
 [node name="Explosion" parent="." instance=ExtResource( 5 )]
 visible = false
 scale = Vector2( 0.5, 0.5 )
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "red"
 [connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
-[connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
