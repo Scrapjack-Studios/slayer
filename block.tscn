@@ -8,8 +8,10 @@ extents = Vector2( 16, 16 )
 
 [node name="block" type="Area2D"]
 input_pickable = false
+space_override = 1
 collision_mask = 2
 script = ExtResource( 2 )
+min_size = 15
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

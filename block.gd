@@ -7,6 +7,7 @@ func _ready():
 # warning-ignore:return_value_discarded
     connect("area_entered", self, "_on_blockx32_area_enter")
     
+    
 func _on_blockx32_area_enter(_a):
     if size <= min_size:
         queue_free()
