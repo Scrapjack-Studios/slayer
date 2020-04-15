@@ -19,7 +19,6 @@ const JUMP_SPEED = 600
 const JUMP_MAX_AIRBORNE_TIME = 0.4
 const SLIDE_SPEED = 600
 const MAX_SLIDE_TIME = 1
-const SLIDE_COOLDOWN = 2
 
 var velocity = Vector2()
 var rot_dir
@@ -29,7 +28,6 @@ var on_air_time = 100
 var jumping = false
 var prev_jump_pressed = false
 var can_slide = true
-var on_slide_time = 0 # elapsed slide time
 
 onready var oldSpriteScale = get_node("Sprite").get_scale()
 onready var oldPosition = get_node("Sprite").get_position()
@@ -57,7 +55,7 @@ func _physics_process(delta):
     var move_left = Input.is_action_pressed("move_left")
     var move_right = Input.is_action_pressed("move_right")
     var jump = Input.is_action_pressed("jump")
-    var slide = Input.is_action_pressed("slide")
+    var crouch = Input.is_action_pressed("crouch")
     
     var stop = true
     
@@ -71,14 +69,15 @@ func _physics_process(delta):
             stop = false
             
     # slide right
-    if slide and move_right:
-        if on_slide_time < MAX_SLIDE_TIME:
-            on_slide_time += delta
+    if crouch and move_right:
+        if can_slide == true:
+            can_slide = false
+            get_node("SlideTime").start(MAX_SLIDE_TIME)
             velocity.x = +SLIDE_SPEED
             get_node("Sprite").set_scale(Vector2(oldSpriteScale.x, oldSpriteScale.y - 0.5))        
-        else:
-            velocity.x = 0
-            get_node("SlideCooldown").start(SLIDE_COOLDOWN)
+        elif can_slide == false:
+            velocity.x = +WALK_MAX_SPEED
+#            get_node("SlideCooldown").start(SLIDE_COOLDOWN)
             get_node("Sprite").set_scale(Vector2(oldSpriteScale.x, oldSpriteScale.y))
     else:
         # resets sprite height if player releases slide key
@@ -86,7 +85,7 @@ func _physics_process(delta):
             
             
     # slide left
-#    elif slide and move_left and can_slide:
+#    if crouch and move_left and can_slide:
 #        can_slide = false
 #        velocity.x = -SLIDE_SPEED
 #        $SlidingTimer.start()
@@ -134,5 +133,9 @@ func take_damage(amount):
         emit_signal("died")
         print("Dead!")
 
-func _on_SlideCooldown_timeout():
-    on_slide_time = 0
+#func _on_SlideCooldown_timeout():
+#    on_slide_time = 0
+
+
+func _on_SlideTime_timeout():
+    can_slide = true
