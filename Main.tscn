@@ -27,10 +27,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="block2" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 47.3824, 310.943 )
-scale = Vector2( 0.980586, 0.901877 )
-
 [node name="block" parent="Blocks" instance=ExtResource( 2 )]
 position = Vector2( 46.2527, 338.733 )
 
@@ -45,10 +41,6 @@ position = Vector2( 78.126, 309.449 )
 
 [node name="block5" parent="Blocks" instance=ExtResource( 2 )]
 position = Vector2( 76.3737, 277.679 )
-
-[node name="block12" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 110.957, 309.98 )
-scale = Vector2( 0.980586, 0.901877 )
 
 [node name="block11" parent="Blocks" instance=ExtResource( 2 )]
 position = Vector2( 109.827, 337.77 )
@@ -65,10 +57,6 @@ position = Vector2( 141.701, 308.486 )
 [node name="block7" parent="Blocks" instance=ExtResource( 2 )]
 position = Vector2( 139.948, 276.716 )
 
-[node name="block18" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 109.512, 218.952 )
-scale = Vector2( 0.980586, 0.901877 )
-
 [node name="block17" parent="Blocks" instance=ExtResource( 2 )]
 position = Vector2( 108.383, 246.742 )
 
@@ -83,10 +71,6 @@ position = Vector2( 140.256, 217.458 )
 
 [node name="block13" parent="Blocks" instance=ExtResource( 2 )]
 position = Vector2( 138.504, 185.688 )
-
-[node name="block24" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 46.9008, 217.026 )
-scale = Vector2( 0.980586, 0.901877 )
 
 [node name="block23" parent="Blocks" instance=ExtResource( 2 )]
 position = Vector2( 45.7711, 244.816 )
