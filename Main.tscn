@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://block.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Platform_Static.tscn" type="PackedScene" id=5]
@@ -20,75 +19,14 @@ margin_bottom = 52.0
 position = Vector2( 485.936, 312.503 )
 collision/safe_margin = 2.0
 
-[node name="Blocks" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="block" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 46.2527, 338.733 )
-
-[node name="block3" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 45.3489, 280.442 )
-
-[node name="block4" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 76.528, 339.411 )
-
-[node name="block6" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 78.126, 309.449 )
-
-[node name="block5" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 76.3737, 277.679 )
-
-[node name="block11" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 109.827, 337.77 )
-
-[node name="block10" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 108.924, 279.479 )
-
-[node name="block9" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 140.103, 338.448 )
-
-[node name="block8" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 141.701, 308.486 )
-
-[node name="block7" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 139.948, 276.716 )
-
-[node name="block17" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 108.383, 246.742 )
-
-[node name="block16" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 107.479, 188.451 )
-
-[node name="block15" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 138.658, 247.42 )
-
-[node name="block14" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 140.256, 217.458 )
-
-[node name="block13" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 138.504, 185.688 )
-
-[node name="block23" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 45.7711, 244.816 )
-
-[node name="block22" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 44.8673, 186.525 )
-
-[node name="block21" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 76.0464, 245.494 )
-
-[node name="block20" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 77.6444, 215.532 )
-
-[node name="block19" parent="Blocks" instance=ExtResource( 2 )]
-position = Vector2( 75.8921, 183.762 )
-
 [node name="StaticBody2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 447.536, 473.707 )
+
+[node name="StaticBody2D6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 193.864, 595.214 )
+
+[node name="StaticBody2D7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 193.864, 595.214 )
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 844.837, 426.085 )
@@ -98,6 +36,10 @@ position = Vector2( 1504.36, 426.085 )
 
 [node name="StaticBody2D4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 782.025, 881.473 )
+scale = Vector2( 10.2, 2.6 )
+
+[node name="StaticBody2D8" parent="." instance=ExtResource( 5 )]
+position = Vector2( -550.139, 1082.24 )
 scale = Vector2( 10.2, 2.6 )
 
 [node name="RigidBody2D" parent="." instance=ExtResource( 6 )]

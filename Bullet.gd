@@ -13,7 +13,6 @@ func start_at(pos, dir, type, dmg, lifetime):
     position = pos
     rotation = dir
     damage = dmg
-    $Lifetime.wait_time = lifetime
     linear_velocity = Vector2(speed, 0).rotated(dir)
 
 func explode():

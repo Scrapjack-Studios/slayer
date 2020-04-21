@@ -27,7 +27,7 @@ var can_shoot = true
 var health
 var on_air_time = 100
 var jumping = false
-
+var grabbing
 var prev_jump_pressed = false
 
     
@@ -88,6 +88,7 @@ func _physics_process(delta):
     if jumping and velocity.y > 0:
         # If falling, no longer jumping
         jumping = false
+
         
         
 
@@ -100,6 +101,8 @@ func _physics_process(delta):
     
     on_air_time += delta
     prev_jump_pressed = jump
+    
+
 
 
 func _on_GunTimer_timeout():
@@ -111,3 +114,5 @@ func take_damage(amount):
     if health <= 0:
         emit_signal("died")
         print("Dead!")
+
+

@@ -6,14 +6,14 @@
 [ext_resource path="res://art/bulletRed2_outline.png" type="Texture" id=4]
 [ext_resource path="res://Explosion.tscn" type="PackedScene" id=5]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 10, 8.32987 )
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 2.1997, 1.72481 )
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 9.03965
-height = 8.51614
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 1.81209
+height = 3.31009
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
@@ -32,35 +32,36 @@ animations = [ {
 } ]
 
 [node name="Bullet" type="RigidBody2D"]
+collision_layer = 3
 mode = 2
 continuous_cd = 2
 contacts_reported = 1
 contact_monitor = true
-angular_damp = 0.0
+applied_torque = 5.0
 script = ExtResource( 1 )
-speed = 2000
+speed = 3000
 
 [node name="Area2D" type="Area2D" parent="."]
+gravity = 30.0
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -1.72849, -0.643528 )
-shape = SubResource( 3 )
+position = Vector2( -0.896183, 0.0283294 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.146673, -0.125128 )
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Explosion" parent="." instance=ExtResource( 5 )]
 visible = false
-scale = Vector2( 0.5, 0.5 )
-
-[node name="Lifetime" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
+scale = Vector2( 0.1, 0.1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 2 )
+position = Vector2( 0.00941366, -0.0736602 )
+scale = Vector2( 0.19919, 0.157123 )
+frames = SubResource( 3 )
 animation = "red"
 [connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
-[connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
