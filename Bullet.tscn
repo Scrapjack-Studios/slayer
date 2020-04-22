@@ -15,14 +15,14 @@ height = 3.31009
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "blue",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "black",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "blue",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
@@ -31,13 +31,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Bullet" type="RigidBody2D"]
+[node name="Bullet" type="KinematicBody2D"]
 collision_layer = 3
-mode = 2
-continuous_cd = 2
-contacts_reported = 1
-contact_monitor = true
-applied_torque = 5.0
 script = ExtResource( 1 )
 speed = 3000
 
@@ -63,5 +58,4 @@ position = Vector2( 0.00941366, -0.0736602 )
 scale = Vector2( 0.19919, 0.157123 )
 frames = SubResource( 3 )
 animation = "red"
-[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
