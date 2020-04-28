@@ -47,4 +47,15 @@ position = Vector2( 1067.8, 342.849 )
 
 [node name="StaticBody2D5" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1226.94, 467.96 )
+
+[node name="StaticBody2D9" parent="." instance=ExtResource( 5 )]
+position = Vector2( 445.951, 164.49 )
+
+[node name="StaticBody2D10" parent="." instance=ExtResource( 5 )]
+position = Vector2( 301.565, 323.497 )
+rotation = -1.54097
+
+[node name="StaticBody2D11" parent="." instance=ExtResource( 5 )]
+position = Vector2( 593.992, 213.837 )
+rotation = -1.54097
 [connection signal="health_changed" from="Player" to="CanvasLayer/HUD" method="_on_health_changed"]

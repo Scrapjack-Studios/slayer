@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Bullet.gd" type="Script" id=1]
 [ext_resource path="res://art/bulletDark1_outline.png" type="Texture" id=2]
 [ext_resource path="res://art/bulletBlue2_outline.png" type="Texture" id=3]
 [ext_resource path="res://art/bulletRed2_outline.png" type="Texture" id=4]
 [ext_resource path="res://Explosion.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Area2D.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.1997, 1.72481 )
@@ -15,14 +16,14 @@ height = 3.31009
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "black",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "blue",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "black",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
@@ -31,14 +32,20 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Bullet" type="KinematicBody2D"]
+[node name="Bullet" type="KinematicBody2D" groups=[
+"Bullet_Colliders",
+]]
 collision_layer = 3
+collision/safe_margin = 1.0
 script = ExtResource( 1 )
 speed = 3000
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=[
+"Bullet_Colliders",
+]]
 gravity = 30.0
 collision_layer = 3
+script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -0.896183, 0.0283294 )
@@ -54,8 +61,9 @@ visible = false
 scale = Vector2( 0.1, 0.1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0.00941366, -0.0736602 )
+position = Vector2( 0.212663, -0.0446246 )
 scale = Vector2( 0.19919, 0.157123 )
 frames = SubResource( 3 )
 animation = "red"
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
