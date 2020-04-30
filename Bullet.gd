@@ -14,27 +14,12 @@ func start_at(pos, dir, type, dmg, _lifetime):
     rotation = dir
     damage = dmg
     velocity = Vector2(speed, 0).rotated(dir)
-    
+    add_to_group("bullets")
 
-func body_enter(body):
-    hit()
-    if body.has_method("take_damage"):
-        body.take_damage(damage)
 
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta)
-    if collision != null:
-        _on_impact(collision.normal)
-        
-        
 
-func _on_impact(normal : Vector2):
-    velocity = velocity.project(normal)
-    hit()
-        
-        #velocity = velocity.bounce(collision.normal)
-        #if collision.collider.has_method("hit"):
-            #collision.collider.hit()
     
 
 func _on_VisibilityNotifier2D_screen_exited():
@@ -49,10 +34,31 @@ func hit():
 func _on_Lifetime_timeout():
     hit()
 
-    
-   
-    #call_deferred("set_contact_monitor",false)
 
 func _on_Explosion_animation_finished():
     queue_free()
 
+
+
+
+func _on_Area2D_body_entered(body):
+    if not body.is_in_group("bullets"):
+        print("Bullet_Spawned")
+        hit()
+        print(body.get_name())
+        $Timer.start()
+        
+        
+
+
+#Bounc       
+#velocity = velocity.bounce(collision.normal)
+#if collision.collider.has_method("hit"):
+#collision.collider.hit()
+
+
+func _on_Timer_timeout():
+    velocity = Vector2(0, 0)
+    $Sprite.hide()
+    $Explosion.show()
+    $Explosion.play("smoke")

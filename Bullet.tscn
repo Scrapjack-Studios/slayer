@@ -16,14 +16,14 @@ height = 3.31009
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "blue",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "black",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "blue",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
@@ -43,6 +43,8 @@ speed = 3000
 [node name="Area2D" type="Area2D" parent="." groups=[
 "Bullet_Colliders",
 ]]
+position = Vector2( -0.654583, -0.0916548 )
+scale = Vector2( -1.97701, 1.25069 )
 gravity = 30.0
 collision_layer = 3
 script = ExtResource( 6 )
@@ -65,5 +67,9 @@ position = Vector2( 0.212663, -0.0446246 )
 scale = Vector2( 0.19919, 0.157123 )
 frames = SubResource( 3 )
 animation = "red"
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
