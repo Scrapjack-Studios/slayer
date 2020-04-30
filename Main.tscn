@@ -19,14 +19,15 @@ margin_bottom = 52.0
 position = Vector2( 485.936, 312.503 )
 collision/safe_margin = 2.0
 
+[node name="Blocks" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="StaticBody2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 447.536, 473.707 )
-
-[node name="StaticBody2D6" parent="." instance=ExtResource( 5 )]
-position = Vector2( 193.864, 595.214 )
-
-[node name="StaticBody2D7" parent="." instance=ExtResource( 5 )]
-position = Vector2( 193.864, 595.214 )
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 844.837, 426.085 )
@@ -38,24 +39,13 @@ position = Vector2( 1504.36, 426.085 )
 position = Vector2( 782.025, 881.473 )
 scale = Vector2( 10.2, 2.6 )
 
-[node name="StaticBody2D8" parent="." instance=ExtResource( 5 )]
-position = Vector2( -550.139, 1082.24 )
-scale = Vector2( 10.2, 2.6 )
+[node name="StaticBody2D6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 765.09, 750.451 )
+scale = Vector2( 0.674881, 2.49826 )
 
 [node name="RigidBody2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1067.8, 342.849 )
 
 [node name="StaticBody2D5" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1226.94, 467.96 )
-
-[node name="StaticBody2D9" parent="." instance=ExtResource( 5 )]
-position = Vector2( 445.951, 164.49 )
-
-[node name="StaticBody2D10" parent="." instance=ExtResource( 5 )]
-position = Vector2( 301.565, 323.497 )
-rotation = -1.54097
-
-[node name="StaticBody2D11" parent="." instance=ExtResource( 5 )]
-position = Vector2( 593.992, 213.837 )
-rotation = -1.54097
 [connection signal="health_changed" from="Player" to="CanvasLayer/HUD" method="_on_health_changed"]

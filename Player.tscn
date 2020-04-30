@@ -66,16 +66,19 @@ wait_time = 0.01
 enabled = true
 cast_to = Vector2( 5000, 0 )
 
-[node name="Wall_Detect" type="RayCast2D" parent="."]
-position = Vector2( 15.2886, -32.8936 )
-rotation = -1.55679
+[node name="Wall_Detect_Right" type="RayCast2D" parent="."]
+position = Vector2( 21.4546, -31.2942 )
+rotation = -1.58225
 enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 5
 collide_with_areas = true
-collide_with_bodies = false
 
-[node name="Floor_Detect" type="RayCast2D" parent="."]
-position = Vector2( -1.38983, 6.0228 )
+[node name="Wall_Detect_Left" type="RayCast2D" parent="."]
+position = Vector2( -29.8931, -30.137 )
+rotation = 1.56325
 enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 5
 collide_with_areas = true
-collide_with_bodies = false
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]

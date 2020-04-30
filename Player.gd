@@ -20,6 +20,8 @@ const WALK_MAX_SPEED = 400
 const STOP_FORCE = 1500
 const JUMP_SPEED = 600
 const JUMP_MAX_AIRBORNE_TIME = 0.4
+const CLIMB_SPEED = 700
+const CLIMB_AMOUNT = 70
 
 var velocity = Vector2()
 var rot_dir
@@ -29,7 +31,6 @@ var on_air_time = 100
 var jumping = false
 var grabbing
 var prev_jump_pressed = false
-
     
 func _ready():
     health = start_health
@@ -88,8 +89,22 @@ func _physics_process(delta):
     if jumping and velocity.y > 0:
         # If falling, no longer jumping
         jumping = false
-
         
+    if jumping and move_right and $Wall_Detect_Right.is_colliding():
+        print("Right-ledge-detect")
+        velocity.x = +CLIMB_AMOUNT
+        velocity.y = -CLIMB_SPEED
+        print($Wall_Detect_Right.get_collider())
+        
+        
+    if jumping  and move_left and $Wall_Detect_Left.is_colliding():
+         print("Left-ledge-detect")
+         velocity.x = -CLIMB_AMOUNT
+         velocity.y = -CLIMB_SPEED
+         print($Wall_Detect_Left.get_collider())
+
+
+       
         
 
     
