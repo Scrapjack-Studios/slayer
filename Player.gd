@@ -20,7 +20,7 @@ const WALK_MAX_SPEED = 400
 const STOP_FORCE = 1500
 const JUMP_SPEED = 600
 const JUMP_MAX_AIRBORNE_TIME = 0.4
-const CLIMB_SPEED = 700
+const CLIMB_SPEED = 600
 const CLIMB_AMOUNT = 70
 
 var velocity = Vector2()
@@ -90,6 +90,7 @@ func _physics_process(delta):
         # If falling, no longer jumping
         jumping = false
         
+    
     if jumping and move_right and $Wall_Detect_Right.is_colliding():
         print("Right-ledge-detect")
         velocity.x = +CLIMB_AMOUNT
