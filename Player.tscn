@@ -64,10 +64,4 @@ wait_time = 0.01
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 5000, 0 )
-
-[node name="SlideCooldown" type="Timer" parent="."]
-
-[node name="SlideTime" type="Timer" parent="."]
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
-[connection signal="timeout" from="SlideCooldown" to="." method="_on_SlideCooldown_timeout"]
-[connection signal="timeout" from="SlideTime" to="." method="_on_SlideTime_timeout"]

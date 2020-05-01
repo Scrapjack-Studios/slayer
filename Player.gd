@@ -17,7 +17,7 @@ const WALK_MAX_SPEED = 400
 const STOP_FORCE = 1500
 const JUMP_SPEED = 600
 const JUMP_MAX_AIRBORNE_TIME = 0.4
-const SLIDE_SPEED = 600
+const SLIDE_SPEED = 1000
 const MAX_SLIDE_TIME = 1
 
 var velocity = Vector2()
@@ -25,9 +25,10 @@ var rot_dir
 var can_shoot = true
 var health
 var on_air_time = 100
-var jumping = false
+var is_jumping = false
 var prev_jump_pressed = false
-var can_slide = true
+var is_sliding = false
+var slide_timer
 
 onready var oldSpriteScale = get_node("Sprite").get_scale()
 onready var oldPosition = get_node("Sprite").get_position()
@@ -59,39 +60,43 @@ func _physics_process(delta):
     
     var stop = true
     
-    if move_left:
-        if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
-            force.x -= WALK_FORCE
-            stop = false
-    elif move_right:
-        if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
-            force.x += WALK_FORCE
-            stop = false
-            
-    # slide right
-    if crouch and move_right:
-        if can_slide == true:
-            can_slide = false
-            get_node("SlideTime").start(MAX_SLIDE_TIME)
-            velocity.x = +SLIDE_SPEED
-            get_node("Sprite").set_scale(Vector2(oldSpriteScale.x, oldSpriteScale.y - 0.5))        
-        elif can_slide == false:
-            velocity.x = +WALK_MAX_SPEED
-#            get_node("SlideCooldown").start(SLIDE_COOLDOWN)
-            get_node("Sprite").set_scale(Vector2(oldSpriteScale.x, oldSpriteScale.y))
+   
+    
+    
+    
+    
+    
+    
+    # sliding     
+    if is_sliding:
+        pass;
     else:
-        # resets sprite height if player releases slide key
-        get_node("Sprite").set_scale(Vector2(oldSpriteScale.x, oldSpriteScale.y))
-            
-            
-    # slide left
-#    if crouch and move_left and can_slide:
-#        can_slide = false
-#        velocity.x = -SLIDE_SPEED
-#        $SlidingTimer.start()
+        if move_left:
+            if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
+                force.x -= WALK_FORCE
+                stop = false
+        elif move_right:
+            if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
+                force.x += WALK_FORCE
+                stop = false
+       
+        if not is_sliding and not is_jumping and crouch and move_right:
+            print("All prequisites met, sliding")
+            is_sliding = true
+            slide_timer = Timer.new()
+            slide_timer.connect("timeout",self,"_on_slide_timer_timeout")
+            add_child(slide_timer)
+            slide_timer.start(MAX_SLIDE_TIME)
+            velocity.x = SLIDE_SPEED
+        elif not is_sliding and not is_jumping and crouch and move_left:
+            print("All prequisites met, sliding")
+            is_sliding = true
+            slide_timer = Timer.new()
+            slide_timer.connect("timeout",self,"_on_slide_timer_timeout")
+            add_child(slide_timer)
+            slide_timer.start(MAX_SLIDE_TIME)
+            velocity.x = -SLIDE_SPEED
 
-#get_node("Sprite").set_scale(Vector2(oldScale.x, oldScale.y))
-        
     if stop:
         var vsign = sign(velocity.x)
         var vlen = abs(velocity.x)
@@ -110,15 +115,15 @@ func _physics_process(delta):
     if is_on_floor():
         on_air_time = 0
         
-    if jumping and velocity.y > 0:
+    if is_jumping and velocity.y > 0:
         # If falling, no longer jumping
-        jumping = false
+        is_jumping = false
    
-    if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not jumping:
+    if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
         # Makes controls more snappy.
         velocity.y = -JUMP_SPEED
-        jumping = true
+        is_jumping = true
     
     on_air_time += delta
     prev_jump_pressed = jump
@@ -132,10 +137,8 @@ func take_damage(amount):
     if health <= 0:
         emit_signal("died")
         print("Dead!")
-
-#func _on_SlideCooldown_timeout():
-#    on_slide_time = 0
-
-
-func _on_SlideTime_timeout():
-    can_slide = true
+        
+func _on_slide_timer_timeout():
+    print("Stop sliding!")
+    is_sliding = false
+    slide_timer.stop()
