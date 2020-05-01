@@ -90,24 +90,13 @@ func _physics_process(delta):
         # If falling, no longer jumping
         jumping = false
         
-    
     if jumping and move_right and $Wall_Detect_Right.is_colliding():
-        print("Right-ledge-detect")
         velocity.x = +CLIMB_AMOUNT
         velocity.y = -CLIMB_SPEED
-        print($Wall_Detect_Right.get_collider())
-        
         
     if jumping  and move_left and $Wall_Detect_Left.is_colliding():
-         print("Left-ledge-detect")
          velocity.x = -CLIMB_AMOUNT
          velocity.y = -CLIMB_SPEED
-         print($Wall_Detect_Left.get_collider())
-
-
-       
-        
-
     
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
@@ -118,9 +107,6 @@ func _physics_process(delta):
     on_air_time += delta
     prev_jump_pressed = jump
     
-
-
-
 func _on_GunTimer_timeout():
     can_shoot = true
     
@@ -129,6 +115,3 @@ func take_damage(amount):
     emit_signal("health_changed", (health * 100 / start_health))
     if health <= 0:
         emit_signal("died")
-        print("Dead!")
-
-

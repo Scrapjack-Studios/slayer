@@ -19,8 +19,6 @@ func start_at(pos, dir, type, dmg, _lifetime):
 func _physics_process(delta):
     var _collision = move_and_collide(velocity * delta)
 
-    
-
 func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
     
@@ -33,35 +31,18 @@ func hit():
 func _on_Lifetime_timeout():
     hit()
 
-
 func _on_Explosion_animation_finished():
     queue_free()
 
-
-
-
 func _on_Area2D_body_entered(body):
     if not body.is_in_group("bullets"):
-        print("Bullet_Spawned")
         hit()
-        print(body.get_name())
         $Timer.start()
     if body.is_in_group("bullets"):
         velocity = Vector2(0, 0)
         $Sprite.hide()
         $Explosion.show()
         $Explosion.play("smoke")
-        
-
-    
-        
-
-
-#Bounc       
-#velocity = velocity.bounce(collision.normal)
-#if collision.collider.has_method("hit"):
-#collision.collider.hit()
-
 
 func _on_Timer_timeout():
     velocity = Vector2(0, 0)
