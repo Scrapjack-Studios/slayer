@@ -34,8 +34,9 @@ animations = [ {
 
 [node name="Bullet" type="KinematicBody2D" groups=[
 "Bullet_Colliders",
+"bullets",
 ]]
-collision_layer = 3
+collision_layer = 2
 collision/safe_margin = 1.0
 script = ExtResource( 1 )
 speed = 3000
@@ -46,7 +47,8 @@ speed = 3000
 position = Vector2( -0.654583, -0.0916548 )
 scale = Vector2( -1.97701, 1.25069 )
 gravity = 30.0
-collision_layer = 3
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

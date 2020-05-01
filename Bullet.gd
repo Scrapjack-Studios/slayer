@@ -4,7 +4,6 @@ var velocity = Vector2()
 export (int) var speed
 var damage
 
-
 func _ready():
     set_process(true)
     
@@ -18,7 +17,7 @@ func start_at(pos, dir, type, dmg, _lifetime):
 
 
 func _physics_process(delta):
-    var collision = move_and_collide(velocity * delta)
+    var _collision = move_and_collide(velocity * delta)
 
     
 
@@ -47,7 +46,14 @@ func _on_Area2D_body_entered(body):
         hit()
         print(body.get_name())
         $Timer.start()
+    if body.is_in_group("bullets"):
+        velocity = Vector2(0, 0)
+        $Sprite.hide()
+        $Explosion.show()
+        $Explosion.play("smoke")
         
+
+    
         
 
 
