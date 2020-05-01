@@ -20,6 +20,8 @@ const WALK_MAX_SPEED = 400
 const STOP_FORCE = 1500
 const JUMP_SPEED = 600
 const JUMP_MAX_AIRBORNE_TIME = 0.4
+const CLIMB_SPEED = 600
+const CLIMB_AMOUNT = 70
 
 var velocity = Vector2()
 var rot_dir
@@ -27,9 +29,8 @@ var can_shoot = true
 var health
 var on_air_time = 100
 var jumping = false
-
+var grabbing
 var prev_jump_pressed = false
-
     
 func _ready():
     health = start_health
@@ -89,8 +90,13 @@ func _physics_process(delta):
         # If falling, no longer jumping
         jumping = false
         
+    if jumping and move_right and $Wall_Detect_Right.is_colliding():
+        velocity.x = +CLIMB_AMOUNT
+        velocity.y = -CLIMB_SPEED
         
-
+    if jumping  and move_left and $Wall_Detect_Left.is_colliding():
+         velocity.x = -CLIMB_AMOUNT
+         velocity.y = -CLIMB_SPEED
     
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
@@ -100,8 +106,7 @@ func _physics_process(delta):
     
     on_air_time += delta
     prev_jump_pressed = jump
-
-
+    
 func _on_GunTimer_timeout():
     can_shoot = true
     
@@ -110,4 +115,3 @@ func take_damage(amount):
     emit_signal("health_changed", (health * 100 / start_health))
     if health <= 0:
         emit_signal("died")
-        print("Dead!")

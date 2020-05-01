@@ -1,13 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://art/music/CantBeSaved.ogg" type="AudioStream" id=2]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://art/onlyObjects_retina.png" type="Texture" id=5]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 121.872, 24.591 )
+[ext_resource path="res://Platform_Static.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Platform_Physics.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -22,122 +20,35 @@ margin_bottom = 52.0
 position = Vector2( 485.936, 312.503 )
 collision/safe_margin = 2.0
 
-[node name="Platform2" type="StaticBody2D" parent="."]
-position = Vector2( 713.506, 319.07 )
+[node name="Blocks" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
-position = Vector2( -245.487, 133.171 )
-shape = SubResource( 1 )
+[node name="StaticBody2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 447.536, 473.707 )
 
-[node name="Sprite" type="Sprite" parent="Platform2/CollisionShape2D"]
-position = Vector2( -1.42494, 68.4 )
-scale = Vector2( 8.07433, 1.63333 )
-texture = ExtResource( 5 )
-offset = Vector2( 0, -41.8776 )
-region_enabled = true
-region_rect = Rect2( 40, 60, 30, 30 )
+[node name="StaticBody2D2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 844.837, 426.085 )
 
-[node name="Platform5" type="StaticBody2D" parent="."]
-position = Vector2( 1833.76, -461.565 )
-rotation = -0.633501
-scale = Vector2( 4.42594, 3.65822 )
+[node name="StaticBody2D3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1504.36, 426.085 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform5"]
-position = Vector2( -245.487, 133.171 )
-shape = SubResource( 1 )
+[node name="StaticBody2D4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 782.025, 881.473 )
+scale = Vector2( 10.2, 2.6 )
 
-[node name="Sprite" type="Sprite" parent="Platform5/CollisionShape2D"]
-position = Vector2( -2.00494, -0.882263 )
-scale = Vector2( 8.07433, 1.63333 )
-texture = ExtResource( 5 )
-region_enabled = true
-region_rect = Rect2( 40, 60, 30, 30 )
+[node name="StaticBody2D6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 765.09, 750.451 )
+scale = Vector2( 0.674881, 2.49826 )
 
-[node name="Platform4" type="StaticBody2D" parent="."]
-position = Vector2( 999.456, 387.47 )
+[node name="RigidBody2D" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1067.8, 342.849 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4"]
-position = Vector2( -245.487, 133.171 )
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Platform4/CollisionShape2D"]
-position = Vector2( -1.42494, 4.48227e-05 )
-scale = Vector2( 8.07433, 1.63333 )
-texture = ExtResource( 5 )
-region_enabled = true
-region_rect = Rect2( 40, 60, 30, 30 )
-
-[node name="Platform3" type="StaticBody2D" parent="."]
-position = Vector2( 209.098, 292.319 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
-position = Vector2( -245.487, 133.171 )
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Platform3/CollisionShape2D"]
-position = Vector2( -1.42494, 4.48227e-05 )
-scale = Vector2( 8.07433, 1.63333 )
-texture = ExtResource( 5 )
-region_enabled = true
-region_rect = Rect2( 40, 60, 30, 30 )
-
-[node name="Platform6" type="StaticBody2D" parent="."]
-position = Vector2( 809.908, 724.985 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform6"]
-position = Vector2( -245.487, 133.171 )
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Platform6/CollisionShape2D"]
-position = Vector2( -1.42494, 4.48227e-05 )
-scale = Vector2( 8.07433, 1.63333 )
-texture = ExtResource( 5 )
-region_enabled = true
-region_rect = Rect2( 40, 60, 30, 30 )
-
-[node name="Platform8" type="StaticBody2D" parent="."]
-position = Vector2( 157.834, 741.389 )
-rotation = 0.576765
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform8"]
-position = Vector2( -245.487, 133.171 )
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Platform8/CollisionShape2D"]
-position = Vector2( 2.67615, 6.15164 )
-scale = Vector2( 8.07433, 1.63333 )
-texture = ExtResource( 5 )
-region_enabled = true
-region_rect = Rect2( 40, 60, 30, 30 )
-
-[node name="Platform9" type="StaticBody2D" parent="."]
-position = Vector2( -90.2821, 622.457 )
-rotation = 0.944074
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform9"]
-position = Vector2( -245.487, 133.171 )
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Platform9/CollisionShape2D"]
-position = Vector2( 2.67615, 6.15164 )
-scale = Vector2( 8.07433, 1.63333 )
-texture = ExtResource( 5 )
-region_enabled = true
-region_rect = Rect2( 40, 60, 30, 30 )
-
-[node name="Platform7" type="StaticBody2D" parent="."]
-position = Vector2( 442.86, 683.974 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform7"]
-position = Vector2( -245.487, 133.171 )
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Platform7/CollisionShape2D"]
-position = Vector2( -1.42494, 4.48227e-05 )
-scale = Vector2( 8.07433, 1.63333 )
-texture = ExtResource( 5 )
-region_enabled = true
-region_rect = Rect2( 40, 60, 30, 30 )
+[node name="StaticBody2D5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1226.94, 467.96 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
