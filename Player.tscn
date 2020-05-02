@@ -89,4 +89,8 @@ enabled = true
 cast_to = Vector2( 0, 30 )
 collision_mask = 5
 collide_with_areas = true
+
+[node name="GrappleTimer" type="Timer" parent="."]
+wait_time = 4.0
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
+[connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]

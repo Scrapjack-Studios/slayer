@@ -37,6 +37,14 @@ position = Vector2( -144.653, -487.838 )
 position = Vector2( -480.431, -252.793 )
 scale = Vector2( -0.648095, 1.59256 )
 
+[node name="StaticBody2D22" parent="." instance=ExtResource( 5 )]
+position = Vector2( 188.01, -569.299 )
+scale = Vector2( -0.12219, -1.07284 )
+
+[node name="StaticBody2D23" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1002.89, -278.775 )
+scale = Vector2( -0.12219, -1.07284 )
+
 [node name="StaticBody2D20" parent="." instance=ExtResource( 5 )]
 position = Vector2( -529.271, -408.472 )
 scale = Vector2( -0.648095, 1.59256 )

@@ -34,6 +34,7 @@ var jumping = false
 var grabbing
 var prev_jump_pressed = false
 var is_walking = false
+var can_grapple = true
 
 func _ready():
     health = start_health
@@ -51,13 +52,16 @@ func _input(event: InputEvent) -> void:
         $Bullets.add_child(b)
     
     
-    if event is InputEventMouseButton:
-        if event.is_action_pressed("Graphook"):
+    if event is InputEventMouseButton and can_grapple:
+        if event.is_action_pressed("Graphook") and can_grapple:
             # We clicked the mouse -> shoot()
             $Turret/Chain.shoot(event.position - get_viewport().size * 0.5)
         else:
             # We released the mouse -> release()
             $Turret/Chain.release()
+            $GrappleTimer.start()
+            can_grapple = false
+            print("StopGrap")
 
     
         
@@ -93,6 +97,7 @@ func _physics_process(delta):
 #            # reduce its pull
 #            chain_velocity.x *= 0.7
 #               Need to make this work
+
 
     else:
         # Not hooked -> no chain velocity
@@ -157,3 +162,11 @@ func take_damage(amount):
     emit_signal("health_changed", (health * 100 / start_health))
     if health <= 0:
         emit_signal("died")
+
+
+func _on_GrappleTimer_timeout():
+    $GrappleTimer.stop()
+    can_grapple = true
+    print("GRAPTIMEOUT")
+    
+    
