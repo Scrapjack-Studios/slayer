@@ -59,15 +59,7 @@ func _physics_process(delta):
     var crouch = Input.is_action_pressed("crouch")
     
     var stop = true
-    
-   
-    
-    
-    
-    
-    
-    
-    # sliding     
+        
     if is_sliding:
         pass;
     else:
@@ -83,18 +75,12 @@ func _physics_process(delta):
         if not is_sliding and not is_jumping and crouch and move_right:
             print("All prequisites met, sliding")
             is_sliding = true
-            slide_timer = Timer.new()
-            slide_timer.connect("timeout",self,"_on_slide_timer_timeout")
-            add_child(slide_timer)
-            slide_timer.start(MAX_SLIDE_TIME)
+            $SlideTimer.start(MAX_SLIDE_TIME)
             velocity.x = SLIDE_SPEED
         elif not is_sliding and not is_jumping and crouch and move_left:
             print("All prequisites met, sliding")
             is_sliding = true
-            slide_timer = Timer.new()
-            slide_timer.connect("timeout",self,"_on_slide_timer_timeout")
-            add_child(slide_timer)
-            slide_timer.start(MAX_SLIDE_TIME)
+            $SlideTimer.start(MAX_SLIDE_TIME)
             velocity.x = -SLIDE_SPEED
 
     if stop:
@@ -137,8 +123,8 @@ func take_damage(amount):
     if health <= 0:
         emit_signal("died")
         print("Dead!")
-        
-func _on_slide_timer_timeout():
+
+func _on_SlideTimer_timeout():
     print("Stop sliding!")
     is_sliding = false
-    slide_timer.stop()
+    $SlideTimer.stop()
