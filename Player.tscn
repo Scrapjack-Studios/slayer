@@ -82,8 +82,24 @@ cast_to = Vector2( 0, 30 )
 collision_mask = 5
 collide_with_areas = true
 
+[node name="Wall_Detect_Right2" type="RayCast2D" parent="."]
+position = Vector2( 25.6651, -196.556 )
+rotation = -1.58225
+enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 5
+collide_with_areas = true
+
 [node name="Wall_Detect_Left" type="RayCast2D" parent="."]
 position = Vector2( -29.8931, -30.137 )
+rotation = 1.57469
+enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 5
+collide_with_areas = true
+
+[node name="Wall_Detect_Left2" type="RayCast2D" parent="."]
+position = Vector2( -38.3141, -197.505 )
 rotation = 1.57469
 enabled = true
 cast_to = Vector2( 0, 30 )

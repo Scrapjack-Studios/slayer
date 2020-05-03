@@ -57,7 +57,14 @@ func _input(event: InputEvent) -> void:
     if event.is_action_pressed("Graphook") and can_grapple:
         # We clicked the mouse -> shoot()
         $Turret/Chain.shoot(event.position - get_viewport().size * 0.5)
+        var t = Timer.new()
+        t.set_wait_time(2)
+        t.set_one_shot(true)
+        self.add_child(t)
+        t.start()
+        yield(t, "timeout")
         is_grappling = true
+        t.queue_free()
     elif not event.is_action_pressed("Graphook") and is_grappling:
          # We released the mouse -> release()
         $Turret/Chain.release()
@@ -139,11 +146,11 @@ func _physics_process(delta):
         # If falling, no longer jumping
         jumping = false
         
-    if jumping and move_right and $Wall_Detect_Right.is_colliding():
+    if jumping and move_right and $Wall_Detect_Right.is_colliding() and not $Wall_Detect_Right2.is_colliding():
         velocity.x = +CLIMB_AMOUNT
         velocity.y = -CLIMB_SPEED
         
-    if jumping  and move_left and $Wall_Detect_Left.is_colliding():
+    if jumping  and move_left and $Wall_Detect_Left.is_colliding() and not $Wall_Detect_Left2.is_colliding():
          velocity.x = -CLIMB_AMOUNT
          velocity.y = -CLIMB_SPEED
     
