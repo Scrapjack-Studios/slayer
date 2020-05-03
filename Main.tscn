@@ -30,14 +30,81 @@ __meta__ = {
 [node name="StaticBody2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 447.536, 473.707 )
 
+[node name="StaticBody2D18" parent="." instance=ExtResource( 5 )]
+position = Vector2( -144.653, -487.838 )
+
+[node name="StaticBody2D19" parent="." instance=ExtResource( 5 )]
+position = Vector2( -480.431, -252.793 )
+scale = Vector2( -0.648095, 1.59256 )
+
+[node name="StaticBody2D22" parent="." instance=ExtResource( 5 )]
+position = Vector2( 188.01, -569.299 )
+scale = Vector2( -0.12219, -1.07284 )
+
+[node name="StaticBody2D23" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1002.89, -278.775 )
+scale = Vector2( -0.12219, -1.07284 )
+
+[node name="StaticBody2D20" parent="." instance=ExtResource( 5 )]
+position = Vector2( -529.271, -408.472 )
+scale = Vector2( -0.648095, 1.59256 )
+
+[node name="StaticBody2D21" parent="." instance=ExtResource( 5 )]
+position = Vector2( -572.007, -542.783 )
+scale = Vector2( -0.648095, 1.59256 )
+
 [node name="StaticBody2D2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 844.837, 426.085 )
+
+[node name="StaticBody2D14" parent="." instance=ExtResource( 5 )]
+position = Vector2( 783.786, 123.885 )
+
+[node name="StaticBody2D15" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1397.34, -208.84 )
+scale = Vector2( 0.606907, 4.0143 )
+
+[node name="StaticBody2D16" parent="." instance=ExtResource( 5 )]
+position = Vector2( 982.2, -569.037 )
+scale = Vector2( 0.606907, 4.0143 )
+
+[node name="StaticBody2D17" parent="." instance=ExtResource( 5 )]
+position = Vector2( 472.429, -578.195 )
+scale = Vector2( 0.606907, 4.0143 )
+
+[node name="StaticBody2D10" parent="." instance=ExtResource( 5 )]
+position = Vector2( 154.967, -211.892 )
+
+[node name="StaticBody2D11" parent="." instance=ExtResource( 5 )]
+position = Vector2( 26.761, 313.142 )
+rotation = 0.766415
+
+[node name="StaticBody2D12" parent="." instance=ExtResource( 5 )]
+position = Vector2( -141.128, 145.253 )
+rotation = 0.766415
+
+[node name="StaticBody2D13" parent="." instance=ExtResource( 5 )]
+position = Vector2( -302.911, -19.5833 )
+rotation = 0.766415
 
 [node name="StaticBody2D3" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1504.36, 426.085 )
 
 [node name="StaticBody2D4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 782.025, 881.473 )
+scale = Vector2( 10.2, 2.6 )
+
+[node name="StaticBody2D7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 898.021, -916.463 )
+scale = Vector2( 10.2, 2.6 )
+
+[node name="StaticBody2D8" parent="." instance=ExtResource( 5 )]
+position = Vector2( -609.925, -638.683 )
+rotation = 1.57197
+scale = Vector2( 10.2, 2.6 )
+
+[node name="StaticBody2D9" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2036.61, -830.992 )
+rotation = 1.57197
 scale = Vector2( 10.2, 2.6 )
 
 [node name="StaticBody2D6" parent="." instance=ExtResource( 5 )]
@@ -52,5 +119,3 @@ position = Vector2( 1226.94, 467.96 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-autoplay = true
-[connection signal="health_changed" from="Player" to="CanvasLayer/HUD" method="_on_health_changed"]

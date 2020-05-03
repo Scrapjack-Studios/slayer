@@ -1,16 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://art/onlyObjects_retina_rotated.png" type="Texture" id=3]
 [ext_resource path="res://art/onlyObjects_retina.png" type="Texture" id=4]
+[ext_resource path="res://32x32.png" type="Texture" id=5]
+[ext_resource path="res://Camera2D.gd" type="Script" id=6]
+[ext_resource path="res://Chain.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24.0234, 37.6377 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"ChainGang",
+]]
 position = Vector2( 459.615, 294.24 )
-collision_layer = 5
+collision_layer = 4
 collision_mask = 5
 collision/safe_margin = 0.001
 script = ExtResource( 1 )
@@ -21,14 +26,14 @@ start_health = 100
 bullet_lifetime = 0.4
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -1.70477, -2.49384 )
-scale = Vector2( 1.00569, 1.5653 )
-texture = ExtResource( 3 )
+position = Vector2( -4.54001, 3.22983 )
+scale = Vector2( 23.3081, 18.8213 )
+texture = ExtResource( 5 )
 region_enabled = true
-region_rect = Rect2( 591.16, 134.007, 48.8704, 47.2414 )
+region_rect = Rect2( 50, 97, 2, 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.84326, -3.58496 )
+position = Vector2( -3.84326, 4.41504 )
 shape = SubResource( 1 )
 
 [node name="Turret" type="Sprite" parent="."]
@@ -48,6 +53,13 @@ region_rect = Rect2( 648, 644, 40, 50 )
 [node name="Muzzle" type="Position2D" parent="Turret"]
 position = Vector2( 65, 0 )
 
+[node name="Chain" parent="Turret" groups=[
+"ChainGang",
+] instance=ExtResource( 7 )]
+position = Vector2( 68.5162, 2.54718 )
+rotation = 1.57599
+scale = Vector2( 0.244703, 0.681887 )
+
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 2, 2 )
@@ -55,8 +67,12 @@ drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
+script = ExtResource( 6 )
 
 [node name="Bullets" type="Node" parent="."]
+
+[node name="GunTimer" type="Timer" parent="."]
+wait_time = 0.01
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
@@ -70,17 +86,36 @@ cast_to = Vector2( 0, 30 )
 collision_mask = 5
 collide_with_areas = true
 
-[node name="Wall_Detect_Left" type="RayCast2D" parent="."]
-position = Vector2( -29.8931, -30.137 )
-rotation = 1.56325
+[node name="Wall_Detect_Right2" type="RayCast2D" parent="."]
+position = Vector2( 25.6651, -196.556 )
+rotation = -1.58225
 enabled = true
 cast_to = Vector2( 0, 30 )
 collision_mask = 5
 collide_with_areas = true
 
+[node name="Wall_Detect_Left" type="RayCast2D" parent="."]
+position = Vector2( -29.8931, -30.137 )
+rotation = 1.57469
+enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 5
+collide_with_areas = true
+
+[node name="Wall_Detect_Left2" type="RayCast2D" parent="."]
+position = Vector2( -38.3141, -197.505 )
+rotation = 1.57469
+enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 5
+collide_with_areas = true
 [node name="GunTimer" type="Timer" parent="."]
 wait_time = 0.01
 
 [node name="SlideTimer" type="Timer" parent="."]
+[node name="GrappleTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 4.0
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
+[connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]
 [connection signal="timeout" from="SlideTimer" to="." method="_on_SlideTimer_timeout"]

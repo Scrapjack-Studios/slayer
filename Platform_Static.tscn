@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://external-content.duckduckgo.com.png" type="Texture" id=1]
+[ext_resource path="res://external-content.duckduckgo.com.jpg" type="Texture" id=1]
 [ext_resource path="res://Platform_Static.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -9,13 +9,14 @@ extents = Vector2( 126.611, 25.788 )
 [node name="StaticBody2D" type="StaticBody2D" groups=[
 "Bullet_Colliders",
 ]]
+position = Vector2( 0, -0.689682 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D2"]
-scale = Vector2( 7.88807, -1.58353 )
+scale = Vector2( 1.4, -0.28 )
 texture = ExtResource( 1 )
 region_rect = Rect2( 31.2719, 26.1082, 0.638771, 2.49119 )
 
