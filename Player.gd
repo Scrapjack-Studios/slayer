@@ -82,7 +82,11 @@ func _physics_process(delta):
             is_sliding = true
             $SlideTimer.start(MAX_SLIDE_TIME)
             velocity.x = -SLIDE_SPEED
-
+    if not crouch:
+        # if the player releases the crouch key at any time, they can move again
+        is_sliding = false
+        $SlideTimer.stop()
+        
     if stop:
         var vsign = sign(velocity.x)
         var vlen = abs(velocity.x)
