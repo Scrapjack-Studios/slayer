@@ -26,6 +26,7 @@ var can_shoot = true
 var health
 var on_air_time = 100
 var is_jumping = false
+var is_falling = false
 var prev_jump_pressed = false
 var is_sliding = false
 var slide_timer
@@ -72,11 +73,11 @@ func _physics_process(delta):
                 force.x += WALK_FORCE
                 stop = false
        
-        if not is_sliding and not is_jumping and crouch and move_right:
+        if not is_sliding and not is_jumping and not is_falling and crouch and move_right:
             is_sliding = true
             $SlideTimer.start(MAX_SLIDE_TIME)
             velocity.x = SLIDE_SPEED
-        elif not is_sliding and not is_jumping and crouch and move_left:
+        elif not is_sliding and not is_jumping and not is_falling and crouch and move_left:
             is_sliding = true
             $SlideTimer.start(MAX_SLIDE_TIME)
             velocity.x = -SLIDE_SPEED
@@ -102,10 +103,12 @@ func _physics_process(delta):
     
     if is_on_floor():
         on_air_time = 0
+        is_falling = false
         
     if is_jumping and velocity.y > 0:
         # If falling, no longer jumping
         is_jumping = false
+        is_falling = true
    
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
