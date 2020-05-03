@@ -57,15 +57,8 @@ func _input(event: InputEvent) -> void:
     if event.is_action_pressed("Graphook") and can_grapple:
         # We clicked the mouse -> shoot()
         $Turret/Chain.shoot(event.position - get_viewport().size * 0.5)
-        var t = Timer.new()
-        t.set_wait_time(2)
-        t.set_one_shot(true)
-        self.add_child(t)
-        t.start()
-        yield(t, "timeout")
         is_grappling = true
-        t.queue_free()
-    elif not event.is_action_pressed("Graphook") and is_grappling:
+    elif event.is_action_released("Graphook") and is_grappling:
          # We released the mouse -> release()
         $Turret/Chain.release()
         $GrappleTimer.start()
