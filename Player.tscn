@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Bullet.tscn" type="PackedScene" id=2]
@@ -22,11 +22,11 @@ start_health = 100
 bullet_lifetime = 0.4
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 18.7807, 11.7618 )
-scale = Vector2( 23.3081, 22.5413 )
-texture = ExtResource( 5 )
+position = Vector2( -1.70477, -2.49384 )
+scale = Vector2( 1.00569, 1.5653 )
+texture = ExtResource( 3 )
 region_enabled = true
-region_rect = Rect2( 594.517, 171.052, 2.05615, 3.34132 )
+region_rect = Rect2( 591.16, 134.007, 48.8704, 47.2414 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -3.84326, 4.41504 )
@@ -59,9 +59,6 @@ editor_draw_drag_margin = true
 
 [node name="Bullets" type="Node" parent="."]
 
-[node name="GunTimer" type="Timer" parent="."]
-wait_time = 0.01
-
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 5000, 0 )
@@ -81,4 +78,9 @@ enabled = true
 cast_to = Vector2( 0, 30 )
 collision_mask = 5
 collide_with_areas = true
+
+[node name="GunTimer" type="Timer" parent="."]
+wait_time = 0.01
+
+[node name="SlideTimer" type="Timer" parent="."]
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
