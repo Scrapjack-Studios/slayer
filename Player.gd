@@ -73,12 +73,10 @@ func _physics_process(delta):
                 stop = false
        
         if not is_sliding and not is_jumping and crouch and move_right:
-            print("All prequisites met, sliding")
             is_sliding = true
             $SlideTimer.start(MAX_SLIDE_TIME)
             velocity.x = SLIDE_SPEED
         elif not is_sliding and not is_jumping and crouch and move_left:
-            print("All prequisites met, sliding")
             is_sliding = true
             $SlideTimer.start(MAX_SLIDE_TIME)
             velocity.x = -SLIDE_SPEED
@@ -129,6 +127,5 @@ func take_damage(amount):
         print("Dead!")
 
 func _on_SlideTimer_timeout():
-    print("Stop sliding!")
     is_sliding = false
     $SlideTimer.stop()
