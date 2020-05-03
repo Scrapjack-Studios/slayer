@@ -153,23 +153,23 @@ func _physics_process(delta):
         on_air_time = 0
         is_falling = false
         
-    if jumping and velocity.y > 0:
+    if is_jumping and velocity.y > 0:
         # If falling, no longer jumping
-        jumping = false
+        is_jumping = false
         
-    if jumping and move_right and $Wall_Detect_Right.is_colliding() and not $Wall_Detect_Right2.is_colliding():
+    if is_jumping and move_right and $Wall_Detect_Right.is_colliding() and not $Wall_Detect_Right2.is_colliding():
         velocity.x = +CLIMB_AMOUNT
         velocity.y = -CLIMB_SPEED
         
-    if jumping  and move_left and $Wall_Detect_Left.is_colliding() and not $Wall_Detect_Left2.is_colliding():
+    if is_jumping  and move_left and $Wall_Detect_Left.is_colliding() and not $Wall_Detect_Left2.is_colliding():
          velocity.x = -CLIMB_AMOUNT
          velocity.y = -CLIMB_SPEED
     
-    if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not jumping:
+    if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
         # Makes controls more snappy.
         velocity.y = -JUMP_SPEED
-        jumping = true
+        is_jumping = true
     
     on_air_time += delta
     prev_jump_pressed = jump
