@@ -4,7 +4,6 @@
 [ext_resource path="res://Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://art/onlyObjects_retina_rotated.png" type="Texture" id=3]
 [ext_resource path="res://art/onlyObjects_retina.png" type="Texture" id=4]
-[ext_resource path="res://32x32.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24.0234, 37.6377 )
@@ -29,7 +28,7 @@ region_enabled = true
 region_rect = Rect2( 591.16, 134.007, 48.8704, 47.2414 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -3.84326, 4.41504 )
+position = Vector2( -1.84326, -3.58496 )
 shape = SubResource( 1 )
 
 [node name="Turret" type="Sprite" parent="."]

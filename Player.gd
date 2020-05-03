@@ -11,9 +11,6 @@ export (float) var bullet_lifetime
 
 const FLOOR_ANGLE_TOLERANCE = 50 # Angle in degrees towards either side that the player can consider "floor"
 const GRAVITY = 1300.0 # pixels/second/second
-
-# Angle in degrees towards either side that the player can consider "floor"
-const FLOOR_ANGLE_TOLERANCE = 50
 const WALK_FORCE = 1600
 const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 400
@@ -32,6 +29,7 @@ var health
 var on_air_time = 100
 var is_jumping = false
 var is_falling = false
+var is_sliding = false
 var grabbing
 var prev_jump_pressed = false
    
@@ -115,13 +113,13 @@ func _physics_process(delta):
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
         # Makes controls more snappy.
         velocity.y = -JUMP_SPEED
-        jumping = true
+        is_jumping = true
     
-    if jumping and move_right and $Wall_Detect_Right.is_colliding():
+    if is_jumping and move_right and $Wall_Detect_Right.is_colliding():
         velocity.x = +CLIMB_AMOUNT
         velocity.y = -CLIMB_SPEED
         
-    if jumping  and move_left and $Wall_Detect_Left.is_colliding():
+    if is_jumping  and move_left and $Wall_Detect_Left.is_colliding():
          velocity.x = -CLIMB_AMOUNT
          velocity.y = -CLIMB_SPEED
     
