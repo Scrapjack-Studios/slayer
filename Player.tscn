@@ -83,3 +83,4 @@ wait_time = 0.01
 
 [node name="SlideTimer" type="Timer" parent="."]
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
+[connection signal="timeout" from="SlideTimer" to="." method="_on_SlideTimer_timeout"]

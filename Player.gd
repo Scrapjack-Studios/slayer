@@ -135,3 +135,7 @@ func take_damage(amount):
     if health <= 0:
         emit_signal("died")
         print("Dead!")
+
+func _on_SlideTimer_timeout():
+    is_sliding = false
+    $SlideTimer.stop()
