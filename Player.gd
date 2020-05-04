@@ -57,7 +57,7 @@ func _input(event: InputEvent) -> void:
     
     if event.is_action_pressed("Graphook") and can_grapple:
         # We clicked the mouse -> shoot()
-        $Turret/Chain.shoot(event.position - get_viewport().size * .7)
+        $Turret/Chain.shoot(event.position - get_viewport().size * .6)
         is_grappling = true
     elif event.is_action_released("Graphook") and is_grappling:
          # We released the mouse -> release()
