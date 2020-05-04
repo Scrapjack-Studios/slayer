@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Bullet.tscn" type="PackedScene" id=2]
@@ -109,13 +109,14 @@ enabled = true
 cast_to = Vector2( 0, 30 )
 collision_mask = 5
 collide_with_areas = true
+
 [node name="GunTimer" type="Timer" parent="."]
 wait_time = 0.01
 
 [node name="SlideTimer" type="Timer" parent="."]
+
 [node name="GrappleTimer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 4.0
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
-[connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]
 [connection signal="timeout" from="SlideTimer" to="." method="_on_SlideTimer_timeout"]
+[connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]
