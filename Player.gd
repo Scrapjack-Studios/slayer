@@ -41,11 +41,9 @@ var is_walking = false
 var can_grapple = true
 var is_grappling = false
 
-
 func _ready():
     health = start_health
     emit_signal("health_changed", health)
-    
     
 func _input(event: InputEvent) -> void:
     if event.is_action_pressed("tank_fire") and can_shoot:
@@ -57,7 +55,6 @@ func _input(event: InputEvent) -> void:
                    'blue', damage, bullet_lifetime)
         $Bullets.add_child(b)
     
-
     if event.is_action_pressed("Graphook") and can_grapple:
         # We clicked the mouse -> shoot()
         $Turret/Chain.shoot(event.position - get_viewport().size * 0.5)
@@ -69,7 +66,6 @@ func _input(event: InputEvent) -> void:
         can_grapple = false
         is_grappling = false
         print("StopGrap")
-        
         
 func _physics_process(delta):
     var mpos = get_global_mouse_position()
@@ -86,6 +82,11 @@ func _physics_process(delta):
     
     var stop = true
     
+    if get_local_mouse_position().x < 0: # mouse is facing left
+        $Turret.set_position(Vector2(-22,0))
+    elif get_local_mouse_position().x > 0: # mouse is facing right
+        $Turret.set_position(Vector2(15,0))
+ 
     # Hook physics
     if $Turret/Chain.hooked:
         # `to_local($Chain.tip).normalized()` is the direction that the chain is pulling
@@ -102,7 +103,6 @@ func _physics_process(delta):
 #            # reduce its pull
 #            chain_velocity.x *= 0.7
 #               Need to make this work
-
 
     else:
         # Not hooked -> no chain velocity
