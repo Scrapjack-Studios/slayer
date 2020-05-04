@@ -13,7 +13,7 @@ export (float) var bullet_lifetime
 const GRAVITY = 1300.0 # pixels/second/second
 
 # Angle in degrees towards either side that the player can consider "floor"
-const FLOOR_ANGLE_TOLERANCE = 50
+const FLOOR_ANGLE_TOLERANCE = 70
 const WALK_FORCE = 1600
 const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 400
@@ -60,7 +60,7 @@ func _input(event: InputEvent) -> void:
 
     if event.is_action_pressed("Graphook") and can_grapple:
         # We clicked the mouse -> shoot()
-        $Turret/Chain.shoot(event.position - get_viewport().size * 0.5)
+        $Turret/Chain.shoot(event.position - get_viewport().size * .7)
         is_grappling = true
     elif event.is_action_released("Graphook") and is_grappling:
          # We released the mouse -> release()
