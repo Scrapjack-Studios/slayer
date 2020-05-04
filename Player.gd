@@ -156,6 +156,7 @@ func _physics_process(delta):
     if is_jumping and velocity.y > 0:
         # If falling, no longer jumping
         is_jumping = false
+        is_falling = true
         
     if is_jumping and move_right and $Wall_Detect_Right.is_colliding() and not $Wall_Detect_Right2.is_colliding():
         velocity.x = +CLIMB_AMOUNT
