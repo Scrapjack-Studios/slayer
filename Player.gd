@@ -25,6 +25,7 @@ const MAX_SLIDE_TIME = 1
 const CLIMB_SPEED = 600
 const CLIMB_AMOUNT = 70
 const CHAIN_PULL = 50
+const CHAIN_ANGLE = 1
 
 var velocity = Vector2(0,0)		# The velocity of the player (kept over time)
 var chain_velocity := Vector2(0,0)
@@ -56,12 +57,12 @@ func _input(event: InputEvent) -> void:
         $Bullets.add_child(b)
     
     if event.is_action_pressed("Graphook") and can_grapple:
-        # We clicked the mouse -> shoot()
-        $Turret/Chain.shoot(event.position - get_viewport().size * .6)
+        # We clicked the mouse -> shoot()d
+        $Chain.shoot(event.position - get_viewport_rect().size * 0.6)
         is_grappling = true
     elif event.is_action_released("Graphook") and is_grappling:
          # We released the mouse -> release()
-        $Turret/Chain.release()
+        $Chain.release()
         $GrappleTimer.start()
         can_grapple = false
         is_grappling = false
@@ -88,9 +89,9 @@ func _physics_process(delta):
         $Turret.set_position(Vector2(15,0))
  
     # Hook physics
-    if $Turret/Chain.hooked:
+    if $Chain.hooked:
         # `to_local($Chain.tip).normalized()` is the direction that the chain is pulling
-        chain_velocity = to_local($Turret/Chain.tip).normalized() * CHAIN_PULL
+        chain_velocity = to_local($Chain.tip).normalized() * CHAIN_PULL
         if chain_velocity.y > 0:
             # Pulling down isn't as strong
             chain_velocity.y *= 0.55

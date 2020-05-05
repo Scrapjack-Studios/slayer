@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://art/onlyObjects_retina_rotated.png" type="Texture" id=3]
-[ext_resource path="res://art/onlyObjects_retina.png" type="Texture" id=4]
 [ext_resource path="res://32x32.png" type="Texture" id=5]
 [ext_resource path="res://Camera2D.gd" type="Script" id=6]
 [ext_resource path="res://Chain.tscn" type="PackedScene" id=7]
@@ -14,8 +13,10 @@ extents = Vector2( 24.0234, 37.6377 )
 [node name="Player" type="KinematicBody2D" groups=[
 "ChainGang",
 ]]
-position = Vector2( 459.615, 294.24 )
+position = Vector2( 2.89905, -3.43567 )
+rotation = -0.000230981
 collision_layer = 4
+collision_mask = 5
 collision/safe_margin = 0.001
 script = ExtResource( 1 )
 Bullet = ExtResource( 2 )
@@ -43,31 +44,12 @@ offset = Vector2( 23, 0 )
 region_enabled = true
 region_rect = Rect2( 199, 36, 60, 24 )
 
-[node name="Flash" type="Sprite" parent="Turret"]
-position = Vector2( 80, 0 )
-rotation = -1.5708
-scale = Vector2( 1.1, 1.1 )
-texture = ExtResource( 4 )
-region_enabled = true
-region_rect = Rect2( 648, 644, 40, 50 )
-
 [node name="Muzzle" type="Position2D" parent="Turret"]
 position = Vector2( 65, 0 )
-
-[node name="Chain" parent="Turret" groups=[
-"ChainGang",
-] instance=ExtResource( 7 )]
-position = Vector2( 68.5162, 2.54718 )
-rotation = 1.57599
-scale = Vector2( 0.244703, 0.681887 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 2, 2 )
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-editor_draw_limits = true
-editor_draw_drag_margin = true
 script = ExtResource( 6 )
 
 [node name="Bullets" type="Node" parent="."]
@@ -78,6 +60,7 @@ wait_time = 0.01
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 5000, 0 )
+collide_with_areas = true
 
 [node name="Wall_Detect_Right" type="RayCast2D" parent="."]
 position = Vector2( 21.4546, -31.2942 )
@@ -118,6 +101,12 @@ wait_time = 0.01
 
 [node name="GrappleTimer" type="Timer" parent="."]
 process_mode = 0
+
+[node name="Chain" parent="." groups=[
+"ChainGang",
+] instance=ExtResource( 7 )]
+position = Vector2( 4.96469, -19.3649 )
+scale = Vector2( 1.36203, 1.23864 )
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="SlideTimer" to="." method="_on_SlideTimer_timeout"]
 [connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]
