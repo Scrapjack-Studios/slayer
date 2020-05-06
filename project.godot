@@ -16,8 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Slayer"
-run/main_scene="res://Main/Main.tscn"
-config/icon="res://art/icon.png"
+run/main_scene="res://Main.tscn"
+config/icon="res://Assets/icon.png"
 
 [input]
 

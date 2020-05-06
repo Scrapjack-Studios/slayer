@@ -2,9 +2,10 @@
 
 [ext_resource path="res://Misc/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Player/Firearms/Bullet.tscn" type="PackedScene" id=2]
-[ext_resource path="res://art/onlyObjects_retina_rotated.png" type="Texture" id=3]
-[ext_resource path="res://art/ui/barGreen_horizontalMid.png" type="Texture" id=4]
+[ext_resource path="res://Assets/onlyObjects_retina_rotated.png" type="Texture" id=3]
+[ext_resource path="res://Assets/ui/barGreen_horizontalMid.png" type="Texture" id=4]
 [ext_resource path="res://Misc/Explosion.tscn" type="PackedScene" id=5]
+
 
 
 
