@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/music/CantBeSaved.ogg" type="AudioStream" id=1]
+[ext_resource path="res://assets/music/CantBeSaved.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Obstacles/Platform_Physics.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Player/HUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Obstacles/Platform_Static.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://obstacles/Platform_Physics.tscn" type="PackedScene" id=4]
+[ext_resource path="res://player/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://obstacles/Platform_Static.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )

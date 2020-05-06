@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bulletBlue2_outline.png-41131811f8ebe92abb4fa93e24d09174.stex"
+path="res://.import/bulletBlue2_outline.png-8626df3811611964846d0fbd3f35bd47.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/bulletBlue2_outline.png"
-dest_files=[ "res://.import/bulletBlue2_outline.png-41131811f8ebe92abb4fa93e24d09174.stex" ]
+source_file="res://assets/bulletBlue2_outline.png"
+dest_files=[ "res://.import/bulletBlue2_outline.png-8626df3811611964846d0fbd3f35bd47.stex" ]
 
 [params]
 

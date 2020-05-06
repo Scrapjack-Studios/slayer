@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/barRed_horizontalMid.png-197af0658c75e8c10ec3395a1ce4bc4d.stex"
+path="res://.import/barRed_horizontalMid.png-a53b0689d590076e6cd71c6ebd8f8f98.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ui/barRed_horizontalMid.png"
-dest_files=[ "res://.import/barRed_horizontalMid.png-197af0658c75e8c10ec3395a1ce4bc4d.stex" ]
+source_file="res://assets/ui/barRed_horizontalMid.png"
+dest_files=[ "res://.import/barRed_horizontalMid.png-a53b0689d590076e6cd71c6ebd8f8f98.stex" ]
 
 [params]
 

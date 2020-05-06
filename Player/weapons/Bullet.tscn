@@ -1,12 +1,11 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Player/Firearms/Bullet.gd" type="Script" id=1]
-[ext_resource path="res://Assets/bulletDark1_outline.png" type="Texture" id=2]
-[ext_resource path="res://Assets/bulletBlue2_outline.png" type="Texture" id=3]
-[ext_resource path="res://Assets/bulletRed2_outline.png" type="Texture" id=4]
-[ext_resource path="res://Misc/Explosion.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Player/Firearms/Area2D.gd" type="Script" id=6]
-
+[ext_resource path="res://misc/Explosion.tscn" type="PackedScene" id=1]
+[ext_resource path="res://player/weapons/Area2D.gd" type="Script" id=2]
+[ext_resource path="res://player/weapons/Bullet.gd" type="Script" id=3]
+[ext_resource path="res://assets/bulletBlue2_outline.png" type="Texture" id=4]
+[ext_resource path="res://assets/bulletRed2_outline.png" type="Texture" id=5]
+[ext_resource path="res://assets/bulletDark1_outline.png" type="Texture" id=6]
 
 
 
@@ -21,17 +20,17 @@ height = 3.31009
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "black",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "blue",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "red",
 "speed": 5.0
@@ -43,7 +42,7 @@ animations = [ {
 ]]
 collision_mask = 2
 collision/safe_margin = 1.0
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 speed = 3000
 
 [node name="Area2D" type="Area2D" parent="." groups=[
@@ -54,7 +53,7 @@ scale = Vector2( -1.97701, 1.25069 )
 gravity = 30.0
 collision_layer = 2
 collision_mask = 2
-script = ExtResource( 6 )
+script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -0.896183, 0.0283294 )
@@ -65,7 +64,7 @@ position = Vector2( 0.146673, -0.125128 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
-[node name="Explosion" parent="." instance=ExtResource( 5 )]
+[node name="Explosion" parent="." instance=ExtResource( 1 )]
 visible = false
 scale = Vector2( 0.1, 0.1 )
 

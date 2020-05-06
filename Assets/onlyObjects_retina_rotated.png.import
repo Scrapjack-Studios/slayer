@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/onlyObjects_retina_rotated.png-3dfef29c3dfafaaf006a6c25c4bb97d0.stex"
+path="res://.import/onlyObjects_retina_rotated.png-7b4ec6af5fd6d0816aed6e2c626ba9f1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/onlyObjects_retina_rotated.png"
-dest_files=[ "res://.import/onlyObjects_retina_rotated.png-3dfef29c3dfafaaf006a6c25c4bb97d0.stex" ]
+source_file="res://assets/onlyObjects_retina_rotated.png"
+dest_files=[ "res://.import/onlyObjects_retina_rotated.png-7b4ec6af5fd6d0816aed6e2c626ba9f1.stex" ]
 
 [params]
 

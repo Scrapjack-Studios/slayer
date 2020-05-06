@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/terrainTiles_retina.png-214eb5caae5198afbf6e6103a5518aa1.stex"
+path="res://.import/terrainTiles_retina.png-93a4c884daff87e06c56d524929d3e2b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/terrainTiles_retina.png"
-dest_files=[ "res://.import/terrainTiles_retina.png-214eb5caae5198afbf6e6103a5518aa1.stex" ]
+source_file="res://assets/terrainTiles_retina.png"
+dest_files=[ "res://.import/terrainTiles_retina.png-93a4c884daff87e06c56d524929d3e2b.stex" ]
 
 [params]
 
