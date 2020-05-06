@@ -25,6 +25,7 @@ const MAX_SLIDE_TIME = 1
 const CLIMB_SPEED = 600
 const CLIMB_AMOUNT = 70
 const CHAIN_PULL = 50
+const MAX_JUMP_COUNT = 2
 
 var velocity = Vector2(0,0)		# The velocity of the player (kept over time)
 var chain_velocity := Vector2(0,0)
@@ -33,6 +34,7 @@ var can_shoot = true
 var health
 var on_air_time = 100
 var is_jumping = false
+var can_doublejump = true
 var is_falling = false
 var is_sliding = false
 var grabbing
@@ -40,6 +42,8 @@ var prev_jump_pressed = false
 var is_walking = false
 var can_grapple = true
 var is_grappling = false
+var jump_count = 0
+
 
 func _ready():
     health = start_health
@@ -64,6 +68,11 @@ func _input(event: InputEvent) -> void:
         $GrappleTimer.start()
         can_grapple = false
         is_grappling = false
+   
+    
+    if jump_count < MAX_JUMP_COUNT and event.is_action_pressed("jump"):
+        velocity.y = -JUMP_SPEED
+        jump_count += 1
         
 func _physics_process(delta):
     var mpos = get_global_mouse_position()
@@ -152,6 +161,7 @@ func _physics_process(delta):
     if is_on_floor():
         on_air_time = 0
         is_falling = false
+        jump_count = 0
         
     if is_jumping and velocity.y > 0:
         # If falling, no longer jumping
@@ -175,7 +185,10 @@ func _physics_process(delta):
     on_air_time += delta
     
     prev_jump_pressed = jump
-   
+
+    
+    
+        
 func _on_GunTimer_timeout():
     can_shoot = true
     
