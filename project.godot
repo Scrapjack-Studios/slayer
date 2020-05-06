@@ -16,8 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Slayer"
-run/main_scene="res://Main.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://Main/Main.tscn"
+config/icon="res://art/icon.png"
 
 [input]
 
@@ -79,4 +79,4 @@ LeftMouse={
 [rendering]
 
 quality/2d/use_pixel_snap=true
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://Misc/default_env.tres"

@@ -25,7 +25,6 @@ const MAX_SLIDE_TIME = 1
 const CLIMB_SPEED = 600
 const CLIMB_AMOUNT = 70
 const CHAIN_PULL = 50
-const CHAIN_ANGLE = 1
 
 var velocity = Vector2(0,0)		# The velocity of the player (kept over time)
 var chain_velocity := Vector2(0,0)
@@ -47,21 +46,20 @@ func _ready():
     emit_signal("health_changed", health)
     
 func _input(event: InputEvent) -> void:
+    
     if event.is_action_pressed("tank_fire") and can_shoot:
         can_shoot = false
-        #yield($AnimationPlayer, "animation_finished")
         $GunTimer.start()
         var b = Bullet.instance()
-        b.start_at($"Turret/Muzzle".global_position, $Turret.global_rotation,
-                   'blue', damage, bullet_lifetime)
+        b.start_at($"Turret/Muzzle".global_position, $Turret.global_rotation,'blue', damage, bullet_lifetime)
         $Bullets.add_child(b)
     
     if event.is_action_pressed("Graphook") and can_grapple:
-        # We clicked the mouse -> shoot()d
-        $Chain.shoot(event.position - get_viewport_rect().size * 0.6)
+        # We clicked the mouse -> shoot()
+        $Chain.shoot(event.position - get_viewport().size * .6)
         is_grappling = true
+        
     elif event.is_action_released("Graphook") and is_grappling:
-         # We released the mouse -> release()
         $Chain.release()
         $GrappleTimer.start()
         can_grapple = false
@@ -70,14 +68,19 @@ func _input(event: InputEvent) -> void:
         
 func _physics_process(delta):
     var mpos = get_global_mouse_position()
-    $Turret.global_rotation = mpos.angle_to_point(position)
-        
-    var force = Vector2(0, GRAVITY) # create forces
+    
+    $Turret.global_rotation = mpos.angle_to_point(position)  
+       
+    var force = Vector2(0, GRAVITY) # create forces 
     
     var move_left = Input.is_action_pressed("move_left")
+    
     var move_right = Input.is_action_pressed("move_right")
+    
     var jump = Input.is_action_pressed("jump")
+    
     var crouch = Input.is_action_pressed("crouch")
+    
     if move_left or move_right:
         is_walking = true
     
@@ -85,10 +88,10 @@ func _physics_process(delta):
     
     if get_local_mouse_position().x < 0: # mouse is facing left
         $Turret.set_position(Vector2(-22,0))
+        
     elif get_local_mouse_position().x > 0: # mouse is facing right
         $Turret.set_position(Vector2(15,0))
  
-    # Hook physics
     if $Chain.hooked:
         # `to_local($Chain.tip).normalized()` is the direction that the chain is pulling
         chain_velocity = to_local($Chain.tip).normalized() * CHAIN_PULL
@@ -98,20 +101,17 @@ func _physics_process(delta):
         else:
             # Pulling up is stronger
             chain_velocity.y *= 1.65
-#        if sign(chain_velocity.x) != sign(is_walking):
-#            # if we are trying to walk in a different
-#            # direction than the chain is pulling
-#            # reduce its pull
-#            chain_velocity.x *= 0.7
-#               Need to make this work
+
 
     else:
         # Not hooked -> no chain velocity
         chain_velocity = Vector2(0,0)
+        
     velocity += chain_velocity
 
     if is_sliding:
         pass;
+        
     else:
         if move_left:
             if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
@@ -174,8 +174,9 @@ func _physics_process(delta):
         is_jumping = true
     
     on_air_time += delta
-    prev_jump_pressed = jump
     
+    prev_jump_pressed = jump
+   
 func _on_GunTimer_timeout():
     can_shoot = true
     

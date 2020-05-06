@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/external-content.duckduckgo.com.jpg-27a97fc28cafcab8eace48d895f16312.stex"
+path="res://.import/32x32.png-0c2cef58a0b250dcbbdffc04d9e7a7f8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://external-content.duckduckgo.com.jpg"
-dest_files=[ "res://.import/external-content.duckduckgo.com.jpg-27a97fc28cafcab8eace48d895f16312.stex" ]
+source_file="res://art/32x32.png"
+dest_files=[ "res://.import/32x32.png-0c2cef58a0b250dcbbdffc04d9e7a7f8.stex" ]
 
 [params]
 

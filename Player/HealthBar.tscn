@@ -4,7 +4,6 @@
 [ext_resource path="res://art/ui/lifebar_fill.png" type="Texture" id=2]
 
 [node name="HealthBar" type="HBoxContainer"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -20,7 +19,6 @@ alignment = 0
 _sections_unfolded = [ "Margin", "Size Flags" ]
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -46,5 +44,3 @@ radial_fill_degrees = 360.0
 radial_center_offset = Vector2( 0, 0 )
 nine_patch_stretch = false
 _sections_unfolded = [ "Textures" ]
-
-

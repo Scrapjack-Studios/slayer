@@ -1,11 +1,15 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Bullet.gd" type="Script" id=1]
+[ext_resource path="res://Player/Firearms/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://art/bulletDark1_outline.png" type="Texture" id=2]
 [ext_resource path="res://art/bulletBlue2_outline.png" type="Texture" id=3]
 [ext_resource path="res://art/bulletRed2_outline.png" type="Texture" id=4]
-[ext_resource path="res://Explosion.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Area2D.gd" type="Script" id=6]
+[ext_resource path="res://Misc/Explosion.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Player/Firearms/Area2D.gd" type="Script" id=6]
+
+
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.1997, 1.72481 )
