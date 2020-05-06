@@ -64,7 +64,6 @@ func _input(event: InputEvent) -> void:
         $GrappleTimer.start()
         can_grapple = false
         is_grappling = false
-        print("StopGrap")
         
 func _physics_process(delta):
     var mpos = get_global_mouse_position()
@@ -194,4 +193,3 @@ func _on_SlideTimer_timeout():
 func _on_GrappleTimer_timeout():
     $GrappleTimer.stop()
     can_grapple = true
-    print("GRAPTIMEOUT")
