@@ -43,7 +43,7 @@ var is_walking = false
 var can_grapple = true
 var is_grappling = false
 var jump_count = 0
-
+var is_wall_sliding = false
 
 func _ready():
     health = start_health
@@ -168,11 +168,11 @@ func _physics_process(delta):
         is_jumping = false
         is_falling = true
         
-    if is_jumping and move_right and $Wall_Detect_Right.is_colliding() and not $Wall_Detect_Right2.is_colliding():
+    if is_jumping and move_right and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right2.is_colliding():
         velocity.x = +CLIMB_AMOUNT
         velocity.y = -CLIMB_SPEED
         
-    if is_jumping  and move_left and $Wall_Detect_Left.is_colliding() and not $Wall_Detect_Left2.is_colliding():
+    if is_jumping  and move_left and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding():
          velocity.x = -CLIMB_AMOUNT
          velocity.y = -CLIMB_SPEED
     
@@ -187,7 +187,28 @@ func _physics_process(delta):
     prev_jump_pressed = jump
 
     
-    
+       
+    if is_on_wall() and is_falling:
+        velocity.y = lerp(velocity.y,0,0.2)
+        if Input.is_action_pressed("ui_keyC"):
+
+            velocity.y = lerp(velocity.y,0,0)
+
+        
+        if $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and jump:
+        
+            velocity.y = -JUMP_SPEED
+        
+            velocity.x = 800
+        
+        if $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and jump:
+        
+            velocity.y = -JUMP_SPEED
+        
+            velocity.x = -800
+            
+        
+        
         
 func _on_GunTimer_timeout():
     can_shoot = true
