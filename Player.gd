@@ -197,15 +197,19 @@ func _physics_process(delta):
         
         if $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and jump:
         
-            velocity.y = -JUMP_SPEED
+            if jump:
+                
+                velocity.y = -JUMP_SPEED
         
-            velocity.x = 800
+                velocity.x = 800
         
         if $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and jump:
         
-            velocity.y = -JUMP_SPEED
+            if jump:
+
+                velocity.y = -JUMP_SPEED
         
-            velocity.x = -800
+                velocity.x = -800
             
         
         
