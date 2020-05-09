@@ -195,7 +195,7 @@ func _physics_process(delta):
             velocity.y = lerp(velocity.y,0,0)
 
         
-        if $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and jump:
+        if $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and $Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding() and jump:
         
             if jump:
                 
@@ -203,7 +203,7 @@ func _physics_process(delta):
         
                 velocity.x = 800
         
-        if $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and jump:
+        if $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and $Wall_Raycasts/Right/Wall_Detect_Right2.is_colliding() and jump:
         
             if jump:
 
