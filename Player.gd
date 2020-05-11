@@ -24,7 +24,6 @@ const SLIDE_SPEED = 1000
 const MAX_SLIDE_TIME = 1
 const CLIMB_SPEED = 600
 const CLIMB_AMOUNT = 70
-const CHAIN_PULL = 50
 const MAX_JUMP_COUNT = 2
 
 var velocity = Vector2(0,0)		# The velocity of the player (kept over time)
@@ -32,6 +31,7 @@ var chain_velocity := Vector2(0,0)
 var rot_dir
 var can_shoot = true
 var health
+var chain_pull = 20
 var on_air_time = 100
 var is_jumping = false
 var can_doublejump = true
@@ -62,13 +62,18 @@ func _input(event: InputEvent) -> void:
         # We clicked the mouse -> shoot()
         $Chain.shoot(event.position - get_viewport().size * .6)
         is_grappling = true
+        $Whip.hide()
+        
+    if is_grappling and event.is_action_pressed("Grapple_Pull"):
+        chain_pull = 70
         
     elif event.is_action_released("Graphook") and is_grappling:
         $Chain.release()
         $GrappleTimer.start()
         can_grapple = false
         is_grappling = false
-   
+        $Whip.show()
+        chain_pull = 20
     
     if jump_count < MAX_JUMP_COUNT and event.is_action_pressed("jump"):
         velocity.y = -JUMP_SPEED
@@ -102,7 +107,7 @@ func _physics_process(delta):
  
     if $Chain.hooked:
         # `to_local($Chain.tip).normalized()` is the direction that the chain is pulling
-        chain_velocity = to_local($Chain.tip).normalized() * CHAIN_PULL
+        chain_velocity = to_local($Chain.tip).normalized() * chain_pull
         if chain_velocity.y > 0:
             # Pulling down isn't as strong
             chain_velocity.y *= 0.55
@@ -188,29 +193,23 @@ func _physics_process(delta):
 
     
        
-    if is_on_wall() and is_falling:
+    if is_on_wall() and is_falling and $Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding() or $Wall_Raycasts/Right/Wall_Detect_Right2.is_colliding():
         velocity.y = lerp(velocity.y,0,0.2)
-        if Input.is_action_pressed("ui_keyC"):
-
-            velocity.y = lerp(velocity.y,0,0)
-
         
         if $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and $Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding() and jump:
         
             if jump:
                 
                 velocity.y = -JUMP_SPEED
-        
-                velocity.x = 800
+                velocity.x = +800
         
         if $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and $Wall_Raycasts/Right/Wall_Detect_Right2.is_colliding() and jump:
         
             if jump:
 
                 velocity.y = -JUMP_SPEED
-        
                 velocity.x = -800
-            
+                
         
         
         

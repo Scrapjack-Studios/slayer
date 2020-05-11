@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/onlyObjects_retina_rotated.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -6,9 +6,17 @@
 [ext_resource path="res://player/Chain.tscn" type="PackedScene" id=4]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/32x32.png" type="Texture" id=6]
+[ext_resource path="res://assets/rope.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24.0234, 37.6377 )
+extents = Vector2( 0.999626, 3.07978 )
+
+[sub_resource type="PhysicsMaterial" id=4]
+
+[sub_resource type="CapsuleShape2D" id=3]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 18.1528, 6.02961 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "ChainGang",
@@ -16,6 +24,7 @@ extents = Vector2( 24.0234, 37.6377 )
 position = Vector2( 2.89905, -3.43567 )
 rotation = -0.000230981
 collision_layer = 4
+collision_mask = 3
 collision/safe_margin = 0.001
 script = ExtResource( 2 )
 Bullet = ExtResource( 5 )
@@ -25,14 +34,16 @@ start_health = 100
 bullet_lifetime = 0.4
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -4.54001, 3.22983 )
-scale = Vector2( 23.3081, 18.8213 )
+position = Vector2( -4.54001, 5.10291 )
+scale = Vector2( 23.3081, 17.8848 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 50, 97, 2, 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -3.84326, 4.41504 )
+position = Vector2( -4.53855, 5.02082 )
+rotation = -0.0112478
+scale = Vector2( 23.308, 11.613 )
 shape = SubResource( 1 )
 
 [node name="Turret" type="Sprite" parent="."]
@@ -72,15 +83,16 @@ process_mode = 0
 [node name="Chain" parent="." groups=[
 "ChainGang",
 ] instance=ExtResource( 4 )]
-position = Vector2( 4.96469, -19.3649 )
+position = Vector2( -4.04369, -3.63054 )
 scale = Vector2( 1.36203, 1.23864 )
 
 [node name="Wall_Raycasts" type="Node2D" parent="."]
+visible = false
 
 [node name="Right" type="Node2D" parent="Wall_Raycasts"]
 
 [node name="Wall_Detect_Right" type="RayCast2D" parent="Wall_Raycasts/Right"]
-position = Vector2( 21.4546, -31.2942 )
+position = Vector2( 25.3923, -30.1176 )
 rotation = -1.58225
 enabled = true
 cast_to = Vector2( 0, 30 )
@@ -98,7 +110,7 @@ collide_with_areas = true
 [node name="Left" type="Node2D" parent="Wall_Raycasts"]
 
 [node name="Wall_Detect_Left" type="RayCast2D" parent="Wall_Raycasts/Left"]
-position = Vector2( -29.8931, -30.137 )
+position = Vector2( -32.3782, -29.7848 )
 rotation = 1.57469
 enabled = true
 cast_to = Vector2( 0, 30 )
@@ -112,6 +124,54 @@ enabled = true
 cast_to = Vector2( 0, 30 )
 collision_mask = 5
 collide_with_areas = true
+
+[node name="Whip" type="PinJoint2D" parent="."]
+position = Vector2( -13.2539, 3.38521 )
+node_a = NodePath("..")
+node_b = NodePath("GrooveJoint2D/RigidBody2D")
+bias = 0.9
+disable_collision = false
+softness = 1.0
+
+[node name="GrooveJoint2D" type="GrooveJoint2D" parent="Whip"]
+position = Vector2( 0.140658, -0.140596 )
+node_a = NodePath("../..")
+node_b = NodePath("RigidBody2D")
+bias = 0.9
+disable_collision = false
+length = 1.0
+initial_offset = 1.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Whip/GrooveJoint2D"]
+position = Vector2( -5.14383, 14.0025 )
+rotation = -0.413721
+collision_layer = 32
+collision_mask = 32
+physics_material_override = SubResource( 4 )
+contact_monitor = true
+can_sleep = false
+
+[node name="Sprite" type="Sprite" parent="Whip/GrooveJoint2D/RigidBody2D"]
+position = Vector2( 3.70252, 2.46796 )
+scale = Vector2( 0.438508, 0.558329 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Whip/GrooveJoint2D/RigidBody2D"]
+position = Vector2( 3.47328, 2.00998 )
+rotation = -1.13057
+scale = Vector2( 1.63873, 1 )
+shape = SubResource( 3 )
+
+[node name="Whip_Contraint" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2( -13.1131, 2.96335 )
+collision_layer = 4
+collision_mask = 32
+mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Whip_Contraint"]
+position = Vector2( 0.284856, -15.6097 )
+shape = SubResource( 5 )
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="SlideTimer" to="." method="_on_SlideTimer_timeout"]
 [connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/image.jpg-7b844b9d7e583303998cd807e8fb5f6d.stex"
+path="res://.import/grapplehook.png-50c9e275da9eeb6357810552e442f414.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/image.jpg"
-dest_files=[ "res://.import/image.jpg-7b844b9d7e583303998cd807e8fb5f6d.stex" ]
+source_file="res://assets/grapplehook.png"
+dest_files=[ "res://.import/grapplehook.png-50c9e275da9eeb6357810552e442f414.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

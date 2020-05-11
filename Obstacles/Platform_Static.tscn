@@ -3,15 +3,6 @@
 [ext_resource path="res://assets/external-content.duckduckgo.com.jpg" type="Texture" id=1]
 [ext_resource path="res://obstacles/Platform_Static.gd" type="Script" id=2]
 
-
-
-
-
-
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 126.611, 25.788 )
 
@@ -19,6 +10,7 @@ extents = Vector2( 126.611, 25.788 )
 "Bullet_Colliders",
 ]]
 position = Vector2( 0, -0.689682 )
+collision_layer = 65
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
@@ -30,7 +22,8 @@ texture = ExtResource( 1 )
 region_rect = Rect2( 31.2719, 26.1082, 0.638771, 2.49119 )
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 3
+collision_layer = 67
+collision_mask = 65
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )

@@ -1,4 +1,3 @@
-
 extends Node2D
 
 onready var links = $Links		# A slightly easier reference to the links
@@ -9,7 +8,7 @@ var tip := Vector2(0,0)			# The global position the tip should be in
                                 # properties would get messed with when the player
                                 # moves.
 
-const SPEED = 50	# The speed with which the chain moves
+const SPEED = 50    # The speed with which the chain moves
 
 var flying = false	# Whether the chain is moving through the air
 var hooked = false	# Whether the chain has connected to a wall
@@ -36,7 +35,7 @@ func _process(_delta: float) -> void:
     $Tip.rotation = self.position.angle_to_point(tip_loc) - deg2rad(90)
     links.position = tip_loc						# The links are moved to start at the tip
     links.region_rect.size.y = tip_loc.length()		# and get extended for the distance between (0,0) and the tip
-    
+
 # Every physics frame we update the tip position
 func _physics_process(_delta: float) -> void:
     $Tip.global_position = tip	# The player might have moved and thus updated the position of the tip -> reset it
