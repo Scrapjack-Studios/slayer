@@ -193,7 +193,7 @@ func _physics_process(delta):
 
     
        
-    if is_on_wall() and is_falling and $Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding() or $Wall_Raycasts/Right/Wall_Detect_Right2.is_colliding():
+    if is_on_wall() and is_falling and not is_on_ceiling() and $Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding() or $Wall_Raycasts/Right/Wall_Detect_Right2.is_colliding():
         velocity.y = lerp(velocity.y,0,0.2)
         
         if $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and $Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding() and jump:

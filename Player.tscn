@@ -11,11 +11,11 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.999626, 3.07978 )
 
-[sub_resource type="PhysicsMaterial" id=4]
+[sub_resource type="PhysicsMaterial" id=2]
 
 [sub_resource type="CapsuleShape2D" id=3]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 18.1528, 6.02961 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -147,7 +147,7 @@ position = Vector2( -5.14383, 14.0025 )
 rotation = -0.413721
 collision_layer = 32
 collision_mask = 32
-physics_material_override = SubResource( 4 )
+physics_material_override = SubResource( 2 )
 contact_monitor = true
 can_sleep = false
 
@@ -171,7 +171,7 @@ mode = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Whip_Contraint"]
 position = Vector2( 0.284856, -15.6097 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="SlideTimer" to="." method="_on_SlideTimer_timeout"]
 [connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]

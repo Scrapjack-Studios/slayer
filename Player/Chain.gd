@@ -8,7 +8,7 @@ var tip := Vector2(0,0)			# The global position the tip should be in
                                 # properties would get messed with when the player
                                 # moves.
 
-const SPEED = 50    # The speed with which the chain moves
+const SPEED = 70    # The speed with which the chain moves
 
 var flying = false	# Whether the chain is moving through the air
 var hooked = false	# Whether the chain has connected to a wall
