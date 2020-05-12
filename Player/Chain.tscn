@@ -2,7 +2,7 @@
 
 [ext_resource path="res://player/Chain.gd" type="Script" id=1]
 [ext_resource path="res://assets/grapplehook.png" type="Texture" id=2]
-[ext_resource path="res://assets/rope.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/ropes/ropeLinkLong.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.3147
@@ -25,17 +25,17 @@ texture = ExtResource( 2 )
 offset = Vector2( -1.4, 25 )
 
 [node name="Capsuleshape2D" type="CollisionShape2D" parent="Tip"]
-position = Vector2( 0.275256, 39.6226 )
+position = Vector2( 0.613827, 22.8993 )
 scale = Vector2( 1.16, 1.92 )
 shape = SubResource( 1 )
 
 [node name="Links" type="Sprite" parent="."]
 show_behind_parent = true
-position = Vector2( -0.313753, 17.5277 )
-scale = Vector2( 0.376889, 0.966527 )
+position = Vector2( 3.97189, -2.499 )
+scale = Vector2( 1.06958, 0.89055 )
 z_as_relative = false
 texture = ExtResource( 3 )
 centered = false
 offset = Vector2( -8, 14 )
 region_enabled = true
-region_rect = Rect2( -0.187965, 0.0892754, 19.1233, 429.833 )
+region_rect = Rect2( -0.22757, -0.240696, 10.5173, 30.2641 )

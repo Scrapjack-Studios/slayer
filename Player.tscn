@@ -88,8 +88,7 @@ process_mode = 0
 [node name="Chain" parent="." groups=[
 "ChainGang",
 ] instance=ExtResource( 4 )]
-visible = false
-position = Vector2( -4.04369, -3.63054 )
+position = Vector2( -4.6513, -1.20232 )
 scale = Vector2( 1.36203, 1.23864 )
 
 [node name="Wall_Raycasts" type="Node2D" parent="."]

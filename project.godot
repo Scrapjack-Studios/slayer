@@ -85,6 +85,7 @@ ui_keyC={
 2d_physics/layer_3="Player"
 2d_physics/layer_4="Hook"
 2d_physics/layer_5="Enemies"
+2d_physics/layer_6="GrappleAble"
 
 [rendering]
 

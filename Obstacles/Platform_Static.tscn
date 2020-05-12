@@ -4,7 +4,7 @@
 [ext_resource path="res://obstacles/Platform_Static.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 126.611, 25.788 )
+extents = Vector2( 125.266, 24.2616 )
 
 [node name="StaticBody2D" type="StaticBody2D" groups=[
 "Bullet_Colliders",
@@ -22,8 +22,7 @@ texture = ExtResource( 1 )
 region_rect = Rect2( 31.2719, 26.1082, 0.638771, 2.49119 )
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 67
-collision_mask = 65
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )

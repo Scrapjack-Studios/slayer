@@ -61,7 +61,7 @@ func _input(event: InputEvent) -> void:
     
     if event.is_action_pressed("Graphook") and can_grapple:
         # We clicked the mouse -> shoot()
-        $Chain.shoot(event.position - get_viewport().size * .7)
+        $Chain.shoot(event.position - get_viewport().size * .55)
         is_grappling = true
         $Whip.hide()
 
