@@ -31,7 +31,7 @@ var chain_velocity := Vector2(0,0)
 var rot_dir
 var can_shoot = true
 var health
-var chain_pull = 20
+var chain_pull = 50
 var on_air_time = 100
 var is_jumping = false
 var can_doublejump = true
@@ -44,6 +44,7 @@ var can_grapple = true
 var is_grappling = false
 var jump_count = 0
 var is_wall_sliding = false
+
 
 func _ready():
     health = start_health
@@ -60,12 +61,10 @@ func _input(event: InputEvent) -> void:
     
     if event.is_action_pressed("Graphook") and can_grapple:
         # We clicked the mouse -> shoot()
-        $Chain.shoot(event.position - get_viewport().size * .6)
+        $Chain.shoot(event.position - get_viewport().size * .7)
         is_grappling = true
         $Whip.hide()
-        
-    if is_grappling and event.is_action_pressed("Grapple_Pull"):
-        chain_pull = 70
+
         
     elif event.is_action_released("Graphook") and is_grappling:
         $Chain.release()
@@ -73,8 +72,9 @@ func _input(event: InputEvent) -> void:
         can_grapple = false
         is_grappling = false
         $Whip.show()
-        chain_pull = 20
     
+    if event.is_action_pressed("jump"):
+        is_jumping = false
     if jump_count < MAX_JUMP_COUNT and event.is_action_pressed("jump"):
         velocity.y = -JUMP_SPEED
         jump_count += 1
@@ -110,7 +110,7 @@ func _physics_process(delta):
         chain_velocity = to_local($Chain.tip).normalized() * chain_pull
         if chain_velocity.y > 0:
             # Pulling down isn't as strong
-            chain_velocity.y *= 0.55
+            chain_velocity.y *= 1.65
         else:
             # Pulling up is stronger
             chain_velocity.y *= 1.65
@@ -173,14 +173,15 @@ func _physics_process(delta):
         is_jumping = false
         is_falling = true
         
-    if is_jumping and move_right and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right2.is_colliding():
+    if is_jumping and move_right and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
         velocity.x = +CLIMB_AMOUNT
         velocity.y = -CLIMB_SPEED
         
-    if is_jumping  and move_left and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding():
+        
+    if is_jumping  and move_left and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
          velocity.x = -CLIMB_AMOUNT
          velocity.y = -CLIMB_SPEED
-    
+        
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
         # Makes controls more snappy.
@@ -193,7 +194,7 @@ func _physics_process(delta):
 
     
        
-    if is_on_wall() and is_falling and not is_on_ceiling() and $Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding() or $Wall_Raycasts/Right/Wall_Detect_Right2.is_colliding():
+    if is_on_wall() and is_falling and [$Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding() or $Wall_Raycasts/Right/Wall_Detect_Right2.is_colliding()]:
         velocity.y = lerp(velocity.y,0,0.2)
         
         if $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and $Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding() and jump:

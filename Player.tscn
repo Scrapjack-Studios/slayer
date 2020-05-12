@@ -59,7 +59,12 @@ position = Vector2( 65, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 2, 2 )
+limit_left = -10000
+limit_top = -10000
+limit_right = 10000
+limit_bottom = 10000
+limit_smoothed = true
+smoothing_enabled = true
 script = ExtResource( 3 )
 
 [node name="Bullets" type="Node" parent="."]
@@ -83,11 +88,11 @@ process_mode = 0
 [node name="Chain" parent="." groups=[
 "ChainGang",
 ] instance=ExtResource( 4 )]
+visible = false
 position = Vector2( -4.04369, -3.63054 )
 scale = Vector2( 1.36203, 1.23864 )
 
 [node name="Wall_Raycasts" type="Node2D" parent="."]
-visible = false
 
 [node name="Right" type="Node2D" parent="Wall_Raycasts"]
 
@@ -96,7 +101,6 @@ position = Vector2( 25.3923, -30.1176 )
 rotation = -1.58225
 enabled = true
 cast_to = Vector2( 0, 30 )
-collision_mask = 5
 collide_with_areas = true
 
 [node name="Wall_Detect_Right2" type="RayCast2D" parent="Wall_Raycasts/Right"]
@@ -104,25 +108,43 @@ position = Vector2( 18.1799, -126.846 )
 rotation = -1.58225
 enabled = true
 cast_to = Vector2( 0, 30 )
-collision_mask = 5
+collide_with_areas = true
+
+[node name="Wall_Detect_Right3" type="RayCast2D" parent="Wall_Raycasts/Right"]
+position = Vector2( 18.4014, -139.284 )
+rotation = -1.58225
+enabled = true
+cast_to = Vector2( 0, 30 )
 collide_with_areas = true
 
 [node name="Left" type="Node2D" parent="Wall_Raycasts"]
 
 [node name="Wall_Detect_Left" type="RayCast2D" parent="Wall_Raycasts/Left"]
-position = Vector2( -32.3782, -29.7848 )
+position = Vector2( -30.6044, -29.1931 )
 rotation = 1.57469
 enabled = true
 cast_to = Vector2( 0, 30 )
-collision_mask = 5
 collide_with_areas = true
 
 [node name="Wall_Detect_Left2" type="RayCast2D" parent="Wall_Raycasts/Left"]
-position = Vector2( -32.7289, -125.302 )
+position = Vector2( -33.6436, -127.132 )
 rotation = 1.57469
 enabled = true
 cast_to = Vector2( 0, 30 )
-collision_mask = 5
+collide_with_areas = true
+
+[node name="Wall_Detect_Left3" type="RayCast2D" parent="Wall_Raycasts/Left"]
+position = Vector2( -33.2867, -140.764 )
+rotation = 1.57469
+enabled = true
+cast_to = Vector2( 0, 30 )
+collide_with_areas = true
+
+[node name="Upper_Detect" type="RayCast2D" parent="Wall_Raycasts"]
+position = Vector2( -4.69749, -43.1527 )
+rotation = 3.14143
+scale = Vector2( 1.00532, 0.302961 )
+enabled = true
 collide_with_areas = true
 
 [node name="Whip" type="PinJoint2D" parent="."]
@@ -130,7 +152,6 @@ position = Vector2( -13.2539, 3.38521 )
 node_a = NodePath("..")
 node_b = NodePath("GrooveJoint2D/RigidBody2D")
 bias = 0.9
-disable_collision = false
 softness = 1.0
 
 [node name="GrooveJoint2D" type="GrooveJoint2D" parent="Whip"]
@@ -170,6 +191,7 @@ collision_mask = 32
 mode = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Whip_Contraint"]
+visible = false
 position = Vector2( 0.284856, -15.6097 )
 shape = SubResource( 4 )
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]

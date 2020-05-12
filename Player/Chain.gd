@@ -8,7 +8,7 @@ var tip := Vector2(0,0)			# The global position the tip should be in
                                 # properties would get messed with when the player
                                 # moves.
 
-const SPEED = 70    # The speed with which the chain moves
+const SPEED = 70   # The speed with which the chain moves
 
 var flying = false	# Whether the chain is moving through the air
 var hooked = false	# Whether the chain has connected to a wall
@@ -17,8 +17,16 @@ var hooked = false	# Whether the chain has connected to a wall
 func shoot(dir: Vector2) -> void:
     direction = dir.normalized()	# Normalize the direction and save it
     flying = true					# Keep track of our current scan
-    tip = self.global_position		# reset the tip position to the player's position
-
+    tip = self.global_position
+    var t = Timer.new()
+    t.set_wait_time(1)
+    t.set_one_shot(true)
+    self.add_child(t)
+    t.start()
+    yield(t, "timeout")
+    t.queue_free()		# reset the tip position to the player's position
+    if not hooked:
+        release()
 # release() the chain
 func release() -> void:
     flying = false	# Not flying anymore	
