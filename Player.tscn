@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/rope.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 0.999626, 3.07978 )
+extents = Vector2( 1.00387, 2.0991 )
 
 [sub_resource type="PhysicsMaterial" id=2]
 
@@ -34,16 +34,15 @@ start_health = 100
 bullet_lifetime = 0.4
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -4.54001, 5.10291 )
-scale = Vector2( 23.3081, 17.8848 )
+position = Vector2( -4.3709, 4.91209 )
+scale = Vector2( 1.46035, 2.24052 )
 texture = ExtResource( 6 )
-region_enabled = true
-region_rect = Rect2( 50, 97, 2, 4 )
+region_rect = Rect2( 11, 13, 18, 20 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -4.53855, 5.02082 )
-rotation = -0.0112478
-scale = Vector2( 23.308, 11.613 )
+position = Vector2( -4.592, 5 )
+rotation = 0.000126217
+scale = Vector2( 23.308, 17 )
 shape = SubResource( 1 )
 
 [node name="Turret" type="Sprite" parent="."]
@@ -92,25 +91,26 @@ position = Vector2( -4.6513, -1.20232 )
 scale = Vector2( 1.36203, 1.23864 )
 
 [node name="Wall_Raycasts" type="Node2D" parent="."]
+visible = false
 
 [node name="Right" type="Node2D" parent="Wall_Raycasts"]
 
 [node name="Wall_Detect_Right" type="RayCast2D" parent="Wall_Raycasts/Right"]
-position = Vector2( 25.3923, -30.1176 )
+position = Vector2( 23.4747, -27.8814 )
 rotation = -1.58225
 enabled = true
 cast_to = Vector2( 0, 30 )
 collide_with_areas = true
 
 [node name="Wall_Detect_Right2" type="RayCast2D" parent="Wall_Raycasts/Right"]
-position = Vector2( 18.1799, -126.846 )
+position = Vector2( 26.803, -109.59 )
 rotation = -1.58225
 enabled = true
 cast_to = Vector2( 0, 30 )
 collide_with_areas = true
 
 [node name="Wall_Detect_Right3" type="RayCast2D" parent="Wall_Raycasts/Right"]
-position = Vector2( 18.4014, -139.284 )
+position = Vector2( 26.8036, -124.759 )
 rotation = -1.58225
 enabled = true
 cast_to = Vector2( 0, 30 )
@@ -126,14 +126,14 @@ cast_to = Vector2( 0, 30 )
 collide_with_areas = true
 
 [node name="Wall_Detect_Left2" type="RayCast2D" parent="Wall_Raycasts/Left"]
-position = Vector2( -33.6436, -127.132 )
+position = Vector2( -33.9674, -108.6 )
 rotation = 1.57469
 enabled = true
 cast_to = Vector2( 0, 30 )
 collide_with_areas = true
 
 [node name="Wall_Detect_Left3" type="RayCast2D" parent="Wall_Raycasts/Left"]
-position = Vector2( -33.2867, -140.764 )
+position = Vector2( -35.6038, -127.045 )
 rotation = 1.57469
 enabled = true
 cast_to = Vector2( 0, 30 )

@@ -18,7 +18,6 @@ const WALK_FORCE = 1600
 const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 400
 const STOP_FORCE = 1500
-const JUMP_SPEED = 600
 const JUMP_MAX_AIRBORNE_TIME = 0.4
 const SLIDE_SPEED = 1000
 const MAX_SLIDE_TIME = 1
@@ -44,6 +43,8 @@ var can_grapple = true
 var is_grappling = false
 var jump_count = 0
 var is_wall_sliding = false
+var has_pressed_jump
+var JUMP_SPEED = 600
 
 
 func _ready():
@@ -115,7 +116,7 @@ func _physics_process(delta):
             # Pulling up is stronger
             chain_velocity.y *= 1.65
 
-
+    
     else:
         # Not hooked -> no chain velocity
         chain_velocity = Vector2(0,0)
@@ -167,7 +168,9 @@ func _physics_process(delta):
         on_air_time = 0
         is_falling = false
         jump_count = 0
+        has_pressed_jump = false
         
+      
     if is_jumping and velocity.y > 0:
         # If falling, no longer jumping
         is_jumping = false
@@ -194,22 +197,17 @@ func _physics_process(delta):
 
     
        
-    if is_on_wall() and is_falling and [$Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding() or $Wall_Raycasts/Right/Wall_Detect_Right2.is_colliding()]:
-        velocity.y = lerp(velocity.y,0,0.2)
+    if is_on_wall() and is_falling:
+        velocity.y = lerp(velocity.y,0,0.3)
+        jump_count = 0
+        JUMP_SPEED = 800
         
-        if $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and $Wall_Raycasts/Left/Wall_Detect_Left2.is_colliding() and jump:
-        
-            if jump:
-                
-                velocity.y = -JUMP_SPEED
-                velocity.x = +800
-        
-        if $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and $Wall_Raycasts/Right/Wall_Detect_Right2.is_colliding() and jump:
-        
-            if jump:
+    if not is_on_wall() and not is_falling:
+        JUMP_SPEED = 600
 
-                velocity.y = -JUMP_SPEED
-                velocity.x = -800
+   
+
+
                 
         
         
