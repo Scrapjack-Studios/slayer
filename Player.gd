@@ -45,7 +45,7 @@ var jump_count = 0
 var is_wall_sliding = false
 var has_pressed_jump
 var JUMP_SPEED = 600
-
+var is_climbing = false
 
 func _ready():
     health = start_health
@@ -169,7 +169,8 @@ func _physics_process(delta):
         is_falling = false
         jump_count = 0
         has_pressed_jump = false
-        
+        is_climbing = false
+        JUMP_SPEED = 600
       
     if is_jumping and velocity.y > 0:
         # If falling, no longer jumping
@@ -179,11 +180,12 @@ func _physics_process(delta):
     if is_jumping and move_right and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
         velocity.x = +CLIMB_AMOUNT
         velocity.y = -CLIMB_SPEED
-        
+        is_climbing = true
         
     if is_jumping  and move_left and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
          velocity.x = -CLIMB_AMOUNT
          velocity.y = -CLIMB_SPEED
+         is_climbing = true
         
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
@@ -197,15 +199,12 @@ func _physics_process(delta):
 
     
        
-    if is_on_wall() and is_falling:
+    if is_on_wall() and not is_climbing:
         velocity.y = lerp(velocity.y,0,0.3)
         jump_count = 0
         JUMP_SPEED = 800
         
-    if not is_on_wall() and not is_falling:
-        JUMP_SPEED = 600
-
-   
+    
 
 
                 

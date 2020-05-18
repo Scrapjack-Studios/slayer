@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/rope.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1.00387, 2.0991 )
+extents = Vector2( 0.998139, 2.11467 )
 
 [sub_resource type="PhysicsMaterial" id=2]
 
@@ -40,7 +40,7 @@ texture = ExtResource( 6 )
 region_rect = Rect2( 11, 13, 18, 20 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -4.592, 5 )
+position = Vector2( -4.38814, 4.89539 )
 rotation = 0.000126217
 scale = Vector2( 23.308, 17 )
 shape = SubResource( 1 )
@@ -193,6 +193,8 @@ mode = 3
 visible = false
 position = Vector2( 0.284856, -15.6097 )
 shape = SubResource( 4 )
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="SlideTimer" to="." method="_on_SlideTimer_timeout"]
 [connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]
