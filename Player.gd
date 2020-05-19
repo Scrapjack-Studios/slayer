@@ -46,6 +46,7 @@ var is_wall_sliding = false
 var has_pressed_jump
 var JUMP_SPEED = 600
 var is_climbing = false
+var can_walljump = true
 
 func _ready():
     health = start_health
@@ -178,14 +179,10 @@ func _physics_process(delta):
         is_falling = true
         
     if is_jumping and move_right and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
-        velocity.x = +CLIMB_AMOUNT
-        velocity.y = -CLIMB_SPEED
-        is_climbing = true
+        _MantelRight()
         
     if is_jumping  and move_left and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
-         velocity.x = -CLIMB_AMOUNT
-         velocity.y = -CLIMB_SPEED
-         is_climbing = true
+        _MantelLeft()
         
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
@@ -201,20 +198,36 @@ func _physics_process(delta):
        
     if is_on_wall() and not is_climbing:
         velocity.y = lerp(velocity.y,0,0.3)
-        jump_count = 0
         JUMP_SPEED = 800
-        jump_count = 0
         
+        if can_walljump:
+            jump_count = 1
+            can_walljump = false
+            $WallJumpTimer.start()
+            
+        if not $Wall_Raycasts/Left/Wall_Detect_Left3:
+            _MantelLeft()
+            
+        if not $Wall_Raycasts/Right/Wall_Detect_Right3:
+            _MantelRight()
+                 
     
     if not is_on_wall() and not is_falling:
         JUMP_SPEED = 600
-        jump_count += 1
         
 
 
                 
         
-        
+func _MantelRight():
+    velocity.x = +CLIMB_AMOUNT
+    velocity.y = -CLIMB_SPEED
+    is_climbing = true
+    
+func _MantelLeft():       
+    velocity.x = -CLIMB_AMOUNT
+    velocity.y = -CLIMB_SPEED
+    is_climbing = true   
         
 func _on_GunTimer_timeout():
     can_shoot = true
@@ -233,3 +246,7 @@ func _on_SlideTimer_timeout():
 func _on_GrappleTimer_timeout():
     $GrappleTimer.stop()
     can_grapple = true
+
+
+func _on_WallJumpTimer_timeout():
+    can_doublejump = true
