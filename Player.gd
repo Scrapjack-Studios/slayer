@@ -201,10 +201,11 @@ func _physics_process(delta):
         velocity.y = lerp(velocity.y,0,0.3)
         jump_count = 0
         JUMP_SPEED = 800
+        jump_count = 0
         
     if not is_on_wall() and not is_falling:
         JUMP_SPEED = 600
-
+        jump_count += 1
    
 
 
