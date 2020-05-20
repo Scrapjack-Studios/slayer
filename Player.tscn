@@ -140,9 +140,23 @@ cast_to = Vector2( 0, 30 )
 collide_with_areas = true
 
 [node name="Upper_Detect" type="RayCast2D" parent="Wall_Raycasts"]
-position = Vector2( -4.69749, -43.1527 )
+position = Vector2( -4.11721, -30.9484 )
 rotation = 3.14143
-scale = Vector2( 1.00532, 0.302961 )
+scale = Vector2( 1.00532, 0.102961 )
+enabled = true
+collide_with_areas = true
+
+[node name="Upper_Detect_Left" type="RayCast2D" parent="Wall_Raycasts"]
+position = Vector2( -21.1638, -32.3429 )
+rotation = 2.47325
+scale = Vector2( 1.00532, 0.102961 )
+enabled = true
+collide_with_areas = true
+
+[node name="Upper_Detect_Right" type="RayCast2D" parent="Wall_Raycasts"]
+position = Vector2( 13.1231, -32.4592 )
+rotation = 3.79792
+scale = Vector2( 1.00532, 0.102961 )
 enabled = true
 collide_with_areas = true
 
@@ -197,7 +211,11 @@ shape = SubResource( 4 )
 [node name="RayCast2D2" type="RayCast2D" parent="."]
 
 [node name="WallJumpTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
+
+[node name="Blur" type="CanvasModulate" parent="."]
+visible = false
+color = Color( 0.984314, 0.0705882, 0.0705882, 1 )
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="SlideTimer" to="." method="_on_SlideTimer_timeout"]
 [connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]

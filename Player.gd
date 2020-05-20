@@ -10,7 +10,7 @@ export (int) var start_health
 export (float) var bullet_lifetime
 # Member variables
 # Member variables
-const GRAVITY = 1300.0 # pixels/second/second
+var gravity = 1300.0 # pixels/second/second
 
 # Angle in degrees towards either side that the player can consider "floor"
 const FLOOR_ANGLE_TOLERANCE = 70
@@ -44,7 +44,7 @@ var is_grappling = false
 var jump_count = 0
 var is_wall_sliding = false
 var has_pressed_jump
-var JUMP_SPEED = 600
+var jump_strength = 600
 var is_climbing = false
 var can_walljump = true
 
@@ -63,7 +63,7 @@ func _input(event: InputEvent) -> void:
     
     if event.is_action_pressed("Graphook") and can_grapple:
         # We clicked the mouse -> shoot()
-        $Chain.shoot(event.position - get_viewport().size * .55)
+        $Chain.shoot(event.position - get_viewport().size * .54)
         is_grappling = true
         $Whip.hide()
 
@@ -78,7 +78,7 @@ func _input(event: InputEvent) -> void:
     if event.is_action_pressed("jump"):
         is_jumping = false
     if jump_count < MAX_JUMP_COUNT and event.is_action_pressed("jump"):
-        velocity.y = -JUMP_SPEED
+        velocity.y = -jump_strength
         jump_count += 1
         
 func _physics_process(delta):
@@ -86,7 +86,7 @@ func _physics_process(delta):
     
     $Turret.global_rotation = mpos.angle_to_point(position)  
        
-    var force = Vector2(0, GRAVITY) # create forces 
+    var force = Vector2(0, gravity) # create forces 
     
     var move_left = Input.is_action_pressed("move_left")
     
@@ -108,14 +108,7 @@ func _physics_process(delta):
         $Turret.set_position(Vector2(15,0))
  
     if $Chain.hooked:
-        # `to_local($Chain.tip).normalized()` is the direction that the chain is pulling
-        chain_velocity = to_local($Chain.tip).normalized() * chain_pull
-        if chain_velocity.y > 0:
-            # Pulling down isn't as strong
-            chain_velocity.y *= 1.65
-        else:
-            # Pulling up is stronger
-            chain_velocity.y *= 1.65
+        _ChainHook()
 
     
     else:
@@ -171,8 +164,11 @@ func _physics_process(delta):
         jump_count = 0
         has_pressed_jump = false
         is_climbing = false
-        JUMP_SPEED = 600
-      
+        jump_strength = 600
+        gravity = -1
+    else:
+        gravity = 1300
+        
     if is_jumping and velocity.y > 0:
         # If falling, no longer jumping
         is_jumping = false
@@ -187,38 +183,38 @@ func _physics_process(delta):
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
         # Makes controls more snappy.
-        velocity.y = -JUMP_SPEED
+        velocity.y = -jump_strength
         is_jumping = true
     
     on_air_time += delta
     
     prev_jump_pressed = jump
-
     
-       
-    if is_on_wall() and not is_climbing:
-        velocity.y = lerp(velocity.y,0,0.3)
-        JUMP_SPEED = 800
+    if is_on_wall() and not is_climbing and Input.is_action_pressed("WallCling"):
+        _WallMount()
+    
+    if $Wall_Raycasts/Upper_Detect.is_colliding() or $Wall_Raycasts/Upper_Detect_Left.is_colliding() or $Wall_Raycasts/Upper_Detect_Right.is_colliding():
+        _HeadBump()
         
-        if can_walljump:
-            jump_count = 1
-            can_walljump = false
-            $WallJumpTimer.start()
+func _WallMount():
+    velocity.y = lerp(velocity.y,0,0.3)
+    jump_strength = 800
+        
+    if can_walljump:
+        jump_count = 1
+#        can_walljump = false
+        $WallJumpTimer.start()
             
-        if not $Wall_Raycasts/Left/Wall_Detect_Left3:
-            _MantelLeft()
+    if not $Wall_Raycasts/Left/Wall_Detect_Left3:
+        _MantelLeft()
             
-        if not $Wall_Raycasts/Right/Wall_Detect_Right3:
-            _MantelRight()
+    if not $Wall_Raycasts/Right/Wall_Detect_Right3:
+        _MantelRight()
                  
     
     if not is_on_wall() and not is_falling:
-        JUMP_SPEED = 600
-        
-
-
-                
-        
+        jump_strength = 600
+            
 func _MantelRight():
     velocity.x = +CLIMB_AMOUNT
     velocity.y = -CLIMB_SPEED
@@ -250,3 +246,26 @@ func _on_GrappleTimer_timeout():
 
 func _on_WallJumpTimer_timeout():
     can_doublejump = true
+
+
+func _ChainHook():
+    chain_velocity = to_local($Chain.tip).normalized() * chain_pull
+    if chain_velocity.y > 0:
+        # Pulling down isn't as strong
+        chain_velocity.y *= 1.65
+    else:
+        # Pulling up is stronger
+        chain_velocity.y *= 1.65
+
+
+func _HeadBump():
+    $Blur.show()
+    OS.delay_msec(15)
+    var t = Timer.new()
+    t.set_wait_time(0.3)
+    t.set_one_shot(true)
+    self.add_child(t)
+    t.start()
+    yield(t, "timeout")
+    $Blur.hide()
+    t.queue_free()

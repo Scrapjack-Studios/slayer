@@ -14,8 +14,8 @@ rotation = 0.00018273
 script = ExtResource( 1 )
 
 [node name="Links" type="Sprite" parent="."]
-position = Vector2( 2.70545, -5.77803 )
-scale = Vector2( 0.584935, 1.03091 )
+position = Vector2( 2.45476, -4.92984 )
+scale = Vector2( 0.584935, 0.970327 )
 z_as_relative = false
 texture = ExtResource( 3 )
 centered = false
