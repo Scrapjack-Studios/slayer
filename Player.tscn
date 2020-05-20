@@ -79,8 +79,6 @@ collide_with_areas = true
 [node name="GunTimer" type="Timer" parent="."]
 wait_time = 0.01
 
-[node name="SlideTimer" type="Timer" parent="."]
-
 [node name="GrappleTimer" type="Timer" parent="."]
 process_mode = 0
 
@@ -199,6 +197,5 @@ shape = SubResource( 4 )
 [node name="WallJumpTimer" type="Timer" parent="."]
 wait_time = 0.5
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
-[connection signal="timeout" from="SlideTimer" to="." method="_on_SlideTimer_timeout"]
 [connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]
 [connection signal="timeout" from="WallJumpTimer" to="." method="_on_WallJumpTimer_timeout"]

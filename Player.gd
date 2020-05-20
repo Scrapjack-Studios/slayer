@@ -19,8 +19,6 @@ const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 400
 const STOP_FORCE = 1500
 const JUMP_MAX_AIRBORNE_TIME = 0.4
-const SLIDE_SPEED = 1000
-const MAX_SLIDE_TIME = 1
 const CLIMB_SPEED = 600
 const CLIMB_AMOUNT = 70
 const MAX_JUMP_COUNT = 2
@@ -35,7 +33,6 @@ var on_air_time = 100
 var is_jumping = false
 var can_doublejump = true
 var is_falling = false
-var is_sliding = false
 var grabbing
 var prev_jump_pressed = false
 var is_walking = false
@@ -94,8 +91,6 @@ func _physics_process(delta):
     
     var jump = Input.is_action_pressed("jump")
     
-    var crouch = Input.is_action_pressed("crouch")
-    
     if move_left or move_right:
         is_walking = true
     
@@ -124,31 +119,14 @@ func _physics_process(delta):
         
     velocity += chain_velocity
 
-    if is_sliding:
-        pass;
-        
-    else:
-        if move_left:
-            if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
-                force.x -= WALK_FORCE
-                stop = false
-        elif move_right:
-            if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
-                force.x += WALK_FORCE
-                stop = false
-       
-        if not is_sliding and not is_jumping and not is_falling and crouch and move_right:
-            is_sliding = true
-            $SlideTimer.start(MAX_SLIDE_TIME)
-            velocity.x = SLIDE_SPEED
-        elif not is_sliding and not is_jumping and not is_falling and crouch and move_left:
-            is_sliding = true
-            $SlideTimer.start(MAX_SLIDE_TIME)
-            velocity.x = -SLIDE_SPEED
-    if not crouch:
-        # if the player releases the crouch key at any time, they can move again
-        is_sliding = false
-        $SlideTimer.stop()
+    if move_left:
+        if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
+            force.x -= WALK_FORCE
+            stop = false
+    elif move_right:
+        if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
+            force.x += WALK_FORCE
+            stop = false
         
     if stop:
         var vsign = sign(velocity.x)
@@ -194,8 +172,6 @@ func _physics_process(delta):
     
     prev_jump_pressed = jump
 
-    
-       
     if is_on_wall() and not is_climbing:
         velocity.y = lerp(velocity.y,0,0.3)
         JUMP_SPEED = 800
@@ -211,13 +187,8 @@ func _physics_process(delta):
         if not $Wall_Raycasts/Right/Wall_Detect_Right3:
             _MantelRight()
                  
-    
     if not is_on_wall() and not is_falling:
         JUMP_SPEED = 600
-        
-
-
-                
         
 func _MantelRight():
     velocity.x = +CLIMB_AMOUNT
@@ -239,14 +210,9 @@ func take_damage(amount):
         emit_signal("died")
         print("Dead!")
 
-func _on_SlideTimer_timeout():
-    is_sliding = false
-    $SlideTimer.stop()
-
 func _on_GrappleTimer_timeout():
     $GrappleTimer.stop()
     can_grapple = true
-
 
 func _on_WallJumpTimer_timeout():
     can_doublejump = true
