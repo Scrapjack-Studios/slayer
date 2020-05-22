@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/onlyObjects_retina_rotated.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/32x32.png" type="Texture" id=6]
 [ext_resource path="res://assets/rope.png" type="Texture" id=7]
+[ext_resource path="res://GunStats.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.998139, 2.11467 )
@@ -55,6 +56,9 @@ region_rect = Rect2( 199, 36, 60, 24 )
 
 [node name="Muzzle" type="Position2D" parent="Turret"]
 position = Vector2( 65, 0 )
+
+[node name="GunStats" type="Node2D" parent="Turret"]
+script = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
