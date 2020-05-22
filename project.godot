@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://weapons/Weapon_Template.gd"
+} ]
 _global_script_class_icons={
-
+"Weapon": ""
 }
 
 [application]
@@ -85,8 +90,8 @@ ui_keyC={
 2d_physics/layer_3="Player"
 2d_physics/layer_4="Hook"
 2d_physics/layer_5="Enemies"
+2d_physics/layer_6="GrappleAble"
 
 [rendering]
 
 quality/2d/use_pixel_snap=true
-environment/default_environment="res://misc/default_env.tres"

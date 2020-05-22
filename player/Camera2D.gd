@@ -5,7 +5,7 @@ const DEAD_ZONE = 160
 
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion: # If the mouse moved...
-        var _target = event.position - get_viewport().size * 2	# Get the mouse position relative to the middle of the screen
+        var _target = event.position - get_viewport().size	# Get the mouse position relative to the middle of the screen
         if _target.length() < DEAD_ZONE:	# If we're in the middle (dead zone)...
             self.position = Vector2(0,0)	# ... reset the camera to the middle (= center on player)
         else:
