@@ -167,19 +167,12 @@ func _physics_process(delta):
     on_air_time += delta
     
     prev_jump_pressed = jump
-<<<<<<< HEAD
     
     if is_on_wall() and not is_climbing and Input.is_action_pressed("WallCling"):
         _WallMount()
     
     if $Wall_Raycasts/Upper_Detect.is_colliding() or $Wall_Raycasts/Upper_Detect_Left.is_colliding() or $Wall_Raycasts/Upper_Detect_Right.is_colliding():
         _HeadBump()
-=======
-
-    if is_on_wall() and not is_climbing:
-        velocity.y = lerp(velocity.y,0,0.3)
-        JUMP_SPEED = 800
->>>>>>> 9e68f6b22f36544bc13cf5f1ff79dfa48eb58b35
         
 func _WallMount():
     velocity.y = lerp(velocity.y,0,0.3)
@@ -197,13 +190,8 @@ func _WallMount():
         _MantelRight()
                  
     if not is_on_wall() and not is_falling:
-<<<<<<< HEAD
         jump_strength = 600
-            
-=======
-        JUMP_SPEED = 600
         
->>>>>>> 9e68f6b22f36544bc13cf5f1ff79dfa48eb58b35
 func _MantelRight():
     velocity.x = +CLIMB_AMOUNT
     velocity.y = -CLIMB_SPEED
