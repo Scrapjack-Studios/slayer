@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/music/CantBeSaved.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://obstacles/Platform_Physics.tscn" type="PackedScene" id=4]
 [ext_resource path="res://player/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://obstacles/Platform_Static.tscn" type="PackedScene" id=6]
+[ext_resource path="res://menus/PauseMenu.tscn" type="PackedScene" id=8]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -15,6 +16,8 @@ script = ExtResource( 2 )
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
 margin_right = 335.0
 margin_bottom = 52.0
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 8 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 485.936, 312.503 )
