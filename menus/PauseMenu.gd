@@ -11,3 +11,6 @@ func _process(_delta):
 func _on_Resume_pressed():
     $PopupMenu.hide()
     get_tree().paused = false
+
+func _on_Quit_Desktop_pressed():
+    get_tree().quit()
