@@ -12,6 +12,9 @@ func _on_Resume_pressed():
     $PopupMenu.hide()
     resume_game()
 
+func _on_Options_pressed():
+    get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Popup").popup()
+
 func _on_Quit_Desktop_pressed():
     get_tree().quit()
     
@@ -22,3 +25,6 @@ func pause_game():
 func resume_game():
     get_tree().paused = false
     # TODO: this has to be changed when multiplayer is implemented
+
+
+

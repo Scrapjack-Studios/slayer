@@ -9,3 +9,47 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Popup" type="Popup" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -403.5
+margin_top = -238.0
+margin_right = 403.5
+margin_bottom = 238.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popup/Panel"]
+anchor_left = 0.026
+anchor_top = 0.042
+anchor_right = 0.331
+anchor_bottom = 0.958
+margin_left = 0.0179996
+margin_top = 0.00799942
+margin_right = -0.117035
+margin_bottom = -0.00802612
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Video" type="Button" parent="Popup/Panel/VBoxContainer"]
+margin_right = 246.0
+margin_bottom = 20.0
+text = "Video"
+
+[node name="Audio" type="Button" parent="Popup/Panel/VBoxContainer"]
+margin_top = 24.0
+margin_right = 246.0
+margin_bottom = 44.0
+text = "Audio"
