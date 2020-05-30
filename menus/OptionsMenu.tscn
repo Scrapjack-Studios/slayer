@@ -10,7 +10,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Popup" type="Popup" parent="."]
+[node name="Buttons" type="Popup" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -24,14 +24,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="Popup"]
+[node name="Panel" type="Panel" parent="Buttons"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Popup/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Buttons/Panel"]
 anchor_left = 0.026
 anchor_top = 0.042
 anchor_right = 0.331
@@ -44,18 +44,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Video" type="Button" parent="Popup/Panel/VBoxContainer"]
+[node name="Video" type="Button" parent="Buttons/Panel/VBoxContainer"]
 margin_right = 245.0
 margin_bottom = 20.0
 text = "Video"
 
-[node name="Audio" type="Button" parent="Popup/Panel/VBoxContainer"]
+[node name="Audio" type="Button" parent="Buttons/Panel/VBoxContainer"]
 margin_top = 24.0
 margin_right = 245.0
 margin_bottom = 44.0
 text = "Audio"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Popup/Panel"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Buttons/Panel"]
 anchor_left = 0.026
 anchor_top = 0.042
 anchor_right = 0.331
@@ -69,9 +69,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Exit" type="Button" parent="Popup/Panel/VBoxContainer2"]
+[node name="Exit" type="Button" parent="Buttons/Panel/VBoxContainer2"]
 margin_top = 415.0
 margin_right = 246.0
 margin_bottom = 435.0
 text = "Exit"
-[connection signal="pressed" from="Popup/Panel/VBoxContainer2/Exit" to="." method="_on_Exit_pressed"]
+
+[node name="VideoOptions" type="Popup" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -403.5
+margin_top = -238.0
+margin_right = 403.5
+margin_bottom = 238.0
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="VideoOptions"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioOptions" type="Popup" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -403.5
+margin_top = -238.0
+margin_right = 403.5
+margin_bottom = 238.0
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="AudioOptions"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Buttons/Panel/VBoxContainer2/Exit" to="." method="_on_Exit_pressed"]
