@@ -116,4 +116,6 @@ anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="Buttons/Panel/VBoxContainer/Video" to="." method="_on_Video_pressed"]
+[connection signal="pressed" from="Buttons/Panel/VBoxContainer/Audio" to="." method="_on_Audio_pressed"]
 [connection signal="pressed" from="Buttons/Panel/VBoxContainer2/Exit" to="." method="_on_Exit_pressed"]
