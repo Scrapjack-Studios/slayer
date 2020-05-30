@@ -19,6 +19,7 @@ margin_left = -403.5
 margin_top = -238.0
 margin_right = 403.5
 margin_bottom = 238.0
+popup_exclusive = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

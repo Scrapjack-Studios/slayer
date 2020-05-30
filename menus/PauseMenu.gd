@@ -4,7 +4,7 @@ func _process(_delta):
     if Input.is_action_just_released("pause_menu") and get_tree().paused == false:
         $PopupMenu.popup()
         pause_game()
-    elif Input.is_action_just_released("pause_menu") and get_tree().paused == true:
+    elif Input.is_action_just_released("pause_menu") and get_tree().paused == true and get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Popup").visible == false:
         $PopupMenu.hide()
         resume_game()
 
