@@ -44,12 +44,33 @@ __meta__ = {
 }
 
 [node name="Video" type="Button" parent="Popup/Panel/VBoxContainer"]
-margin_right = 246.0
+margin_right = 245.0
 margin_bottom = 20.0
 text = "Video"
 
 [node name="Audio" type="Button" parent="Popup/Panel/VBoxContainer"]
 margin_top = 24.0
-margin_right = 246.0
+margin_right = 245.0
 margin_bottom = 44.0
 text = "Audio"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Popup/Panel"]
+anchor_left = 0.026
+anchor_top = 0.042
+anchor_right = 0.331
+anchor_bottom = 0.958
+margin_left = 521.018
+margin_top = 0.00799942
+margin_right = 520.883
+margin_bottom = -0.00802612
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="Popup/Panel/VBoxContainer2"]
+margin_top = 415.0
+margin_right = 246.0
+margin_bottom = 435.0
+text = "Exit"
+[connection signal="pressed" from="Popup/Panel/VBoxContainer2/Exit" to="." method="_on_Exit_pressed"]
