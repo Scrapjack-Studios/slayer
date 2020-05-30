@@ -24,6 +24,11 @@ config/name="Slayer"
 run/main_scene="res://Main.tscn"
 config/icon="res://assets/icon.png"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+
 [input]
 
 jump={
