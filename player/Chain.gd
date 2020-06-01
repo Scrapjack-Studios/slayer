@@ -24,32 +24,39 @@ func shoot(dir: Vector2) -> void:
     self.add_child(t)
     t.start()
     yield(t, "timeout")
-    t.queue_free()		# reset the tip position to the player's position
+    t.queue_free()
+    # reset the tip position to the player's position
     if not hooked:
         release()
-# release() the chain
+    # if tip has not hooked after a second release and reset timer
+
 func release() -> void:
-    flying = false	# Not flying anymore	
-    hooked = false	# Not attached anymore
+    flying = false
+    hooked = false
 
 # Every graphics frame we update the visuals
 func _process(_delta: float) -> void:
     self.visible = flying or hooked	# Only visible if flying or attached to something
     if not self.visible:
-        return	# Not visible -> nothing to draw
-    var tip_loc = to_local(tip)	# Easier to work in local coordinates
+        return
+        # Not visible -> nothing to draw
+    var tip_loc = to_local(tip)
+    # Easier to work in local coordinates
     # We rotate the links (= chain) and the tip to fit on the line between self.position (= origin = player.position) and the tip
     links.rotation = self.position.angle_to_point(tip_loc) - deg2rad(90)
     $Tip.rotation = self.position.angle_to_point(tip_loc) - deg2rad(90)
-    links.position = tip_loc						# The links are moved to start at the tip
-    links.region_rect.size.y = tip_loc.length()		# and get extended for the distance between (0,0) and the tip
+    links.position = tip_loc
+    # The links are moved to start at the tip
+    links.region_rect.size.y = tip_loc.length() * 1.01
 
 # Every physics frame we update the tip position
 func _physics_process(_delta: float) -> void:
-    $Tip.global_position = tip	# The player might have moved and thus updated the position of the tip -> reset it
+    $Tip.global_position = tip
+    # The player might have moved and thus updated the position of the tip -> reset it
     if flying:
-        # `if move_and_collide()` always moves, but returns true if we did collide
+        # if move_and_collide() always moves, but returns true if we did collide
         if $Tip.move_and_collide(direction * SPEED):
-            hooked = true	# Got something!
-            flying = false	# Not flying anymore
-    tip = $Tip.global_position	# set `tip` as starting position for next frame
+            hooked = true
+            flying = false
+    tip = $Tip.global_position
+    # set `tip` as starting position for next frame
