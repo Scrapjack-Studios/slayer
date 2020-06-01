@@ -76,6 +76,7 @@ margin_bottom = 435.0
 text = "Exit"
 
 [node name="VideoOptions" type="Popup" parent="."]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -105,6 +106,30 @@ text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VideoOptions"]
+anchor_left = 0.02
+anchor_top = 0.027
+anchor_right = 0.352
+anchor_bottom = 0.954
+margin_left = -0.140001
+margin_top = 0.148
+margin_right = -0.0640259
+margin_bottom = -0.104034
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSync" type="CheckBox" parent="VideoOptions/VBoxContainer"]
+margin_right = 268.0
+margin_bottom = 24.0
+text = "V-Sync"
+
+[node name="Fullscreen" type="CheckBox" parent="VideoOptions/VBoxContainer"]
+margin_top = 28.0
+margin_right = 268.0
+margin_bottom = 52.0
+text = "Fullscreen"
 
 [node name="AudioOptions" type="Popup" parent="."]
 anchor_left = 0.5
