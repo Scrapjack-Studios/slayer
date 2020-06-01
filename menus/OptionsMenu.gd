@@ -12,3 +12,11 @@ func _on_Video_pressed():
 
 func _on_Audio_pressed():
     $AudioOptions.popup()
+
+
+func _on_Video_Exit_pressed():
+    $VideoOptions.hide()
+
+
+func _on_Audio_Exit_pressed():
+    $AudioOptions.hide()

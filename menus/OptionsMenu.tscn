@@ -96,6 +96,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Video_Exit" type="Button" parent="VideoOptions"]
+margin_left = 542.0
+margin_top = 435.0
+margin_right = 788.0
+margin_bottom = 455.0
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="AudioOptions" type="Popup" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -116,6 +126,18 @@ anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Audio_Exit" type="Button" parent="AudioOptions"]
+margin_left = 542.0
+margin_top = 435.0
+margin_right = 788.0
+margin_bottom = 455.0
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Buttons/Panel/VBoxContainer/Video" to="." method="_on_Video_pressed"]
 [connection signal="pressed" from="Buttons/Panel/VBoxContainer/Audio" to="." method="_on_Audio_pressed"]
 [connection signal="pressed" from="Buttons/Panel/VBoxContainer2/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="VideoOptions/Video_Exit" to="." method="_on_Video_Exit_pressed"]
+[connection signal="pressed" from="AudioOptions/Audio_Exit" to="." method="_on_Audio_Exit_pressed"]
