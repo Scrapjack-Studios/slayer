@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://menus/PauseMenu.gd" type="Script" id=1]
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.0
+margin_top = -75.0
+margin_right = 75.0
+margin_bottom = 75.0
+popup_exclusive = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 15
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="Button" parent="PopupMenu/VBoxContainer"]
+margin_top = 12.0
+margin_right = 150.0
+margin_bottom = 32.0
+text = "Resume"
+
+[node name="Options" type="Button" parent="PopupMenu/VBoxContainer"]
+margin_top = 47.0
+margin_right = 150.0
+margin_bottom = 67.0
+text = "Options"
+
+[node name="Quit_MainMenu" type="Button" parent="PopupMenu/VBoxContainer"]
+margin_top = 82.0
+margin_right = 150.0
+margin_bottom = 102.0
+text = "Quit to Main Menu"
+
+[node name="Quit_Desktop" type="Button" parent="PopupMenu/VBoxContainer"]
+margin_top = 117.0
+margin_right = 150.0
+margin_bottom = 137.0
+text = "Quit to Desktop"
+[connection signal="pressed" from="PopupMenu/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="PopupMenu/VBoxContainer/Quit_Desktop" to="." method="_on_Quit_Desktop_pressed"]
