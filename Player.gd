@@ -184,14 +184,6 @@ func _WallMount():
     if can_walljump:
         jump_count = 1
         can_walljump = false
-        var t = Timer.new()
-        t.set_wait_time(5)
-        t.set_one_shot(true)
-        self.add_child(t)
-        t.start()
-        yield(t, "timeout")
-        can_walljump = true
-        t.queue_free()
     
             
     if not $Wall_Raycasts/Left/Wall_Detect_Left3:
