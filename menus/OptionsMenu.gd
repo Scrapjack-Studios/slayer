@@ -34,10 +34,11 @@ func _save_settings():
     var file = File.new()
     if file.file_exists("user://config.cfg"):
         print($VideoOptions/VBoxContainer/VSync.is_pressed())
+        print($VideoOptions/VBoxContainer/Fullscreen.is_pressed())
     elif not file.file_exists("user://config.cfg"):
-        file.open("user://config.cfg", File.WRITE)
-        for option_category in default_settings:
-            file.store_string("[" + option_category + "]\n")
-            for option in default_settings[option_category]:
-                file.store_string(option + " = ")
-                file.store_string(str(default_settings[option_category][option]).to_lower() + "\n")
+        # sets everything to default values if config.cfg doesn't exist
+        var config = ConfigFile.new()
+        config.set_value("video", "vsync", false)
+        config.set_value("video", "fullscreen", false)
+        config.set_value("audio", "mute", false)
+        config.save("user://config.cfg")
