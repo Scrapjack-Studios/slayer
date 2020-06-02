@@ -1,7 +1,7 @@
 extends Control
 
 func _ready():
-    _save_settings()
+    pass
             
 func _on_Exit_pressed():
     $Buttons.hide()
@@ -15,6 +15,9 @@ func _on_Audio_pressed():
 func _on_Video_Exit_pressed():
     $VideoOptions.hide()
 
+func _on_Video_Save_pressed():
+    _save_settings()
+    
 func _on_Audio_Exit_pressed():
     $AudioOptions.hide()
 
@@ -43,3 +46,10 @@ func _reset_settings():
     # resets the values in the ui
     # when _save_settings() is called, they also get reset in config.cfg
     pass
+    
+func _apply_settings():
+    # actually enables the settings from config.cfg in-game
+    pass
+
+
+
