@@ -169,7 +169,7 @@ func _physics_process(delta):
     
     prev_jump_pressed = jump
     
-    if is_on_wall() and not is_climbing and Input.is_action_pressed("WallCling"):
+    if is_on_wall() and not is_climbing:
         _WallMount()
     else:
         can_walljump = true
