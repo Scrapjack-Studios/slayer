@@ -154,9 +154,10 @@ func _physics_process(delta):
         
     if is_jumping and move_right and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
         _MantelRight()
-        
+
     if is_jumping  and move_left and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
         _MantelLeft()
+
         
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
@@ -170,6 +171,8 @@ func _physics_process(delta):
     
     if is_on_wall() and not is_climbing and Input.is_action_pressed("WallCling"):
         _WallMount()
+    else:
+        can_walljump = true
     
     if $Wall_Raycasts/Upper_Detect.is_colliding() or $Wall_Raycasts/Upper_Detect_Left.is_colliding() or $Wall_Raycasts/Upper_Detect_Right.is_colliding():
         _HeadBump()
@@ -180,8 +183,16 @@ func _WallMount():
         
     if can_walljump:
         jump_count = 1
-#        can_walljump = false
-        $WallJumpTimer.start()
+        can_walljump = false
+        var t = Timer.new()
+        t.set_wait_time(5)
+        t.set_one_shot(true)
+        self.add_child(t)
+        t.start()
+        yield(t, "timeout")
+        can_walljump = true
+        t.queue_free()
+    
             
     if not $Wall_Raycasts/Left/Wall_Detect_Left3:
         _MantelLeft()

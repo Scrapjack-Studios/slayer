@@ -26,7 +26,7 @@ position = Vector2( -0.268707, -10.7599 )
 collision_layer = 8
 
 [node name="Hook" type="Sprite" parent="Tip"]
-position = Vector2( 0.0855947, 0.170228 )
+position = Vector2( -2.77917, 0.170228 )
 rotation = -3.14159
 scale = Vector2( 0.638879, -0.645122 )
 texture = ExtResource( 2 )
