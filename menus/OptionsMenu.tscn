@@ -76,7 +76,6 @@ margin_bottom = 435.0
 text = "Exit"
 
 [node name="VideoOptions" type="Popup" parent="."]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

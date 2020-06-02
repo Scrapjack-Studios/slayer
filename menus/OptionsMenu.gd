@@ -30,6 +30,7 @@ func _save_settings():
     if file.file_exists("user://config.cfg"):
         config.load("user://config.cfg")
         config.set_value("video", "vsync", $VideoOptions/VBoxContainer/VSync.is_pressed())
+        config.set_value("video", "fullscreen", $VideoOptions/VBoxContainer/Fullscreen.is_pressed())
         config.save("user://config.cfg")
     elif not file.file_exists("user://config.cfg"):
         # sets everything to default values if config.cfg doesn't exist
@@ -48,7 +49,7 @@ func _reset_settings():
     pass
     
 func _apply_settings():
-    # actually enables the settings from config.cfg in-game
+    # actually applies the settings from config.cfg in-game
     pass
 
 
