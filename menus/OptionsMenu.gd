@@ -7,6 +7,7 @@ func _ready():
     # sets everything to default values if config.cfg doesn't exist
     if not file.file_exists("user://config.cfg"):
         _reset_settings()
+    _load_settings()
             
 func _on_Exit_pressed():
     $Buttons.hide()
@@ -37,7 +38,9 @@ func _save_settings():
         
 func _load_settings():
     # loads the values from config.cfg into the ui
-    pass
+    config.load("user://config.cfg")
+    $VideoOptions/VBoxContainer/VSync.set_pressed(config.get_value("video", "vsync"))
+    $VideoOptions/VBoxContainer/Fullscreen.set_pressed(config.get_value("video", "fullscreen"))
     
 func _reset_settings():
     # sets everything to default values
