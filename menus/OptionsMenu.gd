@@ -8,6 +8,7 @@ func _ready():
     if not file.file_exists("user://config.cfg"):
         _reset_settings()
     _load_settings()
+    _apply_settings()
             
 func _on_Exit_pressed():
     $Buttons.hide()
@@ -23,6 +24,7 @@ func _on_Video_Exit_pressed():
 
 func _on_Video_Save_pressed():
     _save_settings()
+    _apply_settings()
     
 func _on_Audio_Exit_pressed():
     $AudioOptions.hide()
@@ -51,7 +53,9 @@ func _reset_settings():
     
 func _apply_settings():
     # actually applies the settings from config.cfg in-game
-    pass
+    config.load("user://config.cfg")
+    OS.set_use_vsync(config.get_value("video", "vsync"))
+    OS.set_window_fullscreen(config.get_value("video", "fullscreen"))
 
 
 
