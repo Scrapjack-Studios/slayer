@@ -21,11 +21,12 @@ func _on_Audio_Exit_pressed():
 
 
 func _save_settings():
+    # saves the current state of settings as specified in the ui to config.cfg
     var config = ConfigFile.new()
     var file = File.new()
     if file.file_exists("user://config.cfg"):
         config.load("user://config.cfg")
-        config.set_value("video", "vsync", true)
+        config.set_value("video", "vsync", $VideoOptions/VBoxContainer/VSync.is_pressed())
         config.save("user://config.cfg")
     elif not file.file_exists("user://config.cfg"):
         # sets everything to default values if config.cfg doesn't exist
@@ -33,3 +34,12 @@ func _save_settings():
         config.set_value("video", "fullscreen", false)
         config.set_value("audio", "mute", false)
         config.save("user://config.cfg")
+        
+func _load_settings():
+    # loads the values from config.cfg into the ui
+    pass
+    
+func _reset_settings():
+    # resets the values in the ui
+    # when _save_settings() is called, they also get reset in config.cfg
+    pass
