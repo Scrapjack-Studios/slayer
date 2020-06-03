@@ -56,23 +56,42 @@ margin_bottom = 44.0
 text = "Audio"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Buttons/Panel"]
-anchor_left = 0.026
-anchor_top = 0.042
-anchor_right = 0.331
-anchor_bottom = 0.958
-margin_left = 521.018
-margin_top = 0.00799942
-margin_right = 520.883
-margin_bottom = -0.00802612
+anchor_left = 0.823
+anchor_top = 0.027
+anchor_right = 0.981
+anchor_bottom = 0.954
+margin_left = -0.161011
+margin_top = 0.148
+margin_right = 0.332947
+margin_bottom = -0.104004
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Reset" type="Button" parent="Buttons/Panel/VBoxContainer2"]
+margin_top = 397.0
+margin_right = 127.0
+margin_bottom = 417.0
+text = "Reset"
+
+[node name="Reset_Confirmation" type="ConfirmationDialog" parent="Buttons/Panel/VBoxContainer2/Reset"]
+anchor_left = -1.917
+anchor_top = -8.55
+anchor_right = -1.917
+anchor_bottom = -8.55
+margin_left = -111.541
+margin_top = -46.0
+margin_right = 111.459
+margin_bottom = 46.0
+popup_exclusive = true
+dialog_text = "Are you sure you want to reset your settings? This cannot be undone."
+dialog_autowrap = true
+
 [node name="Exit" type="Button" parent="Buttons/Panel/VBoxContainer2"]
-margin_top = 415.0
-margin_right = 246.0
-margin_bottom = 435.0
+margin_top = 421.0
+margin_right = 127.0
+margin_bottom = 441.0
 text = "Exit"
 
 [node name="VideoOptions" type="Popup" parent="."]
@@ -230,6 +249,8 @@ popup_exclusive = true
 window_title = "Error"
 [connection signal="pressed" from="Buttons/Panel/VBoxContainer/Video" to="." method="_on_Video_pressed"]
 [connection signal="pressed" from="Buttons/Panel/VBoxContainer/Audio" to="." method="_on_Audio_pressed"]
+[connection signal="pressed" from="Buttons/Panel/VBoxContainer2/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="confirmed" from="Buttons/Panel/VBoxContainer2/Reset/Reset_Confirmation" to="." method="_on_Reset_Confirmation_confirmed"]
 [connection signal="pressed" from="Buttons/Panel/VBoxContainer2/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Save" to="." method="_on_Video_Save_pressed"]
 [connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Exit" to="." method="_on_Video_Exit_pressed"]

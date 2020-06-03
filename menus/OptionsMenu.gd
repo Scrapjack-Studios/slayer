@@ -41,6 +41,14 @@ func _on_Audio_Save_pressed():
     _save_settings()
     _apply_settings()
 
+func _on_Reset_pressed():
+    $Buttons/Panel/VBoxContainer2/Reset/Reset_Confirmation.popup_centered()
+
+func _on_Reset_Confirmation_confirmed():
+    _reset_settings()
+    _load_settings()
+    _apply_settings()
+
 # configuration functions
 
 func _save_settings():
@@ -75,3 +83,9 @@ func _apply_settings():
     OS.set_use_vsync(config.get_value("video", "vsync"))
     OS.set_window_fullscreen(config.get_value("video", "fullscreen"))
     # TODO: make this mute everything. so put all sounds in a group and mute the group
+
+
+
+
+
+
