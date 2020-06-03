@@ -55,4 +55,5 @@ margin_right = 150.0
 margin_bottom = 137.0
 text = "Quit to Desktop"
 [connection signal="pressed" from="PopupMenu/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="PopupMenu/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="PopupMenu/VBoxContainer/Quit_Desktop" to="." method="_on_Quit_Desktop_pressed"]

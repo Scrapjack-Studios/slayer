@@ -1,0 +1,258 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://menus/OptionsMenu.gd" type="Script" id=1]
+
+[node name="OptionsMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Popup" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -403.5
+margin_top = -238.0
+margin_right = 403.5
+margin_bottom = 238.0
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Buttons"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Buttons/Panel"]
+anchor_left = 0.026
+anchor_top = 0.042
+anchor_right = 0.331
+anchor_bottom = 0.958
+margin_left = 0.0179996
+margin_top = 0.00799942
+margin_right = -0.117035
+margin_bottom = -0.00802612
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Video" type="Button" parent="Buttons/Panel/VBoxContainer"]
+margin_right = 245.0
+margin_bottom = 20.0
+text = "Video"
+
+[node name="Audio" type="Button" parent="Buttons/Panel/VBoxContainer"]
+margin_top = 24.0
+margin_right = 245.0
+margin_bottom = 44.0
+text = "Audio"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Buttons/Panel"]
+anchor_left = 0.823
+anchor_top = 0.027
+anchor_right = 0.981
+anchor_bottom = 0.954
+margin_left = -0.161011
+margin_top = 0.148
+margin_right = 0.332947
+margin_bottom = -0.104004
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reset" type="Button" parent="Buttons/Panel/VBoxContainer2"]
+margin_top = 397.0
+margin_right = 127.0
+margin_bottom = 417.0
+text = "Reset"
+
+[node name="Reset_Confirmation" type="ConfirmationDialog" parent="Buttons/Panel/VBoxContainer2/Reset"]
+anchor_left = -1.917
+anchor_top = -8.55
+anchor_right = -1.917
+anchor_bottom = -8.55
+margin_left = -111.541
+margin_top = -46.0
+margin_right = 111.459
+margin_bottom = 46.0
+popup_exclusive = true
+dialog_text = "Are you sure you want to reset your settings? This cannot be undone."
+dialog_autowrap = true
+
+[node name="Exit" type="Button" parent="Buttons/Panel/VBoxContainer2"]
+margin_top = 421.0
+margin_right = 127.0
+margin_bottom = 441.0
+text = "Exit"
+
+[node name="VideoOptions" type="Popup" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -403.5
+margin_top = -238.0
+margin_right = 403.5
+margin_bottom = 238.0
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="VideoOptions"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VideoOptions"]
+anchor_left = 0.02
+anchor_top = 0.027
+anchor_right = 0.352
+anchor_bottom = 0.954
+margin_left = -0.140001
+margin_top = 0.148
+margin_right = -0.0640259
+margin_bottom = -0.104034
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSync" type="CheckBox" parent="VideoOptions/VBoxContainer"]
+margin_right = 267.0
+margin_bottom = 24.0
+text = "V-Sync"
+
+[node name="Fullscreen" type="CheckBox" parent="VideoOptions/VBoxContainer"]
+margin_top = 28.0
+margin_right = 267.0
+margin_bottom = 52.0
+text = "Fullscreen"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VideoOptions"]
+anchor_left = 0.823
+anchor_top = 0.027
+anchor_right = 0.981
+anchor_bottom = 0.954
+margin_left = -0.161011
+margin_top = 0.148
+margin_right = 0.332947
+margin_bottom = -0.104004
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Video_Save" type="Button" parent="VideoOptions/VBoxContainer2"]
+margin_top = 397.0
+margin_right = 128.0
+margin_bottom = 417.0
+text = "Save"
+
+[node name="Video_Exit" type="Button" parent="VideoOptions/VBoxContainer2"]
+margin_top = 421.0
+margin_right = 128.0
+margin_bottom = 441.0
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioOptions" type="Popup" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -403.5
+margin_top = -238.0
+margin_right = 403.5
+margin_bottom = 238.0
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="AudioOptions"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AudioOptions"]
+anchor_left = 0.02
+anchor_top = 0.027
+anchor_right = 0.352
+anchor_bottom = 0.954
+margin_left = -0.139999
+margin_top = 0.148
+margin_right = -0.0640259
+margin_bottom = -0.104034
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mute" type="CheckBox" parent="AudioOptions/VBoxContainer"]
+margin_right = 267.0
+margin_bottom = 24.0
+text = "Mute"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="AudioOptions"]
+anchor_left = 0.823
+anchor_top = 0.027
+anchor_right = 0.981
+anchor_bottom = 0.954
+margin_left = -0.161011
+margin_top = 0.148
+margin_right = 0.332947
+margin_bottom = -0.104004
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio_Save" type="Button" parent="AudioOptions/VBoxContainer2"]
+margin_top = 397.0
+margin_right = 127.0
+margin_bottom = 417.0
+text = "Save"
+
+[node name="Audio_Exit" type="Button" parent="AudioOptions/VBoxContainer2"]
+margin_top = 421.0
+margin_right = 127.0
+margin_bottom = 441.0
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -41.5
+margin_top = -29.0
+margin_right = 41.5
+margin_bottom = 29.0
+popup_exclusive = true
+window_title = "Error"
+[connection signal="pressed" from="Buttons/Panel/VBoxContainer/Video" to="." method="_on_Video_pressed"]
+[connection signal="pressed" from="Buttons/Panel/VBoxContainer/Audio" to="." method="_on_Audio_pressed"]
+[connection signal="pressed" from="Buttons/Panel/VBoxContainer2/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="confirmed" from="Buttons/Panel/VBoxContainer2/Reset/Reset_Confirmation" to="." method="_on_Reset_Confirmation_confirmed"]
+[connection signal="pressed" from="Buttons/Panel/VBoxContainer2/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Save" to="." method="_on_Video_Save_pressed"]
+[connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Exit" to="." method="_on_Video_Exit_pressed"]
+[connection signal="pressed" from="AudioOptions/VBoxContainer2/Audio_Save" to="." method="_on_Audio_Save_pressed"]
+[connection signal="pressed" from="AudioOptions/VBoxContainer2/Audio_Exit" to="." method="_on_Audio_Exit_pressed"]
