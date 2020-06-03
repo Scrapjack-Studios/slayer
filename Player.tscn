@@ -94,7 +94,7 @@ scale = Vector2( 1.36203, 1.23864 )
 [node name="Right" type="Node2D" parent="Wall_Raycasts"]
 
 [node name="Wall_Detect_Right" type="RayCast2D" parent="Wall_Raycasts/Right"]
-position = Vector2( 23.4747, -27.8814 )
+position = Vector2( 19.9671, -11.5308 )
 rotation = -1.58225
 enabled = true
 cast_to = Vector2( 0, 30 )
@@ -117,14 +117,14 @@ collide_with_areas = true
 [node name="Left" type="Node2D" parent="Wall_Raycasts"]
 
 [node name="Wall_Detect_Left" type="RayCast2D" parent="Wall_Raycasts/Left"]
-position = Vector2( -30.6044, -29.1931 )
+position = Vector2( -30.316, -13.4256 )
 rotation = 1.57469
 enabled = true
 cast_to = Vector2( 0, 30 )
 collide_with_areas = true
 
 [node name="Wall_Detect_Left2" type="RayCast2D" parent="Wall_Raycasts/Left"]
-position = Vector2( -33.9674, -108.6 )
+position = Vector2( -34.2587, -111.52 )
 rotation = 1.57469
 enabled = true
 cast_to = Vector2( 0, 30 )
