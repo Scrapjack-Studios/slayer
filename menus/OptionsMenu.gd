@@ -4,11 +4,19 @@ var config = ConfigFile.new()
 var file = File.new()
 
 func _ready():
-    # sets everything to default values if config.cfg doesn't exist
-    if not file.file_exists("user://config.cfg"):
-        _reset_settings()
-    _load_settings()
-    _apply_settings()
+    # checks if there are errors with config.cfg
+    if config.load("user://config.cfg") == 0:
+        # if config.cfg doesn't exist, populate it with default values
+        if not file.file_exists("user://config.cfg"):
+            _reset_settings()
+        # then load and apply the settings
+        _load_settings()
+        _apply_settings()
+    else:
+        $ErrorDialog.set_text(config.load("user://config.cfg"))
+        $ErrorDialog.popup()
+      
+# buttons
             
 func _on_Exit_pressed():
     $Buttons.hide()
@@ -29,7 +37,11 @@ func _on_Video_Save_pressed():
 func _on_Audio_Exit_pressed():
     $AudioOptions.hide()
 
+func _on_Audio_Save_pressed():
+    _save_settings()
+    _apply_settings()
 
+# configuration functions
 
 func _save_settings():
     # saves the current state of settings as specified in the ui to config.cfg
@@ -56,6 +68,9 @@ func _apply_settings():
     config.load("user://config.cfg")
     OS.set_use_vsync(config.get_value("video", "vsync"))
     OS.set_window_fullscreen(config.get_value("video", "fullscreen"))
+
+
+
 
 
 

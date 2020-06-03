@@ -170,18 +170,68 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Audio_Exit" type="Button" parent="AudioOptions"]
-margin_left = 542.0
-margin_top = 435.0
-margin_right = 788.0
-margin_bottom = 455.0
+[node name="VBoxContainer" type="VBoxContainer" parent="AudioOptions"]
+anchor_left = 0.02
+anchor_top = 0.027
+anchor_right = 0.352
+anchor_bottom = 0.954
+margin_left = -0.139999
+margin_top = 0.148
+margin_right = -0.0640259
+margin_bottom = -0.104034
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mute" type="CheckBox" parent="AudioOptions/VBoxContainer"]
+margin_right = 267.0
+margin_bottom = 24.0
+text = "Mute"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="AudioOptions"]
+anchor_left = 0.823
+anchor_top = 0.027
+anchor_right = 0.981
+anchor_bottom = 0.954
+margin_left = -0.161011
+margin_top = 0.148
+margin_right = 0.332947
+margin_bottom = -0.104004
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio_Save" type="Button" parent="AudioOptions/VBoxContainer2"]
+margin_top = 397.0
+margin_right = 127.0
+margin_bottom = 417.0
+text = "Save"
+
+[node name="Audio_Exit" type="Button" parent="AudioOptions/VBoxContainer2"]
+margin_top = 421.0
+margin_right = 127.0
+margin_bottom = 441.0
 text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -41.5
+margin_top = -29.0
+margin_right = 41.5
+margin_bottom = 29.0
+popup_exclusive = true
+window_title = "Error"
 [connection signal="pressed" from="Buttons/Panel/VBoxContainer/Video" to="." method="_on_Video_pressed"]
 [connection signal="pressed" from="Buttons/Panel/VBoxContainer/Audio" to="." method="_on_Audio_pressed"]
 [connection signal="pressed" from="Buttons/Panel/VBoxContainer2/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Save" to="." method="_on_Video_Save_pressed"]
 [connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Exit" to="." method="_on_Video_Exit_pressed"]
-[connection signal="pressed" from="AudioOptions/Audio_Exit" to="." method="_on_Audio_Exit_pressed"]
+[connection signal="pressed" from="AudioOptions/VBoxContainer2/Audio_Save" to="." method="_on_Audio_Save_pressed"]
+[connection signal="pressed" from="AudioOptions/VBoxContainer2/Audio_Exit" to="." method="_on_Audio_Exit_pressed"]
