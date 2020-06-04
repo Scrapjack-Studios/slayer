@@ -14,6 +14,7 @@ func start_at(pos, dir, type, dmg, _lifetime):
     damage = dmg
     velocity = Vector2(speed, 0).rotated(dir)
     add_to_group("bullets")
+    $Gunsound.play()
 
 
 func _physics_process(delta):

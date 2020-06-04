@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://misc/Explosion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://weapons/Area2D.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/bulletBlue2_outline.png" type="Texture" id=4]
 [ext_resource path="res://assets/bulletRed2_outline.png" type="Texture" id=5]
 [ext_resource path="res://assets/bulletDark1_outline.png" type="Texture" id=6]
+[ext_resource path="res://weapons/Pistol.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.1997, 1.72481 )
@@ -72,6 +73,10 @@ animation = "red"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="Gunsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -10.0
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
