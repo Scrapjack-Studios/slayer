@@ -7,10 +7,11 @@ var damage
 func _ready():
     set_process(true)
     
-func start_at(pos, dir, type, dmg, _lifetime):
+func start_at(pos, dir, type, dmg, _lifetime, size):
     $Sprite.animation = type
     position = pos
     rotation = dir
+    size = size
     damage = dmg
     velocity = Vector2(speed, 0).rotated(dir)
     add_to_group("bullets")

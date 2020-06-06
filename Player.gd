@@ -51,9 +51,8 @@ func _input(event: InputEvent) -> void:
     
     if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_burst:
         can_shoot = false
-        $GunTimer.start()
         var b = Bullet.instance()
-        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime)
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size)
         $Bullets.add_child(b)
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
@@ -66,7 +65,7 @@ func _input(event: InputEvent) -> void:
         
     while event.is_action_pressed("tank_fire") and $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_burst: 
         var b = Bullet.instance()
-        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime)
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size)
         $Bullets.add_child(b)
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
@@ -82,7 +81,7 @@ func _input(event: InputEvent) -> void:
     if event.is_action_pressed("tank_fire") and can_shoot and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and $Weapon/GunStats.is_burst:
         can_shoot = false
         var b = Bullet.instance()
-        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime)
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size)
         $Bullets.add_child(b)
         var t = Timer.new()
         t.set_wait_time(0.1)
@@ -90,14 +89,14 @@ func _input(event: InputEvent) -> void:
         self.add_child(t)
         t.start()
         yield(t, "timeout")
-        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime)
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size)
         var t1 = Timer.new()
         t1.set_wait_time(0.1)
         t1.set_one_shot(true)
         self.add_child(t1)
         t1.start()
         yield(t1, "timeout")
-        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime)
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size)
         var t2 = Timer.new()
         t2.set_wait_time(0.1)
         t2.set_one_shot(true)
