@@ -68,14 +68,13 @@ func _input(event: InputEvent) -> void:
         var b = Bullet.instance()
         b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime)
         $Bullets.add_child(b)
-        $Bullets.add_child(b)
-        var t = Timer.new()
-        t.set_wait_time(0.1)
-        t.set_one_shot(true)
-        self.add_child(t)
-        t.start()
-        yield(t, "timeout")
-        t.queue_free()
+        var GunTimer = Timer.new()
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
         if stopped_fire:
             break
             stopped_fire = false
@@ -118,13 +117,13 @@ func _input(event: InputEvent) -> void:
         
     if event.is_action_released("tank_fire"):
         stopped_fire = true
-        var t = Timer.new()
-        t.set_wait_time(0.1)
-        t.set_one_shot(true)
-        self.add_child(t)
-        t.start()
-        yield(t, "timeout")
-        t.queue_free()
+        var GunTimer = Timer.new()
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
         stopped_fire = false
         
     if event.is_action_pressed("Graphook") and can_grapple:
