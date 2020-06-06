@@ -4,8 +4,11 @@ var cooldown
 var reload
 var ammo_ammount
 var ammo_type
-var damage
 var is_automatic = true
 var Bsprite = 'blue'
-var bullet_lifetime
 
+
+export (int) var rot_speed
+export (int) var damage
+export (int) var start_health
+export (float) var bullet_lifetime

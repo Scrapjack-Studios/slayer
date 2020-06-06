@@ -4,10 +4,7 @@ signal health_changed
 signal died
 
 export (PackedScene) var Bullet
-export (int) var rot_speed
-export (int) var damage
 export (int) var start_health
-export (float) var bullet_lifetime
 # Member variables
 # Member variables
 var gravity = 1300.0 # pixels/second/second
@@ -45,29 +42,32 @@ var jump_strength = 600
 var is_climbing = false
 var can_walljump = true
 var stopped_fire = false
-
+var bullet_lifetime
 func _ready():
     health = start_health
     emit_signal("health_changed", health)
     
 func _input(event: InputEvent) -> void:
     
-    if event.is_action_pressed("tank_fire") and can_shoot and not $Weapon/Weapon_Stats.is_automatic:
+    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_burst:
         can_shoot = false
         $GunTimer.start()
         var b = Bullet.instance()
-        get_node("Weapon/Weapon_Stats").damage = damage
-        get_node("Weapon/Weapon_Stats").Bsprite = 'blue'
-        get_node("Weapon/Weapon_Stats").bullet_lifetime = bullet_lifetime
-        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', damage, bullet_lifetime)
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime)
         $Bullets.add_child(b)
-    
-    while event.is_action_pressed("tank_fire") and $Weapon/Weapon_Stats.is_automatic:
+        var GunTimer = Timer.new()
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
+        can_shoot = true
+        
+    while event.is_action_pressed("tank_fire") and $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_burst: 
         var b = Bullet.instance()
-        get_node("Weapon/Weapon_Stats").damage = damage
-        get_node("Weapon/Weapon_Stats").Bsprite = 'blue'
-        get_node("Weapon/Weapon_Stats").bullet_lifetime = bullet_lifetime
-        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', damage, bullet_lifetime)
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime)
+        $Bullets.add_child(b)
         $Bullets.add_child(b)
         var t = Timer.new()
         t.set_wait_time(0.1)
@@ -79,6 +79,43 @@ func _input(event: InputEvent) -> void:
         if stopped_fire:
             break
             stopped_fire = false
+        
+    if event.is_action_pressed("tank_fire") and can_shoot and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and $Weapon/GunStats.is_burst:
+        can_shoot = false
+        var b = Bullet.instance()
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime)
+        $Bullets.add_child(b)
+        var t = Timer.new()
+        t.set_wait_time(0.1)
+        t.set_one_shot(true)
+        self.add_child(t)
+        t.start()
+        yield(t, "timeout")
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime)
+        var t1 = Timer.new()
+        t1.set_wait_time(0.1)
+        t1.set_one_shot(true)
+        self.add_child(t1)
+        t1.start()
+        yield(t1, "timeout")
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime)
+        var t2 = Timer.new()
+        t2.set_wait_time(0.1)
+        t2.set_one_shot(true)
+        self.add_child(t2)
+        t2.start()
+        yield(t2, "timeout")
+        t2.queue_free()
+        var GunTimer = Timer.new()
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
+        can_shoot = true
+        
+        
     if event.is_action_released("tank_fire"):
         stopped_fire = true
         var t = Timer.new()
@@ -237,8 +274,8 @@ func _MantelLeft():
     velocity.y = -CLIMB_SPEED
     is_climbing = true   
         
-func _on_GunTimer_timeout():
-    can_shoot = true
+#func _on_GunTimer_timeout():
+#    can_shoot = true
     
 func take_damage(amount):
     health -= amount

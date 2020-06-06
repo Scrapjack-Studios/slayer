@@ -7,7 +7,11 @@
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/32x32.png" type="Texture" id=6]
 [ext_resource path="res://assets/rope.png" type="Texture" id=7]
+<<<<<<< HEAD
+[ext_resource path="res://Weapon_Stats.gd" type="Script" id=8]
+=======
 [ext_resource path="res://GunStats.gd" type="Script" id=8]
+>>>>>>> 31e08c42d269484c81f11ecbb9f1ec5cb95ced5e
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.998139, 2.11467 )
@@ -29,7 +33,10 @@ collision_mask = 3
 collision/safe_margin = 0.001
 script = ExtResource( 2 )
 Bullet = ExtResource( 5 )
+rot_speed = 1
+damage = 10
 start_health = 100
+bullet_lifetime = 0.4
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -4.3709, 4.91209 )
@@ -54,15 +61,17 @@ region_rect = Rect2( 199, 36, 60, 24 )
 [node name="Muzzle" type="Position2D" parent="Weapon"]
 position = Vector2( 65, 0 )
 
-[node name="GunStats" type="Node2D" parent="Weapon"]
+<<<<<<< HEAD
+[node name="Weapon_Stats" type="Node2D" parent="Weapon"]
 script = ExtResource( 8 )
-dmg = 5
-cool_down = 0.3
-is_automatic = true
 
-[node name="Particles2D" type="Particles2D" parent="Weapon"]
-scale = Vector2( 1, 1 )
+[node name="Particles2D" type="Particles2D" parent="Weapon/Weapon_Stats"]
 
+=======
+[node name="GunStats" type="Node2D" parent="Turret"]
+script = ExtResource( 8 )
+
+>>>>>>> 31e08c42d269484c81f11ecbb9f1ec5cb95ced5e
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 limit_left = -10000
@@ -75,10 +84,16 @@ script = ExtResource( 3 )
 
 [node name="Bullets" type="Node" parent="."]
 
+[node name="GunTimer" type="Timer" parent="."]
+wait_time = 0.01
+
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 5000, 0 )
 collide_with_areas = true
+
+[node name="GunTimer" type="Timer" parent="."]
+wait_time = 0.01
 
 [node name="GrappleTimer" type="Timer" parent="."]
 process_mode = 0
@@ -215,5 +230,6 @@ wait_time = 0.3
 [node name="Blur" type="CanvasModulate" parent="."]
 visible = false
 color = Color( 0.984314, 0.0705882, 0.0705882, 1 )
+[connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]
 [connection signal="timeout" from="WallJumpTimer" to="." method="_on_WallJumpTimer_timeout"]
