@@ -42,7 +42,7 @@ func _on_Audio_Save_pressed():
     _apply_settings()
 
 func _on_Reset_pressed():
-    $Buttons/Panel/VBoxContainer2/Reset/Reset_Confirmation.popup_centered()
+    $Buttons/VBoxContainer2/Reset/Reset_Confirmation.popup_centered()
 
 func _on_Reset_Confirmation_confirmed():
     _reset_settings()

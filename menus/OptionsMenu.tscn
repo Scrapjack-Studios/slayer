@@ -31,7 +31,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Buttons/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Buttons"]
 anchor_left = 0.026
 anchor_top = 0.042
 anchor_right = 0.331
@@ -44,18 +44,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Video" type="Button" parent="Buttons/Panel/VBoxContainer"]
+[node name="Video" type="Button" parent="Buttons/VBoxContainer"]
 margin_right = 245.0
 margin_bottom = 20.0
 text = "Video"
 
-[node name="Audio" type="Button" parent="Buttons/Panel/VBoxContainer"]
+[node name="Audio" type="Button" parent="Buttons/VBoxContainer"]
 margin_top = 24.0
 margin_right = 245.0
 margin_bottom = 44.0
 text = "Audio"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Buttons/Panel"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Buttons"]
 anchor_left = 0.823
 anchor_top = 0.027
 anchor_right = 0.981
@@ -69,13 +69,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="Button" parent="Buttons/Panel/VBoxContainer2"]
+[node name="Reset" type="Button" parent="Buttons/VBoxContainer2"]
 margin_top = 397.0
 margin_right = 127.0
 margin_bottom = 417.0
 text = "Reset"
 
-[node name="Reset_Confirmation" type="ConfirmationDialog" parent="Buttons/Panel/VBoxContainer2/Reset"]
+[node name="Reset_Confirmation" type="ConfirmationDialog" parent="Buttons/VBoxContainer2/Reset"]
 anchor_left = -1.917
 anchor_top = -8.55
 anchor_right = -1.917
@@ -88,7 +88,7 @@ popup_exclusive = true
 dialog_text = "Are you sure you want to reset your settings? This cannot be undone."
 dialog_autowrap = true
 
-[node name="Exit" type="Button" parent="Buttons/Panel/VBoxContainer2"]
+[node name="Exit" type="Button" parent="Buttons/VBoxContainer2"]
 margin_top = 421.0
 margin_right = 127.0
 margin_bottom = 441.0
@@ -247,11 +247,11 @@ margin_right = 41.5
 margin_bottom = 29.0
 popup_exclusive = true
 window_title = "Error"
-[connection signal="pressed" from="Buttons/Panel/VBoxContainer/Video" to="." method="_on_Video_pressed"]
-[connection signal="pressed" from="Buttons/Panel/VBoxContainer/Audio" to="." method="_on_Audio_pressed"]
-[connection signal="pressed" from="Buttons/Panel/VBoxContainer2/Reset" to="." method="_on_Reset_pressed"]
-[connection signal="confirmed" from="Buttons/Panel/VBoxContainer2/Reset/Reset_Confirmation" to="." method="_on_Reset_Confirmation_confirmed"]
-[connection signal="pressed" from="Buttons/Panel/VBoxContainer2/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="Buttons/VBoxContainer/Video" to="." method="_on_Video_pressed"]
+[connection signal="pressed" from="Buttons/VBoxContainer/Audio" to="." method="_on_Audio_pressed"]
+[connection signal="pressed" from="Buttons/VBoxContainer2/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="confirmed" from="Buttons/VBoxContainer2/Reset/Reset_Confirmation" to="." method="_on_Reset_Confirmation_confirmed"]
+[connection signal="pressed" from="Buttons/VBoxContainer2/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Save" to="." method="_on_Video_Save_pressed"]
 [connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Exit" to="." method="_on_Video_Exit_pressed"]
 [connection signal="pressed" from="AudioOptions/VBoxContainer2/Audio_Save" to="." method="_on_Audio_Save_pressed"]
