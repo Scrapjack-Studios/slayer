@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Slayer"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://ShootingRange.tscn"
 config/icon="res://assets/icon.png"
 
 [display]
