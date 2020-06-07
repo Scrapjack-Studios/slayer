@@ -8,6 +8,9 @@ export (bool) var is_burst
 export (bool) var is_semi_auto
 #only of these can be set to true
 
+export (bool) var shotgun
+#does nothing at the moment
+
 export (float) var cool_down
 #cool_down time for each shot, could also be reload time and effects the time in betwene shots of auto fire
 

@@ -53,7 +53,7 @@ func _input(event: InputEvent) -> void:
     if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_burst:
         can_shoot = false
         var b = Bullet.instance()
-        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size)
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size, get_node("Weapon/GunStats").shotgun)
         $Bullets.add_child(b)
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
@@ -66,7 +66,7 @@ func _input(event: InputEvent) -> void:
         
     while event.is_action_pressed("tank_fire") and $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_burst: 
         var b = Bullet.instance()
-        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size)
+        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size, get_node("Weapon/GunStats").shotgun)
         $Bullets.add_child(b)
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
@@ -84,7 +84,7 @@ func _input(event: InputEvent) -> void:
             burst_loop +=1
             can_shoot = false
             var b = Bullet.instance()
-            b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size)
+            b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size, get_node("Weapon/GunStats").shotgun)
             $Bullets.add_child(b)
             var t = Timer.new()
             t.set_wait_time(0.1)

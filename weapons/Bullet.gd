@@ -7,7 +7,7 @@ var damage
 func _ready():
     set_process(true)
     
-func start_at(pos, dir, type, dmg, _lifetime, size):
+func start_at(pos, dir, type, dmg, _lifetime, size, shotgun):
     $Sprite.animation = type
     position = pos
     rotation = dir
@@ -17,6 +17,9 @@ func start_at(pos, dir, type, dmg, _lifetime, size):
     velocity = Vector2(speed, 0).rotated(dir)
     add_to_group("bullets")
     $Gunsound.play()
+    if shotgun:
+        $Sprite/ShotgunPellets.show()
+        
 
 
 func _physics_process(delta):
