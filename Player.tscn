@@ -57,7 +57,7 @@ position = Vector2( 65, 0 )
 [node name="GunStats" type="Node2D" parent="Weapon"]
 script = ExtResource( 8 )
 dmg = 5
-is_burst = true
+is_semi_auto = true
 bullet_size = Vector2( 20, 20 )
 cool_down = 1.0
 burst_ammount = 2

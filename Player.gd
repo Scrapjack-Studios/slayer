@@ -81,7 +81,7 @@ func _input(event: InputEvent) -> void:
     
     for x in range(0, get_node("Weapon/GunStats").burst_ammount):
         if event.is_action_pressed("tank_fire") and can_shoot and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and $Weapon/GunStats.is_burst:
-            burst_loop += 1
+            burst_loop +=1
             can_shoot = false
             var b = Bullet.instance()
             b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size)
@@ -93,7 +93,8 @@ func _input(event: InputEvent) -> void:
             t.start()
             yield(t, "timeout")
             can_shoot = true
-            if burst_loop <= get_node("Weapon/GunStats").burst_ammount:
+            if burst_loop == get_node("Weapon/GunStats").burst_ammount:
+                can_shoot = false
                 var GunTimer = Timer.new()
                 GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
                 GunTimer.set_one_shot(true)
@@ -102,7 +103,7 @@ func _input(event: InputEvent) -> void:
                 yield(GunTimer, "timeout")
                 GunTimer.queue_free()
                 can_shoot = true
-
+                burst_loop = 0
     if event.is_action_released("tank_fire"):
         stopped_fire = true
         var GunTimer = Timer.new()
