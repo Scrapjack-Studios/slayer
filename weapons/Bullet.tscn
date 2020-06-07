@@ -53,11 +53,7 @@ collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -0.875153, -3.86123 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -0.875153, -3.86123 )
+position = Vector2( -0.896183, 0.0283294 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -83,79 +79,6 @@ stream = ExtResource( 7 )
 volume_db = 0.097
 
 [node name="ShotgunPellets" type="Node2D" parent="."]
-position = Vector2( 0.212663, -0.0446246 )
-scale = Vector2( 0.19919, 0.157123 )
-
-[node name="Shell1" type="Node2D" parent="ShotgunPellets"]
-position = Vector2( -0.208727, -30.9607 )
-
-[node name="Area2D2" type="Area2D" parent="ShotgunPellets/Shell1" groups=[
-"Bullet_Colliders",
-]]
-position = Vector2( -4.35386, -0.299321 )
-rotation = -3.14159
-scale = Vector2( 9.92525, -7.95994 )
-gravity = 30.0
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShotgunPellets/Shell1/Area2D2"]
-position = Vector2( -0.896183, 0.0283294 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ShotgunPellets/Shell1"]
-position = Vector2( -0.331292, -0.512359 )
-rotation = 1.5708
-scale = Vector2( 6.36444, 5.02033 )
-shape = SubResource( 2 )
-
-[node name="Explosion2" parent="ShotgunPellets/Shell1" instance=ExtResource( 1 )]
-visible = false
-position = Vector2( -1.06764, 0.284011 )
-scale = Vector2( 0.502033, 0.636444 )
-
-[node name="Sprite2" type="AnimatedSprite" parent="ShotgunPellets/Shell1"]
-frames = SubResource( 3 )
-animation = "red"
-
-[node name="Shell2" type="Node2D" parent="ShotgunPellets"]
-position = Vector2( -0.208727, -30.9607 )
-
-[node name="Area2D2" type="Area2D" parent="ShotgunPellets/Shell2" groups=[
-"Bullet_Colliders",
-]]
-position = Vector2( -3.93639, 62.4158 )
-rotation = -3.14159
-scale = Vector2( 9.92525, -7.95994 )
-gravity = 30.0
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShotgunPellets/Shell2/Area2D2"]
-position = Vector2( -0.896183, 0.0283294 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ShotgunPellets/Shell2"]
-position = Vector2( 0.197924, 48.958 )
-rotation = 1.5708
-scale = Vector2( 6.36444, 5.02033 )
-shape = SubResource( 2 )
-
-[node name="Explosion2" parent="ShotgunPellets/Shell2" instance=ExtResource( 1 )]
-visible = false
-position = Vector2( -1.06764, 0.284011 )
-scale = Vector2( 0.502033, 0.636444 )
-
-[node name="Sprite2" type="AnimatedSprite" parent="ShotgunPellets/Shell2"]
-position = Vector2( 0.417475, 62.7152 )
-frames = SubResource( 3 )
-animation = "red"
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="body_entered" from="ShotgunPellets/Shell1/Area2D2" to="." method="_on_Area2D_body_entered"]
-[connection signal="animation_finished" from="ShotgunPellets/Shell1/Explosion2" to="." method="_on_Explosion_animation_finished"]
-[connection signal="body_entered" from="ShotgunPellets/Shell2/Area2D2" to="." method="_on_Area2D_body_entered"]
-[connection signal="animation_finished" from="ShotgunPellets/Shell2/Explosion2" to="." method="_on_Explosion_animation_finished"]

@@ -16,7 +16,6 @@ func start_at(pos, dir, type, dmg, _lifetime, size, shotgun):
     damage = dmg
     velocity = Vector2(speed, 0).rotated(dir)
     add_to_group("bullets")
-    $Gunsound.play()
     if shotgun:
         $Sprite/ShotgunPellets.show()
         

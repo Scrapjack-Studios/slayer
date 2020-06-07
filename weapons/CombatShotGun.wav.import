@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/ShotGun.wav-6c6218ba9c72817f1d279407660ecadb.sample"
+path="res://.import/CombatShotGun.wav-a1a317c1422b073cf7fd0ccac8c312c5.sample"
 
 [deps]
 
-source_file="res://weapons/ShotGun.wav"
-dest_files=[ "res://.import/ShotGun.wav-6c6218ba9c72817f1d279407660ecadb.sample" ]
+source_file="res://weapons/CombatShotGun.wav"
+dest_files=[ "res://.import/CombatShotGun.wav-a1a317c1422b073cf7fd0ccac8c312c5.sample" ]
 
 [params]
 

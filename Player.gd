@@ -44,6 +44,7 @@ var can_walljump = true
 var stopped_fire = false
 var bullet_lifetime
 var burst_loop = 0
+var shot = false
 func _ready():
     health = start_health
     emit_signal("health_changed", health)
@@ -55,6 +56,7 @@ func _input(event: InputEvent) -> void:
         var b = Bullet.instance()
         b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size, get_node("Weapon/GunStats").shotgun)
         $Bullets.add_child(b)
+        shot = true
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
         GunTimer.set_one_shot(true)
@@ -68,6 +70,7 @@ func _input(event: InputEvent) -> void:
         var b = Bullet.instance()
         b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size, get_node("Weapon/GunStats").shotgun)
         $Bullets.add_child(b)
+        shot = true
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
         GunTimer.set_one_shot(true)
@@ -86,6 +89,7 @@ func _input(event: InputEvent) -> void:
             var b = Bullet.instance()
             b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size, get_node("Weapon/GunStats").shotgun)
             $Bullets.add_child(b)
+            shot = true
             var t = Timer.new()
             t.set_wait_time(0.1)
             t.set_one_shot(true)
@@ -104,6 +108,21 @@ func _input(event: InputEvent) -> void:
                 GunTimer.queue_free()
                 can_shoot = true
                 burst_loop = 0
+        
+    if shot:
+        if get_node("Weapon/GunStats").assalt_sound:
+            $Weapon/Sounds/Assalt_fire.play()
+            shot = false
+        if get_node("Weapon/GunStats").pistol_sound:
+            $Weapon/Sounds/Pistol_fire.play()
+            shot = false
+        if get_node("Weapon/GunStats").combat_shotgun_sound:
+            $Weapon/Sounds/CombatShotgun_fire.play()
+            shot = false
+        if get_node("Weapon/GunStats").super_shotgun_sound:
+            $Weapon/Sounds/SuperShotgun_fire.play()
+            shot = false
+    
     if event.is_action_released("tank_fire"):
         stopped_fire = true
         var GunTimer = Timer.new()

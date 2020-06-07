@@ -8,6 +8,7 @@ export (bool) var is_burst
 export (bool) var is_semi_auto
 #only of these can be set to true
 
+
 export (bool) var shotgun
 #does nothing at the moment
 
@@ -19,3 +20,10 @@ export (int) var burst_ammount
 
 export (Vector2) var bullet_size
 #default is 0.2
+
+
+
+export (bool) var assalt_sound
+export (bool) var combat_shotgun_sound
+export (bool) var super_shotgun_sound
+export (bool) var pistol_sound
