@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/ui/MainMenu.png" type="Texture" id=1]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="TextureRect"]
+anchor_left = 0.755
+anchor_top = 0.391
+anchor_right = 0.788
+anchor_bottom = 0.449
+margin_left = -0.600098
+margin_top = -0.280029
+margin_right = 0.039917
+margin_bottom = 0.0799561
