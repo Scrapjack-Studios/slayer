@@ -58,9 +58,9 @@ position = Vector2( 65, 0 )
 script = ExtResource( 8 )
 dmg = 5
 is_semi_auto = true
-bullet_size = Vector2( 20, 20 )
-cool_down = 1.0
+cool_down = 0.2
 burst_ammount = 2
+bullet_size = Vector2( 0.2, 0.2 )
 
 [node name="Particles2D" type="Particles2D" parent="Weapon"]
 

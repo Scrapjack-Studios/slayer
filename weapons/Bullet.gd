@@ -11,7 +11,8 @@ func start_at(pos, dir, type, dmg, _lifetime, size):
     $Sprite.animation = type
     position = pos
     rotation = dir
-    size = size
+    $Explosion.set_scale(size)
+    $Sprite.set_scale(size)
     damage = dmg
     velocity = Vector2(speed, 0).rotated(dir)
     add_to_group("bullets")
