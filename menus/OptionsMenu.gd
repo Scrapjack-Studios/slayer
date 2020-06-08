@@ -37,6 +37,7 @@ func _on_Video_Save_pressed():
     _apply_settings()
     
 func _on_Audio_Exit_pressed():
+    $Buttons.popup()
     $AudioOptions.hide()
 
 func _on_Audio_Save_pressed():
