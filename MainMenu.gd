@@ -50,7 +50,6 @@ func _on_OptionsButton_pressed():
     $OptionsMenu/AudioOptions.set_exclusive(false)
     $OptionsMenu/AudioOptions/Panel.hide()
     
-    
     $OptionsMenu/Buttons.popup()
 
 func _on_QuitButton_pressed():

@@ -25,9 +25,11 @@ func _on_Video_pressed():
     $VideoOptions.popup()
 
 func _on_Audio_pressed():
+    $Buttons.popup()
     $AudioOptions.popup()
 
 func _on_Video_Exit_pressed():
+    $Buttons.popup()
     $VideoOptions.hide()
 
 func _on_Video_Save_pressed():
@@ -48,6 +50,12 @@ func _on_Reset_Confirmation_confirmed():
     _reset_settings()
     _load_settings()
     _apply_settings()
+    
+func _on_VideoOptions_about_to_show():
+    $Buttons.hide()
+
+func _on_AudioOptions_about_to_show():
+    $Buttons.hide()
 
 # configuration functions
 
@@ -83,9 +91,3 @@ func _apply_settings():
     OS.set_use_vsync(config.get_value("video", "vsync"))
     OS.set_window_fullscreen(config.get_value("video", "fullscreen"))
     # TODO: make this mute everything. so put all sounds in a group and mute the group
-
-
-
-
-
-
