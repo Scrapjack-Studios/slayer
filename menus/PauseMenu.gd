@@ -16,6 +16,7 @@ func _on_Options_pressed():
     get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").popup()
 
 func _on_Quit_MainMenu_pressed():
+    # warning-ignore:return_value_discarded
     get_tree().change_scene("res://MainMenu.tscn")
     get_tree().paused = false
 

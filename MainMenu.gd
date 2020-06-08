@@ -18,3 +18,7 @@ func _on_OptionsButton_pressed():
     $OptionsMenu/Buttons/Panel.hide()
     $OptionsMenu/Buttons.set_exclusive(false)
     $OptionsMenu/Buttons.popup()
+
+
+func _on_QuitButton_pressed():
+    get_tree().quit()
