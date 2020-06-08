@@ -13,11 +13,8 @@ func _on_ShootingRange_pressed():
     get_tree().change_scene("res://maps/ShootingRange.tscn")
 
 func _on_OptionsButton_pressed():
-    $OptionsMenu/Buttons.set_size(Vector2(959,869))
-    $OptionsMenu/Buttons.set_position(Vector2(105,103))
-    $OptionsMenu/Buttons/Panel.hide()
-    $OptionsMenu/Buttons.set_exclusive(false)
-    $OptionsMenu/Buttons.popup()
+#    $OptionsMenu/Buttons.popup()
+    pass
 
 
 func _on_QuitButton_pressed():
