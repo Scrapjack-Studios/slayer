@@ -15,6 +15,10 @@ func _on_Resume_pressed():
 func _on_Options_pressed():
     get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").popup()
 
+func _on_Quit_MainMenu_pressed():
+    get_tree().change_scene("res://MainMenu.tscn")
+    get_tree().paused = false
+
 func _on_Quit_Desktop_pressed():
     get_tree().quit()
     
@@ -25,6 +29,3 @@ func pause_game():
 func resume_game():
     get_tree().paused = false
     # TODO: this has to be changed when multiplayer is implemented
-
-
-
