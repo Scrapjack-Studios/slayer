@@ -88,4 +88,4 @@ func _apply_settings():
     config.load("user://config.cfg")
     OS.set_use_vsync(config.get_value("video", "vsync"))
     OS.set_window_fullscreen(config.get_value("video", "fullscreen"))
-    # TODO: make this mute everything. so put all sounds in a group and mute the group
+    # TODO: make a mute function that mutes everything in a 'sounds' group
