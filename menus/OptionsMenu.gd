@@ -9,40 +9,6 @@ func _ready():
         # if config.cfg doesn't exist, populate it with default values
         _reset_settings()
         print("file populated with default settings")
-    # if there are no file errors, continue
-#    elif config.load("user://config.cfg") == 8:
-#        $ErrorDialog.set_text("Bad drive")
-#        $ErrorDialog.popup_centered()
-#    elif config.load("user://config.cfg") == 9:
-#        $ErrorDialog.set_text("Bad drive")
-#        $ErrorDialog.popup_centered()
-#    elif config.load("user://config.cfg") == 10:
-#        $ErrorDialog.set_text("Bad drive")
-#        $ErrorDialog.popup_centered()
-#    elif config.load("user://config.cfg") == 11:
-#        $ErrorDialog.set_text("Bad drive")
-#        $ErrorDialog.popup_centered()
-#    elif config.load("user://config.cfg") == 12:
-#        $ErrorDialog.set_text("Bad drive")
-#        $ErrorDialog.popup_centered()
-#    elif config.load("user://config.cfg") == 13:
-#        $ErrorDialog.set_text("Bad drive")
-#        $ErrorDialog.popup_centered()
-#    elif config.load("user://config.cfg") == 14:
-#        $ErrorDialog.set_text("Bad drive")
-#        $ErrorDialog.popup_centered()
-#    elif config.load("user://config.cfg") == 15:
-#        $ErrorDialog.set_text("Bad drive")
-#        $ErrorDialog.popup_centered()
-#    elif config.load("user://config.cfg") == 16:
-#        $ErrorDialog.set_text("Bad drive")
-#        $ErrorDialog.popup_centered()
-#    elif config.load("user://config.cfg") == 17:
-#        $ErrorDialog.set_text("Bad drive")
-#        $ErrorDialog.popup_centered()
-#    elif config.load("user://config.cfg") == 18:
-#        $ErrorDialog.set_text("Bad drive")
-#        $ErrorDialog.popup_centered()
     elif config.load("user://config.cfg") == 0:
         _load_settings()
         _apply_settings()
