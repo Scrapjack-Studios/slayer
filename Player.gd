@@ -8,9 +8,9 @@ export (int) var rot_speed
 export (int) var damage
 export (int) var start_health
 export (float) var bullet_lifetime
-# Member variables
-# Member variables
+export (int, 0, 200) var push = 100
 var gravity = 1300.0 # pixels/second/second
+
 
 # Angle in degrees towards either side that the player can consider "floor"
 const FLOOR_ANGLE_TOLERANCE = 70
@@ -121,6 +121,8 @@ func _physics_process(delta):
             force.x += WALK_FORCE
             stop = false
         
+
+        
     if stop:
         var vsign = sign(velocity.x)
         var vlen = abs(velocity.x)
@@ -134,7 +136,14 @@ func _physics_process(delta):
     # Integrate forces to velocity
     velocity += force * delta    
     # Integrate velocity into motion and move
-    velocity = move_and_slide(velocity, Vector2(0, -1))
+    velocity = move_and_slide(velocity, Vector2(0, -1), false, 4, PI/4, false)
+    for index in get_slide_count():
+        var collision = get_slide_collision(index)
+        if collision.collider.is_in_group("bodies"):
+                collision.collider.apply_central_impulse(-collision.normal * push)
+
+    
+    
     
     if is_on_floor():
         on_air_time = 0

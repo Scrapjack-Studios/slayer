@@ -209,7 +209,9 @@ scale = Vector2( 10.2, 2.6 )
 position = Vector2( 765.09, 750.451 )
 scale = Vector2( 0.674881, 2.49826 )
 
-[node name="RigidBody2D" parent="Blocks" instance=ExtResource( 2 )]
+[node name="RigidBody2D" parent="Blocks" groups=[
+"bodies",
+] instance=ExtResource( 2 )]
 position = Vector2( 1067.8, 342.849 )
 
 [node name="StaticBody2D5" parent="Blocks" instance=ExtResource( 8 )]
