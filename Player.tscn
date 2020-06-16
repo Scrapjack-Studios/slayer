@@ -61,17 +61,17 @@ position = Vector2( 65, 0 )
 [node name="GunStats" type="Node2D" parent="Weapon"]
 script = ExtResource( 8 )
 dmg = 5
-is_burst = true
+is_semi_auto = true
 cool_down = 0.4
 burst_ammount = 2
 bullet_size = Vector2( 0.2, 0.2 )
-pistol_sound = true
+sound = 4
 
 [node name="Particles2D" type="Particles2D" parent="Weapon"]
 
 [node name="Sounds" type="Node2D" parent="Weapon"]
 
-[node name="Assalt_fire" type="AudioStreamPlayer" parent="Weapon/Sounds"]
+[node name="Assault_fire" type="AudioStreamPlayer" parent="Weapon/Sounds"]
 stream = ExtResource( 9 )
 script = ExtResource( 10 )
 

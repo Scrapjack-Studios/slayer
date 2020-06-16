@@ -22,8 +22,19 @@ export (Vector2) var bullet_size
 #default is 0.2
 
 
+var assault_sound
+var combat_shotgun_sound
+var super_shotgun_sound
+var pistol_sound
 
-export (bool) var assalt_sound
-export (bool) var combat_shotgun_sound
-export (bool) var super_shotgun_sound
-export (bool) var pistol_sound
+export (int) var sound
+func _ready():
+    if sound == 1:
+        assault_sound = true
+    if sound == 2:
+        combat_shotgun_sound = true
+    if sound == 3:
+        super_shotgun_sound = true
+    if sound == 4:
+        pistol_sound = true
+        
