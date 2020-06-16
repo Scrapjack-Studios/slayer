@@ -9,9 +9,6 @@ export (int) var damage
 export (int) var start_health
 export (float) var bullet_lifetime
 
-var green_bar = preload("res://art/ui/barGreen_horizontalMid.png")
-var yellow_bar = preload("res://art/ui/barYellow_horizontalMid.png")
-var red_bar = preload("res://art/ui/barRed_horizontalMid.png")
 var target = null
 var health
 var parent
@@ -54,23 +51,12 @@ func _process(delta):
 func take_damage(amount):
     $HealthBar.show()
     health -= amount
-    update_healthbar()
     if health <= 0:
         alive = false
         $Sprite.hide()
         $Turret.hide()
         $Explosion.show()
         $Explosion.play("boom")
-        
-func update_healthbar():
-    var pct = (health * 100 / start_health)
-    $HealthBar/Bar.value = pct
-    var bar_texture = green_bar
-    if pct < 40:
-        bar_texture = red_bar
-    elif pct < 70:
-        bar_texture = yellow_bar
-    $HealthBar/Bar.texture_progress = bar_texture
         
 func _on_Explosion_animation_finished():
     queue_free()

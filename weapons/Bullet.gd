@@ -49,3 +49,4 @@ func _on_Timer_timeout():
     $Sprite.hide()
     $Explosion.show()
     $Explosion.play("smoke")
+
