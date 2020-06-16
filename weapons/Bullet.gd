@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var velocity = Vector2()
 export (int) var speed
+export (int, 0, 200) var push = 100
 var damage
 
 func _ready():
@@ -17,7 +18,9 @@ func start_at(pos, dir, type, dmg, _lifetime):
 
 
 func _physics_process(delta):
-    var _collision = move_and_collide(velocity * delta)
+    var collision = move_and_collide(velocity * delta, false)
+    if collision and collision.collider.is_in_group("bodies"):
+        collision.collider.apply_central_impulse(-collision.normal * push)
 
 func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
