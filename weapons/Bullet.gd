@@ -1,13 +1,12 @@
 extends KinematicBody2D
 
 var velocity = Vector2()
-export (int) var speed
 var damage
 
 func _ready():
     set_process(true)
     
-func start_at(pos, dir, type, dmg, _lifetime, size, shotgun):
+func start_at(pos, dir, type, dmg, _lifetime, size, speed):
     $Sprite.animation = type
     position = pos
     rotation = dir
@@ -16,10 +15,7 @@ func start_at(pos, dir, type, dmg, _lifetime, size, shotgun):
     damage = dmg
     velocity = Vector2(speed, 0).rotated(dir)
     add_to_group("bullets")
-    if shotgun:
-        $Sprite/ShotgunPellets.show()
-        
-
+    speed = speed
 
 func _physics_process(delta):
     var _collision = move_and_collide(velocity * delta)

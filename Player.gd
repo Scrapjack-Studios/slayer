@@ -42,7 +42,6 @@ var jump_strength = 600
 var is_climbing = false
 var can_walljump = true
 var stopped_fire = false
-var bullet_lifetime
 var burst_loop = 0
 var shot = false
 func _ready():
@@ -53,9 +52,7 @@ func _input(event: InputEvent) -> void:
     
     if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_burst:
         can_shoot = false
-        var b = Bullet.instance()
-        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size, get_node("Weapon/GunStats").shotgun)
-        $Bullets.add_child(b)
+        $Weapon/GunStats._BulletPostition()
         shot = true
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
@@ -67,9 +64,7 @@ func _input(event: InputEvent) -> void:
         can_shoot = true
         
     while event.is_action_pressed("tank_fire") and $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_burst: 
-        var b = Bullet.instance()
-        b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size, get_node("Weapon/GunStats").shotgun)
-        $Bullets.add_child(b)
+        $Weapon/GunStats._BulletPostition()
         shot = true
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
@@ -86,9 +81,7 @@ func _input(event: InputEvent) -> void:
         if event.is_action_pressed("tank_fire") and can_shoot and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and $Weapon/GunStats.is_burst:
             burst_loop +=1
             can_shoot = false
-            var b = Bullet.instance()
-            b.start_at($"Weapon/Muzzle".global_position, $Weapon.global_rotation,'blue', get_node("Weapon/GunStats").dmg, bullet_lifetime, get_node("Weapon/GunStats").bullet_size, get_node("Weapon/GunStats").shotgun)
-            $Bullets.add_child(b)
+            $Weapon/GunStats._BulletPostition()
             shot = true
             var t = Timer.new()
             t.set_wait_time(0.1)
@@ -99,17 +92,28 @@ func _input(event: InputEvent) -> void:
             can_shoot = true
             if burst_loop == get_node("Weapon/GunStats").burst_ammount:
                 can_shoot = false
-                var GunTimer = Timer.new()
-                GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-                GunTimer.set_one_shot(true)
-                self.add_child(GunTimer)
-                GunTimer.start()
-                yield(GunTimer, "timeout")
-                GunTimer.queue_free()
+                shot = true
+                $Weapon/GunStats._GunTimer()
                 can_shoot = true
                 burst_loop = 0
+    
+    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_burst:
+        can_shoot = false
+        print("ye")
+        $Weapon/GunStats._BulletPostition()
+        shot = true
+        var GunTimer = Timer.new()
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
+        can_shoot = true
+        print("ha")
         
     if shot:
+        
         if get_node("Weapon/GunStats").assault_sound:
             $Weapon/Sounds/Assault_fire.play()
             shot = false
@@ -122,7 +126,7 @@ func _input(event: InputEvent) -> void:
         if get_node("Weapon/GunStats").super_shotgun_sound:
             $Weapon/Sounds/SuperShotgun_fire.play()
             shot = false
-    
+            
     if event.is_action_released("tank_fire"):
         stopped_fire = true
         var GunTimer = Timer.new()
@@ -174,9 +178,11 @@ func _physics_process(delta):
     
     if get_local_mouse_position().x < 0: # mouse is facing left
         $Weapon.set_position(Vector2(-22,0))
-        
+        $Weapon/Weapon_Sprite.set_flip_v(true)
     elif get_local_mouse_position().x > 0: # mouse is facing right
         $Weapon.set_position(Vector2(15,0))
+        $Weapon/Weapon_Sprite.set_flip_v(false)
+
  
     if $Chain.hooked:
         _ChainHook()

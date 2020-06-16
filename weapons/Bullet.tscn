@@ -40,7 +40,6 @@ animations = [ {
 collision_layer = 2
 collision/safe_margin = 1.0
 script = ExtResource( 3 )
-speed = 3000
 
 [node name="Area2D" type="Area2D" parent="." groups=[
 "Bullet_Colliders",
