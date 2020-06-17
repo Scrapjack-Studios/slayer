@@ -6,6 +6,7 @@ func _process(_delta):
         pause_game()
     elif Input.is_action_just_released("pause_menu") and get_tree().paused == true and get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").visible == false:
         $PopupMenu.hide()
+        get_parent().get_parent().get_node("Player").get_node("Chain").release()
         resume_game()
 
 func _on_Resume_pressed():
