@@ -18,6 +18,8 @@ export (float) var cool_down
 export (int) var burst_ammount
 #how many bullets are shot in one burst
 
+export (int) var auto_mag
+
 export (Vector2) var bullet_size
 #default is 0.2
 
@@ -50,7 +52,9 @@ func _ready():
         super_shotgun_sound = true
     if sound == 4:
         pistol_sound = true
-        
+
+
+var shot = false    
 
 
     
@@ -58,8 +62,9 @@ func _ready():
 
 func _BulletPostition():
     var b = Bullet.instance()
-    b.start_at(get_parent().get_node("Muzzle").global_position, get_parent().global_rotation,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
+    b.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
     $Bullets.add_child(b)
+    shot = true
     if shotgun:
         var c = Bullet.instance()
         var d = Bullet.instance()
@@ -67,15 +72,31 @@ func _BulletPostition():
         var f = Bullet.instance()
         var g = Bullet.instance()
         var h = Bullet.instance()
-        c.start_at(get_parent().get_node("Muzzle").global_position, get_parent().global_rotation + 0.05,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
-        d.start_at(get_parent().get_node("Muzzle").global_position, get_parent().global_rotation + 0.04,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
-        e.start_at(get_parent().get_node("Muzzle").global_position, get_parent().global_rotation + 0.02,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
-        f.start_at(get_parent().get_node("Muzzle").global_position, get_parent().global_rotation - 0.02,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
-        g.start_at(get_parent().get_node("Muzzle").global_position, get_parent().global_rotation - 0.04,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
-        h.start_at(get_parent().get_node("Muzzle").global_position, get_parent().global_rotation - 0.05,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
+        c.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation + 0.05,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
+        d.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation + 0.04,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
+        e.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation + 0.02,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
+        f.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation - 0.02,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
+        g.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation - 0.04,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
+        h.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation - 0.05,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(c)
         $Bullets.add_child(d)
         $Bullets.add_child(e)
         $Bullets.add_child(f)
         $Bullets.add_child(g)
         $Bullets.add_child(h)
+        
+
+    if shot:
+        
+        if assault_sound:
+            $Sounds/Assault_fire.play()
+            shot = false
+        if pistol_sound:
+            $Sounds/Pistol_fire.play()
+            shot = false
+        if combat_shotgun_sound:
+            $Sounds/CombatShotgun_fire.play()
+            shot = false
+        if super_shotgun_sound:
+            $Sounds/SuperShotgun_fire.play()
+            shot = false

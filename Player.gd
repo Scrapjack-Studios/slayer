@@ -43,6 +43,7 @@ var is_climbing = false
 var can_walljump = true
 var stopped_fire = false
 var burst_loop = 0
+var shots_fired_auto = 0
 var shot = false
 func _ready():
     health = start_health
@@ -53,7 +54,6 @@ func _input(event: InputEvent) -> void:
     if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_burst:
         can_shoot = false
         $Weapon/GunStats._BulletPostition()
-        shot = true
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
         GunTimer.set_one_shot(true)
@@ -63,9 +63,8 @@ func _input(event: InputEvent) -> void:
         GunTimer.queue_free()
         can_shoot = true
         
-    while event.is_action_pressed("tank_fire") and $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_burst: 
+    while event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_burst: 
         $Weapon/GunStats._BulletPostition()
-        shot = true
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
         GunTimer.set_one_shot(true)
@@ -73,16 +72,21 @@ func _input(event: InputEvent) -> void:
         GunTimer.start()
         yield(GunTimer, "timeout")
         GunTimer.queue_free()
+        shots_fired_auto += 1
+#        if shots_fired_auto == get_node("Weapon/GunStats").auto_mag:
+#            break
+#            stopped_fire = false
+#            can_shoot = false
         if stopped_fire:
             break
             stopped_fire = false
     
+               
     for x in range(0, get_node("Weapon/GunStats").burst_ammount):
         if event.is_action_pressed("tank_fire") and can_shoot and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and $Weapon/GunStats.is_burst:
             burst_loop +=1
             can_shoot = false
             $Weapon/GunStats._BulletPostition()
-            shot = true
             var t = Timer.new()
             t.set_wait_time(0.1)
             t.set_one_shot(true)
@@ -92,7 +96,6 @@ func _input(event: InputEvent) -> void:
             can_shoot = true
             if burst_loop == get_node("Weapon/GunStats").burst_ammount:
                 can_shoot = false
-                shot = true
                 $Weapon/GunStats._GunTimer()
                 can_shoot = true
                 burst_loop = 0
@@ -101,7 +104,6 @@ func _input(event: InputEvent) -> void:
         can_shoot = false
         print("ye")
         $Weapon/GunStats._BulletPostition()
-        shot = true
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
         GunTimer.set_one_shot(true)
@@ -112,20 +114,6 @@ func _input(event: InputEvent) -> void:
         can_shoot = true
         print("ha")
         
-    if shot:
-        
-        if get_node("Weapon/GunStats").assault_sound:
-            $Weapon/Sounds/Assault_fire.play()
-            shot = false
-        if get_node("Weapon/GunStats").pistol_sound:
-            $Weapon/Sounds/Pistol_fire.play()
-            shot = false
-        if get_node("Weapon/GunStats").combat_shotgun_sound:
-            $Weapon/Sounds/CombatShotgun_fire.play()
-            shot = false
-        if get_node("Weapon/GunStats").super_shotgun_sound:
-            $Weapon/Sounds/SuperShotgun_fire.play()
-            shot = false
             
     if event.is_action_released("tank_fire"):
         stopped_fire = true
@@ -177,13 +165,11 @@ func _physics_process(delta):
     var stop = true
     
     if get_local_mouse_position().x < 0: # mouse is facing left
-        $Weapon.set_position(Vector2(-22,0))
+        $Weapon.set_position(Vector2(-22,10))
         $Weapon/Weapon_Sprite.set_flip_v(true)
     elif get_local_mouse_position().x > 0: # mouse is facing right
         $Weapon.set_position(Vector2(15,0))
         $Weapon/Weapon_Sprite.set_flip_v(false)
-
- 
     if $Chain.hooked:
         _ChainHook()
 
@@ -289,8 +275,6 @@ func _MantelLeft():
     velocity.y = -CLIMB_SPEED
     is_climbing = true   
         
-#func _on_GunTimer_timeout():
-#    can_shoot = true
     
 func take_damage(amount):
     health -= amount
