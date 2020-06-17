@@ -72,7 +72,7 @@ scale = Vector2( 0.42014, 0.401667 )
 script = ExtResource( 8 )
 Bullet = ExtResource( 5 )
 dmg = 5
-is_automatic = true
+shotgun = true
 cool_down = 0.1
 burst_ammount = 2
 auto_mag = 30
@@ -85,7 +85,6 @@ sound = 4
 [node name="Bullets" type="Node" parent="Weapon/GunStats"]
 
 [node name="Sounds" type="Node2D" parent="Weapon/GunStats"]
-scale = Vector2( 1, 1 )
 
 [node name="Assault_fire" type="AudioStreamPlayer" parent="Weapon/GunStats/Sounds"]
 stream = ExtResource( 9 )
