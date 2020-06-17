@@ -121,7 +121,8 @@ func _physics_process(delta):
             force.x += WALK_FORCE
             stop = false
         
-
+    if is_on_floor():
+        rotation = get_floor_normal().angle() + PI/2
         
     if stop:
         var vsign = sign(velocity.x)
@@ -160,6 +161,7 @@ func _physics_process(delta):
         # If falling, no longer jumping
         is_jumping = false
         is_falling = true
+        rotation = 0
         
     if [is_jumping or is_falling] and move_right and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
         _MantelRight()
@@ -173,6 +175,7 @@ func _physics_process(delta):
         # Makes controls more snappy.
         velocity.y = -jump_strength
         is_jumping = true
+        rotation = 0
     
     on_air_time += delta
     
