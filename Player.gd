@@ -19,7 +19,7 @@ const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 400
 const STOP_FORCE = 1500
 const JUMP_MAX_AIRBORNE_TIME = 0.4
-const CLIMB_SPEED = 600
+const CLIMB_SPEED = 800
 const CLIMB_AMOUNT = 70
 const MAX_JUMP_COUNT = 2
 
@@ -28,7 +28,7 @@ var chain_velocity := Vector2(0,0)
 var rot_dir
 var can_shoot = true
 var health
-var chain_pull = 50
+var chain_pull = 40
 var on_air_time = 100
 var is_jumping = false
 var can_doublejump = true
@@ -41,7 +41,7 @@ var is_grappling = false
 var jump_count = 0
 var is_wall_sliding = false
 var has_pressed_jump
-var jump_strength = 600
+var jump_strength = 750
 var is_climbing = false
 var can_walljump = true
 
@@ -59,10 +59,12 @@ func _input(event: InputEvent) -> void:
         $Bullets.add_child(b)
     
     if event.is_action_pressed("Graphook") and can_grapple:
+        rotation = 0
         # We clicked the mouse -> shoot()
-        $Chain.shoot(event.position - get_viewport().size * .54)
+        $Chain.shoot(event.position - get_viewport().size * .575)
         is_grappling = true
         $Whip.hide()
+        
 
         
     elif event.is_action_released("Graphook") and is_grappling:
@@ -71,6 +73,7 @@ func _input(event: InputEvent) -> void:
         can_grapple = false
         is_grappling = false
         $Whip.show()
+        
     
     if event.is_action_pressed("jump"):
         is_jumping = false
@@ -105,7 +108,6 @@ func _physics_process(delta):
     if $Chain.hooked:
         _ChainHook()
 
-    
     else:
         # Not hooked -> no chain velocity
         chain_velocity = Vector2(0,0)
@@ -152,7 +154,7 @@ func _physics_process(delta):
         jump_count = 0
         has_pressed_jump = false
         is_climbing = false
-        jump_strength = 600
+        jump_strength = 750
         gravity = -1
     else:
         gravity = 1300
@@ -164,10 +166,12 @@ func _physics_process(delta):
         rotation = 0
         
     if [is_jumping or is_falling] and move_right and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
-        _MantelRight()
+        if Input.is_action_just_pressed("jump"):
+            _MantelRight()
 
     if [is_jumping or is_falling] and move_left and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
-        _MantelLeft()
+        if Input.is_action_just_pressed("jump"):
+            _MantelLeft()
 
         
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
@@ -181,6 +185,7 @@ func _physics_process(delta):
     
     prev_jump_pressed = jump
     
+        
     if is_on_wall() and not is_climbing:
         _WallMount()
     else:
@@ -191,7 +196,7 @@ func _physics_process(delta):
         
 func _WallMount():
     velocity.y = lerp(velocity.y,0,0.3)
-    jump_strength = 800
+    jump_strength = 900
         
     if can_walljump:
         jump_count = 1
@@ -205,7 +210,9 @@ func _WallMount():
         _MantelRight()
                  
     if not is_on_wall() and not is_falling:
-        jump_strength = 600
+        jump_strength = 750
+    if velocity.y > 0:
+        rotation = 0
         
 func _MantelRight():
     velocity.x = +CLIMB_AMOUNT
@@ -243,7 +250,7 @@ func _ChainHook():
     else:
         # Pulling up is stronger
         chain_velocity.y *= 1.65
-
+    rotation = 0
 
 func _HeadBump():
     $Blur.show()
