@@ -8,3 +8,16 @@ A 2D multiplayer shooter inspired by Liero
 * Assets are all [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 * [topdown_tanks](https://github.com/kidscancode/topdown_tanks) code and assets (to be replaced) is under the [MIT](https://opensource.org/licenses/MIT)
 * Godot Weapons is under the [MIT](https://opensource.org/licenses/MIT)
+
+### Creating levels
+
+Every level has to have this hierarchy:
+
+```
+Main
+| CanvasLayer
+    | Hud
+    | PauseMenu
+    | OptionsMenu
+| Player
+```
