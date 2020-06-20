@@ -28,6 +28,11 @@ OptionsMenu="*res://menus/OptionsMenu.tscn"
 window/size/width=1920
 window/size/height=1080
 
+[gui]
+
+theme/custom="res://assets/ui/SlayerTheme.tres"
+theme/custom_font="res://assets/fonts/savior.tres"
+
 [importer_defaults]
 
 texture={
