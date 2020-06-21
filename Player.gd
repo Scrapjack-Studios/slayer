@@ -102,7 +102,6 @@ func _input(event: InputEvent) -> void:
     
     if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_burst:
         can_shoot = false
-        print("ye")
         $Weapon/GunStats._BulletPostition()
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
@@ -112,7 +111,6 @@ func _input(event: InputEvent) -> void:
         yield(GunTimer, "timeout")
         GunTimer.queue_free()
         can_shoot = true
-        print("ha")
         
             
     if event.is_action_released("tank_fire"):

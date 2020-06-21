@@ -36,6 +36,7 @@ export (Vector2) var weapon_size
 
 export (Vector2) var weapon_position
 #weapon location
+var shot = false    
 
 var assault_sound
 var combat_shotgun_sound
@@ -43,6 +44,7 @@ var super_shotgun_sound
 var pistol_sound
 
 export (int) var sound
+
 func _ready():
     if sound == 1:
         assault_sound = true
@@ -53,12 +55,12 @@ func _ready():
     if sound == 4:
         pistol_sound = true
 
-
-var shot = false    
-
-
     
-
+func readyfire(is_auto, is_shotgun, is_burst, is_semi):
+    is_automatic = is_auto
+    shotgun = is_shotgun
+    is_burst = is_burst
+    is_semi_auto = is_semi
 
 func _BulletPostition():
     var b = Bullet.instance()

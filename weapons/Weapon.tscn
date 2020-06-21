@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://GunStats.gd" type="Script" id=1]
+[ext_resource path="res://Shotgun.png" type="Texture" id=2]
+[ext_resource path="res://Weapon_Fire.gd" type="Script" id=3]
+[ext_resource path="res://Weapon_Sprite.gd" type="Script" id=4]
+[ext_resource path="res://weapons/weapon_sounds/Pistol.wav" type="AudioStream" id=5]
+[ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://weapons/weapon_sounds/CombatShotGun.wav" type="AudioStream" id=7]
+[ext_resource path="res://weapons/weapon_sounds/AssaltRifle.wav" type="AudioStream" id=8]
+
+[node name="Weapon" type="Sprite"]
+use_parent_material = true
+position = Vector2( 20, 0 )
+scale = Vector2( 0.700347, 0.738675 )
+offset = Vector2( 23, 0 )
+region_enabled = true
+region_rect = Rect2( 199, 36, 60, 24 )
+
+[node name="Weapon_Sprite" type="Sprite" parent="."]
+position = Vector2( 22.2715, 5.11179 )
+scale = Vector2( 2.38016, 2.48963 )
+centered = false
+offset = Vector2( -20, -5 )
+script = ExtResource( 4 )
+
+[node name="Muzzle" type="Position2D" parent="Weapon_Sprite"]
+position = Vector2( 27.7532, -1.9078 )
+rotation = 1.7318e-11
+scale = Vector2( 0.42014, 0.401667 )
+
+[node name="GunStats" type="Node2D" parent="."]
+script = ExtResource( 1 )
+Bullet = ExtResource( 6 )
+dmg = 5
+is_burst = true
+cool_down = 0.1
+burst_ammount = 2
+auto_mag = 30
+bullet_size = Vector2( 0.2, 0.2 )
+bullet_speed = 2500
+weapon_sprite = ExtResource( 2 )
+weapon_size = Vector2( 3, 3 )
+sound = 4
+
+[node name="Sounds" type="Node2D" parent="GunStats"]
+
+[node name="Assault_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
+stream = ExtResource( 8 )
+script = ExtResource( 3 )
+
+[node name="Pistol_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
+stream = ExtResource( 5 )
+
+[node name="CombatShotgun_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
+stream = ExtResource( 7 )
+
+[node name="SuperShotgun_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
+stream = ExtResource( 7 )
+
+[node name="Bullets" type="Node" parent="GunStats"]
