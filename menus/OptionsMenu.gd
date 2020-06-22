@@ -91,4 +91,5 @@ func _apply_settings():
     config.load("user://config.cfg")
     OS.set_use_vsync(config.get_value("video", "vsync"))
     OS.set_window_fullscreen(config.get_value("video", "fullscreen"))
+    get_node("/root/FullscreenCRT/ColorRect").visible = config.get_value("video", "fullscreen_crt")
     # TODO: make a mute function that mutes everything in a 'sounds' group

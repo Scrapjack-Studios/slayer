@@ -6,7 +6,7 @@ uniform float screen_height = 896;
 // Curvature
 uniform float BarrelPower =1;
 // Color bleeding
-uniform float color_bleeding = 1.2;
+uniform float color_bleeding = 0.5;
 uniform float bleeding_range_x = 0.5;
 uniform float bleeding_range_y = 0.5;
 // Scanline

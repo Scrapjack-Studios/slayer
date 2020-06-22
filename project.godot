@@ -22,6 +22,7 @@ config/icon="res://assets/icon.png"
 [autoload]
 
 OptionsMenu="*res://menus/OptionsMenu.tscn"
+FullscreenCRT="*res://misc/FullscreenCRT.tscn"
 
 [display]
 
