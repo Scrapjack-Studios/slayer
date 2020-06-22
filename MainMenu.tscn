@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/ui/MainMenu.png" type="Texture" id=1]
 [ext_resource path="res://MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://menus/OptionsMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/shaders/CRTShader.tres" type="Material" id=5]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -12,7 +13,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CRTShader" type="ColorRect" parent="CanvasLayer"]
+material = ExtResource( 5 )
+anchor_left = 0.055
+anchor_top = 0.097
+anchor_right = 0.555
+anchor_bottom = 0.902
+margin_left = -0.600006
+margin_top = 0.239998
+margin_right = -0.599976
+margin_bottom = 0.839905
+
+[node name="TerminalBackground" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 1 )

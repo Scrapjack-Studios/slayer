@@ -1,14 +1,14 @@
 shader_type canvas_item;
 
-uniform float screen_width = 1024;
-uniform float screen_height = 600;
+uniform float screen_width = 959;
+uniform float screen_height = 896;
 
 // Curvature
-uniform float BarrelPower =1.1;
+uniform float BarrelPower =1;
 // Color bleeding
 uniform float color_bleeding = 1.2;
-uniform float bleeding_range_x = 3;
-uniform float bleeding_range_y = 3;
+uniform float bleeding_range_x = 0.5;
+uniform float bleeding_range_y = 0.5;
 // Scanline
 uniform float lines_distance = 4.0;
 uniform float scan_size = 2.0;
