@@ -63,6 +63,7 @@ func _save_settings():
     # video
     config.set_value("video", "vsync", $VideoOptions/VBoxContainer/VSync.is_pressed())
     config.set_value("video", "fullscreen", $VideoOptions/VBoxContainer/Fullscreen.is_pressed())
+    config.set_value("video", "fullscreen_crt", $VideoOptions/VBoxContainer/FullscreenCRT.is_pressed())
     # audio
     config.set_value("audio", "mute", $AudioOptions/VBoxContainer/Mute.is_pressed())
     config.save("user://config.cfg")
@@ -73,6 +74,7 @@ func _load_settings():
     # video
     $VideoOptions/VBoxContainer/VSync.set_pressed(config.get_value("video", "vsync"))
     $VideoOptions/VBoxContainer/Fullscreen.set_pressed(config.get_value("video", "fullscreen"))
+    $VideoOptions/VBoxContainer/FullscreenCRT.set_pressed(config.get_value("video", "fullscreen_crt"))
     # audio
     $AudioOptions/VBoxContainer/Mute.set_pressed(config.get_value("audio", "mute"))
     
@@ -80,6 +82,7 @@ func _reset_settings():
     # sets everything to default values
     config.set_value("video", "vsync", false)
     config.set_value("video", "fullscreen", false)
+    config.set_value("video", "fullscreen_crt", false)
     config.set_value("audio", "mute", false)
     config.save("user://config.cfg")
     
