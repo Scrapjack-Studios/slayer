@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/music/CantBeSaved.ogg" type="AudioStream" id=1]
 [ext_resource path="res://obstacles/Platform_Physics.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://menus/PauseMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://obstacles/Platform_Static.tscn" type="PackedScene" id=8]
+[ext_resource path="res://obstacles/DestructibleBlock.tscn" type="PackedScene" id=9]
 
 [node name="Main" type="Node"]
 script = ExtResource( 3 )
@@ -17,11 +18,14 @@ script = ExtResource( 3 )
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
 margin_right = 335.0
 margin_bottom = 52.0
+mouse_filter = 2
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 6 )]
+mouse_filter = 2
 
 [node name="OptionsMenu" parent="CanvasLayer" instance=ExtResource( 4 )]
 pause_mode = 2
+mouse_filter = 2
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 485.936, 312.503 )
@@ -30,6 +34,7 @@ collision/safe_margin = 2.0
 [node name="Blocks" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -142,6 +147,7 @@ rotation = -1.57022
 [node name="StaticBody2D39" parent="Blocks" instance=ExtResource( 8 )]
 position = Vector2( 1750.01, 101.942 )
 rotation = -1.57022
+input_pickable = true
 
 [node name="StaticBody2D40" parent="Blocks" instance=ExtResource( 8 )]
 position = Vector2( 734.646, -1180.12 )
@@ -216,6 +222,9 @@ position = Vector2( 1067.8, 342.849 )
 
 [node name="StaticBody2D5" parent="Blocks" instance=ExtResource( 8 )]
 position = Vector2( 1226.94, 467.96 )
+
+[node name="DestructibleBlock" parent="Blocks" instance=ExtResource( 9 )]
+position = Vector2( -778, 266 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
