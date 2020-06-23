@@ -89,7 +89,13 @@ func _reset_settings():
 func _apply_settings():
     # actually applies the settings from config.cfg in-game
     config.load("user://config.cfg")
+    
     OS.set_use_vsync(config.get_value("video", "vsync"))
+    
     OS.set_window_fullscreen(config.get_value("video", "fullscreen"))
+    
     get_node("/root/FullscreenCRT/ColorRect").visible = config.get_value("video", "fullscreen_crt")
+    if get_node("/root").has_node("MainMenu"):
+        get_node("/root/MainMenu/CanvasLayer/CRTShader").visible = not config.get_value("video", "fullscreen_crt")
+    
     # TODO: make a mute function that mutes everything in a 'sounds' group
