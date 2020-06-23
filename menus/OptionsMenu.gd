@@ -101,4 +101,5 @@ func _apply_settings():
     if get_node("/root").has_node("MainMenu"):
         get_node("/root/MainMenu/CanvasLayer/CRTShader").visible = not config.get_value("video", "fullscreen_crt")
     
+    get_node("/root/FPSCounter/RichTextLabel").visible = config.get_value("video", "fps_counter")
     # TODO: make a mute function that mutes everything in a 'sounds' group
