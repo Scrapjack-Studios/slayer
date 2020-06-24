@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://menus/OptionsMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/SlayerTheme.tres" type="Theme" id=2]
 
 [node name="OptionsMenu" type="Control"]
 anchor_right = 1.0
@@ -34,25 +35,25 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Buttons"]
 anchor_left = 0.026
 anchor_top = 0.042
-anchor_right = 0.331
+anchor_right = 0.239
 anchor_bottom = 0.958
 margin_left = 0.0179996
 margin_top = 0.00799942
-margin_right = -0.117035
-margin_bottom = -0.00802612
+margin_right = 0.126999
+margin_bottom = -0.00799561
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Video" type="Button" parent="Buttons/VBoxContainer"]
-margin_right = 245.0
-margin_bottom = 20.0
+margin_right = 172.0
+margin_bottom = 26.0
 text = "Video"
 
 [node name="Audio" type="Button" parent="Buttons/VBoxContainer"]
-margin_top = 24.0
-margin_right = 245.0
-margin_bottom = 44.0
+margin_top = 30.0
+margin_right = 172.0
+margin_bottom = 56.0
 text = "Audio"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Buttons"]
@@ -70,9 +71,9 @@ __meta__ = {
 }
 
 [node name="Reset" type="Button" parent="Buttons/VBoxContainer2"]
-margin_top = 397.0
+margin_top = 385.0
 margin_right = 127.0
-margin_bottom = 417.0
+margin_bottom = 411.0
 text = "Reset"
 
 [node name="Reset_Confirmation" type="ConfirmationDialog" parent="Buttons/VBoxContainer2/Reset"]
@@ -89,7 +90,7 @@ dialog_text = "Are you sure you want to reset your settings? This cannot be undo
 dialog_autowrap = true
 
 [node name="Exit" type="Button" parent="Buttons/VBoxContainer2"]
-margin_top = 421.0
+margin_top = 415.0
 margin_right = 127.0
 margin_bottom = 441.0
 text = "Exit"
@@ -103,6 +104,7 @@ margin_left = -403.5
 margin_top = -238.0
 margin_right = 403.5
 margin_bottom = 238.0
+theme = ExtResource( 2 )
 popup_exclusive = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -130,23 +132,25 @@ __meta__ = {
 
 [node name="VSync" type="CheckBox" parent="VideoOptions/VBoxContainer"]
 margin_right = 267.0
-margin_bottom = 24.0
+margin_bottom = 30.0
 text = "V-Sync"
 
 [node name="Fullscreen" type="CheckBox" parent="VideoOptions/VBoxContainer"]
-margin_top = 28.0
+margin_top = 34.0
 margin_right = 267.0
-margin_bottom = 52.0
+margin_bottom = 64.0
 text = "Fullscreen"
 
 [node name="FullscreenCRT" type="CheckBox" parent="VideoOptions/VBoxContainer"]
+margin_top = 68.0
 margin_right = 267.0
-margin_bottom = 30.0
+margin_bottom = 98.0
 text = "Fullscreen CRT Effect"
 
 [node name="FPSCounter" type="CheckBox" parent="VideoOptions/VBoxContainer"]
+margin_top = 102.0
 margin_right = 267.0
-margin_bottom = 30.0
+margin_bottom = 132.0
 text = "FPS Counter"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VideoOptions"]
@@ -164,14 +168,14 @@ __meta__ = {
 }
 
 [node name="Video_Save" type="Button" parent="VideoOptions/VBoxContainer2"]
-margin_top = 397.0
-margin_right = 128.0
-margin_bottom = 417.0
+margin_top = 385.0
+margin_right = 127.0
+margin_bottom = 411.0
 text = "Save"
 
 [node name="Video_Exit" type="Button" parent="VideoOptions/VBoxContainer2"]
-margin_top = 421.0
-margin_right = 128.0
+margin_top = 415.0
+margin_right = 127.0
 margin_bottom = 441.0
 text = "Exit"
 __meta__ = {
@@ -187,6 +191,7 @@ margin_left = -403.5
 margin_top = -238.0
 margin_right = 403.5
 margin_bottom = 238.0
+theme = ExtResource( 2 )
 popup_exclusive = true
 __meta__ = {
 "_edit_use_anchors_": false
