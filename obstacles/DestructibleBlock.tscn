@@ -10,12 +10,12 @@ script = ExtResource( 2 )
 
 [node name="StaticBody2D" type="RigidBody2D" parent="."]
 position = Vector2( 530, 76 )
-input_pickable = true
 collision_layer = 3
 collision_mask = 3
 gravity_scale = 10.0
 contacts_reported = 1
 contact_monitor = true
+sleeping = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 0, 288 )
