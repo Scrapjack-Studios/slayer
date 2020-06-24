@@ -224,7 +224,16 @@ position = Vector2( 1067.8, 342.849 )
 position = Vector2( 1226.94, 467.96 )
 
 [node name="DestructibleBlock" parent="Blocks" instance=ExtResource( 9 )]
-position = Vector2( -778, 266 )
+position = Vector2( -789.593, 212.827 )
+
+[node name="DestructibleBlock4" parent="Blocks" instance=ExtResource( 9 )]
+position = Vector2( -629.593, 372.827 )
+
+[node name="DestructibleBlock3" parent="Blocks" instance=ExtResource( 9 )]
+position = Vector2( -789.593, 52.8267 )
+
+[node name="DestructibleBlock2" parent="Blocks" instance=ExtResource( 9 )]
+position = Vector2( -789.593, 371.827 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )

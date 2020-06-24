@@ -19,7 +19,7 @@ contact_monitor = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 0, 288 )
-scale = Vector2( 16, 16 )
+scale = Vector2( 8, 8 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D/CollisionShape2D"]
