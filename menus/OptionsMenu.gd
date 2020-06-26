@@ -161,3 +161,22 @@ func _on_Audio_Save_mouse_entered():
 
 func _on_Audio_Exit_mouse_entered():
     $Hover.play()
+
+func _on_VSync_pressed():
+    $Blip2.play()
+
+
+func _on_Fullscreen_pressed():
+    $Blip2.play()
+
+
+func _on_FullscreenCRT_pressed():
+    $Blip2.play()
+
+
+func _on_FPSCounter_pressed():
+    $Blip2.play()
+
+
+func _on_Mute_pressed():
+    $Blip2.play()
