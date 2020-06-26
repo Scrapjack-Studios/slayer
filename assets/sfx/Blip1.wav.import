@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Blip1.wav-49ae7f0f4a913170a5dfe7d3e181a25a.sample"
+
+[deps]
+
+source_file="res://assets/sfx/Blip1.wav"
+dest_files=[ "res://.import/Blip1.wav-49ae7f0f4a913170a5dfe7d3e181a25a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

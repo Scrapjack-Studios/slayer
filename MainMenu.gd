@@ -5,6 +5,7 @@ func _ready():
 
 func _on_PlayButton_pressed():
     $PlayMenu.popup()
+    $Button2.play()
 
 func _on_ShootingRange_pressed():
     # warning-ignore:return_value_discarded
@@ -51,6 +52,9 @@ func _on_OptionsButton_pressed():
     $OptionsMenu/AudioOptions/Panel.hide()
     
     $OptionsMenu/Buttons.popup()
+    
+    $Button2.play()
 
 func _on_QuitButton_pressed():
     get_tree().quit()
+    $Button2.play()

@@ -2,6 +2,7 @@ extends Control
 
 var config = ConfigFile.new()
 var file = File.new()
+var video_focused_before = true
 
 func _ready():
     # checks if there are errors with config.cfg
@@ -16,32 +17,40 @@ func _ready():
 # buttons
             
 func _on_Exit_pressed():
+    $Blip1.play()
     $Buttons.hide()
 
 func _on_Video_pressed():
+    $Blip1.play()
     $VideoOptions.popup()
 
 func _on_Audio_pressed():
+    $Blip1.play()
     $Buttons.popup()
     $AudioOptions.popup()
 
 func _on_Video_Exit_pressed():
+    $Blip1.play()
     $Buttons.popup()
     $VideoOptions.hide()
 
 func _on_Video_Save_pressed():
+    $Blip1.play()
     _save_settings()
     _apply_settings()
     
 func _on_Audio_Exit_pressed():
+    $Blip1.play()
     $Buttons.popup()
     $AudioOptions.hide()
 
 func _on_Audio_Save_pressed():
+    $Blip1.play()
     _save_settings()
     _apply_settings()
 
 func _on_Reset_pressed():
+    $Blip1.play()
     $Buttons/VBoxContainer2/Reset/Reset_Confirmation.popup_centered()
 
 func _on_Reset_Confirmation_confirmed():
@@ -103,3 +112,52 @@ func _apply_settings():
     
     get_node("/root/FPSCounter/RichTextLabel").visible = config.get_value("video", "fps_counter")
     # TODO: make a mute function that mutes everything in a 'sounds' group
+
+
+func _on_Video_mouse_entered():
+    $Hover.play()
+
+func _on_Audio_mouse_entered():
+    $Hover.play()
+
+func _on_Reset_mouse_entered():
+    $Hover.play()
+
+func _on_Exit_mouse_entered():
+    $Hover.play()
+
+
+func _on_VSync_mouse_entered():
+    $Hover.play()
+
+
+func _on_Fullscreen_mouse_entered():
+    $Hover.play()
+
+
+func _on_FullscreenCRT_mouse_entered():
+    $Hover.play()
+
+
+func _on_FPSCounter_mouse_entered():
+    $Hover.play()
+
+
+func _on_Video_Save_mouse_entered():
+    $Hover.play()
+
+
+func _on_Video_Exit_mouse_entered():
+    $Hover.play()
+
+
+func _on_Mute_mouse_entered():
+    $Hover.play()
+
+
+func _on_Audio_Save_mouse_entered():
+    $Hover.play()
+
+
+func _on_Audio_Exit_mouse_entered():
+    $Hover.play()

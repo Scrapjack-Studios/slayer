@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://menus/OptionsMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/SlayerTheme.tres" type="Theme" id=2]
+[ext_resource path="res://assets/sfx/Hover.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sfx/Button2.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sfx/Blip2.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sfx/Button1.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sfx/Blip1.wav" type="AudioStream" id=7]
 
 [node name="OptionsMenu" type="Control"]
 anchor_right = 1.0
@@ -262,14 +267,42 @@ margin_right = 41.5
 margin_bottom = 29.0
 popup_exclusive = true
 window_title = "Error"
+
+[node name="Blip1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="Blip2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="Button1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Button2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+[connection signal="mouse_entered" from="Buttons/VBoxContainer/Video" to="." method="_on_Video_mouse_entered"]
 [connection signal="pressed" from="Buttons/VBoxContainer/Video" to="." method="_on_Video_pressed"]
+[connection signal="mouse_entered" from="Buttons/VBoxContainer/Audio" to="." method="_on_Audio_mouse_entered"]
 [connection signal="pressed" from="Buttons/VBoxContainer/Audio" to="." method="_on_Audio_pressed"]
+[connection signal="mouse_entered" from="Buttons/VBoxContainer2/Reset" to="." method="_on_Reset_mouse_entered"]
 [connection signal="pressed" from="Buttons/VBoxContainer2/Reset" to="." method="_on_Reset_pressed"]
 [connection signal="confirmed" from="Buttons/VBoxContainer2/Reset/Reset_Confirmation" to="." method="_on_Reset_Confirmation_confirmed"]
+[connection signal="mouse_entered" from="Buttons/VBoxContainer2/Exit" to="." method="_on_Exit_mouse_entered"]
 [connection signal="pressed" from="Buttons/VBoxContainer2/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="about_to_show" from="VideoOptions" to="." method="_on_VideoOptions_about_to_show"]
+[connection signal="mouse_entered" from="VideoOptions/VBoxContainer/VSync" to="." method="_on_VSync_mouse_entered"]
+[connection signal="mouse_entered" from="VideoOptions/VBoxContainer/Fullscreen" to="." method="_on_Fullscreen_mouse_entered"]
+[connection signal="mouse_entered" from="VideoOptions/VBoxContainer/FullscreenCRT" to="." method="_on_FullscreenCRT_mouse_entered"]
+[connection signal="mouse_entered" from="VideoOptions/VBoxContainer/FPSCounter" to="." method="_on_FPSCounter_mouse_entered"]
+[connection signal="mouse_entered" from="VideoOptions/VBoxContainer2/Video_Save" to="." method="_on_Video_Save_mouse_entered"]
 [connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Save" to="." method="_on_Video_Save_pressed"]
+[connection signal="mouse_entered" from="VideoOptions/VBoxContainer2/Video_Exit" to="." method="_on_Video_Exit_mouse_entered"]
 [connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Exit" to="." method="_on_Video_Exit_pressed"]
 [connection signal="about_to_show" from="AudioOptions" to="." method="_on_AudioOptions_about_to_show"]
+[connection signal="mouse_entered" from="AudioOptions/VBoxContainer/Mute" to="." method="_on_Mute_mouse_entered"]
+[connection signal="mouse_entered" from="AudioOptions/VBoxContainer2/Audio_Save" to="." method="_on_Audio_Save_mouse_entered"]
 [connection signal="pressed" from="AudioOptions/VBoxContainer2/Audio_Save" to="." method="_on_Audio_Save_pressed"]
+[connection signal="mouse_entered" from="AudioOptions/VBoxContainer2/Audio_Exit" to="." method="_on_Audio_Exit_mouse_entered"]
 [connection signal="pressed" from="AudioOptions/VBoxContainer2/Audio_Exit" to="." method="_on_Audio_Exit_pressed"]
