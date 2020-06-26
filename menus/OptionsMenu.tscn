@@ -182,7 +182,7 @@ text = "Save"
 margin_top = 415.0
 margin_right = 127.0
 margin_bottom = 441.0
-text = "Exit"
+text = "Back"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -251,7 +251,7 @@ text = "Save"
 margin_top = 421.0
 margin_right = 127.0
 margin_bottom = 441.0
-text = "Exit"
+text = "Back"
 __meta__ = {
 "_edit_use_anchors_": false
 }
