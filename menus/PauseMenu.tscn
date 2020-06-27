@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://menus/PauseMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/sfx/Blip2.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sfx/Button1.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sfx/Button2.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sfx/Hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sfx/Blip1.wav" type="AudioStream" id=6]
 
 [node name="PauseMenu" type="Control"]
 pause_mode = 2
@@ -54,7 +59,26 @@ margin_top = 117.0
 margin_right = 150.0
 margin_bottom = 137.0
 text = "Quit to Desktop"
+
+[node name="Blip1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Blip2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="Button1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Button2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+[connection signal="mouse_entered" from="PopupMenu/VBoxContainer/Resume" to="." method="_on_Resume_mouse_entered"]
 [connection signal="pressed" from="PopupMenu/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="mouse_entered" from="PopupMenu/VBoxContainer/Options" to="." method="_on_Options_mouse_entered"]
 [connection signal="pressed" from="PopupMenu/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="mouse_entered" from="PopupMenu/VBoxContainer/Quit_MainMenu" to="." method="_on_Quit_MainMenu_mouse_entered"]
 [connection signal="pressed" from="PopupMenu/VBoxContainer/Quit_MainMenu" to="." method="_on_Quit_MainMenu_pressed"]
+[connection signal="mouse_entered" from="PopupMenu/VBoxContainer/Quit_Desktop" to="." method="_on_Quit_Desktop_mouse_entered"]
 [connection signal="pressed" from="PopupMenu/VBoxContainer/Quit_Desktop" to="." method="_on_Quit_Desktop_pressed"]

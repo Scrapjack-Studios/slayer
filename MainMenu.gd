@@ -15,6 +15,7 @@ func _on_CreateGame_pressed():
 
 func _on_ShootingRange_pressed():
     $Blip1.play()
+    yield($Blip1, "finished")
     # warning-ignore:return_value_discarded
     get_tree().change_scene("res://maps/ShootingRange.tscn")
 
@@ -63,8 +64,9 @@ func _on_OptionsButton_pressed():
     $Button2.play()
 
 func _on_QuitButton_pressed():
-    get_tree().quit()
     $Button2.play()
+    yield($Button2, "finished")
+    get_tree().quit()
 
 func _on_JoinGame_mouse_entered():
     $Hover.play()
