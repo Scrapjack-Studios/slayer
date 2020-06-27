@@ -164,8 +164,8 @@ text = "FPS Counter"
 margin_top = 120.0
 margin_right = 267.0
 margin_bottom = 146.0
-text = "(1080p HD) 1920x1080"
-items = [ "640x480", null, false, 0, null, "1024x786", null, false, 1, null, "1280x960", null, false, 2, null, "1600x1200", null, false, 3, null, "1280x1024", null, false, 4, null, "960x540", null, false, 5, null, "(720p HD) 1280x720", null, false, 6, null, "1366x768", null, false, 7, null, "(1080p HD) 1920x1080", null, false, 8, null, "(1440p HD) 2560x1440", null, false, 9, null, "(4K UHD) 3840x2160", null, false, 11, null, "960x600", null, false, 12, null, "1280x800", null, false, 13, null, "1440x900", null, false, 14, null, "1680x1050", null, false, 15, null, "1920x1200", null, false, 15, null ]
+text = "1920x1080"
+items = [ "640x480", null, false, 0, null, "1024x786", null, false, 1, null, "1280x960", null, false, 2, null, "1600x1200", null, false, 3, null, "1280x1024", null, false, 4, null, "960x540", null, false, 5, null, "1280x720", null, false, 6, null, "1366x768", null, false, 7, null, "1920x1080", null, false, 8, null, "2560x1440", null, false, 9, null, "3840x2160", null, false, 11, null, "960x600", null, false, 12, null, "1280x800", null, false, 13, null, "1440x900", null, false, 14, null, "1680x1050", null, false, 15, null, "1920x1200", null, false, 15, null ]
 selected = 8
 __meta__ = {
 "_edit_use_anchors_": false
