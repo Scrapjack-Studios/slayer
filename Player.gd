@@ -79,7 +79,6 @@ func _input(event: InputEvent) -> void:
         can_shoot = true
         
     while event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-        print("SNAZZY")
         $Weapon/GunStats._BulletPostition()
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
@@ -279,7 +278,6 @@ func take_damage(amount):
     emit_signal("health_changed", (health * 100 / start_health))
     if health <= 0:
         emit_signal("died")
-        print("Dead!")
 
 func _on_GrappleTimer_timeout():
     $GrappleTimer.stop()
