@@ -29,6 +29,8 @@ FPSCounter="*res://misc/FPSCounter.tscn"
 
 window/size/width=1920
 window/size/height=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
 
 [gui]
 
@@ -129,3 +131,4 @@ pause_menu={
 [rendering]
 
 quality/2d/use_pixel_snap=true
+quality/dynamic_fonts/use_oversampling=false

@@ -74,6 +74,8 @@ func _apply_settings():
         get_node("/root/MainMenu/CanvasLayer/CRTShader").visible = not config.get_value("video", "fullscreen_crt")
     
     get_node("/root/FPSCounter/RichTextLabel").visible = config.get_value("video", "fps_counter")
+    
+    OS.set_window_size(Vector2(config.get_value("video", "vid_width"), config.get_value("video", "vid_height")))
     # TODO: make a mute function that mutes everything in a 'sounds' group
 
 # buttons
