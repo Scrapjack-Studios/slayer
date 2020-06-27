@@ -94,6 +94,8 @@ func _reset_settings():
     config.set_value("video", "fullscreen", false)
     config.set_value("video", "fullscreen_crt", false)
     config.set_value("video", "fps_counter", false)
+    config.set_value("video", "vid_width", 1920)
+    config.set_value("video", "vid_height", 1080)
     config.set_value("audio", "mute", false)
     config.save("user://config.cfg")
     
