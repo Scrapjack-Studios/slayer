@@ -9,6 +9,12 @@ export (int) var damage
 export (int) var start_health
 export (float) var bullet_lifetime
 
+<<<<<<< HEAD
+=======
+var green_bar = preload("res://assets/ui/barGreen_horizontalMid.png")
+var yellow_bar = preload("res://assets/ui/barYellow_horizontalMid.png")
+var red_bar = preload("res://assets/ui/barRed_horizontalMid.png")
+>>>>>>> weapons
 var target = null
 var health
 var parent

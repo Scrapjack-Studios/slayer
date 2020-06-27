@@ -15,6 +15,7 @@ var hooked = false	# Whether the chain has connected to a wall
 
 # shoot() shoots the chain in a given direction
 func shoot(dir: Vector2) -> void:
+    $WhipSound.play()
     direction = dir.normalized()	# Normalize the direction and save it
     flying = true					# Keep track of our current scan
     tip = self.global_position

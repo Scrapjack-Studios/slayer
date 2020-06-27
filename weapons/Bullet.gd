@@ -8,14 +8,17 @@ var damage
 func _ready():
     set_process(true)
     
-func start_at(pos, dir, type, dmg, _lifetime):
+# warning-ignore:shadowed_variable
+func start_at(pos, dir, type, dmg, _lifetime, size, speed):
     $Sprite.animation = type
     position = pos
     rotation = dir
+    $Explosion.set_scale(size)
+    $Sprite.set_scale(size)
     damage = dmg
     velocity = Vector2(speed, 0).rotated(dir)
     add_to_group("bullets")
-
+    speed = speed
 
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta, false)
@@ -52,4 +55,3 @@ func _on_Timer_timeout():
     $Sprite.hide()
     $Explosion.show()
     $Explosion.play("smoke")
-
