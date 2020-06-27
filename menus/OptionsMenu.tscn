@@ -116,8 +116,10 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="VideoOptions"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.000736809
+anchor_top = -0.00124917
+anchor_right = 1.00074
+anchor_bottom = 0.998751
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -137,26 +139,37 @@ __meta__ = {
 
 [node name="VSync" type="CheckBox" parent="VideoOptions/VBoxContainer"]
 margin_right = 267.0
-margin_bottom = 30.0
+margin_bottom = 26.0
 text = "V-Sync"
 
 [node name="Fullscreen" type="CheckBox" parent="VideoOptions/VBoxContainer"]
-margin_top = 34.0
+margin_top = 30.0
 margin_right = 267.0
-margin_bottom = 64.0
+margin_bottom = 56.0
 text = "Fullscreen"
 
 [node name="FullscreenCRT" type="CheckBox" parent="VideoOptions/VBoxContainer"]
-margin_top = 68.0
+margin_top = 60.0
 margin_right = 267.0
-margin_bottom = 98.0
+margin_bottom = 86.0
 text = "Fullscreen CRT Effect"
 
 [node name="FPSCounter" type="CheckBox" parent="VideoOptions/VBoxContainer"]
-margin_top = 102.0
+margin_top = 90.0
 margin_right = 267.0
-margin_bottom = 132.0
+margin_bottom = 116.0
 text = "FPS Counter"
+
+[node name="Resolution" type="OptionButton" parent="VideoOptions/VBoxContainer"]
+margin_top = 120.0
+margin_right = 267.0
+margin_bottom = 146.0
+text = "(1080p HD) 1920x1080"
+items = [ "640x480", null, false, 0, null, "1024x786", null, false, 1, null, "1280x960", null, false, 2, null, "1600x1200", null, false, 3, null, "1280x1024", null, false, 4, null, "960x540", null, false, 5, null, "(720p HD) 1280x720", null, false, 6, null, "1366x768", null, false, 7, null, "(1080p HD) 1920x1080", null, false, 8, null, "(1440p HD) 2560x1440", null, false, 9, null, "(4K UHD) 3840x2160", null, false, 11, null, "960x600", null, false, 12, null, "1280x800", null, false, 13, null, "1440x900", null, false, 14, null, "1680x1050", null, false, 15, null, "1920x1200", null, false, 15, null ]
+selected = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VideoOptions"]
 anchor_left = 0.823
@@ -300,6 +313,8 @@ stream = ExtResource( 3 )
 [connection signal="pressed" from="VideoOptions/VBoxContainer/FullscreenCRT" to="." method="_on_FullscreenCRT_pressed"]
 [connection signal="mouse_entered" from="VideoOptions/VBoxContainer/FPSCounter" to="." method="_on_FPSCounter_mouse_entered"]
 [connection signal="pressed" from="VideoOptions/VBoxContainer/FPSCounter" to="." method="_on_FPSCounter_pressed"]
+[connection signal="mouse_entered" from="VideoOptions/VBoxContainer/Resolution" to="." method="_on_Resolution_mouse_entered"]
+[connection signal="pressed" from="VideoOptions/VBoxContainer/Resolution" to="." method="_on_Resolution_pressed"]
 [connection signal="mouse_entered" from="VideoOptions/VBoxContainer2/Video_Save" to="." method="_on_Video_Save_mouse_entered"]
 [connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Save" to="." method="_on_Video_Save_pressed"]
 [connection signal="mouse_entered" from="VideoOptions/VBoxContainer2/Video_Exit" to="." method="_on_Video_Exit_mouse_entered"]

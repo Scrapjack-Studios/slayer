@@ -9,7 +9,6 @@ func _ready():
     if config.load("user://config.cfg") == 7:
         # if config.cfg doesn't exist, populate it with default values
         _reset_settings()
-        print("file populated with default settings")
     elif config.load("user://config.cfg") == 0:
         _load_settings()
         _apply_settings()
@@ -161,6 +160,9 @@ func _on_Audio_Save_mouse_entered():
 
 func _on_Audio_Exit_mouse_entered():
     $Hover.play()
+    
+func _on_Resolution_mouse_entered():
+    $Hover.play()
 
 func _on_VSync_pressed():
     $Blip2.play()
@@ -180,3 +182,10 @@ func _on_FPSCounter_pressed():
 
 func _on_Mute_pressed():
     $Blip2.play()
+
+
+func _on_Resolution_pressed():
+    $Blip2.play()
+
+
+
