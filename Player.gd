@@ -45,13 +45,25 @@ var stopped_fire = false
 var burst_loop = 0
 var shots_fired_auto = 0
 var shot = false
+
+var gun_shotgun
+var gun_assaultrifle
+var gun_pistol
+var gun_revolver
+var gun_m1
+var gun_supershotty
+
+
 func _ready():
     health = start_health
     emit_signal("health_changed", health)
+    if gun_shotgun:
+        $Weapon/GunStats/Templates/shotgun.activate()
+    
     
 func _input(event: InputEvent) -> void:
     
-    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_burst:
+    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
         can_shoot = false
         $Weapon/GunStats._BulletPostition()
         var GunTimer = Timer.new()
@@ -63,7 +75,8 @@ func _input(event: InputEvent) -> void:
         GunTimer.queue_free()
         can_shoot = true
         
-    while event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_burst: 
+    while event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_burst_fire: 
+        print("SNAZZY")
         $Weapon/GunStats._BulletPostition()
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
@@ -82,8 +95,8 @@ func _input(event: InputEvent) -> void:
             stopped_fire = false
     
                
-    for x in range(0, get_node("Weapon/GunStats").burst_ammount):
-        if event.is_action_pressed("tank_fire") and can_shoot and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and $Weapon/GunStats.is_burst:
+    for _x in range(0, get_node("Weapon/GunStats").burst_ammount):
+        if event.is_action_pressed("tank_fire") and can_shoot and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and $Weapon/GunStats.is_burst_fire:
             burst_loop +=1
             can_shoot = false
             $Weapon/GunStats._BulletPostition()
@@ -96,11 +109,16 @@ func _input(event: InputEvent) -> void:
             can_shoot = true
             if burst_loop == get_node("Weapon/GunStats").burst_ammount:
                 can_shoot = false
-                $Weapon/GunStats._GunTimer()
+                var t2 = Timer.new()
+                t2.set_wait_time(0.1)
+                t2.set_one_shot(true)
+                self.add_child(t2)
+                t2.start()
+                yield(t2, "timeout")
                 can_shoot = true
                 burst_loop = 0
     
-    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_burst:
+    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun and not $Weapon/GunStats.is_semi_auto and not $Weapon/GunStats.is_automatic and not $Weapon/GunStats.is_burst_fire:
         can_shoot = false
         $Weapon/GunStats._BulletPostition()
         var GunTimer = Timer.new()

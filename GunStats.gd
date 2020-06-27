@@ -3,38 +3,35 @@ extends Node2D
 export (PackedScene) var Bullet
 export (int) var dmg
 
-export (bool) var is_automatic
-export (bool) var is_burst
-export (bool) var is_semi_auto
-#only of these can be set to true
+var is_automatic
+var is_burst_fire
+var is_semi_auto
+var shotgun
 
 
-export (bool) var shotgun
-#does nothing at the moment
-
-export (float) var cool_down
+var cool_down = 0.5
 #cool_down time for each shot, could also be reload time and effects the time in betwene shots of auto fire
 
-export (int) var burst_ammount
+var burst_ammount = 3
 #how many bullets are shot in one burst
 
-export (int) var auto_mag
+var auto_mag = 60
 
-export (Vector2) var bullet_size
+var bullet_size = Vector2(0.3,0.3)
 #default is 0.2
 
-export (int) var bullet_speed
+var bullet_speed = 3000
 #velocity of bullet
 
 var bullet_lifetime
 
-export (Texture) var weapon_sprite
+var weapon_sprite = load("res://Shotgun.png")
 #Weapon sprite duh
 
-export (Vector2) var weapon_size
+var weapon_size = Vector2(2,2)
 #weapon size
 
-export (Vector2) var weapon_position
+var weapon_position = Vector2(0,0)
 #weapon location
 var shot = false    
 
@@ -42,31 +39,16 @@ var assault_sound
 var combat_shotgun_sound
 var super_shotgun_sound
 var pistol_sound
-
-export (int) var sound
-
-func _ready():
-    if sound == 1:
-        assault_sound = true
-    if sound == 2:
-        combat_shotgun_sound = true
-    if sound == 3:
-        super_shotgun_sound = true
-    if sound == 4:
-        pistol_sound = true
-
+        
     
-func readyfire(is_auto, is_shotgun, is_burst, is_semi):
-    is_automatic = is_auto
-    shotgun = is_shotgun
-    is_burst = is_burst
-    is_semi_auto = is_semi
-
+    
 func _BulletPostition():
+    print("SNAYSNAY")
     var b = Bullet.instance()
     b.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
     $Bullets.add_child(b)
     shot = true
+    
     if shotgun:
         var c = Bullet.instance()
         var d = Bullet.instance()
