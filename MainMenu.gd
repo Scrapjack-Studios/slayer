@@ -15,9 +15,8 @@ func _on_CreateGame_pressed():
 
 func _on_ShootingRange_pressed():
     $Blip1.play()
-    yield($Blip1, "finished")
-    # warning-ignore:return_value_discarded
-    get_tree().change_scene("res://maps/ShootingRange.tscn")
+    $PlayMenu.hide()
+    $SRSetup.popup()
 
 func _on_OptionsButton_pressed():
     $OptionsMenu/Buttons.set_position(Vector2(105,103))
@@ -76,3 +75,11 @@ func _on_CreateGame_mouse_entered():
 
 func _on_ShootingRange_mouse_entered():
     $Hover.play()
+
+
+func _on_StartGame_pressed():
+    $Blip1.play()
+    yield($Blip1, "finished")
+    # warning-ignore:return_value_discarded
+    get_tree().change_scene("res://maps/ShootingRange.tscn")
+
