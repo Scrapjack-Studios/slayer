@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Button2.wav-ea438798f01062e835bc01f545c123a5.sample"
+path="res://.import/menuabm.wav-dab465a30488335d4daef508c780819b.sample"
 
 [deps]
 
-source_file="res://assets/sfx/Button2.wav"
-dest_files=[ "res://.import/Button2.wav-ea438798f01062e835bc01f545c123a5.sample" ]
+source_file="res://assets/sfx/ui/menuabm.wav"
+dest_files=[ "res://.import/menuabm.wav-dab465a30488335d4daef508c780819b.sample" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Blip2.wav-3fa341f6b2f27abfa3ce595f4ff5d6b1.sample"
+path="res://.import/Button1.wav-61bd587f18440c0e03e47dc8e561da61.sample"
 
 [deps]
 
-source_file="res://assets/sfx/Blip2.wav"
-dest_files=[ "res://.import/Blip2.wav-3fa341f6b2f27abfa3ce595f4ff5d6b1.sample" ]
+source_file="res://assets/sfx/ui/Button1.wav"
+dest_files=[ "res://.import/Button1.wav-61bd587f18440c0e03e47dc8e561da61.sample" ]
 
 [params]
 

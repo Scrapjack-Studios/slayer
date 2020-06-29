@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/AssaltRifle.wav-2a484f6bc7c83ec8d9dcc9faebc87fb2.sample"
+path="res://.import/Blip2.wav-41fbde57878fbf62819186ec152d98d7.sample"
 
 [deps]
 
-source_file="res://weapons/AssaltRifle.wav"
-dest_files=[ "res://.import/AssaltRifle.wav-2a484f6bc7c83ec8d9dcc9faebc87fb2.sample" ]
+source_file="res://assets/sfx/ui/Blip2.wav"
+dest_files=[ "res://.import/Blip2.wav-41fbde57878fbf62819186ec152d98d7.sample" ]
 
 [params]
 

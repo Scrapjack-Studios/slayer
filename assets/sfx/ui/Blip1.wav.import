@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Hover.wav-dbcfce4fba4a4dc5a829388b0b3d8488.sample"
+path="res://.import/Blip1.wav-e789f4593d2d115aec084c9717ac6468.sample"
 
 [deps]
 
-source_file="res://assets/sfx/Hover.wav"
-dest_files=[ "res://.import/Hover.wav-dbcfce4fba4a4dc5a829388b0b3d8488.sample" ]
+source_file="res://assets/sfx/ui/Blip1.wav"
+dest_files=[ "res://.import/Blip1.wav-e789f4593d2d115aec084c9717ac6468.sample" ]
 
 [params]
 

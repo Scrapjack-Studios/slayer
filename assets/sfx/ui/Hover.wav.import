@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/menuabm.wav-ff6aa83f8fc1d23f2e0901db9f3c69f3.sample"
+path="res://.import/Hover.wav-0f011a2e93871ac5d02b615a1e3f7ea1.sample"
 
 [deps]
 
-source_file="res://assets/sfx/menuabm.wav"
-dest_files=[ "res://.import/menuabm.wav-ff6aa83f8fc1d23f2e0901db9f3c69f3.sample" ]
+source_file="res://assets/sfx/ui/Hover.wav"
+dest_files=[ "res://.import/Hover.wav-0f011a2e93871ac5d02b615a1e3f7ea1.sample" ]
 
 [params]
 
