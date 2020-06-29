@@ -1,6 +1,6 @@
 extends Node
 
-export (PackedScene) var GunStats
+#export (PackedScene) var GunStats
 
 #should set values in res://GunStats.gd
 

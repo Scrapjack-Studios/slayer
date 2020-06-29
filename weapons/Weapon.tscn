@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
@@ -8,8 +8,6 @@
 [ext_resource path="res://assets/sfx/weapons/CombatShotgunFire.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sfx/weapons/AssaultRifleFire.wav" type="AudioStream" id=8]
 [ext_resource path="res://weapons/weapon_templates/Shotgun_T.gd" type="Script" id=9]
-[ext_resource path="res://weapons/GunStats.tscn" type="PackedScene" id=10]
-
 
 [node name="Weapon" type="Sprite"]
 use_parent_material = true
@@ -41,7 +39,6 @@ dmg = 5
 
 [node name="shotgun" type="Node2D" parent="GunStats/Templates"]
 script = ExtResource( 9 )
-GunStats = ExtResource( 10 )
 
 [node name="Sounds" type="Node2D" parent="GunStats"]
 
