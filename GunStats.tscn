@@ -6,7 +6,6 @@
 [ext_resource path="res://GunStats.gd" type="Script" id=5]
 [ext_resource path="res://assets/sfx/weapons/CombatShotgunFire.wav" type="AudioStream" id=7]
 
-
 [node name="GunStats" type="Node2D"]
 script = ExtResource( 5 )
 Bullet = ExtResource( 3 )

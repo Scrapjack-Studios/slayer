@@ -25,7 +25,7 @@ var bullet_speed = 3000
 
 var bullet_lifetime
 
-var weapon_sprite = load("res://Shotgun.png")
+var weapon_sprite = load("res://assets/sprites/weapons/Shotgun.png")
 #Weapon sprite duh
 
 var weapon_size = Vector2(2,2)

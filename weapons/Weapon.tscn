@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://GunStats.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
 [ext_resource path="res://Weapon_Sprite.gd" type="Script" id=4]
 [ext_resource path="res://assets/sfx/weapons/PistolFire.wav" type="AudioStream" id=5]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
@@ -20,6 +21,7 @@ region_rect = Rect2( 199, 36, 60, 24 )
 [node name="Weapon_Sprite" type="Sprite" parent="."]
 position = Vector2( 22.2715, 5.11179 )
 scale = Vector2( 2.38016, 2.48963 )
+texture = ExtResource( 2 )
 centered = false
 offset = Vector2( -20, -5 )
 script = ExtResource( 4 )
