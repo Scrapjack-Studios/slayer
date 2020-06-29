@@ -6,7 +6,8 @@
 [ext_resource path="res://assets/bulletBlue2_outline.png" type="Texture" id=4]
 [ext_resource path="res://assets/bulletRed2_outline.png" type="Texture" id=5]
 [ext_resource path="res://assets/bulletDark1_outline.png" type="Texture" id=6]
-[ext_resource path="res://weapons/Pistol.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sfx/weapons/PistolFire.wav" type="AudioStream" id=7]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.1997, 1.72481 )

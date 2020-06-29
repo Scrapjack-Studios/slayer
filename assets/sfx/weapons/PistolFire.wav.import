@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Pistol.wav-cb2160b3a4496edde0c31f8a8e9eff58.sample"
+path="res://.import/PistolFire.wav-d872de92c470f5b86a036423a0da51f1.sample"
 
 [deps]
 
-source_file="res://weapons/Pistol.wav"
-dest_files=[ "res://.import/Pistol.wav-cb2160b3a4496edde0c31f8a8e9eff58.sample" ]
+source_file="res://assets/sfx/weapons/PistolFire.wav"
+dest_files=[ "res://.import/PistolFire.wav-d872de92c470f5b86a036423a0da51f1.sample" ]
 
 [params]
 
