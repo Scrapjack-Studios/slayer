@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://GunStats.gd" type="Script" id=1]
-[ext_resource path="res://Weapon_Fire.gd" type="Script" id=3]
 [ext_resource path="res://Weapon_Sprite.gd" type="Script" id=4]
 [ext_resource path="res://weapons/weapon_sounds/Pistol.wav" type="AudioStream" id=5]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
@@ -45,7 +44,6 @@ GunStats = ExtResource( 10 )
 
 [node name="Assault_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
 stream = ExtResource( 8 )
-script = ExtResource( 3 )
 
 [node name="Pistol_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
 stream = ExtResource( 5 )

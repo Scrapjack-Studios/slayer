@@ -1,25 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Shotgun.png" type="Texture" id=1]
 [ext_resource path="res://weapons/AssaltRifle.wav" type="AudioStream" id=2]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://weapons/Pistol.wav" type="AudioStream" id=4]
 [ext_resource path="res://GunStats.gd" type="Script" id=5]
-[ext_resource path="res://Weapon_Fire.gd" type="Script" id=6]
 [ext_resource path="res://weapons/CombatShotGun.wav" type="AudioStream" id=7]
 
 [node name="GunStats" type="Node2D"]
 script = ExtResource( 5 )
 Bullet = ExtResource( 3 )
 dmg = 5
-cool_down = 1.0
-burst_ammount = 2
-auto_mag = 30
-bullet_size = Vector2( 0.2, 0.2 )
-bullet_speed = 2500
-weapon_sprite = ExtResource( 1 )
-weapon_size = Vector2( 3, 3 )
-sound = 2
 
 [node name="Bullets" type="Node" parent="."]
 
@@ -27,7 +17,6 @@ sound = 2
 
 [node name="Assault_fire" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 2 )
-script = ExtResource( 6 )
 
 [node name="Pistol_fire" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 4 )
