@@ -160,28 +160,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Weapon1" type="Button" parent="SRSetup/VBoxContainer2"]
+[node name="Weapon1" type="OptionButton" parent="SRSetup/VBoxContainer2"]
 margin_right = 326.0
 margin_bottom = 26.0
-text = "Weapon 1"
+text = "Shotgun"
+items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null ]
+selected = 0
 
-[node name="Weapon2" type="Button" parent="SRSetup/VBoxContainer2"]
-margin_top = 38.0
+[node name="Weapon2" type="OptionButton" parent="SRSetup/VBoxContainer2"]
 margin_right = 326.0
-margin_bottom = 64.0
-text = "Weapon 2"
+margin_bottom = 26.0
+text = "Shotgun"
+items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null ]
+selected = 0
 
-[node name="Weapon3" type="Button" parent="SRSetup/VBoxContainer2"]
-margin_top = 76.0
+[node name="Weapon3" type="OptionButton" parent="SRSetup/VBoxContainer2"]
 margin_right = 326.0
-margin_bottom = 102.0
-text = "Weapon 3"
+margin_bottom = 26.0
+text = "Shotgun"
+items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null ]
+selected = 0
 
-[node name="Weapon4" type="Button" parent="SRSetup/VBoxContainer2"]
-margin_top = 114.0
+[node name="Weapon4" type="OptionButton" parent="SRSetup/VBoxContainer2"]
 margin_right = 326.0
-margin_bottom = 140.0
-text = "Weapon 4"
+margin_bottom = 26.0
+text = "Shotgun"
+items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null ]
+selected = 0
 
 [node name="StartGame" type="Button" parent="SRSetup/VBoxContainer2"]
 margin_top = 152.0
