@@ -246,8 +246,8 @@ func _physics_process(delta):
     else:
         can_walljump = true
     
-    if $Wall_Raycasts/Upper_Detect.is_colliding() or $Wall_Raycasts/Upper_Detect_Left.is_colliding() or $Wall_Raycasts/Upper_Detect_Right.is_colliding():
-        _HeadBump()
+#    if $Wall_Raycasts/Upper_Detect.is_colliding() or $Wall_Raycasts/Upper_Detect_Left.is_colliding() or $Wall_Raycasts/Upper_Detect_Right.is_colliding():
+#        _HeadBump()
         
 func _WallMount():
     velocity.y = lerp(velocity.y,0,0.3)

@@ -124,20 +124,6 @@ scale = Vector2( 1.00532, 0.102961 )
 enabled = true
 collide_with_areas = true
 
-[node name="Upper_Detect_Left" type="RayCast2D" parent="Wall_Raycasts"]
-position = Vector2( -21.1638, -32.3429 )
-rotation = 2.47325
-scale = Vector2( 1.00532, 0.102961 )
-enabled = true
-collide_with_areas = true
-
-[node name="Upper_Detect_Right" type="RayCast2D" parent="Wall_Raycasts"]
-position = Vector2( 13.1231, -32.4592 )
-rotation = 3.79792
-scale = Vector2( 1.00532, 0.102961 )
-enabled = true
-collide_with_areas = true
-
 [node name="Whip" type="PinJoint2D" parent="."]
 position = Vector2( -13.2539, 3.38521 )
 node_a = NodePath("..")
