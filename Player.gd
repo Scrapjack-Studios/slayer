@@ -60,9 +60,12 @@ func _ready():
     gun_shotgun = true
     health = start_health
     emit_signal("health_changed", health)
-    if gun_shotgun:
+    if $"/root/WeaponVariables".shotgun:
         $Weapon/GunStats/Templates/shotgun.activate()
-    
+    if $"/root/WeaponVariables".assault_rifle:
+        $Weapon/GunStats/Templates/assault_rifle.activate()
+    if $"/root/WeaponVariables".pistol:
+        $Weapon/GunStats/Templates/pistol.activate()
     
 func _input(event: InputEvent) -> void:
     
@@ -80,6 +83,7 @@ func _input(event: InputEvent) -> void:
         
     while event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
         $Weapon/GunStats._BulletPostition()
+        stopped_fire = false
         var GunTimer = Timer.new()
         GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
         GunTimer.set_one_shot(true)
@@ -107,7 +111,10 @@ func _input(event: InputEvent) -> void:
         yield(GunTimer, "timeout")
         GunTimer.queue_free()
         can_shoot = true       
-        
+    
+    if event.is_action_released("tank_fire"):
+        stopped_fire = true
+     
     if event.is_action_pressed("Graphook") and can_grapple:
         rotation = 0
         # We clicked the mouse -> shoot()

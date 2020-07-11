@@ -24,6 +24,7 @@ config/icon="res://assets/icon.png"
 OptionsMenu="*res://menus/OptionsMenu.tscn"
 FullscreenCRT="*res://misc/FullscreenCRT.tscn"
 FPSCounter="*res://misc/FPSCounter.tscn"
+WeaponVariables="*res://weapons/Weapon_Variables.gd"
 
 [display]
 
