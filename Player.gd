@@ -57,6 +57,12 @@ var gun_supershotty
 
 
 func _ready():
+    if $"/root/WeaponVariables".weapon1 == "shotgun":
+        $Weapon/GunStats/Templates/shotgun.activate()
+    if $"/root/WeaponVariables".weapon1 == "assault_rifle":
+        $Weapon/GunStats/Templates/assault_rifle.activate()
+    if $"/root/WeaponVariables".weapon1 == "pistol":
+        $Weapon/GunStats/Templates/pistol.activate()
     gun_shotgun = true
     health = start_health
     emit_signal("health_changed", health)
@@ -136,6 +142,30 @@ func _input(event: InputEvent) -> void:
         if $"/root/WeaponVariables".weapon1 == "assault_rifle":
             $Weapon/GunStats/Templates/assault_rifle.activate()
         if $"/root/WeaponVariables".weapon1 == "pistol":
+            $Weapon/GunStats/Templates/pistol.activate()
+            
+    if event.is_action_pressed("Weapon2"):
+        if $"/root/WeaponVariables".weapon2 == "shotgun":
+            $Weapon/GunStats/Templates/shotgun.activate()
+        if $"/root/WeaponVariables".weapon2 == "assault_rifle":
+            $Weapon/GunStats/Templates/assault_rifle.activate()
+        if $"/root/WeaponVariables".weapon2 == "pistol":
+            $Weapon/GunStats/Templates/pistol.activate()
+            
+    if event.is_action_pressed("Weapon3"):
+        if $"/root/WeaponVariables".weapon3 == "shotgun":
+            $Weapon/GunStats/Templates/shotgun.activate()
+        if $"/root/WeaponVariables".weapon3 == "assault_rifle":
+            $Weapon/GunStats/Templates/assault_rifle.activate()
+        if $"/root/WeaponVariables".weapon3 == "pistol":
+            $Weapon/GunStats/Templates/pistol.activate()
+    
+    if event.is_action_pressed("Weapon4"):
+        if $"/root/WeaponVariables".weapon4 == "shotgun":
+            $Weapon/GunStats/Templates/shotgun.activate()
+        if $"/root/WeaponVariables".weapon4 == "assault_rifle":
+            $Weapon/GunStats/Templates/assault_rifle.activate()
+        if $"/root/WeaponVariables".weapon4 == "pistol":
             $Weapon/GunStats/Templates/pistol.activate()
         
 func _physics_process(delta):

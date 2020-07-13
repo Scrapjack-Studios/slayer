@@ -171,21 +171,21 @@ selected = 0
 margin_right = 326.0
 margin_bottom = 26.0
 text = "Shotgun"
-items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null ]
+items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null, "Pistol", null, false, 2, null ]
 selected = 0
 
 [node name="Weapon3" type="OptionButton" parent="SRSetup/VBoxContainer2"]
 margin_right = 326.0
 margin_bottom = 26.0
 text = "Shotgun"
-items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null ]
+items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null, "Pistol", null, false, 2, null ]
 selected = 0
 
 [node name="Weapon4" type="OptionButton" parent="SRSetup/VBoxContainer2"]
 margin_right = 326.0
 margin_bottom = 26.0
 text = "Shotgun"
-items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null ]
+items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null, "Pistol", null, false, 2, null ]
 selected = 0
 
 [node name="StartGame" type="Button" parent="SRSetup/VBoxContainer2"]

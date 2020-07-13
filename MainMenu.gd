@@ -85,6 +85,28 @@ func _on_StartGame_pressed():
         $"/root/WeaponVariables".weapon1 = "assault_rifle"
     if $SRSetup/VBoxContainer2/Weapon1.selected == 2:
         $"/root/WeaponVariables".weapon1 = "pistol"
+        
+    if $SRSetup/VBoxContainer2/Weapon2.selected == 0:
+        $"/root/WeaponVariables".weapon2 = "shotgun"
+    if $SRSetup/VBoxContainer2/Weapon2.selected == 1:
+        $"/root/WeaponVariables".weapon2 = "assault_rifle"
+    if $SRSetup/VBoxContainer2/Weapon2.selected == 2:
+        $"/root/WeaponVariables".weapon2 = "pistol"
+        
+    if $SRSetup/VBoxContainer2/Weapon3.selected == 0:
+        $"/root/WeaponVariables".weapon3 = "shotgun"
+    if $SRSetup/VBoxContainer2/Weapon3.selected == 1:
+        $"/root/WeaponVariables".weapon3 = "assault_rifle"
+    if $SRSetup/VBoxContainer2/Weapon3.selected == 2:
+        $"/root/WeaponVariables".weapon3 = "pistol"
+        
+    if $SRSetup/VBoxContainer2/Weapon4.selected == 0:
+        $"/root/WeaponVariables".weapon4 = "shotgun"
+    if $SRSetup/VBoxContainer2/Weapon4.selected == 1:
+        $"/root/WeaponVariables".weapon4 = "assault_rifle"
+    if $SRSetup/VBoxContainer2/Weapon4.selected == 2:
+        $"/root/WeaponVariables".weapon4 = "pistol"
+    
     yield($Blip1, "finished")
     # warning-ignore:return_value_discarded
     get_tree().change_scene("res://maps/ShootingRange.tscn")
