@@ -1,7 +1,6 @@
 extends Node
 
-
-var shotgun
-var assault_rifle
-var pistol
-
+var weapon1
+var weapon2
+var weapon3
+var weapon4

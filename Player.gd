@@ -60,12 +60,6 @@ func _ready():
     gun_shotgun = true
     health = start_health
     emit_signal("health_changed", health)
-    if $"/root/WeaponVariables".shotgun:
-        $Weapon/GunStats/Templates/shotgun.activate()
-    if $"/root/WeaponVariables".assault_rifle:
-        $Weapon/GunStats/Templates/assault_rifle.activate()
-    if $"/root/WeaponVariables".pistol:
-        $Weapon/GunStats/Templates/pistol.activate()
     
 func _input(event: InputEvent) -> void:
     
@@ -135,6 +129,14 @@ func _input(event: InputEvent) -> void:
     if jump_count < MAX_JUMP_COUNT and event.is_action_pressed("jump"):
         velocity.y = -jump_strength
         jump_count += 1
+        
+    if event.is_action_pressed("Weapon1"):
+        if $"/root/WeaponVariables".weapon1 == "shotgun":
+            $Weapon/GunStats/Templates/shotgun.activate()
+        if $"/root/WeaponVariables".weapon1 == "assault_rifle":
+            $Weapon/GunStats/Templates/assault_rifle.activate()
+        if $"/root/WeaponVariables".weapon1 == "pistol":
+            $Weapon/GunStats/Templates/pistol.activate()
         
 func _physics_process(delta):
     var mpos = get_global_mouse_position()

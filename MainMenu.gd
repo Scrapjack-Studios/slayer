@@ -80,11 +80,11 @@ func _on_ShootingRange_mouse_entered():
 func _on_StartGame_pressed():
     $Blip1.play()
     if $SRSetup/VBoxContainer2/Weapon1.selected == 0:
-        $"/root/WeaponVariables".shotgun = true
+        $"/root/WeaponVariables".weapon1 = "shotgun"
     if $SRSetup/VBoxContainer2/Weapon1.selected == 1:
-        $"/root/WeaponVariables".assault_rifle = true
+        $"/root/WeaponVariables".weapon1 = "assault_rifle"
     if $SRSetup/VBoxContainer2/Weapon1.selected == 2:
-        $"/root/WeaponVariables".pistol = true
+        $"/root/WeaponVariables".weapon1 = "pistol"
     yield($Blip1, "finished")
     # warning-ignore:return_value_discarded
     get_tree().change_scene("res://maps/ShootingRange.tscn")
