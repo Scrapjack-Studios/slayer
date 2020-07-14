@@ -11,3 +11,4 @@ func activate():
     get_parent().get_parent().get_parent().get_node("GunStats").shotgun = false
     get_parent().get_parent().get_parent().get_node("GunStats").pistol_sound = true
     get_parent().get_parent().get_parent().get_node("GunStats").cool_down = 0.3
+    get_parent().get_parent().get_parent().get_node("GunStats").weapon_sprite = load("res://assets/sprites/weapons/Pistol.png")

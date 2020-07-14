@@ -25,7 +25,7 @@ var bullet_speed = 3000
 
 var bullet_lifetime
 
-var weapon_sprite = load("res://assets/sprites/weapons/Shotgun.png")
+var weapon_sprite
 #Weapon sprite duh
 
 var weapon_size = Vector2(2,2)
@@ -89,3 +89,8 @@ func _BulletPostition():
         if super_shotgun_sound:
             $Sounds/SuperShotgun_fire.play()
             shot = false
+
+func set_sprite():
+    get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
+    get_parent().get_node("Weapon_Sprite").scale = get_parent().get_node("GunStats").weapon_size
+    get_parent().get_node("Weapon_Sprite").position = get_parent().get_node("GunStats").weapon_position
