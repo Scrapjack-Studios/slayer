@@ -2,15 +2,15 @@ extends Control
 
 func _process(_delta):
     if Input.is_action_just_released("pause_menu") and get_tree().paused == false:
-        $PopupMenu.popup()
+        self.show()
         pause_game()
     elif Input.is_action_just_released("pause_menu") and get_tree().paused == true and get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").visible == false:
-        $PopupMenu.hide()
+        self.hide()
         get_parent().get_parent().get_node("Player").get_node("Chain").release()
         resume_game()
 
 func _on_Resume_pressed():
-    $PopupMenu.hide()
+    self.hide()
     resume_game()
     $Blip1.play()
 
