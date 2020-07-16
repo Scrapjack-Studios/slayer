@@ -7,6 +7,7 @@ func _on_PlayButton_pressed():
     $SRSetup.hide()
     $OptionsMenu.hide()
     $OptionsMenu/VideoOptions.hide()
+    $OptionsMenu/AudioOptions.hide()
     $PlayMenu.show()
     $Button2.play()
     
@@ -25,6 +26,7 @@ func _on_OptionsButton_pressed():
     $PlayMenu.hide()
     $SRSetup.hide()
     $OptionsMenu/VideoOptions.hide()
+    $OptionsMenu/AudioOptions.hide()
     $OptionsMenu/Buttons.set_position(Vector2(105,103))
     $OptionsMenu/Buttons.set_size(Vector2(959,869))
     $OptionsMenu/Buttons.anchor_left = 0.055
@@ -59,7 +61,6 @@ func _on_OptionsButton_pressed():
     $OptionsMenu/AudioOptions.margin_top = 0
     $OptionsMenu/AudioOptions.margin_right = 0
     $OptionsMenu/AudioOptions.margin_bottom = 0
-    $OptionsMenu/AudioOptions.set_exclusive(false)
     $OptionsMenu/AudioOptions/Panel.hide()
     
     $OptionsMenu.show()

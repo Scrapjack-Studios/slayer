@@ -91,7 +91,8 @@ func _on_Video_pressed():
 
 func _on_Audio_pressed():
     $Blip1.play()
-    $AudioOptions.popup()
+    $Buttons.hide()
+    $AudioOptions.show()
 
 func _on_Video_Exit_pressed():
     $Blip1.play()

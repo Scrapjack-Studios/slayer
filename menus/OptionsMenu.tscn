@@ -194,7 +194,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AudioOptions" type="Popup" parent="."]
+[node name="AudioOptions" type="Control" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -204,10 +205,6 @@ margin_top = -238.0
 margin_right = 403.5
 margin_bottom = 238.0
 theme = ExtResource( 2 )
-popup_exclusive = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="AudioOptions"]
 anchor_right = 1.0
@@ -231,7 +228,7 @@ __meta__ = {
 
 [node name="Mute" type="CheckBox" parent="AudioOptions/VBoxContainer"]
 margin_right = 267.0
-margin_bottom = 24.0
+margin_bottom = 26.0
 text = "Mute"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="AudioOptions"]
@@ -249,13 +246,13 @@ __meta__ = {
 }
 
 [node name="Audio_Save" type="Button" parent="AudioOptions/VBoxContainer2"]
-margin_top = 397.0
+margin_top = 385.0
 margin_right = 127.0
-margin_bottom = 417.0
+margin_bottom = 411.0
 text = "Save"
 
 [node name="Audio_Exit" type="Button" parent="AudioOptions/VBoxContainer2"]
-margin_top = 421.0
+margin_top = 415.0
 margin_right = 127.0
 margin_bottom = 441.0
 text = "Back"
@@ -312,7 +309,6 @@ stream = ExtResource( 3 )
 [connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Save" to="." method="_on_Video_Save_pressed"]
 [connection signal="mouse_entered" from="VideoOptions/VBoxContainer2/Video_Exit" to="." method="_on_Video_Exit_mouse_entered"]
 [connection signal="pressed" from="VideoOptions/VBoxContainer2/Video_Exit" to="." method="_on_Video_Exit_pressed"]
-[connection signal="about_to_show" from="AudioOptions" to="." method="_on_AudioOptions_about_to_show"]
 [connection signal="mouse_entered" from="AudioOptions/VBoxContainer/Mute" to="." method="_on_Mute_mouse_entered"]
 [connection signal="pressed" from="AudioOptions/VBoxContainer/Mute" to="." method="_on_Mute_pressed"]
 [connection signal="mouse_entered" from="AudioOptions/VBoxContainer2/Audio_Save" to="." method="_on_Audio_Save_mouse_entered"]
