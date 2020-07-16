@@ -61,3 +61,8 @@ stream = ExtResource( 7 )
 stream = ExtResource( 7 )
 
 [node name="Bullets" type="Node" parent="GunStats"]
+
+[node name="RayCast2D" type="RayCast2D" parent="GunStats"]
+rotation = -1.57101
+scale = Vector2( 1, 17.9248 )
+enabled = true

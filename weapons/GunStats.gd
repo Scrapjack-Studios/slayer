@@ -9,7 +9,6 @@ var is_semi_auto
 var shotgun
 var kickback = -500
 
-
 var cool_down = 0.5
 #cool_down time for each shot, could also be reload time and effects the time in betwene shots of auto fire
 
@@ -48,7 +47,8 @@ func _BulletPostition():
     b.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
     $Bullets.add_child(b)
     shot = true
-    get_parent().get_parent().Kickback(kickback)
+    if $RayCast2D.is_colliding():
+        get_parent().get_parent().Kickback(kickback)
     
     if shotgun:
         var c = Bullet.instance()
