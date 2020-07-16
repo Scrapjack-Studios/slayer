@@ -47,7 +47,6 @@ var stopped_fire = false
 var burst_loop = 0
 var shots_fired_auto = 0
 var shot = false
-
 var gun_shotgun
 var gun_assaultrifle
 var gun_pistol
@@ -116,7 +115,8 @@ func _input(event: InputEvent) -> void:
     
     if event.is_action_released("tank_fire"):
         stopped_fire = true
-     
+        connect("bullet_collided", Bullet, "on_bullet_collided")
+        
     if event.is_action_pressed("Graphook") and can_grapple:
         rotation = 0
         # We clicked the mouse -> shoot()
@@ -314,7 +314,9 @@ func _WallMount():
         jump_strength = 750
     if velocity.y > 0:
         rotation = 0
-        
+    
+func Kickback(kickback):
+    velocity = Vector2(kickback, 0).rotated($Weapon.global_rotation)
 func _MantelRight():
     velocity.x = +CLIMB_AMOUNT
     velocity.y = -CLIMB_SPEED
@@ -361,3 +363,4 @@ func _HeadBump():
     yield(t, "timeout")
     $Blur.hide()
     t.queue_free()
+

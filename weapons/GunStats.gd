@@ -7,6 +7,7 @@ var is_automatic
 var is_burst_fire
 var is_semi_auto
 var shotgun
+var kickback = -500
 
 
 var cool_down = 0.5
@@ -14,6 +15,7 @@ var cool_down = 0.5
 
 var burst_ammount = 3
 #how many bullets are shot in one burst
+
 
 var auto_mag = 60
 
@@ -38,8 +40,7 @@ var shot = false
 var assault_sound
 var combat_shotgun_sound
 var super_shotgun_sound
-var pistol_sound
-        
+var pistol_sound  
     
     
 func _BulletPostition():
@@ -47,6 +48,7 @@ func _BulletPostition():
     b.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
     $Bullets.add_child(b)
     shot = true
+    get_parent().get_parent().Kickback(kickback)
     
     if shotgun:
         var c = Bullet.instance()
