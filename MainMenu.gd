@@ -4,7 +4,7 @@ func _ready():
     pass
 
 func _on_PlayButton_pressed():
-    $PlayMenu.popup()
+    $PlayMenu.show()
     $Button2.play()
     
 func _on_JoinGame_pressed():
@@ -19,6 +19,7 @@ func _on_ShootingRange_pressed():
     $SRSetup.popup()
 
 func _on_OptionsButton_pressed():
+    $PlayMenu.hide()
     $OptionsMenu/Buttons.set_position(Vector2(105,103))
     $OptionsMenu/Buttons.set_size(Vector2(959,869))
     $OptionsMenu/Buttons.anchor_left = 0.055

@@ -33,6 +33,7 @@ margin_left = -0.600006
 margin_top = 0.239998
 margin_right = -0.599976
 margin_bottom = 0.839905
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -86,7 +87,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayMenu" type="Popup" parent="."]
+[node name="PlayMenu" type="Control" parent="."]
+visible = false
 anchor_left = 0.055
 anchor_top = 0.095
 anchor_right = 0.554
@@ -95,9 +97,6 @@ margin_left = -0.600006
 margin_top = 0.399994
 margin_right = 0.319946
 margin_bottom = -6.10352e-05
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayMenu"]
 anchor_left = 0.038
