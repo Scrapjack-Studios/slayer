@@ -113,8 +113,8 @@ func _input(event: InputEvent) -> void:
     
     if event.is_action_released("tank_fire"):
         stopped_fire = true
-#        connect("bullet_collided", Bullet, "on_bullet_collided")
-        
+        #connect("bullet_collided", Bullet, "on_bullet_collided")
+
     if event.is_action_pressed("Graphook") and can_grapple:
         rotation = 0
         # We clicked the mouse -> shoot()
