@@ -47,12 +47,6 @@ var stopped_fire = false
 var burst_loop = 0
 var shots_fired_auto = 0
 var shot = false
-var gun_shotgun
-var gun_assaultrifle
-var gun_pistol
-var gun_revolver
-var gun_m1
-var gun_supershotty
 
 
 func _ready():
@@ -65,6 +59,10 @@ func _ready():
     if $"/root/WeaponVariables".weapon1 == "pistol":
         $Weapon/GunStats/Templates/pistol.activate()
         $Weapon/GunStats.set_sprite()
+    if $"/root/WeaponVariables".weapon1 == "m1":
+        $Weapon/GunStats/Templates/m1.activate()
+        $Weapon/GunStats.set_sprite()
+        
     health = start_health
     emit_signal("health_changed", health)
     
@@ -115,7 +113,7 @@ func _input(event: InputEvent) -> void:
     
     if event.is_action_released("tank_fire"):
         stopped_fire = true
-        connect("bullet_collided", Bullet, "on_bullet_collided")
+#        connect("bullet_collided", Bullet, "on_bullet_collided")
         
     if event.is_action_pressed("Graphook") and can_grapple:
         rotation = 0

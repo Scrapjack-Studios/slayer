@@ -37,7 +37,7 @@ var weapon_position = Vector2(0,0)
 var shot = false    
 
 var assault_sound
-var combat_shotgun_sound
+var m1_sound
 var super_shotgun_sound
 var pistol_sound  
     
@@ -85,8 +85,8 @@ func _BulletPostition():
         if pistol_sound:
             $Sounds/Pistol_fire.play()
             shot = false
-        if combat_shotgun_sound:
-            $Sounds/CombatShotgun_fire.play()
+        if m1_sound:
+            $Sounds/M1_fire.play()
             shot = false
         if super_shotgun_sound:
             $Sounds/SuperShotgun_fire.play()
