@@ -4,10 +4,18 @@ func _process(_delta):
     if Input.is_action_just_released("pause_menu") and get_tree().paused == false:
         self.show()
         pause_game()
-    elif Input.is_action_just_released("pause_menu") and get_tree().paused == true and get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").visible == false:
+    elif Input.is_action_just_released("pause_menu") and get_tree().paused == true and get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").visible == false and get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/VideoOptions").visible == false and get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/AudioOptions").visible == false:
         self.hide()
         get_parent().get_parent().get_node("Player").get_node("Chain").release()
         resume_game()
+    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").visible == true:
+        get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").hide()
+    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/VideoOptions").visible == true:
+        get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/VideoOptions").hide()
+        get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").show()
+    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/AudioOptions").visible == true:
+        get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/AudioOptions").hide()
+        get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").show()
 
 func _on_Resume_pressed():
     self.hide()
