@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/ui/MainMenu.png" type="Texture" id=1]
 [ext_resource path="res://MainMenu.gd" type="Script" id=2]
-[ext_resource path="res://menus/OptionsMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://menus/OptionsMenu.gd" type="Script" id=3]
 [ext_resource path="res://assets/ui/SlayerTheme.tres" type="Theme" id=4]
 [ext_resource path="res://assets/shaders/CRTShader.tres" type="Material" id=5]
 [ext_resource path="res://assets/sfx/ui/Hover.wav" type="AudioStream" id=6]
@@ -194,7 +194,7 @@ margin_right = 326.0
 margin_bottom = 178.0
 text = "Start Game"
 
-[node name="OptionsMenu" parent="." instance=ExtResource( 3 )]
+[node name="OptionsMenu" type="Control" parent="."]
 visible = false
 anchor_left = 0.055
 anchor_top = 0.098
@@ -204,6 +204,243 @@ margin_left = 0.399994
 margin_top = 0.159996
 margin_right = 0.400024
 margin_bottom = 0.439941
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="OptionsMenu"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/Buttons"]
+anchor_left = 0.026
+anchor_top = 0.042
+anchor_right = 0.239
+anchor_bottom = 0.958
+margin_left = 0.0179996
+margin_top = 0.00799942
+margin_right = 0.126999
+margin_bottom = -0.00799561
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Video" type="Button" parent="OptionsMenu/Buttons/VBoxContainer"]
+margin_right = 204.0
+margin_bottom = 26.0
+text = "Video"
+
+[node name="Audio" type="Button" parent="OptionsMenu/Buttons/VBoxContainer"]
+margin_top = 30.0
+margin_right = 204.0
+margin_bottom = 56.0
+text = "Audio"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="OptionsMenu/Buttons"]
+anchor_left = 0.823
+anchor_top = 0.027
+anchor_right = 0.981
+anchor_bottom = 0.954
+margin_left = -0.161011
+margin_top = 0.148
+margin_right = 0.332947
+margin_bottom = -0.104004
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reset" type="Button" parent="OptionsMenu/Buttons/VBoxContainer2"]
+margin_top = 753.0
+margin_right = 152.0
+margin_bottom = 779.0
+text = "Reset"
+
+[node name="Reset_Confirmation" type="ConfirmationDialog" parent="OptionsMenu/Buttons/VBoxContainer2/Reset"]
+anchor_left = -1.917
+anchor_top = -8.55
+anchor_right = -1.917
+anchor_bottom = -8.55
+margin_left = -111.541
+margin_top = -46.0
+margin_right = 111.459
+margin_bottom = 46.0
+popup_exclusive = true
+dialog_text = "Are you sure you want to reset your settings? This cannot be undone."
+dialog_autowrap = true
+
+[node name="Exit" type="Button" parent="OptionsMenu/Buttons/VBoxContainer2"]
+margin_top = 783.0
+margin_right = 152.0
+margin_bottom = 809.0
+text = "Exit"
+
+[node name="VideoOptions" type="Control" parent="OptionsMenu"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/VideoOptions"]
+anchor_left = 0.02
+anchor_top = 0.027
+anchor_right = 0.352
+anchor_bottom = 0.954
+margin_left = -0.140001
+margin_top = 0.148
+margin_right = -0.0640259
+margin_bottom = -0.104034
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSync" type="CheckBox" parent="OptionsMenu/VideoOptions/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 26.0
+text = "V-Sync"
+
+[node name="Fullscreen" type="CheckBox" parent="OptionsMenu/VideoOptions/VBoxContainer"]
+margin_top = 30.0
+margin_right = 318.0
+margin_bottom = 56.0
+text = "Fullscreen"
+
+[node name="FullscreenCRT" type="CheckBox" parent="OptionsMenu/VideoOptions/VBoxContainer"]
+margin_top = 60.0
+margin_right = 318.0
+margin_bottom = 86.0
+text = "Fullscreen CRT Effect"
+
+[node name="FPSCounter" type="CheckBox" parent="OptionsMenu/VideoOptions/VBoxContainer"]
+margin_top = 90.0
+margin_right = 318.0
+margin_bottom = 116.0
+text = "FPS Counter"
+
+[node name="Resolution" type="OptionButton" parent="OptionsMenu/VideoOptions/VBoxContainer"]
+margin_top = 120.0
+margin_right = 318.0
+margin_bottom = 146.0
+text = "1920x1080"
+items = [ "640x480", null, false, 0, null, "1024x786", null, false, 1, null, "1280x960", null, false, 2, null, "1600x1200", null, false, 3, null, "1280x1024", null, false, 4, null, "960x540", null, false, 5, null, "1280x720", null, false, 6, null, "1366x768", null, false, 7, null, "1920x1080", null, false, 8, null, "2560x1440", null, false, 9, null, "3840x2160", null, false, 11, null, "960x600", null, false, 12, null, "1280x800", null, false, 13, null, "1440x900", null, false, 14, null, "1680x1050", null, false, 15, null, "1920x1200", null, false, 15, null ]
+selected = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="OptionsMenu/VideoOptions"]
+anchor_left = 0.823
+anchor_top = 0.027
+anchor_right = 0.981
+anchor_bottom = 0.954
+margin_left = -0.161011
+margin_top = 0.148
+margin_right = 0.332947
+margin_bottom = -0.104004
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Video_Save" type="Button" parent="OptionsMenu/VideoOptions/VBoxContainer2"]
+margin_top = 753.0
+margin_right = 152.0
+margin_bottom = 779.0
+text = "Save"
+
+[node name="Video_Exit" type="Button" parent="OptionsMenu/VideoOptions/VBoxContainer2"]
+margin_top = 783.0
+margin_right = 152.0
+margin_bottom = 809.0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioOptions" type="Control" parent="OptionsMenu"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/AudioOptions"]
+anchor_left = 0.02
+anchor_top = 0.027
+anchor_right = 0.352
+anchor_bottom = 0.954
+margin_left = -0.139999
+margin_top = 0.148
+margin_right = -0.0640259
+margin_bottom = -0.104034
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mute" type="CheckBox" parent="OptionsMenu/AudioOptions/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 26.0
+text = "Mute"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="OptionsMenu/AudioOptions"]
+anchor_left = 0.823
+anchor_top = 0.027
+anchor_right = 0.981
+anchor_bottom = 0.954
+margin_left = -0.161011
+margin_top = 0.148
+margin_right = 0.332947
+margin_bottom = -0.104004
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio_Save" type="Button" parent="OptionsMenu/AudioOptions/VBoxContainer2"]
+margin_top = 753.0
+margin_right = 152.0
+margin_bottom = 779.0
+text = "Save"
+
+[node name="Audio_Exit" type="Button" parent="OptionsMenu/AudioOptions/VBoxContainer2"]
+margin_top = 783.0
+margin_right = 152.0
+margin_bottom = 809.0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ErrorDialog" type="AcceptDialog" parent="OptionsMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -41.5
+margin_top = -29.0
+margin_right = 41.5
+margin_bottom = 29.0
+popup_exclusive = true
+window_title = "Error"
+
+[node name="Blip1" type="AudioStreamPlayer" parent="OptionsMenu"]
+stream = ExtResource( 10 )
+
+[node name="Blip2" type="AudioStreamPlayer" parent="OptionsMenu"]
+stream = ExtResource( 8 )
+
+[node name="Button1" type="AudioStreamPlayer" parent="OptionsMenu"]
+stream = ExtResource( 9 )
+
+[node name="Button2" type="AudioStreamPlayer" parent="OptionsMenu"]
+stream = ExtResource( 7 )
+
+[node name="Hover" type="AudioStreamPlayer" parent="OptionsMenu"]
+stream = ExtResource( 6 )
 
 [node name="Blip1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
@@ -233,3 +470,32 @@ autoplay = true
 [connection signal="mouse_entered" from="PlayMenu/VBoxContainer/ShootingRange" to="." method="_on_ShootingRange_mouse_entered"]
 [connection signal="pressed" from="PlayMenu/VBoxContainer/ShootingRange" to="." method="_on_ShootingRange_pressed"]
 [connection signal="pressed" from="SRSetup/VBoxContainer2/StartGame" to="." method="_on_StartGame_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/Buttons/VBoxContainer/Video" to="OptionsMenu" method="_on_Video_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/Buttons/VBoxContainer/Video" to="OptionsMenu" method="_on_Video_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/Buttons/VBoxContainer/Audio" to="OptionsMenu" method="_on_Audio_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/Buttons/VBoxContainer/Audio" to="OptionsMenu" method="_on_Audio_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/Buttons/VBoxContainer2/Reset" to="OptionsMenu" method="_on_Reset_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/Buttons/VBoxContainer2/Reset" to="OptionsMenu" method="_on_Reset_pressed"]
+[connection signal="confirmed" from="OptionsMenu/Buttons/VBoxContainer2/Reset/Reset_Confirmation" to="OptionsMenu" method="_on_Reset_Confirmation_confirmed"]
+[connection signal="mouse_entered" from="OptionsMenu/Buttons/VBoxContainer2/Exit" to="OptionsMenu" method="_on_Exit_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/Buttons/VBoxContainer2/Exit" to="OptionsMenu" method="_on_Exit_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/VideoOptions/VBoxContainer/VSync" to="OptionsMenu" method="_on_VSync_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/VideoOptions/VBoxContainer/VSync" to="OptionsMenu" method="_on_VSync_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/VideoOptions/VBoxContainer/Fullscreen" to="OptionsMenu" method="_on_Fullscreen_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/VideoOptions/VBoxContainer/Fullscreen" to="OptionsMenu" method="_on_Fullscreen_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/VideoOptions/VBoxContainer/FullscreenCRT" to="OptionsMenu" method="_on_FullscreenCRT_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/VideoOptions/VBoxContainer/FullscreenCRT" to="OptionsMenu" method="_on_FullscreenCRT_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/VideoOptions/VBoxContainer/FPSCounter" to="OptionsMenu" method="_on_FPSCounter_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/VideoOptions/VBoxContainer/FPSCounter" to="OptionsMenu" method="_on_FPSCounter_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/VideoOptions/VBoxContainer/Resolution" to="OptionsMenu" method="_on_Resolution_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/VideoOptions/VBoxContainer/Resolution" to="OptionsMenu" method="_on_Resolution_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/VideoOptions/VBoxContainer2/Video_Save" to="OptionsMenu" method="_on_Video_Save_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/VideoOptions/VBoxContainer2/Video_Save" to="OptionsMenu" method="_on_Video_Save_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/VideoOptions/VBoxContainer2/Video_Exit" to="OptionsMenu" method="_on_Video_Exit_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/VideoOptions/VBoxContainer2/Video_Exit" to="OptionsMenu" method="_on_Video_Exit_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/AudioOptions/VBoxContainer/Mute" to="OptionsMenu" method="_on_Mute_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/AudioOptions/VBoxContainer/Mute" to="OptionsMenu" method="_on_Mute_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/AudioOptions/VBoxContainer2/Audio_Save" to="OptionsMenu" method="_on_Audio_Save_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/AudioOptions/VBoxContainer2/Audio_Save" to="OptionsMenu" method="_on_Audio_Save_pressed"]
+[connection signal="mouse_entered" from="OptionsMenu/AudioOptions/VBoxContainer2/Audio_Exit" to="OptionsMenu" method="_on_Audio_Exit_mouse_entered"]
+[connection signal="pressed" from="OptionsMenu/AudioOptions/VBoxContainer2/Audio_Exit" to="OptionsMenu" method="_on_Audio_Exit_pressed"]
