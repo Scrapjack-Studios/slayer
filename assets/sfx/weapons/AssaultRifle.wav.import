@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/AssaultRifle.wav-c5ba6f0f67d126c578f291790212c04e.sample"
+
+[deps]
+
+source_file="res://assets/sfx/weapons/AssaultRifle.wav"
+dest_files=[ "res://.import/AssaultRifle.wav-c5ba6f0f67d126c578f291790212c04e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

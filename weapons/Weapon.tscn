@@ -3,11 +3,11 @@
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
 [ext_resource path="res://weapons/weapon_templates/Assault_T.gd" type="Script" id=3]
-[ext_resource path="res://assets/M1.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/sfx/weapons/PistolFire.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sfx/weapons/Combat_Shotgun.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sfx/weapons/Pistol.wav" type="AudioStream" id=5]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sfx/weapons/CombatShotgunFire.wav" type="AudioStream" id=7]
-[ext_resource path="res://assets/sfx/weapons/AssaultRifleFire.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sfx/weapons/M1.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sfx/weapons/AssaultRifle.wav" type="AudioStream" id=8]
 [ext_resource path="res://weapons/weapon_templates/Shotgun_T.gd" type="Script" id=9]
 [ext_resource path="res://weapons/weapon_templates/Pistol_T.gd" type="Script" id=10]
 [ext_resource path="res://weapons/weapon_templates/M1_T.gd" type="Script" id=11]
@@ -60,10 +60,10 @@ stream = ExtResource( 8 )
 stream = ExtResource( 5 )
 
 [node name="M1_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
-stream = ExtResource( 4 )
+stream = ExtResource( 7 )
 
 [node name="SuperShotgun_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
-stream = ExtResource( 7 )
+stream = ExtResource( 4 )
 
 [node name="Bullets" type="Node" parent="GunStats"]
 
