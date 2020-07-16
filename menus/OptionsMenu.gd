@@ -86,7 +86,8 @@ func _on_Exit_pressed():
 
 func _on_Video_pressed():
     $Blip1.play()
-    $VideoOptions.popup()
+    $Buttons.hide()
+    $VideoOptions.show()
 
 func _on_Audio_pressed():
     $Blip1.play()
@@ -120,12 +121,6 @@ func _on_Reset_Confirmation_confirmed():
     _reset_settings()
     _load_settings()
     _apply_settings()
-    
-func _on_VideoOptions_about_to_show():
-    $Buttons.hide()
-
-func _on_AudioOptions_about_to_show():
-    $Buttons.hide()
 
 func _on_Video_mouse_entered():
     $Hover.play()

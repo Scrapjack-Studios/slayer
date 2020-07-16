@@ -6,6 +6,7 @@ func _ready():
 func _on_PlayButton_pressed():
     $SRSetup.hide()
     $OptionsMenu.hide()
+    $OptionsMenu/VideoOptions.hide()
     $PlayMenu.show()
     $Button2.play()
     
@@ -23,6 +24,7 @@ func _on_ShootingRange_pressed():
 func _on_OptionsButton_pressed():
     $PlayMenu.hide()
     $SRSetup.hide()
+    $OptionsMenu/VideoOptions.hide()
     $OptionsMenu/Buttons.set_position(Vector2(105,103))
     $OptionsMenu/Buttons.set_size(Vector2(959,869))
     $OptionsMenu/Buttons.anchor_left = 0.055
@@ -45,7 +47,6 @@ func _on_OptionsButton_pressed():
     $OptionsMenu/VideoOptions.margin_top = 0
     $OptionsMenu/VideoOptions.margin_right = 0
     $OptionsMenu/VideoOptions.margin_bottom = 0
-    $OptionsMenu/VideoOptions.set_exclusive(false)
     $OptionsMenu/VideoOptions/Panel.hide()
     
     $OptionsMenu/AudioOptions.set_position(Vector2(105,103))
