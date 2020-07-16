@@ -15,7 +15,7 @@ func _on_Resume_pressed():
     $Blip1.play()
 
 func _on_Options_pressed():
-    get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").popup()
+    get_tree().get_root().get_node("Main/CanvasLayer/OptionsMenu/Buttons").show()
     $Blip1.play()
 
 func _on_Quit_MainMenu_pressed():
