@@ -91,6 +91,8 @@ func _input(event: InputEvent) -> void:
         yield(GunTimer, "timeout")
         GunTimer.queue_free()
         shots_fired_auto += 1
+        
+           
 #        if shots_fired_auto == get_node("Weapon/GunStats").auto_mag:
 #            break
 #            stopped_fire = false
@@ -98,7 +100,7 @@ func _input(event: InputEvent) -> void:
         if stopped_fire:
             break
             stopped_fire = false
-    
+          
     if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun:
         can_shoot = false
         $Weapon/GunStats._BulletPostition()
@@ -114,6 +116,7 @@ func _input(event: InputEvent) -> void:
     if event.is_action_released("tank_fire"):
         stopped_fire = true
         #connect("bullet_collided", Bullet, "on_bullet_collided")
+        
 
     if event.is_action_pressed("Graphook") and can_grapple:
         rotation = 0
