@@ -157,6 +157,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MapOptions" type="Label" parent="SRSetup/VBoxContainer2"]
+margin_right = 40.0
+margin_bottom = 22.0
+text = "Map"
+
+[node name="Map" type="OptionButton" parent="SRSetup/VBoxContainer2"]
+margin_right = 40.0
+margin_bottom = 40.0
+toggle_mode = false
+text = "Shooting Range"
+items = [ "Shooting Range", null, false, 0, null ]
+selected = 0
+
+[node name="Weapons" type="Label" parent="SRSetup/VBoxContainer2"]
+margin_right = 40.0
+margin_bottom = 22.0
+text = "Weapons"
+
 [node name="Weapon1" type="OptionButton" parent="SRSetup/VBoxContainer2"]
 margin_right = 326.0
 margin_bottom = 26.0

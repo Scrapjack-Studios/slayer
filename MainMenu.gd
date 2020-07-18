@@ -48,41 +48,45 @@ func _on_ShootingRange_mouse_entered():
 
 func _on_StartGame_pressed():
     $Blip1.play()
+    
+    if $SRSetup/VBoxContainer2/Map.selected == 0:
+        $"/root/Global".map = load("res://maps/ShootingRange.tscn")
+    
     if $SRSetup/VBoxContainer2/Weapon1.selected == 0:
-        $"/root/WeaponVariables".weapon1 = "shotgun"
+        $"/root/Global".weapon1 = "shotgun"
     if $SRSetup/VBoxContainer2/Weapon1.selected == 1:
-        $"/root/WeaponVariables".weapon1 = "assault_rifle"
+        $"/root/Global".weapon1 = "assault_rifle"
     if $SRSetup/VBoxContainer2/Weapon1.selected == 2:
-        $"/root/WeaponVariables".weapon1 = "pistol"
+        $"/root/Global".weapon1 = "pistol"
     if $SRSetup/VBoxContainer2/Weapon1.selected == 3:
-        $"/root/WeaponVariables".weapon1 = "m1"
+        $"/root/Global".weapon1 = "m1"
          
     if $SRSetup/VBoxContainer2/Weapon2.selected == 0:
-        $"/root/WeaponVariables".weapon2 = "shotgun"
+        $"/root/Global".weapon2 = "shotgun"
     if $SRSetup/VBoxContainer2/Weapon2.selected == 1:
-        $"/root/WeaponVariables".weapon2 = "assault_rifle"
+        $"/root/Global".weapon2 = "assault_rifle"
     if $SRSetup/VBoxContainer2/Weapon2.selected == 2:
-        $"/root/WeaponVariables".weapon2 = "pistol"
+        $"/root/Global".weapon2 = "pistol"
     if $SRSetup/VBoxContainer2/Weapon2.selected == 3:
-        $"/root/WeaponVariables".weapon1 = "m1"
+        $"/root/Global".weapon1 = "m1"
         
     if $SRSetup/VBoxContainer2/Weapon3.selected == 0:
-        $"/root/WeaponVariables".weapon3 = "shotgun"
+        $"/root/Global".weapon3 = "shotgun"
     if $SRSetup/VBoxContainer2/Weapon3.selected == 1:
-        $"/root/WeaponVariables".weapon3 = "assault_rifle"
+        $"/root/Global".weapon3 = "assault_rifle"
     if $SRSetup/VBoxContainer2/Weapon3.selected == 2:
-        $"/root/WeaponVariables".weapon3 = "pistol"
+        $"/root/Global".weapon3 = "pistol"
     if $SRSetup/VBoxContainer2/Weapon3.selected == 3:
-        $"/root/WeaponVariables".weapon1 = "m1"
+        $"/root/Global".weapon1 = "m1"
         
     if $SRSetup/VBoxContainer2/Weapon4.selected == 0:
-        $"/root/WeaponVariables".weapon4 = "shotgun"
+        $"/root/Global".weapon4 = "shotgun"
     if $SRSetup/VBoxContainer2/Weapon4.selected == 1:
-        $"/root/WeaponVariables".weapon4 = "assault_rifle"
+        $"/root/Global".weapon4 = "assault_rifle"
     if $SRSetup/VBoxContainer2/Weapon4.selected == 2:
-        $"/root/WeaponVariables".weapon4 = "pistol"
+        $"/root/Global".weapon4 = "pistol"
     if $SRSetup/VBoxContainer2/Weapon4.selected == 3:
-        $"/root/WeaponVariables".weapon1 = "m1"
+        $"/root/Global".weapon1 = "m1"
     
     yield($Blip1, "finished")
     # warning-ignore:return_value_discarded
