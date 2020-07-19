@@ -48,7 +48,6 @@ var burst_loop = 0
 var shots_fired_auto = 0
 var shot = false
 
-
 func _ready():
     if $"/root/WeaponVariables".weapon1 == "shotgun":
         $Weapon/GunStats/Templates/shotgun.activate()
@@ -79,27 +78,7 @@ func _input(event: InputEvent) -> void:
         yield(GunTimer, "timeout")
         GunTimer.queue_free()
         can_shoot = true
-        
-    while event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-        $Weapon/GunStats._BulletPostition()
-        stopped_fire = false
-        var GunTimer = Timer.new()
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        shots_fired_auto += 1
-        
-           
-#        if shots_fired_auto == get_node("Weapon/GunStats").auto_mag:
-#            break
-#            stopped_fire = false
-#            can_shoot = false
-        if stopped_fire:
-            break
-            stopped_fire = false
+
           
     if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun:
         can_shoot = false
@@ -111,13 +90,13 @@ func _input(event: InputEvent) -> void:
         GunTimer.start()
         yield(GunTimer, "timeout")
         GunTimer.queue_free()
-        can_shoot = true       
+        can_shoot = true
+         
     
     if event.is_action_released("tank_fire"):
         stopped_fire = true
         #connect("bullet_collided", Bullet, "on_bullet_collided")
         
-
     if event.is_action_pressed("Graphook") and can_grapple:
         rotation = 0
         # We clicked the mouse -> shoot()
@@ -184,6 +163,24 @@ func _input(event: InputEvent) -> void:
             $Weapon/GunStats.set_sprite()
         
 func _physics_process(delta):
+    
+    if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
+        $Weapon/GunStats._BulletPostition()
+        can_shoot = false
+        var GunTimer = Timer.new()
+        GunTimer.set_physics_process(true)
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
+        can_shoot = true
+        shots_fired_auto += 1
+#        if shots_fired_auto == get_node("Weapon/GunStats").auto_mag:
+#            break
+#            stopped_fire = false
+#            can_shoot = false
     var mpos = get_global_mouse_position()
     
     $Weapon.global_rotation = mpos.angle_to_point(position)  
