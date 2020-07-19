@@ -49,16 +49,16 @@ var shots_fired_auto = 0
 var shot = false
 
 func _ready():
-    if $"/root/WeaponVariables".weapon1 == "shotgun":
+    if $"/root/Global".weapon1 == "shotgun":
         $Weapon/GunStats/Templates/shotgun.activate()
         $Weapon/GunStats.set_sprite()
-    if $"/root/WeaponVariables".weapon1 == "assault_rifle":
+    if $"/root/Global".weapon1 == "assault_rifle":
         $Weapon/GunStats/Templates/assault_rifle.activate()
         $Weapon/GunStats.set_sprite()
-    if $"/root/WeaponVariables".weapon1 == "pistol":
+    if $"/root/Global".weapon1 == "pistol":
         $Weapon/GunStats/Templates/pistol.activate()
         $Weapon/GunStats.set_sprite()
-    if $"/root/WeaponVariables".weapon1 == "m1":
+    if $"/root/Global".weapon1 == "m1":
         $Weapon/GunStats/Templates/m1.activate()
         $Weapon/GunStats.set_sprite()
         
@@ -119,47 +119,59 @@ func _input(event: InputEvent) -> void:
         jump_count += 1
         
     if event.is_action_pressed("Weapon1"):
-        if $"/root/WeaponVariables".weapon1 == "shotgun":
+        if $"/root/Global".weapon1 == "shotgun":
             $Weapon/GunStats/Templates/shotgun.activate()
             $Weapon/GunStats.set_sprite()
-        if $"/root/WeaponVariables".weapon1 == "assault_rifle":
+        if $"/root/Global".weapon1 == "assault_rifle":
             $Weapon/GunStats/Templates/assault_rifle.activate()
             $Weapon/GunStats.set_sprite()
-        if $"/root/WeaponVariables".weapon1 == "pistol":
+        if $"/root/Global".weapon1 == "pistol":
             $Weapon/GunStats/Templates/pistol.activate()
+            $Weapon/GunStats.set_sprite()
+        if $"/root/Global".weapon1 == "m1":
+            $Weapon/GunStats/Templates/m1.activate()
             $Weapon/GunStats.set_sprite()
             
     if event.is_action_pressed("Weapon2"):
-        if $"/root/WeaponVariables".weapon2 == "shotgun":
+        if $"/root/Global".weapon2 == "shotgun":
             $Weapon/GunStats/Templates/shotgun.activate()
             $Weapon/GunStats.set_sprite()
-        if $"/root/WeaponVariables".weapon2 == "assault_rifle":
+        if $"/root/Global".weapon2 == "assault_rifle":
             $Weapon/GunStats/Templates/assault_rifle.activate()
             $Weapon/GunStats.set_sprite()
-        if $"/root/WeaponVariables".weapon2 == "pistol":
+        if $"/root/Global".weapon2 == "pistol":
             $Weapon/GunStats/Templates/pistol.activate()
+            $Weapon/GunStats.set_sprite()
+        if $"/root/Global".weapon2 == "m1":
+            $Weapon/GunStats/Templates/m1.activate()
             $Weapon/GunStats.set_sprite()
             
     if event.is_action_pressed("Weapon3"):
-        if $"/root/WeaponVariables".weapon3 == "shotgun":
+        if $"/root/Global".weapon3 == "shotgun":
             $Weapon/GunStats/Templates/shotgun.activate()
             $Weapon/GunStats.set_sprite()
-        if $"/root/WeaponVariables".weapon3 == "assault_rifle":
+        if $"/root/Global".weapon3 == "assault_rifle":
             $Weapon/GunStats/Templates/assault_rifle.activate()
             $Weapon/GunStats.set_sprite()
-        if $"/root/WeaponVariables".weapon3 == "pistol":
+        if $"/root/Global".weapon3 == "pistol":
             $Weapon/GunStats/Templates/pistol.activate()
+            $Weapon/GunStats.set_sprite()
+        if $"/root/Global".weapon3 == "m1":
+            $Weapon/GunStats/Templates/m1.activate()
             $Weapon/GunStats.set_sprite()
     
     if event.is_action_pressed("Weapon4"):
-        if $"/root/WeaponVariables".weapon4 == "shotgun":
+        if $"/root/Global".weapon4 == "shotgun":
             $Weapon/GunStats/Templates/shotgun.activate()
             $Weapon/GunStats.set_sprite()
-        if $"/root/WeaponVariables".weapon4 == "assault_rifle":
+        if $"/root/Global".weapon4 == "assault_rifle":
             $Weapon/GunStats/Templates/assault_rifle.activate()
             $Weapon/GunStats.set_sprite()
-        if $"/root/WeaponVariables".weapon4 == "pistol":
+        if $"/root/Global".weapon4 == "pistol":
             $Weapon/GunStats/Templates/pistol.activate()
+            $Weapon/GunStats.set_sprite()
+        if $"/root/Global".weapon4 == "m1":
+            $Weapon/GunStats/Templates/m1.activate()
             $Weapon/GunStats.set_sprite()
         
 func _physics_process(delta):

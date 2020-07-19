@@ -23,7 +23,7 @@ config/icon="res://assets/icon.png"
 
 FullscreenCRT="*res://misc/FullscreenCRT.tscn"
 FPSCounter="*res://misc/FPSCounter.tscn"
-WeaponVariables="*res://weapons/Weapon_Variables.gd"
+Global="*res://Global.gd"
 
 [display]
 
