@@ -149,6 +149,9 @@ func _input(event: InputEvent) -> void:
         if $"/root/Global".weapon1 == "pistol":
             $Weapon/GunStats/Templates/pistol.activate()
             $Weapon/GunStats.set_sprite()
+        if $"/root/Global".weapon1 == "m1":
+            $Weapon/GunStats/Templates/m1.activate()
+            $Weapon/GunStats.set_sprite()
             
     if event.is_action_pressed("Weapon2"):
         if $"/root/Global".weapon2 == "shotgun":
@@ -159,6 +162,9 @@ func _input(event: InputEvent) -> void:
             $Weapon/GunStats.set_sprite()
         if $"/root/Global".weapon2 == "pistol":
             $Weapon/GunStats/Templates/pistol.activate()
+            $Weapon/GunStats.set_sprite()
+        if $"/root/Global".weapon2 == "m1":
+            $Weapon/GunStats/Templates/m1.activate()
             $Weapon/GunStats.set_sprite()
             
     if event.is_action_pressed("Weapon3"):
@@ -171,6 +177,9 @@ func _input(event: InputEvent) -> void:
         if $"/root/Global".weapon3 == "pistol":
             $Weapon/GunStats/Templates/pistol.activate()
             $Weapon/GunStats.set_sprite()
+        if $"/root/Global".weapon3 == "m1":
+            $Weapon/GunStats/Templates/m1.activate()
+            $Weapon/GunStats.set_sprite()
     
     if event.is_action_pressed("Weapon4"):
         if $"/root/Global".weapon4 == "shotgun":
@@ -181,6 +190,9 @@ func _input(event: InputEvent) -> void:
             $Weapon/GunStats.set_sprite()
         if $"/root/Global".weapon4 == "pistol":
             $Weapon/GunStats/Templates/pistol.activate()
+            $Weapon/GunStats.set_sprite()
+        if $"/root/Global".weapon4 == "m1":
+            $Weapon/GunStats/Templates/m1.activate()
             $Weapon/GunStats.set_sprite()
         
 func _physics_process(delta):

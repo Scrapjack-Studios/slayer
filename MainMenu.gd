@@ -68,7 +68,7 @@ func _on_StartGame_pressed():
     if $SRSetup/VBoxContainer2/Weapon2.selected == 2:
         $"/root/Global".weapon2 = "pistol"
     if $SRSetup/VBoxContainer2/Weapon2.selected == 3:
-        $"/root/Global".weapon1 = "m1"
+        $"/root/Global".weapon2 = "m1"
         
     if $SRSetup/VBoxContainer2/Weapon3.selected == 0:
         $"/root/Global".weapon3 = "shotgun"
@@ -77,7 +77,7 @@ func _on_StartGame_pressed():
     if $SRSetup/VBoxContainer2/Weapon3.selected == 2:
         $"/root/Global".weapon3 = "pistol"
     if $SRSetup/VBoxContainer2/Weapon3.selected == 3:
-        $"/root/Global".weapon1 = "m1"
+        $"/root/Global".weapon3 = "m1"
         
     if $SRSetup/VBoxContainer2/Weapon4.selected == 0:
         $"/root/Global".weapon4 = "shotgun"
@@ -86,7 +86,7 @@ func _on_StartGame_pressed():
     if $SRSetup/VBoxContainer2/Weapon4.selected == 2:
         $"/root/Global".weapon4 = "pistol"
     if $SRSetup/VBoxContainer2/Weapon4.selected == 3:
-        $"/root/Global".weapon1 = "m1"
+        $"/root/Global".weapon4 = "m1"
     
     yield($Blip1, "finished")
     # warning-ignore:return_value_discarded
