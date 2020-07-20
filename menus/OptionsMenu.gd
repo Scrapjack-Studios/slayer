@@ -66,6 +66,9 @@ func _reset_settings():
     config.set_value("video", "vid_width", 1920)
     config.set_value("video", "vid_height", 1080)
     config.set_value("audio", "mute", false)
+    config.set_value("audio", "music_volume", 50)
+    config.set_value("audio", "game_volume", 50)
+    config.set_value("audio", "menu_volume", 50)
     config.save("user://config.cfg")
     
 func _apply_settings():
