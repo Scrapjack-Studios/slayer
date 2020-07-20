@@ -462,22 +462,28 @@ stream = ExtResource( 6 )
 
 [node name="Blip1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
+bus = "Menu SFX"
 
 [node name="Blip2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+bus = "Menu SFX"
 
 [node name="Button1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+bus = "Menu SFX"
 
 [node name="Button2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+bus = "Menu SFX"
 
 [node name="Hover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "Menu SFX"
 
 [node name="MenuTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
 autoplay = true
+bus = "Music"
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_QuitButton_pressed"]

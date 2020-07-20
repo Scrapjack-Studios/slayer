@@ -274,18 +274,23 @@ window_title = "Error"
 
 [node name="Blip1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+bus = "Menu SFX"
 
 [node name="Blip2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+bus = "Menu SFX"
 
 [node name="Button1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "Menu SFX"
 
 [node name="Button2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "Menu SFX"
 
 [node name="Hover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "Menu SFX"
 [connection signal="mouse_entered" from="Buttons/VBoxContainer/Video" to="." method="_on_Video_mouse_entered"]
 [connection signal="pressed" from="Buttons/VBoxContainer/Video" to="." method="_on_Video_pressed"]
 [connection signal="mouse_entered" from="Buttons/VBoxContainer/Audio" to="." method="_on_Audio_mouse_entered"]

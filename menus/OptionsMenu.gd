@@ -76,7 +76,10 @@ func _apply_settings():
     get_node("/root/FPSCounter/RichTextLabel").visible = config.get_value("video", "fps_counter")
     
     OS.set_window_size(Vector2(config.get_value("video", "vid_width"), config.get_value("video", "vid_height")))
-    # TODO: make a mute function that mutes everything in a 'sounds' group
+    
+    AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), config.get_value("audio", "mute"))
+    AudioServer.set_bus_mute(AudioServer.get_bus_index("Game SFX"), config.get_value("audio", "mute"))
+    AudioServer.set_bus_mute(AudioServer.get_bus_index("Menu SFX"), config.get_value("audio", "mute"))
 
 # buttons
             

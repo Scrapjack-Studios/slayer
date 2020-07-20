@@ -55,15 +55,19 @@ script = ExtResource( 11 )
 
 [node name="Assault_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
 stream = ExtResource( 8 )
+bus = "Game SFX"
 
 [node name="Pistol_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
 stream = ExtResource( 5 )
+bus = "Game SFX"
 
 [node name="M1_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
 stream = ExtResource( 7 )
+bus = "Game SFX"
 
 [node name="SuperShotgun_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
 stream = ExtResource( 4 )
+bus = "Game SFX"
 
 [node name="Bullets" type="Node" parent="GunStats"]
 
