@@ -231,6 +231,18 @@ margin_right = 267.0
 margin_bottom = 26.0
 text = "Mute"
 
+[node name="MusicVolume" type="HSlider" parent="AudioOptions/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="GameVolume" type="HSlider" parent="AudioOptions/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="MenuVolume" type="HSlider" parent="AudioOptions/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="AudioOptions"]
 anchor_left = 0.823
 anchor_top = 0.027

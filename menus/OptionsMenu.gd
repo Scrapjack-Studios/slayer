@@ -33,6 +33,10 @@ func _save_settings():
     
     # audio
     config.set_value("audio", "mute", $AudioOptions/VBoxContainer/Mute.is_pressed())
+    config.set_value("audio", "music_volume", $AudioOptions/VBoxContainer/MusicVolume.value)
+    config.set_value("audio", "game_volume", $AudioOptions/VBoxContainer/GameVolume.value)
+    config.set_value("audio", "menu_volume", $AudioOptions/VBoxContainer/MenuVolume.value)
+    
     config.save("user://config.cfg")
         
 func _load_settings():
@@ -49,6 +53,9 @@ func _load_settings():
             get_node("VideoOptions/VBoxContainer/Resolution").select(item)
     # audio
     $AudioOptions/VBoxContainer/Mute.set_pressed(config.get_value("audio", "mute"))
+    $AudioOptions/VBoxContainer/MusicVolume.set_value(config.get_value("audio", "music_volume"))
+    $AudioOptions/VBoxContainer/GameVolume.set_value(config.get_value("audio", "game_volume"))
+    $AudioOptions/VBoxContainer/MenuVolume.set_value(config.get_value("audio", "menu_volume"))
     
 func _reset_settings():
     # sets everything to default values
@@ -80,6 +87,8 @@ func _apply_settings():
     AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), config.get_value("audio", "mute"))
     AudioServer.set_bus_mute(AudioServer.get_bus_index("Game SFX"), config.get_value("audio", "mute"))
     AudioServer.set_bus_mute(AudioServer.get_bus_index("Menu SFX"), config.get_value("audio", "mute"))
+    
+    
 
 # buttons
             
