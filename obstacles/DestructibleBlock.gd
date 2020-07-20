@@ -33,7 +33,6 @@ func subdivide(body, node):
         Clone.get_node("CollisionShape2D").shape = Stamp.get_node("CollisionShape2D").shape.duplicate(true)
         Clone.set_position(Clone.get_position() + Vector2(-oldExtents.x*collision_scale_x,-oldExtents.y*collision_scale_y))
         Clone.get_node("CollisionShape2D").get_node("Sprite").scale = Clone.get_node("CollisionShape2D").shape.extents * sprite_scale
-    #    add_child(Clone)
         call_deferred("add_child", Clone)
             
         Clone = Stamp.duplicate()
