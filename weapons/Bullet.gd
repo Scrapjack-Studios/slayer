@@ -22,8 +22,18 @@ func start_at(pos, dir, type, dmg, _lifetime, size, speed):
 
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta, false)
-    if collision and collision.collider.is_in_group("bodies"):
-        collision.collider.apply_central_impulse(-collision.normal * push)
+    if collision:
+        if collision.collider.is_in_group("bodies"):
+            collision.collider.apply_central_impulse(-collision.normal * push)
+            
+        if collision.collider.is_in_group("bullets"):
+            velocity = Vector2(0, 0)
+            $Sprite.hide()
+            $Explosion.show()
+            $Explosion.play("smoke")
+        elif not collision.collider.is_in_group("bullets"):
+            hit()
+            $Timer.start()
 
 func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
@@ -39,16 +49,6 @@ func _on_Lifetime_timeout():
 
 func _on_Explosion_animation_finished():
     queue_free()
-
-func _on_Area2D_body_entered(body):
-    if not body.is_in_group("bullets"):
-        hit()
-        $Timer.start()
-    if body.is_in_group("bullets"):
-        velocity = Vector2(0, 0)
-        $Sprite.hide()
-        $Explosion.show()
-        $Explosion.play("smoke")
 
 func _on_Timer_timeout():
     velocity = Vector2(0, 0)
