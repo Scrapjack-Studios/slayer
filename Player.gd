@@ -8,7 +8,7 @@ export (int) var rot_speed
 export (int) var damage
 export (int) var start_health
 export (float) var bullet_lifetime
-export (int, 0, 200) var push = 100
+export (int, 0, 200) var push = 500
 var gravity = 1500.0 # pixels/second/second
 
 # Angle in degrees towards either side that the player can consider "floor"
