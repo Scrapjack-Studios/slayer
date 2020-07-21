@@ -75,6 +75,7 @@ func _apply_settings():
     # actually applies the settings from config.cfg in-game
     config.load("user://config.cfg")
     
+    # video
     OS.set_use_vsync(config.get_value("video", "vsync"))
     
     OS.set_window_fullscreen(config.get_value("video", "fullscreen"))
@@ -87,11 +88,15 @@ func _apply_settings():
     
     OS.set_window_size(Vector2(config.get_value("video", "vid_width"), config.get_value("video", "vid_height")))
     
+    # audio
     AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), config.get_value("audio", "mute"))
     AudioServer.set_bus_mute(AudioServer.get_bus_index("Game SFX"), config.get_value("audio", "mute"))
     AudioServer.set_bus_mute(AudioServer.get_bus_index("Menu SFX"), config.get_value("audio", "mute"))
     
-    
+    if not config.get_value("audio", "mute"):
+        AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear2db(config.get_value("audio", "music_volume")/100))
+        AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Game SFX"), linear2db(config.get_value("audio", "game_volume")/100))
+        AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Menu SFX"), linear2db(config.get_value("audio", "menu_volume")/100))
 
 # buttons
             
