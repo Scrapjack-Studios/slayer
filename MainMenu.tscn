@@ -399,22 +399,43 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MusicVolumeLabel" type="Label" parent="OptionsMenu/AudioOptions/VBoxContainer"]
+margin_top = 30.0
+margin_right = 318.0
+margin_bottom = 52.0
+text = "Music"
+
+[node name="MusicVolume" type="HSlider" parent="OptionsMenu/AudioOptions/VBoxContainer"]
+margin_top = 56.0
+margin_right = 318.0
+margin_bottom = 72.0
+
+[node name="GameVolumeLabel" type="Label" parent="OptionsMenu/AudioOptions/VBoxContainer"]
+margin_top = 76.0
+margin_right = 318.0
+margin_bottom = 98.0
+text = "Game"
+
+[node name="GameVolume" type="HSlider" parent="OptionsMenu/AudioOptions/VBoxContainer"]
+margin_top = 102.0
+margin_right = 318.0
+margin_bottom = 118.0
+
+[node name="MenuVolumeLabel" type="Label" parent="OptionsMenu/AudioOptions/VBoxContainer"]
+margin_top = 122.0
+margin_right = 318.0
+margin_bottom = 144.0
+text = "Menu"
+
+[node name="MenuVolume" type="HSlider" parent="OptionsMenu/AudioOptions/VBoxContainer"]
+margin_top = 148.0
+margin_right = 318.0
+margin_bottom = 164.0
+
 [node name="Mute" type="CheckBox" parent="OptionsMenu/AudioOptions/VBoxContainer"]
 margin_right = 318.0
 margin_bottom = 26.0
 text = "Mute"
-
-[node name="MusicVolume" type="HSlider" parent="OptionsMenu/AudioOptions/VBoxContainer"]
-margin_right = 16.0
-margin_bottom = 16.0
-
-[node name="GameVolume" type="HSlider" parent="OptionsMenu/AudioOptions/VBoxContainer"]
-margin_right = 16.0
-margin_bottom = 16.0
-
-[node name="MenuVolume" type="HSlider" parent="OptionsMenu/AudioOptions/VBoxContainer"]
-margin_right = 16.0
-margin_bottom = 16.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="OptionsMenu/AudioOptions"]
 anchor_left = 0.823

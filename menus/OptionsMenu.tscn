@@ -231,13 +231,28 @@ margin_right = 267.0
 margin_bottom = 26.0
 text = "Mute"
 
+[node name="MusicVolumeLabel" type="Label" parent="AudioOptions/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 22.0
+text = "Music"
+
 [node name="MusicVolume" type="HSlider" parent="AudioOptions/VBoxContainer"]
 margin_right = 40.0
 margin_bottom = 40.0
 
+[node name="GameVolumeLabel" type="Label" parent="AudioOptions/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 22.0
+text = "Game"
+
 [node name="GameVolume" type="HSlider" parent="AudioOptions/VBoxContainer"]
 margin_right = 40.0
 margin_bottom = 40.0
+
+[node name="MenuVolumeLabel" type="Label" parent="AudioOptions/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 22.0
+text = "Menu"
 
 [node name="MenuVolume" type="HSlider" parent="AudioOptions/VBoxContainer"]
 margin_right = 40.0
