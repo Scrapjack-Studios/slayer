@@ -1,8 +1,6 @@
 extends Control
 
 var config = ConfigFile.new()
-var file = File.new()
-var video_focused_before = true
 var string_splitter
 var selected_id
 
