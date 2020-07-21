@@ -23,6 +23,15 @@ func _on_ShootingRange_pressed():
     $SRSetup.show()
 
 func _on_OptionsButton_pressed():
+    $OptionsMenu/Buttons.set_position(Vector2(0,0))
+    $OptionsMenu/Buttons.set_size(Vector2(960,870))
+    $OptionsMenu/Buttons/Panel.hide()
+    $OptionsMenu/VideoOptions.set_position(Vector2(0,0))
+    $OptionsMenu/VideoOptions.set_size(Vector2(960,870))
+    $OptionsMenu/VideoOptions/Panel.hide()
+    $OptionsMenu/AudioOptions.set_position(Vector2(0,0))
+    $OptionsMenu/AudioOptions.set_size(Vector2(960,870))
+    $OptionsMenu/AudioOptions/Panel.hide()
     $PlayMenu.hide()
     $SRSetup.hide()
     $OptionsMenu/VideoOptions.hide()
