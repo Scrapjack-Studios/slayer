@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://obstacles/DestructibleBlock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://obstacles/Platform_Physics.tscn" type="PackedScene" id=2]
 [ext_resource path="res://obstacles/Platform_Static.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 71.5219, 66.8818 )
+
+[sub_resource type="Gradient" id=2]
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
 [node name="ShootingRange" type="Control"]
 margin_right = 40.0
@@ -207,3 +215,15 @@ position = Vector2( -789.593, 52.8267 )
 
 [node name="DestructibleBlock2" parent="." instance=ExtResource( 1 )]
 position = Vector2( -789.593, 371.827 )
+
+[node name="DamagingBlock" type="StaticBody2D" parent="."]
+position = Vector2( 310.033, 726.973 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamagingBlock"]
+position = Vector2( 2.52264, 20.1815 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="DamagingBlock"]
+position = Vector2( -0.402832, 86.839 )
+scale = Vector2( 0.069003, 134.245 )
+texture = SubResource( 3 )
