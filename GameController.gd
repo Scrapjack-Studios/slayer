@@ -25,6 +25,7 @@ func on_Player_died():
     yield($CanvasLayer/DeathUI/YouDiedTimer, "timeout")
     $CanvasLayer/DeathUI/YouDied.hide()
     $CanvasLayer/DeathUI/RespawnAsker.show()
+    $CanvasLayer/DeathUI/RespawnAsker.set_text("Respawn")
     can_respawn = false
     $CanvasLayer/DeathUI/RespawnTimer.start()
     $CanvasLayer/DeathUI/RespawnCountdown.show()
@@ -37,7 +38,7 @@ func _on_RespawnAsker_pressed():
         spawn()
     else:
         wants_to_respawn = true
-        $CanvasLayer/DeathUI/RespawnAsker.text = "Queued"
+        $CanvasLayer/DeathUI/RespawnAsker.set_text("Queued")
 
 func spawn():
     player = load("res://Player.tscn").instance()
@@ -53,3 +54,4 @@ func spawn():
 func _on_GameController_respawn_available():
     if wants_to_respawn:
         spawn()
+        wants_to_respawn = false

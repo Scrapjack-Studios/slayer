@@ -6,7 +6,8 @@ func _process(_delta):
         pause_game()
     elif Input.is_action_just_released("pause_menu") and get_tree().paused == true and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").visible == false and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/VideoOptions").visible == false and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/AudioOptions").visible == false:
         self.hide()
-        get_parent().get_parent().get_node("Player").get_node("Chain").release()
+        if get_parent().get_parent().get_node("Player"):
+            get_parent().get_parent().get_node("Player").get_node("Chain").release()
         resume_game()
     elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").visible == true:
         get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").hide()
