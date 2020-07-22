@@ -1,7 +1,10 @@
 extends Node
 
+signal respawn_available
+
 var player
 var can_respawn
+var wants_to_respawn
 
 func _ready():
     add_child($"/root/Global".map.instance())
@@ -27,14 +30,14 @@ func on_Player_died():
     $CanvasLayer/DeathUI/RespawnCountdown.show()
     yield($CanvasLayer/DeathUI/RespawnTimer, "timeout")
     can_respawn = true
+    emit_signal("respawn_available")
 
 func _on_RespawnAsker_pressed():
     if can_respawn:
         spawn()
-        $CanvasLayer/DeathUI/RespawnAsker.hide()
-        $CanvasLayer/DeathUI/RespawnCountdown.hide()
     else:
-        $CanvasLayer/DeathUI/RespawnAsker.text = "Nope"
+        wants_to_respawn = true
+        $CanvasLayer/DeathUI/RespawnAsker.text = "Queued"
 
 func spawn():
     player = load("res://Player.tscn").instance()
@@ -43,3 +46,10 @@ func spawn():
     player.connect("died", self, "on_Player_died")
     player.health = player.max_health
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
+    $CanvasLayer/DeathUI/RespawnAsker.hide()
+    $CanvasLayer/DeathUI/RespawnCountdown.hide()
+
+
+func _on_GameController_respawn_available():
+    if wants_to_respawn:
+        spawn()

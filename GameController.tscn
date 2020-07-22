@@ -97,4 +97,5 @@ mouse_filter = 2
 [node name="OptionsMenu" parent="CanvasLayer" instance=ExtResource( 2 )]
 pause_mode = 2
 mouse_filter = 2
+[connection signal="respawn_available" from="." to="." method="_on_GameController_respawn_available"]
 [connection signal="pressed" from="CanvasLayer/DeathUI/RespawnAsker" to="." method="_on_RespawnAsker_pressed"]
