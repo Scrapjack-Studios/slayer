@@ -67,6 +67,10 @@ text = "Respawn"
 [node name="YouDiedTimer" type="Timer" parent="CanvasLayer/DeathUI"]
 one_shot = true
 
+[node name="RespawnTimer" type="Timer" parent="CanvasLayer/DeathUI"]
+wait_time = 10.0
+one_shot = true
+
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 4 )]
 mouse_filter = 2
 

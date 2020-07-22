@@ -1,6 +1,7 @@
 extends Node
 
 var player
+var can_respawn
 
 func _ready():
     add_child($"/root/Global".map.instance())
@@ -17,10 +18,17 @@ func on_Player_died():
     yield($CanvasLayer/DeathUI/YouDiedTimer, "timeout")
     $CanvasLayer/DeathUI/YouDied.hide()
     $CanvasLayer/DeathUI/RespawnAsker.show()
+    can_respawn = false
+    $CanvasLayer/DeathUI/RespawnTimer.start()
+    yield($CanvasLayer/DeathUI/RespawnTimer, "timeout")
+    can_respawn = true
 
 func _on_RespawnAsker_pressed():
-    spawn()
-    $CanvasLayer/DeathUI/RespawnAsker.hide()
+    if can_respawn:
+        spawn()
+        $CanvasLayer/DeathUI/RespawnAsker.hide()
+    else:
+        $CanvasLayer/DeathUI/RespawnAsker.text = "Nope"
 
 func spawn():
     player = load("res://Player.tscn").instance()
