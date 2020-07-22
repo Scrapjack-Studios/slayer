@@ -7,6 +7,10 @@ func _ready():
     add_child($"/root/Global".map.instance())
     spawn()
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
+    
+func _process(_delta):
+    if $CanvasLayer/DeathUI/RespawnCountdown.visible:
+        $CanvasLayer/DeathUI/RespawnCountdown.set_text(str(int($CanvasLayer/DeathUI/RespawnTimer.time_left)))
 
 func on_Player_health_changed(health):
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = health
@@ -20,6 +24,7 @@ func on_Player_died():
     $CanvasLayer/DeathUI/RespawnAsker.show()
     can_respawn = false
     $CanvasLayer/DeathUI/RespawnTimer.start()
+    $CanvasLayer/DeathUI/RespawnCountdown.show()
     yield($CanvasLayer/DeathUI/RespawnTimer, "timeout")
     can_respawn = true
 
@@ -27,6 +32,7 @@ func _on_RespawnAsker_pressed():
     if can_respawn:
         spawn()
         $CanvasLayer/DeathUI/RespawnAsker.hide()
+        $CanvasLayer/DeathUI/RespawnCountdown.hide()
     else:
         $CanvasLayer/DeathUI/RespawnAsker.text = "Nope"
 

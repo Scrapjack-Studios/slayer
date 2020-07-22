@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://GameController.gd" type="Script" id=1]
 [ext_resource path="res://menus/OptionsMenu.tscn" type="PackedScene" id=2]
@@ -12,6 +12,10 @@ font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 57
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 100
 font_data = ExtResource( 5 )
 
 [node name="GameController" type="Node"]
@@ -63,6 +67,22 @@ margin_right = 121.5
 margin_bottom = 37.5
 custom_fonts/font = SubResource( 2 )
 text = "Respawn"
+
+[node name="RespawnCountdown" type="RichTextLabel" parent="CanvasLayer/DeathUI"]
+visible = false
+anchor_left = 0.5
+anchor_top = -1.5
+anchor_right = 0.5
+anchor_bottom = -1.5
+margin_left = -19.5
+margin_top = -42.5
+margin_right = 69.5
+margin_bottom = 42.5
+custom_fonts/normal_font = SubResource( 3 )
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="YouDiedTimer" type="Timer" parent="CanvasLayer/DeathUI"]
 one_shot = true
