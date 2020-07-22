@@ -1,10 +1,10 @@
 extends Node
 
-var player = load("res://Player.tscn")
+var player = load("res://Player.tscn").instance()
 
 func _ready():
     add_child($"/root/Global".map.instance())
-    add_child(player.instance())
+    add_child(player)
     
     # warning-ignore:return_value_discarded
     $Player.connect("health_changed", self, "on_Player_health_changed")
@@ -16,4 +16,4 @@ func on_Player_health_changed(health):
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = health
     
 func on_Player_died():
-    print("dead")
+    player.queue_free()
