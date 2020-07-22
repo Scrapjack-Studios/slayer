@@ -4,18 +4,18 @@ func _process(_delta):
     if Input.is_action_just_released("pause_menu") and get_tree().paused == false:
         self.show()
         pause_game()
-    elif Input.is_action_just_released("pause_menu") and get_tree().paused == true and get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/Buttons").visible == false and get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/VideoOptions").visible == false and get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/AudioOptions").visible == false:
+    elif Input.is_action_just_released("pause_menu") and get_tree().paused == true and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").visible == false and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/VideoOptions").visible == false and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/AudioOptions").visible == false:
         self.hide()
         get_parent().get_parent().get_node("Player").get_node("Chain").release()
         resume_game()
-    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/Buttons").visible == true:
-        get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/Buttons").hide()
-    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/VideoOptions").visible == true:
-        get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/VideoOptions").hide()
-        get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/Buttons").show()
-    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/AudioOptions").visible == true:
-        get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/AudioOptions").hide()
-        get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/Buttons").show()
+    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").visible == true:
+        get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").hide()
+    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/VideoOptions").visible == true:
+        get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/VideoOptions").hide()
+        get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").show()
+    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/AudioOptions").visible == true:
+        get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/AudioOptions").hide()
+        get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").show()
 
 func _on_Resume_pressed():
     self.hide()
@@ -23,7 +23,7 @@ func _on_Resume_pressed():
     $Blip1.play()
 
 func _on_Options_pressed():
-    get_tree().get_root().get_node("MapLoader/CanvasLayer/OptionsMenu/Buttons").show()
+    get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").show()
     $Blip1.play()
 
 func _on_Quit_MainMenu_pressed():
