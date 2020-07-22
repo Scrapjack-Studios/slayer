@@ -20,6 +20,7 @@ extents = Vector2( 18.1528, 6.02961 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "ChainGang",
+"Players",
 ]]
 position = Vector2( 2.89905, -3.43567 )
 rotation = -0.000230981

@@ -1,18 +1,18 @@
 extends KinematicBody2D
 
-signal health_changed
+signal health_changed(health)
 signal died
+
+export (float) var max_health = 100
+onready var health = max_health
 
 export (PackedScene) var Bullet
 export (int) var rot_speed
 export (int) var damage
-export (int) var start_health
 export (float) var bullet_lifetime
 export (int, 0, 200) var push = 500
-var gravity = 1500.0 # pixels/second/second
 
-# Angle in degrees towards either side that the player can consider "floor"
-const FLOOR_ANGLE_TOLERANCE = 70
+const FLOOR_ANGLE_TOLERANCE = 70 # Angle in degrees towards either side that the player can consider "floor"
 const WALK_FORCE = 1600
 const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 400
@@ -22,11 +22,11 @@ const CLIMB_SPEED = 800
 const CLIMB_AMOUNT = 70
 const MAX_JUMP_COUNT = 2
 
-var velocity = Vector2(0,0)		# The velocity of the player (kept over time)
+var velocity = Vector2(0,0) # The velocity of the player (kept over time)
 var chain_velocity := Vector2(0,0)
+var gravity = 1500.0 # pixels/second/second
 var rot_dir
 var can_shoot = true
-var health
 var chain_pull = 55
 var on_air_time = 100
 var is_jumping = false
@@ -61,9 +61,6 @@ func _ready():
     if $"/root/Global".weapon1 == "m1":
         $Weapon/GunStats/Templates/m1.activate()
         $Weapon/GunStats.set_sprite()
-        
-    health = start_health
-    emit_signal("health_changed", health)
     
 func _input(event: InputEvent) -> void:
     
@@ -340,7 +337,7 @@ func _MantelLeft():
 
 func take_damage(amount):
     health -= amount
-    emit_signal("health_changed", (health * 100 / start_health))
+    emit_signal("health_changed", (health * 100 / max_health))
     if health <= 0:
         emit_signal("died")
 
