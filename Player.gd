@@ -45,7 +45,6 @@ var is_climbing = false
 var can_walljump = true
 var stopped_fire = false
 var burst_loop = 0
-var shots_fired_auto = 0
 var shot = false
 
 func _ready():
@@ -63,6 +62,19 @@ func _ready():
         $Weapon/GunStats.set_sprite()
     
 func _input(event: InputEvent) -> void:
+    
+    
+    if event.is_action_pressed("reload"):
+        var RTimer = Timer.new()
+        RTimer.set_wait_time($Weapon/GunStats.ReloadTimer)
+        RTimer.set_one_shot(true)
+        self.add_child(RTimer)
+        RTimer.start()
+        yield(RTimer, "timeout")
+        RTimer.queue_free()
+        $Weapon/GunStats.can_fire = true
+        $Weapon/GunStats.shots_fired = 0
+    
     
     if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
         can_shoot = false
@@ -185,11 +197,8 @@ func _physics_process(delta):
         yield(GunTimer, "timeout")
         GunTimer.queue_free()
         can_shoot = true
-        shots_fired_auto += 1
-#        if shots_fired_auto == get_node("Weapon/GunStats").auto_mag:
-#            break
-#            stopped_fire = false
-#            can_shoot = false
+        
+        
     var mpos = get_global_mouse_position()
     
     $Weapon.global_rotation = mpos.angle_to_point(position)  
