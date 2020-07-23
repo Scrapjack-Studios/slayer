@@ -138,6 +138,51 @@ margin_right = 324.0
 margin_bottom = 102.0
 text = "Shooting Range"
 
+[node name="EditProfileMenu" type="Control" parent="."]
+visible = false
+anchor_left = 0.055
+anchor_top = 0.095
+anchor_right = 0.554
+anchor_bottom = 0.9
+margin_left = -0.600006
+margin_top = 0.399994
+margin_right = 0.319946
+margin_bottom = -6.10352e-05
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditProfileMenu"]
+anchor_left = 0.038
+anchor_top = 0.046
+anchor_right = 0.376
+anchor_bottom = 0.97
+margin_left = -0.442001
+margin_top = 0.0259972
+margin_right = 0.415985
+margin_bottom = 0.0699463
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UserName" type="LineEdit" parent="EditProfileMenu/VBoxContainer"]
+margin_right = 324.0
+margin_bottom = 32.0
+custom_colors/cursor_color = Color( 0.2, 1, 0, 1 )
+clear_button_enabled = true
+placeholder_text = "Username"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save" type="Button" parent="EditProfileMenu/VBoxContainer"]
+margin_top = 44.0
+margin_right = 324.0
+margin_bottom = 70.0
+text = "Save"
+
 [node name="SRSetup" type="Control" parent="."]
 visible = false
 anchor_left = 0.053
