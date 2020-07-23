@@ -6,6 +6,7 @@ func _ready():
 func _on_PlayButton_pressed():
     $SRSetup.hide()
     $OptionsMenu.hide()
+    $EditProfileMenu.hide()
     $OptionsMenu/VideoOptions.hide()
     $OptionsMenu/AudioOptions.hide()
     $PlayMenu.show()
@@ -16,6 +17,11 @@ func _on_JoinGame_pressed():
 
 func _on_CreateGame_pressed():
     $Blip1.play()
+
+func _on_EditProfile_pressed():
+    $Blip1.play()
+    $PlayMenu.hide()
+    $EditProfileMenu.show()
 
 func _on_ShootingRange_pressed():
     $Blip1.play()
@@ -34,6 +40,7 @@ func _on_OptionsButton_pressed():
     $OptionsMenu/AudioOptions/Panel.hide()
     $PlayMenu.hide()
     $SRSetup.hide()
+    $EditProfileMenu.hide()
     $OptionsMenu/VideoOptions.hide()
     $OptionsMenu/AudioOptions.hide()
     $OptionsMenu.show()

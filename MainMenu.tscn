@@ -306,6 +306,7 @@ bus = "Music"
 [connection signal="mouse_entered" from="PlayMenu/VBoxContainer/CreateGame" to="." method="_on_CreateGame_mouse_entered"]
 [connection signal="pressed" from="PlayMenu/VBoxContainer/CreateGame" to="." method="_on_CreateGame_pressed"]
 [connection signal="mouse_entered" from="PlayMenu/VBoxContainer/EditProfile" to="." method="_on_EditProfile_mouse_entered"]
+[connection signal="pressed" from="PlayMenu/VBoxContainer/EditProfile" to="." method="_on_EditProfile_pressed"]
 [connection signal="mouse_entered" from="PlayMenu/VBoxContainer/ShootingRange" to="." method="_on_ShootingRange_mouse_entered"]
 [connection signal="pressed" from="PlayMenu/VBoxContainer/ShootingRange" to="." method="_on_ShootingRange_pressed"]
 [connection signal="pressed" from="SRSetup/VBoxContainer2/StartGame" to="." method="_on_StartGame_pressed"]
