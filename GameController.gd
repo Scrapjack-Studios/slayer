@@ -14,9 +14,7 @@ func _ready():
 func _process(_delta):
     if $CanvasLayer/DeathUI/RespawnCountdown.visible:
         $CanvasLayer/DeathUI/RespawnCountdown.set_text(str(int($CanvasLayer/DeathUI/RespawnTimer.time_left)))
-    $CanvasLayer/HUD/AmmoCounter.text = str(player.get_node("Weapon").get_node("GunStats").shots_fired)
-    print(player.get_node("Weapon").get_node("GunStats").shots_fired)
-    $CanvasLayer/HUD/AmmoCounter.show()
+    $CanvasLayer/HUD/AmmoCounter.text = str(player.get_node("Weapon").get_node("GunStats").shots_fired)+"/"+str(player.get_node("Weapon").get_node("GunStats").mag)
 
 func on_Player_health_changed(health):
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = health

@@ -17,7 +17,7 @@ var burst_ammount = 3
 
 
 
-var bullet_size = Vector2(0.3,0.3)
+var bullet_size = Vector2(0.2,0.2)
 #default is 0.2
 
 var bullet_speed = 3000
@@ -40,20 +40,19 @@ var m1_sound
 var super_shotgun_sound
 var pistol_sound  
 
-
-var shots_fired = 0
 var mag = 10
+var shots_fired = mag
 var can_fire = true
 var ReloadTimer = 2
 
 func _BulletPostition():
     if can_fire:
         var b = Bullet.instance()
-        b.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
+        b.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(b)
-        shots_fired += 1
+        shots_fired -= 1
         shot = true
-        if shots_fired == mag:
+        if shots_fired == 0:
             can_fire = false   
         if $RayCast2D.is_colliding():
             get_parent().get_parent().Kickback(kickback)
