@@ -45,16 +45,6 @@ func _on_QuitButton_pressed():
     yield($Button2, "finished")
     get_tree().quit()
 
-func _on_JoinGame_mouse_entered():
-    $Hover.play()
-
-func _on_CreateGame_mouse_entered():
-    $Hover.play()
-
-func _on_ShootingRange_mouse_entered():
-    $Hover.play()
-
-
 func _on_StartGame_pressed():
     $Blip1.play()
     
@@ -101,5 +91,14 @@ func _on_StartGame_pressed():
     # warning-ignore:return_value_discarded
     get_tree().change_scene("res://GameController.tscn")
     
-    
+func _on_JoinGame_mouse_entered():
+    $Hover.play()
 
+func _on_CreateGame_mouse_entered():
+    $Hover.play()
+
+func _on_ShootingRange_mouse_entered():
+    $Hover.play()
+
+func _on_EditProfile_mouse_entered():
+    $Hover.play()
