@@ -6,6 +6,9 @@
 [node name="HealthBar" type="HBoxContainer"]
 margin_right = 400.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 margin_right = 317.0

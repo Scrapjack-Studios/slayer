@@ -43,7 +43,6 @@ var pistol_sound
 var mag = 10
 var shots_fired = mag
 var can_fire = true
-var ReloadTimer = 2
 
 func _BulletPostition():
     if can_fire:

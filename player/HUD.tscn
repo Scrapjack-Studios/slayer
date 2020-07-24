@@ -35,3 +35,32 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GrappleCooldown" type="ProgressBar" parent="."]
+anchor_right = 0.044
+anchor_bottom = 0.072
+margin_left = 2.43193
+margin_top = 50.4262
+margin_right = -7.04807
+margin_bottom = -3.33382
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoCooldown" type="ProgressBar" parent="."]
+visible = false
+anchor_left = 0.753
+anchor_top = 0.831
+anchor_right = 0.792
+anchor_bottom = 0.853
+margin_left = -0.668945
+margin_top = -0.0997925
+margin_right = -0.549072
+margin_bottom = 0.140198
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

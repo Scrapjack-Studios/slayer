@@ -67,7 +67,7 @@ func _input(event: InputEvent) -> void:
     
     if Input.is_action_just_pressed("reload"):
         var RTimer = Timer.new()
-        RTimer.set_wait_time($Weapon/GunStats.ReloadTimer)
+        RTimer.set_wait_time($Weapon/GunStats/ReloadTimer.wait_time)
         RTimer.set_one_shot(true)
         self.add_child(RTimer)
         RTimer.start()
@@ -122,7 +122,7 @@ func _input(event: InputEvent) -> void:
         $Chain.release()
         $Whip.show()
         is_grappling = false
-        if grapple_count == 2:
+        if grapple_count == 3:
             can_grapple = false
             $GrappleTimer.start()
             grapple_count = 0

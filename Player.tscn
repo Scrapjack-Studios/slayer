@@ -62,6 +62,7 @@ collide_with_areas = true
 
 [node name="GrappleTimer" type="Timer" parent="."]
 process_mode = 0
+wait_time = 4.0
 
 [node name="Chain" parent="." groups=[
 "ChainGang",

@@ -75,3 +75,6 @@ bus = "Game SFX"
 rotation = -1.57101
 scale = Vector2( 1, 17.9248 )
 enabled = true
+
+[node name="ReloadTimer" type="Timer" parent="GunStats"]
+wait_time = 5.0
