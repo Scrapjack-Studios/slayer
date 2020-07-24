@@ -8,4 +8,4 @@ func activate():
     get_parent().get_parent().get_parent().get_node("GunStats").m1_sound = true
     get_parent().get_parent().get_parent().get_node("GunStats").cool_down = .5
     get_parent().get_parent().get_parent().get_node("GunStats").weapon_sprite = load("res://assets/sprites/weapons/AssaultRifle.png")
-
+    get_parent().get_parent().get_parent().get_node("GunStats").mag = 10

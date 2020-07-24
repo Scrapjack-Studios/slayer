@@ -1,15 +1,37 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://player/HUD.gd" type="Script" id=1]
 [ext_resource path="res://player/HealthBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/savior.ttf" type="DynamicFontData" id=3]
 
-[node name="HUD" type="MarginContainer"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 8.0
-margin_bottom = 40.0
-script = ExtResource( 1 )
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 3 )
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HealthBar" parent="." instance=ExtResource( 2 )]
-margin_right = 317.0
-margin_bottom = 42.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="AmmoCounter" type="Label" parent="."]
+anchor_left = 0.758
+anchor_top = 0.84
+anchor_right = 0.789
+anchor_bottom = 0.916
+margin_left = -0.161499
+margin_top = -0.255432
+margin_right = 3.31836
+margin_bottom = -0.33551
+size_flags_stretch_ratio = 0.0
+custom_fonts/font = SubResource( 1 )
+text = "10"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
