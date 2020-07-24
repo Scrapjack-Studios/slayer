@@ -7,7 +7,9 @@ var can_respawn
 var wants_to_respawn
 
 func _ready():
+    # warning-ignore:return_value_discarded
     get_tree().connect('network_peer_disconnected', self, '_on_player_disconnected')
+    # warning-ignore:return_value_discarded
     get_tree().connect('server_disconnected', self, '_on_server_disconnected')
     
     add_child($"/root/Global".map.instance())
@@ -65,3 +67,7 @@ func _on_GameController_respawn_available():
         
 func _on_player_disconnected(id):
     get_node(str(id)).queue_free()
+
+func _on_server_disconnected():
+    # warning-ignore:return_value_discarded
+    get_tree().change_scene("res://MainMenu.tscn")

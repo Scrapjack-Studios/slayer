@@ -11,7 +11,9 @@ signal player_disconnected
 signal server_disconnected
 
 func _ready():
+    # warning-ignore:return_value_discarded
     get_tree().connect('network_peer_disconnected', self, '_on_player_disconnected')
+    # warning-ignore:return_value_discarded
     get_tree().connect('network_peer_connected', self, '_on_player_connected')
 
 func create_server(player_nickname):
@@ -23,6 +25,7 @@ func create_server(player_nickname):
 
 func connect_to_server(player_nickname):
     self_data.name = player_nickname
+    # warning-ignore:return_value_discarded
     get_tree().connect('connected_to_server', self, '_connected_to_server')
     var peer = NetworkedMultiplayerENet.new()
     peer.create_client(DEFAULT_IP, DEFAULT_PORT)
