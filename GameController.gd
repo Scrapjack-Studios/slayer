@@ -7,6 +7,9 @@ var can_respawn
 var wants_to_respawn
 
 func _ready():
+    get_tree().connect('network_peer_disconnected', self, '_on_player_disconnected')
+    get_tree().connect('server_disconnected', self, '_on_server_disconnected')
+    
     add_child($"/root/Global".map.instance())
     spawn()
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
@@ -42,7 +45,11 @@ func _on_RespawnAsker_pressed():
 
 func spawn():
     player = load("res://Player.tscn").instance()
+    player.name = str(get_tree().get_network_unique_id())
+    player.set_network_master(get_tree().get_network_unique_id())
     add_child(player)
+    var info = Network.self_data
+    player.set_position(info.position)
     player.connect("health_changed", self, "on_Player_health_changed")
     player.connect("died", self, "on_Player_died")
     player.health = player.max_health
