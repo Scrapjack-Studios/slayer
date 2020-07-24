@@ -47,6 +47,7 @@ var stopped_fire = false
 var burst_loop = 0
 var shots_fired_auto = 0
 var shot = false
+var grapple_count = 0
 
 func _ready():
     if $"/root/Global".weapon1 == "shotgun":
@@ -100,14 +101,21 @@ func _input(event: InputEvent) -> void:
         $Chain.shoot(event.position - get_viewport().size * .57)
         is_grappling = true
         $Whip.hide()
+        grapple_count += 1
+        
+            
 
         
     elif event.is_action_released("Graphook") and is_grappling:
         $Chain.release()
-        $GrappleTimer.start()
-        can_grapple = false
-        is_grappling = false
         $Whip.show()
+        is_grappling = false
+        if grapple_count == 2:
+            can_grapple = false
+            $GrappleTimer.start()
+            grapple_count = 0
+        
+        
     
     if event.is_action_pressed("jump"):
         is_jumping = false
