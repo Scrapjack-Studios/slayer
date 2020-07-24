@@ -62,3 +62,6 @@ func _on_GameController_respawn_available():
     if wants_to_respawn:
         spawn()
         wants_to_respawn = false
+        
+func _on_player_disconnected(id):
+    get_node(str(id)).queue_free()
