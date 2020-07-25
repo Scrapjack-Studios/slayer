@@ -51,7 +51,7 @@ func spawn():
     player.set_network_master(get_tree().get_network_unique_id())
     add_child(player)
     var info = Network.self_data
-    player.set_position(info.position)
+    player.init(info.name, info.position)
     player.connect("health_changed", self, "on_Player_health_changed")
     player.connect("died", self, "on_Player_died")
     player.health = player.max_health
