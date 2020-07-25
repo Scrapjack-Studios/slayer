@@ -189,11 +189,18 @@ func _physics_process(delta):
             is_walking = true
         elif Input.is_action_pressed('move_right'):
             direction = MoveDirection.RIGHT
-            is_walking = true
-        jump = Input.is_action_pressed("jump")   
-            
-    move(direction)
+            is_walking = true 
+        rset_unreliable('puppet_position', position)
+        rset('puppet_movement', direction)
+        move(direction)
+    else:
+        move(puppet_movement)
+        position = puppet_position
+    if get_tree().is_network_server():
+        Network.update_position(int(name), position)
      
+    jump = Input.is_action_pressed("jump")  
+    
     if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
         $Weapon/GunStats._BulletPostition()
         can_shoot = false
