@@ -3,6 +3,8 @@ extends KinematicBody2D
 signal health_changed(health)
 signal died
 
+enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
+
 export (float) var max_health = 100
 onready var health = max_health
 
@@ -175,11 +177,25 @@ func _input(event: InputEvent) -> void:
             $Weapon/GunStats.set_sprite()
         
 func _physics_process(delta):
+    var direction = MoveDirection.NONE
     if is_network_master():
-        move_left = Input.is_action_pressed("move_left")
-        move_right = Input.is_action_pressed("move_right")
+        if Input.is_action_pressed('move_left'):
+            direction = MoveDirection.LEFT
+        elif Input.is_action_pressed('move_right'):
+            direction = MoveDirection.RIGHTS
         jump = Input.is_action_pressed("jump")
     
+    var force = Vector2(0, gravity) # create forces
+    var stop = true
+    
+    if direction == MoveDirection.LEFT:
+        if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
+            force.x -= WALK_FORCE
+            stop = false
+    elif direction == MoveDirection.RIGHT:
+        if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
+            force.x += WALK_FORCE
+            stop = false
     
     if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
         $Weapon/GunStats._BulletPostition()
@@ -202,12 +218,10 @@ func _physics_process(delta):
     
     $Weapon.global_rotation = mpos.angle_to_point(position)  
        
-    var force = Vector2(0, gravity) # create forces 
+    
     
     if move_left or move_right:
         is_walking = true
-    
-    var stop = true
     
     if get_local_mouse_position().x < 0: # mouse is facing left
         $Weapon.set_position(Vector2(-22,10))
@@ -225,14 +239,7 @@ func _physics_process(delta):
         
     velocity += chain_velocity
 
-    if move_left:
-        if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
-            force.x -= WALK_FORCE
-            stop = false
-    elif move_right:
-        if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
-            force.x += WALK_FORCE
-            stop = false
+    
         
     if is_on_floor():
         rotation = get_floor_normal().angle() + PI/2
