@@ -5,6 +5,9 @@ signal died
 
 enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
 
+puppet var puppet_position = Vector2()
+puppet var puppet_movement = MoveDirection.NONE
+
 export (float) var max_health = 100
 onready var health = max_health
 
@@ -244,9 +247,6 @@ func _physics_process(delta):
         if collision.collider.is_in_group("bodies"):
                 collision.collider.apply_central_impulse(-collision.normal * push)
 
-    
-    
-    
     if is_on_floor():
         on_air_time = 0
         is_falling = false
