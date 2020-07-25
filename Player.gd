@@ -52,6 +52,8 @@ var shot = false
 var move_left
 var move_right
 var jump
+var stop
+var force
 
 func _ready():
     if $"/root/Global".weapon1 == "shotgun":
@@ -181,22 +183,14 @@ func _physics_process(delta):
     if is_network_master():
         if Input.is_action_pressed('move_left'):
             direction = MoveDirection.LEFT
+            is_walking = true
         elif Input.is_action_pressed('move_right'):
-            direction = MoveDirection.RIGHTS
-        jump = Input.is_action_pressed("jump")
-    
-    var force = Vector2(0, gravity) # create forces
-    var stop = true
-    
-    if direction == MoveDirection.LEFT:
-        if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
-            force.x -= WALK_FORCE
-            stop = false
-    elif direction == MoveDirection.RIGHT:
-        if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
-            force.x += WALK_FORCE
-            stop = false
-    
+            direction = MoveDirection.RIGHT
+            is_walking = true
+        jump = Input.is_action_pressed("jump")   
+            
+    move(direction)
+     
     if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
         $Weapon/GunStats._BulletPostition()
         can_shoot = false
@@ -210,18 +204,10 @@ func _physics_process(delta):
         GunTimer.queue_free()
         can_shoot = true
         shots_fired_auto += 1
-#        if shots_fired_auto == get_node("Weapon/GunStats").auto_mag:
-#            break
-#            stopped_fire = false
-#            can_shoot = false
+
     var mpos = get_global_mouse_position()
     
     $Weapon.global_rotation = mpos.angle_to_point(position)  
-       
-    
-    
-    if move_left or move_right:
-        is_walking = true
     
     if get_local_mouse_position().x < 0: # mouse is facing left
         $Weapon.set_position(Vector2(-22,10))
@@ -231,16 +217,11 @@ func _physics_process(delta):
         $Weapon/Weapon_Sprite.set_flip_v(false)
     if $Chain.hooked:
         _ChainHook()
-
-    
     else:
         # Not hooked -> no chain velocity
         chain_velocity = Vector2(0,0)
-        
     velocity += chain_velocity
 
-    
-        
     if is_on_floor():
         rotation = get_floor_normal().angle() + PI/2
         
@@ -311,6 +292,18 @@ func _physics_process(delta):
 #    if $Wall_Raycasts/Upper_Detect.is_colliding() or $Wall_Raycasts/Upper_Detect_Left.is_colliding() or $Wall_Raycasts/Upper_Detect_Right.is_colliding():
 #        _HeadBump()
         
+func move(direction):
+    force = Vector2(0, gravity) # create forces
+    stop = true
+    if direction == MoveDirection.LEFT:
+        if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
+            force.x -= WALK_FORCE
+            stop = false
+    elif direction == MoveDirection.RIGHT:
+        if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
+            force.x += WALK_FORCE
+            stop = false
+        
 func _WallMount():
     velocity.y = lerp(velocity.y,0,0.3)
     jump_strength = 900
@@ -333,6 +326,7 @@ func _WallMount():
     
 func Kickback(kickback):
     velocity = Vector2(kickback, 0).rotated($Weapon.global_rotation)
+    
 func _MantelRight():
     velocity.x = +CLIMB_AMOUNT
     velocity.y = -CLIMB_SPEED
@@ -343,7 +337,6 @@ func _MantelLeft():
     velocity.y = -CLIMB_SPEED
     is_climbing = true   
         
-
 func take_damage(amount):
     health -= amount
     emit_signal("health_changed", (health * 100 / max_health))
@@ -356,7 +349,6 @@ func _on_GrappleTimer_timeout():
 
 func _on_WallJumpTimer_timeout():
     can_doublejump = true
-
 
 func _ChainHook():
     chain_velocity = to_local($Chain.tip).normalized() * chain_pull
