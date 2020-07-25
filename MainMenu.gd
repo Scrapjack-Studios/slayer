@@ -11,6 +11,12 @@ func _on_PlayButton_pressed():
     
 func _on_JoinGame_pressed():
     $Blip1.play()
+    Network.connect_to_server($"/root/Global".username)
+    $"/root/Global".map = load("res://maps/ShootingRange.tscn")
+    $"/root/Global".weapon1 = "shotgun"
+    yield($Blip1, "finished")
+    # warning-ignore:return_value_discarded
+    get_tree().change_scene("res://GameController.tscn")
 
 func _on_CreateGame_pressed():
     $Blip1.play()
