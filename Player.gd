@@ -47,6 +47,9 @@ var stopped_fire = false
 var burst_loop = 0
 var shots_fired_auto = 0
 var shot = false
+var move_left
+var move_right
+var jump
 
 func _ready():
     if $"/root/Global".weapon1 == "shotgun":
@@ -172,6 +175,11 @@ func _input(event: InputEvent) -> void:
             $Weapon/GunStats.set_sprite()
         
 func _physics_process(delta):
+    if is_network_master():
+        move_left = Input.is_action_pressed("move_left")
+        move_right = Input.is_action_pressed("move_right")
+        jump = Input.is_action_pressed("jump")
+    
     
     if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
         $Weapon/GunStats._BulletPostition()
@@ -195,12 +203,6 @@ func _physics_process(delta):
     $Weapon.global_rotation = mpos.angle_to_point(position)  
        
     var force = Vector2(0, gravity) # create forces 
-    
-    var move_left = Input.is_action_pressed("move_left")
-    
-    var move_right = Input.is_action_pressed("move_right")
-    
-    var jump = Input.is_action_pressed("jump")
     
     if move_left or move_right:
         is_walking = true
