@@ -49,6 +49,7 @@ var shots_fired_auto = 0
 var shot = false
 
 func _ready():
+    $Username.set_text($"/root/Global".username)
     if $"/root/Global".weapon1 == "shotgun":
         $Weapon/GunStats/Templates/shotgun.activate()
         $Weapon/GunStats.set_sprite()
