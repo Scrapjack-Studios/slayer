@@ -60,8 +60,9 @@ remote func _send_player_info(id, info):
     var new_player = load('res://Player.tscn').instance()
     new_player.name = str(id)
     new_player.set_network_master(id)
-    $'/root/Game'.add_child(new_player)
-    new_player.init(info.name, info.position, true)
+    $'/root/GameController'.add_child(new_player)
+#    new_player.init(info.name, info.position, true)
+    new_player.set_position(Vector2(400,500))
 
 func update_position(id, position):
     players[id].position = position
