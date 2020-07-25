@@ -51,7 +51,7 @@ func spawn():
     player.set_network_master(get_tree().get_network_unique_id())
     add_child(player)
     var info = Network.self_data
-    player.init(info.name, info.position)
+    player.init(info.name, Vector2(500,480))
     player.connect("health_changed", self, "on_Player_health_changed")
     player.connect("died", self, "on_Player_died")
     player.health = player.max_health
@@ -67,6 +67,11 @@ func _on_GameController_respawn_available():
         
 func _on_player_disconnected(id):
     get_node(str(id)).queue_free()
+    $CanvasLayer/NetworkUI/DisconnectMessage.set_text(str(id) + " has disconnected")
+    $CanvasLayer/NetworkUI/DisconnectMessageTimer.start()
+    $CanvasLayer/NetworkUI/DisconnectMessage.show()
+    yield($CanvasLayer/NetworkUI/DisconnectMessageTimer, "timeout")
+    $CanvasLayer/NetworkUI/DisconnectMessage.hide()
 
 func _on_server_disconnected():
     # warning-ignore:return_value_discarded
