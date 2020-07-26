@@ -174,6 +174,8 @@ func _physics_process(delta):
      
     jump = Input.is_action_pressed("jump")  
     
+    var mpos = get_global_mouse_position().angle_to_point(position)
+    
     if is_network_master():
         if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
             can_shoot = false
@@ -225,7 +227,7 @@ func _physics_process(delta):
             
     if is_network_master():
         $Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
-        rset_unreliable("puppet_mouse_position", get_global_mouse_position().angle_to_point(position))
+        rset("puppet_mouse_position", mpos)
     else:
         $Weapon.global_rotation = puppet_mouse_position
         
