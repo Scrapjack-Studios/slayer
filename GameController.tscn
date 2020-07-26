@@ -59,6 +59,19 @@ custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 0.827451, 0.0627451, 0.0627451, 1 )
 text = "YOU DIED"
 
+[node name="TheyDied" type="RichTextLabel" parent="CanvasLayer/DeathUI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -312.5
+margin_top = -89.5
+margin_right = 312.5
+margin_bottom = 89.5
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0.827451, 0.0627451, 0.0627451, 1 )
+
 [node name="RespawnAsker" type="Button" parent="CanvasLayer/DeathUI"]
 visible = false
 anchor_left = 0.5

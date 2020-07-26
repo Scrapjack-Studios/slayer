@@ -353,16 +353,18 @@ func take_damage(amount):
         
 sync func die():
     emit_signal("died")
-    self.hide()
-    self.set_physics_process(false)
-    self.can_shoot = false
-    self.get_node("Camera2D")._set_current(false)
+    hide()
+    set_physics_process(false)
+    can_shoot = false
+    $Camera2D._set_current(false)
+    call_deferred("set_disabled", true, $CollisionShape2D)
     
 sync func respawn():
-    self.show()
-    self.set_physics_process(true)
-    self.can_shoot = true
-    self.get_node("Camera2D")._set_current(true)
+    show()
+    set_physics_process(true)
+    can_shoot = true
+    $Camera2D._set_current(true)
+    call_deferred("set_disabled", false, $CollisionShape2D)
     health = max_health
     emit_signal("respawn")
 
