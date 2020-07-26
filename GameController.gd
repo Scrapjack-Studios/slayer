@@ -22,21 +22,6 @@ func _process(_delta):
 
 func on_Player_health_changed(health):
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = health
-    
-func on_Player_died():
-    player.queue_free()
-    $CanvasLayer/DeathUI/YouDied.show()
-    $CanvasLayer/DeathUI/YouDiedTimer.start()
-    yield($CanvasLayer/DeathUI/YouDiedTimer, "timeout")
-    $CanvasLayer/DeathUI/YouDied.hide()
-    $CanvasLayer/DeathUI/RespawnAsker.show()
-    $CanvasLayer/DeathUI/RespawnAsker.set_text("Respawn")
-    can_respawn = false
-    $CanvasLayer/DeathUI/RespawnTimer.start()
-    $CanvasLayer/DeathUI/RespawnCountdown.show()
-    yield($CanvasLayer/DeathUI/RespawnTimer, "timeout")
-    can_respawn = true
-    emit_signal("respawn_available")
 
 func _on_RespawnAsker_pressed():
     if can_respawn:
@@ -53,13 +38,26 @@ func spawn():
     var info = Network.self_data
     player.init(info.name, Vector2(500,480))
     player.connect("health_changed", self, "on_Player_health_changed")
-    player.connect("died", self, "on_Player_died")
     player.health = player.max_health
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     $CanvasLayer/DeathUI/RespawnAsker.hide()
     $CanvasLayer/DeathUI/RespawnCountdown.hide()
-
-
+    
+sync func die(dead_player):
+    dead_player.queue_free()
+    $CanvasLayer/DeathUI/YouDied.show()
+    $CanvasLayer/DeathUI/YouDiedTimer.start()
+    yield($CanvasLayer/DeathUI/YouDiedTimer, "timeout")
+    $CanvasLayer/DeathUI/YouDied.hide()
+    $CanvasLayer/DeathUI/RespawnAsker.show()
+    $CanvasLayer/DeathUI/RespawnAsker.set_text("Respawn")
+    can_respawn = false
+    $CanvasLayer/DeathUI/RespawnTimer.start()
+    $CanvasLayer/DeathUI/RespawnCountdown.show()
+    yield($CanvasLayer/DeathUI/RespawnTimer, "timeout")
+    can_respawn = true
+    emit_signal("respawn_available")
+    
 func _on_GameController_respawn_available():
     if wants_to_respawn:
         spawn()
