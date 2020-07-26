@@ -33,9 +33,9 @@ animations = [ {
 "Bullet_Colliders",
 "bullets",
 ]]
-collision_layer = 2147483669
-collision_mask = 23
-collision/safe_margin = 1.0
+collision_layer = 2147483679
+collision_mask = 31
+collision/safe_margin = 0.5
 script = ExtResource( 3 )
 speed = 3000
 
