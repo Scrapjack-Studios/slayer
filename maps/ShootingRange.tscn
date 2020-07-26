@@ -211,6 +211,8 @@ position = Vector2( -789.593, 52.8267 )
 position = Vector2( -789.593, 371.827 )
 
 [node name="DamagingBlock" parent="." instance=ExtResource( 4 )]
+position = Vector2( -874.293, 1437.57 )
+scale = Vector2( 81.44, 1 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
