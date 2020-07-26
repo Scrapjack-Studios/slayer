@@ -224,8 +224,8 @@ func _physics_process(delta):
             $Weapon/Weapon_Sprite.set_flip_v(false)
             
     if is_network_master():
-        rset_unreliable('puppet_mouse_position', get_global_mouse_position().angle_to_point(position))
         $Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
+        rset_unreliable("puppet_mouse_position", get_global_mouse_position().angle_to_point(position))
     else:
         $Weapon.global_rotation = puppet_mouse_position
         
