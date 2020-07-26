@@ -39,6 +39,7 @@ func spawn():
     var info = Network.self_data
     player.init(info.name, Vector2(500,480))
     player.connect("health_changed", self, "on_Player_health_changed")
+    player.connect("died", self, "on_Player_died")
     player.health = player.max_health
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     $CanvasLayer/DeathUI/RespawnAsker.hide()
@@ -53,14 +54,9 @@ sync func respawn(player_to_respawn):
     player_to_respawn.health = player_to_respawn.max_health
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player_to_respawn.health
     $CanvasLayer/DeathUI/RespawnAsker.hide()
-    $CanvasLayer/DeathUI/RespawnCountdown.hide()
+    $CanvasLayer/DeathUI/RespawnCountdown.hide()  
     
-sync func die(dead_player):
-    dead_player.hide()
-    dead_player.set_physics_process(false)
-    dead_player.can_shoot = false
-    dead_player.get_node("Camera2D")._set_current(false)
-    respawning_player = dead_player
+func on_Player_died():
     $CanvasLayer/DeathUI/YouDied.show()
     $CanvasLayer/DeathUI/YouDiedTimer.start()
     yield($CanvasLayer/DeathUI/YouDiedTimer, "timeout")

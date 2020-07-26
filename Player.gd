@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal health_changed(health)
+signal died
 
 enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
 
@@ -347,8 +348,14 @@ func take_damage(amount):
     health -= amount
     emit_signal("health_changed", (health * 100 / max_health))
     if health <= 0:
-#        $"/root/GameController".die(self)
-        $"/root/GameController".rpc("die", self)
+        rpc("die")
+        
+sync func die():
+    emit_signal("died")
+    self.hide()
+    self.set_physics_process(false)
+    self.can_shoot = false
+    self.get_node("Camera2D")._set_current(false)
 
 func _on_GrappleTimer_timeout():
     $GrappleTimer.stop()
