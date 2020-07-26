@@ -5,7 +5,6 @@ signal respawn_available
 var player
 var can_respawn
 var wants_to_respawn
-var respawning_player
 
 func _ready():
     # warning-ignore:return_value_discarded
@@ -26,7 +25,7 @@ func on_Player_health_changed(health):
 
 func _on_RespawnAsker_pressed():
     if can_respawn:
-        rpc("respawn", respawning_player)
+        player.rpc("respawn")
     else:
         wants_to_respawn = true
         $CanvasLayer/DeathUI/RespawnAsker.set_text("Queued")
@@ -40,19 +39,14 @@ func spawn():
     player.init(info.name, Vector2(500,480))
     player.connect("health_changed", self, "on_Player_health_changed")
     player.connect("died", self, "on_Player_died")
+    player.connect("respawn", self, "on_Player_respawned")    
     player.health = player.max_health
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     $CanvasLayer/DeathUI/RespawnAsker.hide()
     $CanvasLayer/DeathUI/RespawnCountdown.hide()
     
-sync func respawn(player_to_respawn):
-    player_to_respawn.show()
-    player_to_respawn.set_physics_process(true)
-    player_to_respawn.can_shoot = true
-    player_to_respawn.get_node("Camera2D")._set_current(true)
-    player_to_respawn.set_position(Vector2(500,480))
-    player_to_respawn.health = player_to_respawn.max_health
-    $CanvasLayer/HUD/HealthBar/TextureProgress.value = player_to_respawn.health
+func on_Player_respawned():
+    $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     $CanvasLayer/DeathUI/RespawnAsker.hide()
     $CanvasLayer/DeathUI/RespawnCountdown.hide()  
     
@@ -72,7 +66,7 @@ func on_Player_died():
     
 func _on_GameController_respawn_available():
     if wants_to_respawn:
-        rpc("respawn", respawning_player)
+        player.rpc("respawn")
         wants_to_respawn = false
         
 func _on_player_disconnected(id):

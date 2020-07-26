@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal health_changed(health)
 signal died
+signal respawn
 
 enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
 
@@ -356,6 +357,14 @@ sync func die():
     self.set_physics_process(false)
     self.can_shoot = false
     self.get_node("Camera2D")._set_current(false)
+    
+sync func respawn():
+    self.show()
+    self.set_physics_process(true)
+    self.can_shoot = true
+    self.get_node("Camera2D")._set_current(true)
+    health = max_health
+    emit_signal("respawn")
 
 func _on_GrappleTimer_timeout():
     $GrappleTimer.stop()
