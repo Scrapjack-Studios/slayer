@@ -7,7 +7,9 @@ const MAX_PLAYERS = 5
 var players = { }
 var self_data = { name = '', position = Vector2(360, 180) }
 
+# warning_ignore:unused_signal
 signal player_disconnected
+# warning_ignore:unused_signal
 signal server_disconnected
 
 func _ready():

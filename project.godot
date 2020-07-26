@@ -26,6 +26,10 @@ FPSCounter="*res://misc/FPSCounter.tscn"
 Global="*res://Global.gd"
 Network="*res://Network.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=false
+
 [display]
 
 window/size/width=1920
