@@ -75,36 +75,32 @@ func _ready():
     
 func _input(event: InputEvent) -> void:
     
-    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
-        can_shoot = false
-        $Weapon/GunStats._BulletPostition()
-        var GunTimer = Timer.new()
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        can_shoot = true
-
-          
-    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun:
-        can_shoot = false
-        $Weapon/GunStats._BulletPostition()
-        var GunTimer = Timer.new()
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        can_shoot = true
-         
+    if is_network_master():
+        if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
+            can_shoot = false
+            $Weapon/GunStats.rpc("_BulletPostition")
+            var GunTimer = Timer.new()
+            GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+            GunTimer.set_one_shot(true)
+            self.add_child(GunTimer)
+            GunTimer.start()
+            yield(GunTimer, "timeout")
+            GunTimer.queue_free()
+            can_shoot = true
+        if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun:
+            can_shoot = false
+            $Weapon/GunStats.rpc("_BulletPostition")
+            var GunTimer = Timer.new()
+            GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+            GunTimer.set_one_shot(true)
+            self.add_child(GunTimer)
+            GunTimer.start()
+            yield(GunTimer, "timeout")
+            GunTimer.queue_free()
+            can_shoot = true
+        if event.is_action_released("tank_fire"):
+            stopped_fire = true
     
-    if event.is_action_released("tank_fire"):
-        stopped_fire = true
-        #connect("bullet_collided", Bullet, "on_bullet_collided")
-        
     if event.is_action_pressed("Graphook") and can_grapple:
         rotation = 0
         # We clicked the mouse -> shoot()

@@ -42,7 +42,7 @@ var super_shotgun_sound
 var pistol_sound  
     
     
-func _BulletPostition():
+sync func _BulletPostition():
     var b = Bullet.instance()
     b.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'blue', dmg, bullet_lifetime, bullet_size, bullet_speed)
     $Bullets.add_child(b)
