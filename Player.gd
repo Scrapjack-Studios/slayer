@@ -9,7 +9,7 @@ enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
 puppet var puppet_position = Vector2()
 puppet var puppet_movement = MoveDirection.NONE
 
-puppet var puppet_mouse_position = 0
+puppet var puppet_mouse_position
 
 export (float) var max_health = 100
 onready var health = max_health
@@ -226,8 +226,8 @@ func _physics_process(delta):
             $Weapon/Weapon_Sprite.set_flip_v(false)
             
     if is_network_master():
-        rset("puppet_mouse_position", mpos)
         $Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
+        rset("puppet_mouse_position", mpos)
     else:
         $Weapon.global_rotation = puppet_mouse_position
         
