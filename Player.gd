@@ -184,6 +184,7 @@ func _physics_process(delta):
             yield(GunTimer, "timeout")
             GunTimer.queue_free()
             can_shoot = true
+            
         if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun:
             can_shoot = false
             $Weapon/GunStats.rpc("_BulletPostition")
@@ -195,6 +196,7 @@ func _physics_process(delta):
             yield(GunTimer, "timeout")
             GunTimer.queue_free()
             can_shoot = true
+            
         if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
             $Weapon/GunStats._BulletPostition()
             can_shoot = false
@@ -208,20 +210,18 @@ func _physics_process(delta):
             GunTimer.queue_free()
             can_shoot = true
             shots_fired_auto += 1
+        
+        var mpos = get_global_mouse_position()
+        $Weapon.global_rotation = mpos.angle_to_point(position)     
         if Input.is_action_just_released("tank_fire"):
             stopped_fire = true
+        if get_local_mouse_position().x < 0: # mouse is facing left
+            $Weapon.set_position(Vector2(-22,10))
+            $Weapon/Weapon_Sprite.set_flip_v(true)
+        elif get_local_mouse_position().x > 0: # mouse is facing right
+            $Weapon.set_position(Vector2(15,0))
+            $Weapon/Weapon_Sprite.set_flip_v(false)
         
-
-    var mpos = get_global_mouse_position()
-    
-    $Weapon.global_rotation = mpos.angle_to_point(position)  
-    
-    if get_local_mouse_position().x < 0: # mouse is facing left
-        $Weapon.set_position(Vector2(-22,10))
-        $Weapon/Weapon_Sprite.set_flip_v(true)
-    elif get_local_mouse_position().x > 0: # mouse is facing right
-        $Weapon.set_position(Vector2(15,0))
-        $Weapon/Weapon_Sprite.set_flip_v(false)
     if $Chain.hooked:
         _ChainHook()
     else:
