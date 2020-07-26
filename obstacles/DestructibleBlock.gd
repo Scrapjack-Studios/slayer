@@ -12,7 +12,7 @@ func _ready():
     sprite_scale = $StaticBody2D/CollisionShape2D/Sprite.scale.x / 10
     collision_scale_x = $StaticBody2D/CollisionShape2D.scale.x / 2
     collision_scale_y = $StaticBody2D/CollisionShape2D.scale.y / 2
-    division_threshold = $StaticBody2D/CollisionShape2D.scale.x / 4
+    division_threshold = $StaticBody2D/CollisionShape2D.scale.x / 2
         
 func subdivide(body, node):
     if body.is_in_group("bullets"):
