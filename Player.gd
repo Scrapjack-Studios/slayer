@@ -10,7 +10,7 @@ export (PackedScene) var Bullet
 export (int) var rot_speed
 export (int) var damage
 export (float) var bullet_lifetime
-export (int, 0, 200) var push = 500
+export (int, 20, 200) var push = 550
 
 const FLOOR_ANGLE_TOLERANCE = 70 # Angle in degrees towards either side that the player can consider "floor"
 const WALK_FORCE = 1600
@@ -205,8 +205,8 @@ func _physics_process(delta):
         yield(GunTimer, "timeout")
         GunTimer.queue_free()
         can_shoot = true
-        
-        
+
+    
     var mpos = get_global_mouse_position()
     
     $Weapon.global_rotation = mpos.angle_to_point(position)  
@@ -270,9 +270,7 @@ func _physics_process(delta):
         var collision = get_slide_collision(index)
         if collision.collider.is_in_group("bodies"):
                 collision.collider.apply_central_impulse(-collision.normal * push)
-
-    
-    
+            
     
     if is_on_floor():
         on_air_time = 0

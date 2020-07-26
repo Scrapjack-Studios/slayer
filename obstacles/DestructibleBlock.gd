@@ -15,7 +15,7 @@ func _ready():
     division_threshold = $StaticBody2D/CollisionShape2D.scale.x / 2
     
 func subdivide(body, node):
-    if body.is_in_group("bullets"):
+    if body.is_in_group("bullets") or Input.is_action_pressed("crouch"):
         node.queue_free()
         var division = node.get_meta("level")
         if division > division_threshold:
@@ -23,6 +23,7 @@ func subdivide(body, node):
                 return
         var Stamp = node.duplicate()
         Stamp.set_meta("level", division + 1)
+        
         
         Stamp.get_node("CollisionShape2D").shape = Stamp.get_node("CollisionShape2D").shape.duplicate(true)
         var oldExtents = Stamp.get_node("CollisionShape2D").shape.extents

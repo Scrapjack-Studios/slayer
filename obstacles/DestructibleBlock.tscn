@@ -4,31 +4,35 @@
 [ext_resource path="res://obstacles/DestructibleBlock.gd" type="Script" id=2]
 
 [sub_resource type="PhysicsMaterial" id=1]
-rough = true
-absorbent = true
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 9.604, 9.614 )
 
-[node name="DestructibleBlock" type="Node2D"]
+[node name="DestructibleBlock" type="Node2D" groups=[
+"bodies",
+]]
 script = ExtResource( 2 )
 
-[node name="StaticBody2D" type="RigidBody2D" parent="."]
+[node name="StaticBody2D" type="RigidBody2D" parent="." groups=[
+"bodies",
+]]
 position = Vector2( 530, 76 )
 collision_layer = 7
 collision_mask = 7
-mass = 0.510204
 physics_material_override = SubResource( 1 )
-gravity_scale = 5.0
 contacts_reported = 1
 contact_monitor = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" groups=[
+"bodies",
+]]
 position = Vector2( 59.6436, 303.596 )
 scale = Vector2( 8, 8 )
 shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="StaticBody2D/CollisionShape2D"]
+[node name="Sprite" type="Sprite" parent="StaticBody2D/CollisionShape2D" groups=[
+"bodies",
+]]
 show_behind_parent = true
 position = Vector2( -0.002, 0.023 )
 scale = Vector2( 0.6, 0.6 )
