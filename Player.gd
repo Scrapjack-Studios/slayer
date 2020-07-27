@@ -10,7 +10,7 @@ puppet var puppet_position = Vector2()
 puppet var puppet_movement = MoveDirection.NONE
 puppet var puppet_mouse_position = 0
 puppet var puppet_weapon_position = Vector2()
-puppet var puppet_weapon_flip = false
+puppet var puppet_weapon_flip = bool()
 
 export (float) var max_health = 100
 onready var health = max_health
@@ -236,7 +236,7 @@ func _physics_process(delta):
     else:
         $Weapon.global_rotation = puppet_mouse_position
         $Weapon.position = puppet_weapon_position
-        $Weapon.set_flip_v(weaponflip)
+        $Weapon.flip_v = weaponflip
         
     if $Chain.hooked:
         _ChainHook()
