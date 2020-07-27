@@ -78,20 +78,19 @@ func _ready():
     
 func _input(event: InputEvent) -> void:
     
-    if event.is_action_pressed("Graphook") and can_grapple:
-        rotation = 0
-        # We clicked the mouse -> shoot()
-        $Chain.shoot(event.position - get_viewport().size * .57)
-        is_grappling = true
-        $Whip.hide()
-
-        
-    elif event.is_action_released("Graphook") and is_grappling:
-        $Chain.release()
-        $GrappleTimer.start()
-        can_grapple = false
-        is_grappling = false
-        $Whip.show()
+    if is_network_master():
+        if event.is_action_pressed("Graphook") and can_grapple:
+            rotation = 0
+            # We clicked the mouse -> shoot()
+            $Chain.shoot(event.position - get_viewport().size * .57)
+            is_grappling = true
+            $Whip.hide()
+        elif event.is_action_released("Graphook") and is_grappling:
+            $Chain.release()
+            $GrappleTimer.start()
+            can_grapple = false
+            is_grappling = false
+            $Whip.show()
     
     if event.is_action_pressed("jump"):
         is_jumping = false
