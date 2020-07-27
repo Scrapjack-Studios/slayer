@@ -1,8 +1,8 @@
 extends Node2D
 
-onready var links = $Links		# A slightly easier reference to the links
-var direction := Vector2(0,0)	# The direction in which the chain was shot
-var tip := Vector2(0,0)			# The global position the tip should be in
+onready var links = $Links      # A slightly easier reference to the links
+var direction := Vector2(0,0)   # The direction in which the chain was shot
+var tip := Vector2(0,0)         # The global position the tip should be in
                                 # We use an extra var for this, because the chain is 
                                 # connected to the player and thus all .position
                                 # properties would get messed with when the player
@@ -16,8 +16,8 @@ var hooked = false	# Whether the chain has connected to a wall
 # shoot() shoots the chain in a given direction
 func shoot(dir: Vector2) -> void:
     $WhipSound.play()
-    direction = dir.normalized()	# Normalize the direction and save it
-    flying = true					# Keep track of our current scan
+    direction = dir.normalized() # Normalize the direction and save it
+    flying = true # Keep track of our current scan
     tip = self.global_position
     var t = Timer.new()
     t.set_wait_time(1)
