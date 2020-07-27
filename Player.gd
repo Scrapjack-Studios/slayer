@@ -92,8 +92,6 @@ func _input(event: InputEvent) -> void:
             is_grappling = false
             $Whip.show()
     
-    if event.is_action_pressed("jump"):
-        is_jumping = false
     if jump_count < MAX_JUMP_COUNT and event.is_action_pressed("jump"):
         velocity.y = -jump_strength
         jump_count += 1
