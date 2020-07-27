@@ -10,6 +10,7 @@ puppet var puppet_position = Vector2()
 puppet var puppet_movement = MoveDirection.NONE
 puppet var puppet_mouse_position = 0
 puppet var puppet_weapon_position = Vector2()
+puppet var puppet_weapon_flip = false
 
 export (float) var max_health = 100
 onready var health = max_health
@@ -218,7 +219,8 @@ func _physics_process(delta):
         if Input.is_action_just_released("tank_fire"):
             stopped_fire = true
             
-    var weaponpos = $Weapon.position     
+    var weaponpos = $Weapon.position
+    var weaponflip = $Weapon.is_flipped_v()
             
     if is_network_master():
         $Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
@@ -230,9 +232,11 @@ func _physics_process(delta):
             $Weapon/Weapon_Sprite.set_flip_v(false)
         rset("puppet_mouse_position", mpos)
         rset("puppet_weapon_position", weaponpos)
+        rset("puppet_weapon_flip", weaponflip)
     else:
         $Weapon.global_rotation = puppet_mouse_position
         $Weapon.position = puppet_weapon_position
+        $Weapon.set_flip_v(weaponflip)
         
     if $Chain.hooked:
         _ChainHook()
