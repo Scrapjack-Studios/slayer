@@ -9,7 +9,7 @@ enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
 puppet var puppet_position = Vector2()
 puppet var puppet_movement = MoveDirection.NONE
 puppet var puppet_mouse_position = 0
-puppet var puppet_weapon_position = 0
+puppet var puppet_weapon_position = Vector2()
 
 export (float) var max_health = 100
 onready var health = max_health
