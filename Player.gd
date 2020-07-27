@@ -8,8 +8,8 @@ enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
 
 puppet var puppet_position = Vector2()
 puppet var puppet_movement = MoveDirection.NONE
-
-puppet var puppet_mouse_position
+puppet var puppet_mouse_position = 0
+puppet var puppet_weapon_position = 0
 
 export (float) var max_health = 100
 onready var health = max_health
@@ -217,19 +217,22 @@ func _physics_process(delta):
             
         if Input.is_action_just_released("tank_fire"):
             stopped_fire = true
-        
+            
+    var weaponpos = $Weapon.position     
+            
+    if is_network_master():
+        $Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
         if get_local_mouse_position().x < 0: # mouse is facing left
             $Weapon.set_position(Vector2(-22,10))
             $Weapon/Weapon_Sprite.set_flip_v(true)
         elif get_local_mouse_position().x > 0: # mouse is facing right
             $Weapon.set_position(Vector2(15,0))
             $Weapon/Weapon_Sprite.set_flip_v(false)
-            
-    if is_network_master():
-        $Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
         rset("puppet_mouse_position", mpos)
+        rset("puppet_weapon_position", weaponpos)
     else:
         $Weapon.global_rotation = puppet_mouse_position
+        $Weapon.position = puppet_weapon_position
         
     if $Chain.hooked:
         _ChainHook()
