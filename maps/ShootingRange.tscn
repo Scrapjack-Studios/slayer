@@ -172,7 +172,7 @@ rotation = 1.57197
 scale = Vector2( 10.2, 2.6 )
 
 [node name="StaticBody2D36" parent="." instance=ExtResource( 3 )]
-position = Vector2( -1153.91, -386.376 )
+position = Vector2( -1287.1, -609.947 )
 rotation = 1.57197
 scale = Vector2( 10.2, 2.6 )
 
@@ -182,7 +182,7 @@ rotation = 1.57197
 scale = Vector2( 10.2, 2.6 )
 
 [node name="StaticBody2D13" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2327.29, -316.074 )
+position = Vector2( 2327.29, -515.861 )
 rotation = 1.57197
 scale = Vector2( 10.2, 2.6 )
 
@@ -211,6 +211,8 @@ position = Vector2( -789.593, 52.8267 )
 position = Vector2( -789.593, 371.827 )
 
 [node name="DamagingBlock" parent="." instance=ExtResource( 4 )]
+position = Vector2( -132.352, 1350.12 )
+scale = Vector2( 40.92, 1 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
