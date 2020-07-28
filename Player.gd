@@ -269,8 +269,8 @@ func _physics_process(delta):
     for index in get_slide_count():
         var collision = get_slide_collision(index)
         if collision.collider.is_in_group("bodies"):
-                collision.collider.apply_central_impulse(-collision.normal * push)
-            
+            collision.collider.apply_central_impulse(-collision.normal * push)
+        
     
     if is_on_floor():
         on_air_time = 0
@@ -299,7 +299,6 @@ func _physics_process(delta):
 
         
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
-        # Jump must also be allowed to happen if the character left the floor a little bit ago.
         # Makes controls more snappy.
         velocity.y = -jump_strength
         is_jumping = true
@@ -313,10 +312,7 @@ func _physics_process(delta):
         _WallMount()
     else:
         can_walljump = true
-    
-#    if $Wall_Raycasts/Upper_Detect.is_colliding() or $Wall_Raycasts/Upper_Detect_Left.is_colliding() or $Wall_Raycasts/Upper_Detect_Right.is_colliding():
-#        _HeadBump()
-        
+
 func _WallMount():
     velocity.y = lerp(velocity.y,0,0.3)
     jump_strength = 900
