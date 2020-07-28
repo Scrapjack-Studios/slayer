@@ -75,9 +75,6 @@ func _ready():
     if $"/root/Global".weapon1 == "m1":
         $Weapon/GunStats/Templates/m1.activate()
         $Weapon/GunStats.set_sprite()
-        
-    if is_network_master():
-        $Camera2D.make_current()
     
 func _input(event: InputEvent) -> void:
     
