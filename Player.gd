@@ -85,7 +85,7 @@ func _input(event: InputEvent) -> void:
             is_grappling = true
             $Whip.hide()
         elif event.is_action_released("Graphook") and is_grappling:
-            $Chain.release()
+            $Chain.rpc("release")
             $GrappleTimer.start()
             can_grapple = false
             is_grappling = false

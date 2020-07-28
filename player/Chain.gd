@@ -31,7 +31,7 @@ sync func shoot(dir: Vector2) -> void:
         release()
     # if tip has not hooked after a second release and reset timer
 
-func release() -> void:
+sync func release() -> void:
     flying = false
     hooked = false
 
