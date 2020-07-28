@@ -56,9 +56,6 @@ var stopped_fire = false
 var burst_loop = 0
 var shots_fired_auto = 0
 var shot = false
-var move_left
-var move_right
-var jump
 var stop
 var force
 
@@ -277,16 +274,16 @@ func _physics_process(delta):
         is_falling = true
         rotation = 0
         
-    if [is_jumping or is_falling] and move_right and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
+    if [is_jumping or is_falling] and Input.is_action_pressed('move_right') and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
         if Input.is_action_just_pressed("jump"):
             _MantelRight()
 
-    if [is_jumping or is_falling] and move_left and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
+    if [is_jumping or is_falling] and Input.is_action_pressed('move_left') and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
         if Input.is_action_just_pressed("jump"):
             _MantelLeft()
 
         
-    if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
+    if on_air_time < JUMP_MAX_AIRBORNE_TIME and Input.is_action_just_pressed("jump") and not prev_jump_pressed and not is_jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
         # Makes controls more snappy.
         velocity.y = -jump_strength
@@ -295,7 +292,7 @@ func _physics_process(delta):
     
     on_air_time += delta
     
-    prev_jump_pressed = jump
+    prev_jump_pressed = Input.is_action_just_pressed("jump")
     
     if is_on_wall() and not is_climbing:
         _WallMount()
