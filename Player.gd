@@ -90,10 +90,6 @@ func _input(event: InputEvent) -> void:
             can_grapple = false
             is_grappling = false
             $Whip.show()
-    
-    if jump_count < MAX_JUMP_COUNT and event.is_action_pressed("jump"):
-        velocity.y = -jump_strength
-        jump_count += 1
         
     if event.is_action_pressed("Weapon1"):
         if $"/root/Global".weapon1 == "shotgun":
@@ -168,9 +164,10 @@ func _physics_process(delta):
         position = puppet_position
     if get_tree().is_network_server():
         Network.update_position(int(name), position)
-     
-    jump = Input.is_action_pressed("jump")  
     
+    if jump_count < MAX_JUMP_COUNT and Input.is_action_pressed("jump"):
+        velocity.y = -jump_strength
+        jump_count += 1
     
     if is_network_master():
         if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
