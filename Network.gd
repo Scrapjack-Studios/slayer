@@ -6,6 +6,7 @@ const MAX_PLAYERS = 5
 
 var players = { }
 var self_data = { name = '', position = Vector2(360, 180) }
+var disconnected_player_info
 
 # warning_ignore:unused_signal
 signal player_disconnected
@@ -39,6 +40,7 @@ func _connected_to_server():
     rpc('_send_player_info', local_player_id, self_data)
 
 func _on_player_disconnected(id):
+    disconnected_player_info = players[id]
     players.erase(id)
 
 func _on_player_connected(connected_player_id):
