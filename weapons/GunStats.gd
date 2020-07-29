@@ -54,7 +54,7 @@ func _BulletPostition():
         shot = true
         if shots_fired == 0:
             can_fire = false   
-        if $RayCast2D.is_colliding():
+        if $RayCast2DKick.is_colliding():
             get_parent().get_parent().Kickback(kickback)
         
         if shotgun:

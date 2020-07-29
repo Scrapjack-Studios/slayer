@@ -64,3 +64,14 @@ func subdivide(body, node):
         Stamp.set_mass(oldMass / 2)
         Clone.set_gravity_scale(oldGravity / 2)
         call_deferred("add_child", Stamp)
+        
+        
+#        var RTimer = Timer.new()
+#        RTimer.set_wait_time(5)
+#        RTimer.set_one_shot(true)
+#        self.add_child(RTimer)
+#        RTimer.start()
+#        yield(RTimer, "timeout")
+#        RTimer.queue_free()
+#        Stamp.set_sleeping(true)
+#        Clone.set_sleeping(true)
