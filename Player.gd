@@ -66,15 +66,16 @@ func _input(event: InputEvent) -> void:
     
     
     if Input.is_action_just_pressed("reload"):
+        $Weapon/GunStats.can_fire = true
+        $Weapon/GunStats.shots_fired = $Weapon/GunStats.mag
         var RTimer = Timer.new()
-        RTimer.set_wait_time($Weapon/GunStats/ReloadTimer.wait_time)
+        RTimer.set_wait_time($Weapon/GunStats.ReloadTime)
         RTimer.set_one_shot(true)
         self.add_child(RTimer)
         RTimer.start()
         yield(RTimer, "timeout")
         RTimer.queue_free()
-        $Weapon/GunStats.can_fire = true
-        $Weapon/GunStats.shots_fired = $Weapon/GunStats.mag
+        
     
     
     if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:

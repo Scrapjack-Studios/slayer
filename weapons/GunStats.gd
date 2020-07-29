@@ -20,7 +20,7 @@ var burst_ammount = 3
 var bullet_size = Vector2(0.2,0.2)
 #default is 0.2
 
-var bullet_speed = 1000
+var bullet_speed = 3000
 #velocity of bullet
 
 var bullet_lifetime
@@ -40,9 +40,10 @@ var m1_sound
 var super_shotgun_sound
 var pistol_sound  
 
-var mag = 10
+var mag = 50
 var shots_fired = 50
 var can_fire = true
+var ReloadTime = 2
 
 func _BulletPostition():
     if can_fire:
