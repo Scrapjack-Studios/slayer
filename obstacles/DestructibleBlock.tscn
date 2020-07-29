@@ -4,7 +4,7 @@
 [ext_resource path="res://obstacles/DestructibleBlock.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9.604, 9.614 )
+extents = Vector2( 9.5487, 9.614 )
 
 [node name="DestructibleBlock" type="Node2D" groups=[
 "bodies",
@@ -17,8 +17,8 @@ script = ExtResource( 2 )
 position = Vector2( 530, 76 )
 collision_layer = 7
 collision_mask = 7
-mass = 0.5
-gravity_scale = 1.5
+mass = 5.0
+gravity_scale = 8.0
 contacts_reported = 1
 contact_monitor = true
 

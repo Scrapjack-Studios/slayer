@@ -12,4 +12,4 @@ func activate():
     get_parent().get_parent().get_parent().get_node("GunStats").super_shotgun_sound = true
     get_parent().get_parent().get_parent().get_node("GunStats").cool_down = 1
     get_parent().get_parent().get_parent().get_node("GunStats").weapon_sprite = load("res://assets/sprites/weapons/Shotgun.png")
-    get_parent().get_parent().get_parent().get_node("GunStats").kickback = -400
+    get_parent().get_parent().get_parent().get_node("GunStats").kickback = -100

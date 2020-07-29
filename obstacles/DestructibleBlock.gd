@@ -15,7 +15,7 @@ func _ready():
     division_threshold = $StaticBody2D/CollisionShape2D.scale.x / 2
     
 func subdivide(body, node):
-    if body.is_in_group("bullets") or Input.is_action_pressed("crouch"):
+    if body.is_in_group("bullets"):
         node.queue_free()
         var division = node.get_meta("level")
         if division > division_threshold:
@@ -28,6 +28,7 @@ func subdivide(body, node):
         Stamp.get_node("CollisionShape2D").shape = Stamp.get_node("CollisionShape2D").shape.duplicate(true)
         var oldExtents = Stamp.get_node("CollisionShape2D").shape.extents
         var oldMass = Stamp.get_mass()
+        var oldGravity = Stamp.get_gravity_scale()
         Stamp.get_node("CollisionShape2D").shape.extents = Stamp.get_node("CollisionShape2D").shape.extents / 2
         
         var Clone = Stamp.duplicate()
@@ -36,6 +37,7 @@ func subdivide(body, node):
         Clone.set_position(Clone.get_position() + Vector2(-oldExtents.x*collision_scale_x,-oldExtents.y*collision_scale_y))
         Clone.get_node("CollisionShape2D").get_node("Sprite").scale = Clone.get_node("CollisionShape2D").shape.extents * sprite_scale
         Clone.set_mass(oldMass / 2)
+        Clone.set_gravity_scale(oldGravity / 2)
         call_deferred("add_child", Clone)
             
         Clone = Stamp.duplicate()
@@ -44,6 +46,7 @@ func subdivide(body, node):
         Clone.set_position(Clone.get_position() + Vector2(oldExtents.x*collision_scale_x,-oldExtents.y*collision_scale_y))
         Clone.get_node("CollisionShape2D").get_node("Sprite").scale = Clone.get_node("CollisionShape2D").shape.extents * sprite_scale
         Clone.set_mass(oldMass / 2)
+        Clone.set_gravity_scale(oldGravity / 2)
         call_deferred("add_child", Clone)
         
         Clone = Stamp.duplicate()
@@ -52,10 +55,12 @@ func subdivide(body, node):
         Clone.set_position(Clone.get_position() + Vector2(-oldExtents.x*collision_scale_x,oldExtents.y*collision_scale_y))
         Clone.get_node("CollisionShape2D").get_node("Sprite").scale = Clone.get_node("CollisionShape2D").shape.extents * sprite_scale
         Clone.set_mass(oldMass / 2)
+        Clone.set_gravity_scale(oldGravity / 2)
         call_deferred("add_child", Clone)
         
         Stamp.connect("body_entered", self, "subdivide", [Stamp])
         Stamp.set_position(Stamp.get_position() + Vector2(oldExtents.x*collision_scale_x,oldExtents.y*collision_scale_y))
         Stamp.get_node("CollisionShape2D").get_node("Sprite").scale = Stamp.get_node("CollisionShape2D").shape.extents * sprite_scale
         Stamp.set_mass(oldMass / 2)
+        Clone.set_gravity_scale(oldGravity / 2)
         call_deferred("add_child", Stamp)
