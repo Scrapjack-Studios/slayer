@@ -7,11 +7,14 @@ const MAX_PLAYERS = 5
 var players = { }
 var self_data = { name = '', position = Vector2(360, 180) }
 var disconnected_player_info
+var connected_player_info
+var connected_player
 
 # warning_ignore:unused_signal
 signal player_disconnected
 # warning_ignore:unused_signal
 signal server_disconnected
+signal player_connection_completed
 
 func _ready():
     # warning-ignore:return_value_discarded
@@ -44,6 +47,7 @@ func _on_player_disconnected(id):
     players.erase(id)
 
 func _on_player_connected(connected_player_id):
+    connected_player = connected_player_id
     var local_player_id = get_tree().get_network_unique_id()
     if not(get_tree().is_network_server()):
         rpc_id(1, '_request_player_info', local_player_id, connected_player_id)
@@ -65,8 +69,10 @@ remote func _send_player_info(id, info):
     new_player.name = str(id)
     new_player.set_network_master(id)
     $'/root/GameController'.add_child(new_player)
-#    new_player.init(info.name, info.position, true)
     new_player.init(info.name, info.position)
+    if connected_player in players:
+        connected_player_info = players[connected_player]
+        emit_signal("player_connection_completed")
 
 func update_position(id, position):
     players[id].position = position

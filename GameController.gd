@@ -10,6 +10,8 @@ func _ready():
     # warning-ignore:return_value_discarded
     get_tree().connect('network_peer_disconnected', self, '_on_player_disconnected')
     # warning-ignore:return_value_discarded
+    Network.connect('player_connection_completed', self, '_on_player_connection_completed')
+    # warning-ignore:return_value_discarded
     get_tree().connect('server_disconnected', self, '_on_server_disconnected')
     
     add_child($"/root/Global".map.instance())
@@ -77,6 +79,9 @@ func _on_player_disconnected(id):
     $CanvasLayer/NetworkUI/DisconnectMessage.show()
     yield($CanvasLayer/NetworkUI/DisconnectMessageTimer, "timeout")
     $CanvasLayer/NetworkUI/DisconnectMessage.hide()
+    
+func _on_player_connection_completed():
+    print(Network.connected_player_info)
 
 func _on_server_disconnected():
     # warning-ignore:return_value_discarded
