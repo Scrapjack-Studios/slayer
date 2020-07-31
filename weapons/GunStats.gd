@@ -49,8 +49,8 @@ func _BulletPostition():
         shots_fired -= 1
         if shots_fired == 0:
             can_fire = false   
-#        if $RayCast2D.is_colliding():
-#            get_parent().get_parent().Kickback(kickback)
+        if $RayCast2DKick.is_colliding():
+            get_parent().get_parent().Kickback(kickback)
         if not shotgun:
             spawn_projectile(
                         get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
