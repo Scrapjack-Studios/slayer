@@ -35,7 +35,6 @@ scale = Vector2( 0.42014, 0.401667 )
 [node name="GunStats" type="Node2D" parent="."]
 script = ExtResource( 1 )
 Bullet = ExtResource( 6 )
-dmg = 5
 
 [node name="Templates" type="Node2D" parent="GunStats"]
 
@@ -77,3 +76,6 @@ scale = Vector2( 1, 17.9248 )
 enabled = true
 
 [node name="ReloadTimer" type="Timer" parent="GunStats"]
+
+[node name="ShotDelayTimer" type="Timer" parent="GunStats"]
+one_shot = true

@@ -76,12 +76,9 @@ func _BulletPostition():
                         bullet_lifetime
                     )
                 rot_amount -= 0.02
-            var t = Timer.new()
-            t.set_wait_time(0.03)
-            t.set_one_shot(true)
-            self.add_child(t)
-            t.start()
-            yield(t, "timeout")
+            $ShotDelayTimer.set_wait_time(0.03)
+            $ShotDelayTimer.start()
+            yield($ShotDelayTimer, "timeout")
         if shot:
             if assault_sound:
                 $Sounds/Assault_fire.play()
