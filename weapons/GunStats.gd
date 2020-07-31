@@ -53,25 +53,25 @@ func _BulletPostition():
             get_parent().get_parent().Kickback(kickback)
         if not shotgun:
             spawn_projectile(
-                        get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-                        get_parent().global_rotation,
-                        damage, 
-                        bullet_speed, 
-                        'blue', 
-                        bullet_size, 
-                        bullet_lifetime
+                    get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
+                    get_parent().global_rotation,
+                    damage, 
+                    bullet_speed, 
+                    'blue', 
+                    bullet_size, 
+                    bullet_lifetime
                     )
         elif shotgun:
             var rot_amount = 0
             for _bullet in range(0,7):
                 spawn_projectile(
-                        get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-                        get_parent().global_rotation + rot_amount,
-                        damage, 
-                        bullet_speed, 
-                        'blue', 
-                        bullet_size, 
-                        bullet_lifetime
+                    get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
+                    get_parent().global_rotation + rot_amount,
+                    damage, 
+                    bullet_speed, 
+                    'blue', 
+                    bullet_size, 
+                    bullet_lifetime
                     )
                 rot_amount -= 0.02
             $ShotDelayTimer.set_wait_time(0.03)
