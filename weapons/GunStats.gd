@@ -64,34 +64,18 @@ func _BulletPostition():
                     bullet_lifetime
                 )
         elif shotgun:
-            var rot_amount = 0.4
-            spawn_projectile(
-                    get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-                    get_parent().global_rotation - 0.4,
-                    damage, 
-                    bullet_speed, 
-                    'blue', 
-                    bullet_size, 
-                    bullet_lifetime
-                )
-            spawn_projectile(
-                    get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-                    get_parent().global_rotation,
-                    damage, 
-                    bullet_speed, 
-                    'blue', 
-                    bullet_size, 
-                    bullet_lifetime
-                )
-            spawn_projectile(
-                    get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-                    get_parent().global_rotation + 0.4,
-                    damage, 
-                    bullet_speed, 
-                    'blue', 
-                    bullet_size, 
-                    bullet_lifetime
-                )
+            var rot_amount = 0
+            for _bullet in range(0,7):
+                spawn_projectile(
+                        get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
+                        get_parent().global_rotation + rot_amount,
+                        damage, 
+                        bullet_speed, 
+                        'blue', 
+                        bullet_size, 
+                        bullet_lifetime
+                    )
+                rot_amount -= 0.02
             var t = Timer.new()
             t.set_wait_time(0.03)
             t.set_one_shot(true)
