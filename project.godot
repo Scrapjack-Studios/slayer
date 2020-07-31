@@ -24,7 +24,6 @@ config/icon="res://assets/icon.png"
 FullscreenCRT="*res://misc/FullscreenCRT.tscn"
 FPSCounter="*res://misc/FPSCounter.tscn"
 Global="*res://Global.gd"
-Network="*res://Network.gd"
 
 [debug]
 
