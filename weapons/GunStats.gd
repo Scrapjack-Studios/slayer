@@ -21,7 +21,6 @@ var bullet_lifetime
 var weapon_sprite
 var weapon_size = Vector2(2,2)
 var weapon_position = Vector2(0,0)
-var shot = false
 
 var assault_sound
 var m1_sound
@@ -48,21 +47,20 @@ func spawn_projectile(pos, dir, dmg, speed, type, size, lifetime):
 func _BulletPostition():
     if can_fire:
         shots_fired -= 1
-        shot = true
         if shots_fired == 0:
             can_fire = false   
 #        if $RayCast2D.is_colliding():
 #            get_parent().get_parent().Kickback(kickback)
         if not shotgun:
             spawn_projectile(
-                    get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-                    get_parent().get_node("Weapon_Sprite/Muzzle").global_position - get_global_mouse_position(), 
-                    damage, 
-                    bullet_speed, 
-                    'blue', 
-                    bullet_size, 
-                    bullet_lifetime
-                )
+                        get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
+                        get_parent().global_rotation,
+                        damage, 
+                        bullet_speed, 
+                        'blue', 
+                        bullet_size, 
+                        bullet_lifetime
+                    )
         elif shotgun:
             var rot_amount = 0
             for _bullet in range(0,7):
@@ -79,19 +77,14 @@ func _BulletPostition():
             $ShotDelayTimer.set_wait_time(0.03)
             $ShotDelayTimer.start()
             yield($ShotDelayTimer, "timeout")
-        if shot:
-            if assault_sound:
-                $Sounds/Assault_fire.play()
-                shot = false
-            if pistol_sound:
-                $Sounds/Pistol_fire.play()
-                shot = false
-            if m1_sound:
-                $Sounds/M1_fire.play()
-                shot = false
-            if super_shotgun_sound:
-                $Sounds/SuperShotgun_fire.play()
-                shot = false
+        if assault_sound:
+            $Sounds/Assault_fire.play()
+        if pistol_sound:
+            $Sounds/Pistol_fire.play()
+        if m1_sound:
+            $Sounds/M1_fire.play()
+        if super_shotgun_sound:
+            $Sounds/SuperShotgun_fire.play()
                 
 func set_sprite():
     get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
