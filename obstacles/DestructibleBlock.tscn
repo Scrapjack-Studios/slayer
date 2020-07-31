@@ -8,17 +8,19 @@ extents = Vector2( 9.5487, 9.614 )
 
 [node name="DestructibleBlock" type="Node2D" groups=[
 "bodies",
+"destruct",
 ]]
 script = ExtResource( 2 )
 
 [node name="StaticBody2D" type="RigidBody2D" parent="." groups=[
 "bodies",
+"destruct",
 ]]
 position = Vector2( 530, 76 )
 collision_layer = 7
 collision_mask = 7
 mass = 5.0
-gravity_scale = 8.0
+gravity_scale = 20.0
 contacts_reported = 1
 contact_monitor = true
 

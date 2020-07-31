@@ -25,7 +25,8 @@ func _physics_process(delta):
     if collision:
         if collision.collider.is_in_group("bodies"):
             collision.collider.apply_central_impulse(-collision.normal * push)
-            collision.collider.get_parent().subdivide(self , collision.collider)
+            if collision.collider.is_in_group("destruct"):
+                collision.collider.get_parent().subdivide(self , collision.collider)
         if collision.collider.is_in_group("bullets"):
             velocity = Vector2(0, 0)
             $Sprite.hide()
