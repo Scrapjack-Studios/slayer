@@ -42,7 +42,11 @@ func _on_Quit_MainMenu_pressed():
 func _on_Quit_Desktop_pressed():
     $Blip1.play()
     yield($Blip1, "finished")
-    get_tree().quit()
+    if is_network_master():
+        Network.close_server()
+        get_tree().quit()
+    else:
+        get_tree().quit()
     
 func pause_game():
     get_tree().paused = true
