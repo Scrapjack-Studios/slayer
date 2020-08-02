@@ -368,6 +368,10 @@ sync func respawn():
     call_deferred("set_disabled", false, $CollisionShape2D)
     health = max_health
     emit_signal("respawn")
+    
+remote func kicked(reason):
+    get_tree().network_peer.disconnect_peer(get_tree().get_network_unique_id())
+#    print("You have been kicked from the server, reason: ", reason)
 
 func _on_GrappleTimer_timeout():
     $GrappleTimer.stop()
