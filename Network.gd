@@ -47,7 +47,6 @@ func close_server():
     # terminate server
     get_tree().set_network_peer(null)
 #    emit_signal("server_stopped")
-    get_tree().change_scene("res://Menus/MainMenu/MainMenu.tscn")
     
 func update_position(id, position):
     players[id].position = position

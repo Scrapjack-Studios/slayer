@@ -30,8 +30,13 @@ func _on_Options_pressed():
 func _on_Quit_MainMenu_pressed():
     $Blip1.play()
     yield($Blip1, "finished")
-    # warning-ignore:return_value_discarded
-    get_tree().change_scene("res://MainMenu.tscn")
+    if is_network_master():
+        Network.close_server()
+        # warning-ignore:return_value_discarded
+        get_tree().change_scene("res://MainMenu.tscn")
+    else:
+        # warning-ignore:return_value_discarded
+        get_tree().change_scene("res://MainMenu.tscn")
     get_tree().paused = false
 
 func _on_Quit_Desktop_pressed():
