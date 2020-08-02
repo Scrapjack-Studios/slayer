@@ -36,7 +36,22 @@ func connect_to_server(player_nickname):
     var peer = NetworkedMultiplayerENet.new()
     peer.create_client(DEFAULT_IP, DEFAULT_PORT)
     get_tree().set_network_peer(peer)
-
+    
+func close_server():
+    #kick players
+    for player in players:
+        if player != 1:
+            rpc_id(player,"kicked", "Server Closed")
+            get_tree().network_peer.disconnect_peer(player)
+    players.clear()
+    # terminate server
+    get_tree().set_network_peer(null)
+#    emit_signal("server_stopped")
+    get_tree().change_scene("res://Menus/MainMenu/MainMenu.tscn")
+    
+func update_position(id, position):
+    players[id].position = position
+    
 func _connected_to_server():
     var local_player_id = get_tree().get_network_unique_id()
     players[local_player_id] = self_data
@@ -56,7 +71,6 @@ remote func _request_player_info(request_from_id, player_id):
     if get_tree().is_network_server():
         rpc_id(request_from_id, '_send_player_info', player_id, players[player_id])
 
-# A function to be used if needed. The purpose is to request all players in the current session.
 remote func _request_players(request_from_id):
     if get_tree().is_network_server():
         for peer_id in players:
@@ -73,6 +87,3 @@ remote func _send_player_info(id, info):
     if connected_player in players:
         connected_player_info = players[connected_player]
         emit_signal("player_connection_completed")
-
-func update_position(id, position):
-    players[id].position = position
