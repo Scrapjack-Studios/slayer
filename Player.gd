@@ -364,9 +364,9 @@ sync func respawn():
     show()
     set_physics_process(true)
     can_shoot = true
-    $Camera2D._set_current(true)
     call_deferred("set_disabled", false, $CollisionShape2D)
     health = max_health
+    
     emit_signal("respawn")
     
 remote func kicked(reason):
