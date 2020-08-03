@@ -43,6 +43,7 @@ func spawn():
     player.connect("died", self, "on_Player_died")
     player.connect("respawn", self, "on_Player_respawned")    
     player.health = player.max_health
+    player.get_node("Camera2D").make_current()
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     $CanvasLayer/DeathUI/RespawnAsker.hide()
     $CanvasLayer/DeathUI/RespawnCountdown.hide()
