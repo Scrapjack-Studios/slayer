@@ -1,16 +1,13 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
-[ext_resource path="res://weapons/weapon_templates/Assault_T.gd" type="Script" id=3]
+[ext_resource path="res://weapons/weapon_templates/WeaponPreseter.gd" type="Script" id=3]
 [ext_resource path="res://assets/sfx/weapons/Combat_Shotgun.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sfx/weapons/Pistol.wav" type="AudioStream" id=5]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sfx/weapons/M1.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sfx/weapons/AssaultRifle.wav" type="AudioStream" id=8]
-[ext_resource path="res://weapons/weapon_templates/Shotgun_T.gd" type="Script" id=9]
-[ext_resource path="res://weapons/weapon_templates/Pistol_T.gd" type="Script" id=10]
-[ext_resource path="res://weapons/weapon_templates/M1_T.gd" type="Script" id=11]
 
 [node name="Weapon" type="Sprite"]
 use_parent_material = true
@@ -39,17 +36,33 @@ dmg = 5
 
 [node name="Templates" type="Node2D" parent="GunStats"]
 
-[node name="shotgun" type="Node2D" parent="GunStats/Templates"]
-script = ExtResource( 9 )
-
-[node name="assault_rifle" type="Node2D" parent="GunStats/Templates"]
+[node name="Chesterfield_33" type="Node" parent="GunStats/Templates"]
 script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "Pump action shotgun"
+}
+shotgun = true
+cool_down = 1
+mag = 8
+shots_fired = 8
+reload = 2
+weapon_sprite = ExtResource( 2 )
+kickback = -30
+super_shotgun_sound = true
+dmg = 5
 
-[node name="pistol" type="Node2D" parent="GunStats/Templates"]
-script = ExtResource( 10 )
-
-[node name="m1" type="Node2D" parent="GunStats/Templates"]
-script = ExtResource( 11 )
+[node name="Axe_78" type="Node" parent="GunStats/Templates"]
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "Standard assalt rifle"
+}
+automatic = true
+mag = 60
+shots_fired = 60
+reload = 3
+weapon_sprite = ExtResource( 2 )
+assault_sound = true
+dmg = 1
 
 [node name="Sounds" type="Node2D" parent="GunStats"]
 

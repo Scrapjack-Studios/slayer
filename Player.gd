@@ -50,7 +50,7 @@ var grapple_count = 0
 
 func _ready():
     if $"/root/Global".weapon1 == "shotgun":
-        $Weapon/GunStats/Templates/shotgun.activate()
+        $Weapon/GunStats/Templates/Chesterfield_33.activate()
         $Weapon/GunStats.set_sprite()
     if $"/root/Global".weapon1 == "assault_rifle":
         $Weapon/GunStats/Templates/assault_rifle.activate()
@@ -66,46 +66,16 @@ func _input(event: InputEvent) -> void:
     
     
     if Input.is_action_just_pressed("reload"):
-        var RTimer = Timer.new()
-        RTimer.set_wait_time($Weapon/GunStats.ReloadTime)
-        RTimer.set_one_shot(true)
-        self.add_child(RTimer)
-        RTimer.start()
-        yield(RTimer, "timeout")
-        RTimer.queue_free()
-        $Weapon/GunStats.shots_fired = $Weapon/GunStats.mag
-        $Weapon/GunStats.can_fire = true
+        $Weapon_Mechanics.reload()
     
     
-    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
-        can_shoot = false
-        $Weapon/GunStats._BulletPostition()
-        var GunTimer = Timer.new()
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        can_shoot = true
+    if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
+        $Weapon_Mechanics.semi_auto()
 
           
-    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun:
-        can_shoot = false
-        $Weapon/GunStats._BulletPostition()
-        var GunTimer = Timer.new()
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        can_shoot = true
+    if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
+        $Weapon_Mechanics.shotgun()
          
-    
-    if event.is_action_released("tank_fire"):
-        stopped_fire = true
-        #connect("bullet_collided", Bullet, "on_bullet_collided")
         
     if event.is_action_pressed("Graphook") and can_grapple:
         rotation = 0
@@ -193,20 +163,9 @@ func _input(event: InputEvent) -> void:
         
 func _physics_process(delta):
     
-    if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-        $Weapon/GunStats._BulletPostition()
-        can_shoot = false
-        var GunTimer = Timer.new()
-        GunTimer.set_physics_process(true)
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        can_shoot = true
+    if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
+        $Weapon_Mechanics.automatic()
 
-    
     var mpos = get_global_mouse_position()
     
     $Weapon.global_rotation = mpos.angle_to_point(position)  

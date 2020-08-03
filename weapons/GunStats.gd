@@ -44,6 +44,7 @@ var mag = 50
 var shots_fired = 50
 var can_fire = true
 var ReloadTime = 2
+var bounce
 
 func _BulletPostition():
     if can_fire:
@@ -56,7 +57,7 @@ func _BulletPostition():
             can_fire = false   
         if $RayCast2DKick.is_colliding():
             get_parent().get_parent().Kickback(kickback)
-        
+            
         if shotgun:
             var c = Bullet.instance()
             var d = Bullet.instance()
