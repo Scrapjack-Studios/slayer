@@ -3,8 +3,10 @@ extends Control
 var game_controller
 var options_menu
 var player
+var paused
 
 func _ready():
+    # warning-ignore:return_value_discarded
     get_parent().get_parent().connect("game_started", self, "on_game_started")
 
 func _process(_delta):
@@ -54,11 +56,11 @@ func _on_Quit_Desktop_pressed():
         get_tree().quit()
     
 func pause_game():
-    get_tree().paused = true
+    paused = true
     # TODO: this has to be changed when multiplayer is implemented
     
 func resume_game():
-    get_tree().paused = false
+    paused = false
     # TODO: this has to be changed when multiplayer is implemented
     
 func on_game_started():
