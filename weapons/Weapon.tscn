@@ -70,7 +70,7 @@ dmg = 1
 
 [node name="Assault_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
 stream = ExtResource( 8 )
-bus = "Game SFX"
+bus = "Weapon SFX"
 
 [node name="Pistol_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
 stream = ExtResource( 5 )

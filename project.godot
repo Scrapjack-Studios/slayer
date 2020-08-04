@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="Slayer"
 run/main_scene="res://MainMenu.tscn"
-config/icon="res://assets/icon.png"
+config/icon="res://assets/sprites/icon.png"
 
 [autoload]
 

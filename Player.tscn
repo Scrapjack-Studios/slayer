@@ -5,8 +5,8 @@
 [ext_resource path="res://player/Camera2D.gd" type="Script" id=3]
 [ext_resource path="res://player/Chain.tscn" type="PackedScene" id=4]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/32x32.png" type="Texture" id=6]
-[ext_resource path="res://assets/rope.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/32x32.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/rope.png" type="Texture" id=7]
 [ext_resource path="res://WeaponMechanics.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]

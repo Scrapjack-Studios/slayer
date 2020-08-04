@@ -2,9 +2,10 @@
 
 [ext_resource path="res://misc/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/onlyObjects_retina_rotated.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/onlyObjects_retina_rotated.png" type="Texture" id=3]
 [ext_resource path="res://assets/ui/barRed_horizontalMid.png" type="Texture" id=4]
 [ext_resource path="res://misc/Explosion.tscn" type="PackedScene" id=5]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.8592, 31.8324 )

@@ -1,15 +1,16 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/explosion3.png" type="Texture" id=1]
-[ext_resource path="res://assets/explosionSmoke3.png" type="Texture" id=2]
-[ext_resource path="res://assets/explosion4.png" type="Texture" id=3]
-[ext_resource path="res://assets/explosionSmoke1.png" type="Texture" id=4]
-[ext_resource path="res://assets/explosionSmoke5.png" type="Texture" id=5]
-[ext_resource path="res://assets/explosion1.png" type="Texture" id=6]
-[ext_resource path="res://assets/explosion5.png" type="Texture" id=7]
-[ext_resource path="res://assets/explosionSmoke2.png" type="Texture" id=8]
-[ext_resource path="res://assets/explosionSmoke4.png" type="Texture" id=9]
-[ext_resource path="res://assets/explosion2.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/explosion3.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/explosionSmoke3.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/explosion4.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/explosionSmoke1.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/explosionSmoke5.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/explosion1.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/explosion5.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/explosionSmoke2.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/explosionSmoke4.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/explosion2.png" type="Texture" id=10]
+
 
 
 
