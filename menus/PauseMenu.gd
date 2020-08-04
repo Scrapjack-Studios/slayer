@@ -59,13 +59,13 @@ func pause_game():
     paused = true
     player.can_shoot = false
     player.can_grapple = false
-    # TODO: this has to be changed when multiplayer is implemented
+    player.get_node("Camera2D").clear_current()
     
 func resume_game():
     paused = false
     player.can_shoot = true
     player.can_grapple = true
-    # TODO: this has to be changed when multiplayer is implemented
+    player.get_node("Camera2D").make_current()
     
 func on_game_started():
     game_controller = get_parent().get_parent()
