@@ -1,5 +1,7 @@
 extends Control
 
+var game_controller
+var options_menu
 var player
 
 func _ready():
@@ -9,17 +11,17 @@ func _process(_delta):
     if Input.is_action_just_released("pause_menu") and get_tree().paused == false:
         self.show()
         pause_game()
-    elif Input.is_action_just_released("pause_menu") and get_tree().paused == true and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").visible == false and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/VideoOptions").visible == false and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/AudioOptions").visible == false:
+    elif Input.is_action_just_released("pause_menu") and get_tree().paused == true and options_menu.get_node("Buttons").visible == false and options_menu.get_node("VideoOptions").visible == false and options_menu.get_node("AudioOptions").visible == false:
         self.hide()
         resume_game()
-    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").visible == true:
-        get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").hide()
-    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/VideoOptions").visible == true:
-        get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/VideoOptions").hide()
-        get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").show()
+    elif Input.is_action_just_released("pause_menu") and options_menu.get_node("Buttons").visible == true:
+        options_menu.get_node("Buttons").hide()
+    elif Input.is_action_just_released("pause_menu") and options_menu.get_node("VideoOptions").visible == true:
+        options_menu.get_node("VideoOptions").hide()
+        options_menu.get_node("Buttons").show()
     elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/AudioOptions").visible == true:
-        get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/AudioOptions").hide()
-        get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").show()
+        options_menu.get_node("AudioOptons").hide()
+        options_menu.get_node("Buttons").show()
 
 func _on_Resume_pressed():
     self.hide()
@@ -27,7 +29,7 @@ func _on_Resume_pressed():
     $Blip1.play()
 
 func _on_Options_pressed():
-    get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/Buttons").show()
+    options_menu.get_node("Buttons").show()
     $Blip1.play()
 
 func _on_Quit_MainMenu_pressed():
@@ -60,7 +62,9 @@ func resume_game():
     # TODO: this has to be changed when multiplayer is implemented
     
 func on_game_started():
-    player = get_parent().get_parent().get_node(str(get_tree().get_network_unique_id()))
+    game_controller = get_parent().get_parent()
+    options_menu = game_controller.get_node("CanvasLayer/OptionsMenu")
+    player = game_controller.get_node(str(get_tree().get_network_unique_id()))
 
 func _on_Resume_mouse_entered():
     $Hover.play()
