@@ -39,8 +39,7 @@ func spawn():
     player.name = str(get_tree().get_network_unique_id())
     player.set_network_master(get_tree().get_network_unique_id())
     add_child(player)
-    var info = Network.self_data
-    player.init(info.name, Vector2(500,480))
+    player.init(Network.self_data.name, Network.self_data.position)
     player.connect("health_changed", self, "on_Player_health_changed")
     player.connect("died", self, "on_Player_died")
     player.connect("respawn", self, "on_Player_respawned")    
@@ -52,7 +51,7 @@ func spawn():
     
 func on_Player_respawned():
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
-    player.set_position(Vector2(500,480))
+    player.set_position(Network.self_data.position)
     player.get_node("Camera2D").make_current()
     $CanvasLayer/DeathUI/RespawnAsker.hide()
     $CanvasLayer/DeathUI/RespawnCountdown.hide()  
