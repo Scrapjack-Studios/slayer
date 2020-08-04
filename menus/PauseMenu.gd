@@ -10,18 +10,18 @@ func _ready():
     get_parent().get_parent().connect("game_started", self, "on_game_started")
 
 func _process(_delta):
-    if Input.is_action_just_released("pause_menu") and get_tree().paused == false:
+    if Input.is_action_just_released("pause_menu") and not paused:
         self.show()
         pause_game()
-    elif Input.is_action_just_released("pause_menu") and get_tree().paused == true and options_menu.get_node("Buttons").visible == false and options_menu.get_node("VideoOptions").visible == false and options_menu.get_node("AudioOptions").visible == false:
+    elif Input.is_action_just_released("pause_menu") and paused and not options_menu.get_node("Buttons").visible and not options_menu.get_node("VideoOptions").visible and not options_menu.get_node("AudioOptions").visible:
         self.hide()
         resume_game()
-    elif Input.is_action_just_released("pause_menu") and options_menu.get_node("Buttons").visible == true:
+    elif Input.is_action_just_released("pause_menu") and options_menu.get_node("Buttons").visible:
         options_menu.get_node("Buttons").hide()
-    elif Input.is_action_just_released("pause_menu") and options_menu.get_node("VideoOptions").visible == true:
+    elif Input.is_action_just_released("pause_menu") and options_menu.get_node("VideoOptions").visible:
         options_menu.get_node("VideoOptions").hide()
         options_menu.get_node("Buttons").show()
-    elif Input.is_action_just_released("pause_menu") and get_tree().get_root().get_node("GameController/CanvasLayer/OptionsMenu/AudioOptions").visible == true:
+    elif Input.is_action_just_released("pause_menu") and options_menu.get_node("AudioOptions").visible:
         options_menu.get_node("AudioOptons").hide()
         options_menu.get_node("Buttons").show()
 
