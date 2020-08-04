@@ -44,7 +44,7 @@ func _on_Quit_MainMenu_pressed():
     else:
         # warning-ignore:return_value_discarded
         get_tree().change_scene("res://MainMenu.tscn")
-    get_tree().paused = false
+    player.get_node("Camera2D").make_current() # fixes strange main menu bug, so don't remove it
 
 func _on_Quit_Desktop_pressed():
     $Blip1.play()
