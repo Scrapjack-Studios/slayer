@@ -37,6 +37,7 @@ var gravity = 1500.0 # pixels/second/second
 var rot_dir
 var can_shoot = true
 var can_move = true
+var can_jump = true
 var chain_pull = 55
 var on_air_time = 100
 var is_jumping = false
@@ -163,26 +164,27 @@ func _physics_process(delta):
     if get_tree().is_network_server():
         Network.update_position(int(name), position)
     
-    if Input.is_action_just_pressed("jump") and jump_count < MAX_JUMP_COUNT:
-        velocity.y = -jump_strength
-        jump_count += 1
-        
-    if [is_jumping or is_falling] and Input.is_action_pressed('move_right') and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
-        if Input.is_action_just_pressed("jump"):
-            _MantelRight()
-
-    if [is_jumping or is_falling] and Input.is_action_pressed('move_left') and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
-        if Input.is_action_just_pressed("jump"):
-            _MantelLeft()
+    if can_jump:
+        if Input.is_action_just_pressed("jump") and jump_count < MAX_JUMP_COUNT:
+            velocity.y = -jump_strength
+            jump_count += 1
             
-    if on_air_time < JUMP_MAX_AIRBORNE_TIME and Input.is_action_just_pressed("jump") and not prev_jump_pressed and not is_jumping:
-        # Jump must also be allowed to happen if the character left the floor a little bit ago.
-        # Makes controls more snappy.
-        velocity.y = -jump_strength
-        is_jumping = true
-        rotation = 0
-
-    prev_jump_pressed = Input.is_action_just_pressed("jump")
+        if [is_jumping or is_falling] and Input.is_action_pressed('move_right') and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
+            if Input.is_action_just_pressed("jump"):
+                _MantelRight()
+    
+        if [is_jumping or is_falling] and Input.is_action_pressed('move_left') and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
+            if Input.is_action_just_pressed("jump"):
+                _MantelLeft()
+                
+        if on_air_time < JUMP_MAX_AIRBORNE_TIME and Input.is_action_just_pressed("jump") and not prev_jump_pressed and not is_jumping:
+            # Jump must also be allowed to happen if the character left the floor a little bit ago.
+            # Makes controls more snappy.
+            velocity.y = -jump_strength
+            is_jumping = true
+            rotation = 0
+    
+        prev_jump_pressed = Input.is_action_just_pressed("jump")
     
     on_air_time += delta
         
