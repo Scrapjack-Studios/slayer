@@ -36,6 +36,7 @@ var chain_velocity := Vector2(0,0)
 var gravity = 1500.0 # pixels/second/second
 var rot_dir
 var can_shoot = true
+var can_move = true
 var chain_pull = 55
 var on_air_time = 100
 var is_jumping = false
@@ -304,14 +305,15 @@ func _physics_process(delta):
 func move(direction):
     force = Vector2(0, gravity) # create forces
     stop = true
-    if direction == MoveDirection.LEFT:
-        if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
-            force.x -= WALK_FORCE
-            stop = false
-    elif direction == MoveDirection.RIGHT:
-        if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
-            force.x += WALK_FORCE
-            stop = false
+    if can_move:
+        if direction == MoveDirection.LEFT:
+            if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
+                force.x -= WALK_FORCE
+                stop = false
+        elif direction == MoveDirection.RIGHT:
+            if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
+                force.x += WALK_FORCE
+                stop = false
         
 func _WallMount():
     velocity.y = lerp(velocity.y,0,0.3)
