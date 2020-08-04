@@ -1,5 +1,6 @@
 extends Node
 
+signal game_started
 signal respawn_available
 
 var player
@@ -17,6 +18,7 @@ func _ready():
     add_child($"/root/Global".map.instance())
     spawn()
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
+    emit_signal("game_started")
     
 func _process(_delta):
     if $CanvasLayer/DeathUI/RespawnCountdown.visible:

@@ -1,5 +1,10 @@
 extends Control
 
+var player
+
+func _ready():
+    get_parent().get_parent().connect("game_started", self, "on_game_started")
+
 func _process(_delta):
     if Input.is_action_just_released("pause_menu") and get_tree().paused == false:
         self.show()
@@ -55,6 +60,9 @@ func pause_game():
 func resume_game():
     get_tree().paused = false
     # TODO: this has to be changed when multiplayer is implemented
+    
+func on_game_started():
+    player = get_parent().get_parent().get_node(str(get_tree().get_network_unique_id()))
 
 func _on_Resume_mouse_entered():
     $Hover.play()
