@@ -26,7 +26,7 @@ var velocity = Vector2(0,0) # The velocity of the player (kept over time)
 var chain_velocity := Vector2(0,0)
 var gravity = 1500.0 # pixels/second/second
 var rot_dir
-var can_shoot
+var can_shoot = true
 var chain_pull = 55
 var on_air_time = 100
 var is_jumping = false
@@ -49,12 +49,11 @@ var shot = false
 var grapple_count = 0
 
 func _ready():
-    can_shoot = $WeaponMechanics.can_fire
     if $"/root/Global".weapon1 == "shotgun":
         $Weapon/GunStats/Templates/Chesterfield_33.activate()
         $Weapon/GunStats.set_sprite()
     if $"/root/Global".weapon1 == "assault_rifle":
-        $Weapon/GunStats/Templates/assault_rifle.activate()
+        $Weapon/GunStats/Templates/Axe_78.activate()
         $Weapon/GunStats.set_sprite()
     if $"/root/Global".weapon1 == "pistol":
         $Weapon/GunStats/Templates/pistol.activate()
@@ -62,8 +61,7 @@ func _ready():
     if $"/root/Global".weapon1 == "m1":
         $Weapon/GunStats/Templates/m1.activate()
         $Weapon/GunStats.set_sprite()
-    
-    
+     
 func _input(event: InputEvent) -> void:
     
     
@@ -73,11 +71,12 @@ func _input(event: InputEvent) -> void:
     
     if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
         $WeaponMechanics.semi_auto()
-
+        GunTimer(false)
           
     if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
         $WeaponMechanics.shotgun()
-         
+        GunTimer(false)
+
         
     if event.is_action_pressed("Graphook") and can_grapple:
         rotation = 0
@@ -167,7 +166,9 @@ func _physics_process(delta):
     
     if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
         $WeaponMechanics.automatic()
-
+        GunTimer(true)
+        
+        
     var mpos = get_global_mouse_position()
     
     $Weapon.global_rotation = mpos.angle_to_point(position)  
@@ -293,6 +294,18 @@ func _WallMount():
         jump_strength = 750
     if velocity.y > 0:
         rotation = 0
+    
+func GunTimer(phy):
+    can_shoot = false
+    var GunTimer = Timer.new()
+    GunTimer.set_physics_process(phy)
+    GunTimer.set_wait_time($Weapon/GunStats.cool_down)
+    GunTimer.set_one_shot(true)
+    self.add_child(GunTimer)
+    GunTimer.start()
+    yield(GunTimer, "timeout")
+    GunTimer.queue_free()
+    can_shoot = true
     
 func Kickback(kickback):
     velocity = Vector2(kickback, 0).rotated($Weapon.global_rotation)

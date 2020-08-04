@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sfx/weapons/M1.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sfx/weapons/AssaultRifle.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sprites/weapons/AssaultRifle.png" type="Texture" id=9]
 
 [node name="Weapon" type="Sprite"]
 use_parent_material = true
@@ -42,7 +43,7 @@ __meta__ = {
 "_editor_description_": "Pump action shotgun"
 }
 shotgun = true
-cool_down = 1
+cool_down = 0.3
 mag = 8
 shots_fired = 8
 reload = 2
@@ -57,10 +58,11 @@ __meta__ = {
 "_editor_description_": "Standard assalt rifle"
 }
 automatic = true
+cool_down = 0.1
 mag = 60
 shots_fired = 60
-reload = 3
-weapon_sprite = ExtResource( 2 )
+reload = 2
+weapon_sprite = ExtResource( 9 )
 assault_sound = true
 dmg = 1
 

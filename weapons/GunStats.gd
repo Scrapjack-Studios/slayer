@@ -9,7 +9,7 @@ var is_semi_auto
 var shotgun
 var kickback = 0
 
-var cool_down = 0.5
+var cool_down = 0
 #cool_down time for each shot, could also be reload time and effects the time in betwene shots of auto fire
 
 var burst_ammount = 3

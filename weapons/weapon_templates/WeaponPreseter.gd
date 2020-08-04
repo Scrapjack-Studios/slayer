@@ -6,7 +6,7 @@ export (bool) var semi_auto
 export (bool) var automatic
 export (bool) var burst_fire
 export (bool) var shotgun
-export (int) var cool_down
+export (float) var cool_down
 export (int) var mag
 export (int) var shots_fired
 export (int) var reload
