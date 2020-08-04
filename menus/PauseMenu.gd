@@ -57,10 +57,14 @@ func _on_Quit_Desktop_pressed():
     
 func pause_game():
     paused = true
+    player.can_shoot = false
+    player.can_grapple = false
     # TODO: this has to be changed when multiplayer is implemented
     
 func resume_game():
     paused = false
+    player.can_shoot = true
+    player.can_grapple = true
     # TODO: this has to be changed when multiplayer is implemented
     
 func on_game_started():
