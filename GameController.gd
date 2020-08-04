@@ -85,7 +85,6 @@ func _on_player_disconnected(id):
     
 func _on_player_connection_completed():
     $CanvasLayer/NetworkUI/ConnectMessage.set_text(Network.connected_player_info["name"] + " has connected")
-    print(Network.connected_player_info["name"] + " has connected")
     $CanvasLayer/NetworkUI/ConnectMessageTimer.start()
     $CanvasLayer/NetworkUI/ConnectMessage.show()
     yield($CanvasLayer/NetworkUI/ConnectMessageTimer, "timeout")
