@@ -7,7 +7,7 @@
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/32x32.png" type="Texture" id=6]
 [ext_resource path="res://assets/rope.png" type="Texture" id=7]
-[ext_resource path="res://Weapon_Mechanics.gd" type="Script" id=8]
+[ext_resource path="res://WeaponMechanics.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.998139, 2.11467 )
@@ -32,7 +32,7 @@ script = ExtResource( 2 )
 Bullet = ExtResource( 5 )
 push = 20
 
-[node name="Weapon_Mechanics" type="Node2D" parent="."]
+[node name="WeaponMechanics" type="Node2D" parent="."]
 script = ExtResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]

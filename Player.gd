@@ -26,7 +26,7 @@ var velocity = Vector2(0,0) # The velocity of the player (kept over time)
 var chain_velocity := Vector2(0,0)
 var gravity = 1500.0 # pixels/second/second
 var rot_dir
-var can_shoot = true
+var can_shoot
 var chain_pull = 55
 var on_air_time = 100
 var is_jumping = false
@@ -49,6 +49,7 @@ var shot = false
 var grapple_count = 0
 
 func _ready():
+    can_shoot = $WeaponMechanics.can_fire
     if $"/root/Global".weapon1 == "shotgun":
         $Weapon/GunStats/Templates/Chesterfield_33.activate()
         $Weapon/GunStats.set_sprite()
@@ -62,19 +63,20 @@ func _ready():
         $Weapon/GunStats/Templates/m1.activate()
         $Weapon/GunStats.set_sprite()
     
+    
 func _input(event: InputEvent) -> void:
     
     
     if Input.is_action_just_pressed("reload"):
-        $Weapon_Mechanics.reload()
+        $WeaponMechanics.reload()
     
     
     if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
-        $Weapon_Mechanics.semi_auto()
+        $WeaponMechanics.semi_auto()
 
           
     if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
-        $Weapon_Mechanics.shotgun()
+        $WeaponMechanics.shotgun()
          
         
     if event.is_action_pressed("Graphook") and can_grapple:
@@ -164,7 +166,7 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta):
     
     if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-        $Weapon_Mechanics.automatic()
+        $WeaponMechanics.automatic()
 
     var mpos = get_global_mouse_position()
     
