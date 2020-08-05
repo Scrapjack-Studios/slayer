@@ -86,19 +86,7 @@ func _BulletPostition():
             
     
         if shot:
-        
-            if assault_sound:
-                $Sounds/Assault_fire.play()
-                shot = false
-            if pistol_sound:
-                $Sounds/Pistol_fire.play()
-                shot = false
-            if m1_sound:
-                $Sounds/M1_fire.play()
-                shot = false
-            if super_shotgun_sound:
-                $Sounds/SuperShotgun_fire.play()
-                shot = false
+            $Sounds/FireSound.play()
 
 func set_sprite():
     get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite

@@ -47,6 +47,8 @@ var stopped_fire = false
 var burst_loop = 0
 var shot = false
 var grapple_count = 0
+var cool_down_sound
+var reload_sound
 
 func _ready():
     if $"/root/Global".weapon1 == "shotgun":
@@ -303,6 +305,7 @@ func GunTimer(phy):
     GunTimer.set_one_shot(true)
     self.add_child(GunTimer)
     GunTimer.start()
+    
     yield(GunTimer, "timeout")
     GunTimer.queue_free()
     can_shoot = true

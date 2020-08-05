@@ -1,14 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
 [ext_resource path="res://weapons/weapon_templates/WeaponPreseter.gd" type="Script" id=3]
-[ext_resource path="res://assets/sfx/weapons/Combat_Shotgun.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/sfx/weapons/Pistol.wav" type="AudioStream" id=5]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sfx/weapons/M1.wav" type="AudioStream" id=7]
-[ext_resource path="res://assets/sfx/weapons/AssaultRifle.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sprites/weapons/AssaultRifle.png" type="Texture" id=9]
+[ext_resource path="res://weapons/FireSound.gd" type="Script" id=10]
 
 [node name="Weapon" type="Sprite"]
 use_parent_material = true
@@ -49,8 +46,8 @@ shots_fired = 8
 reload = 2
 weapon_sprite = ExtResource( 2 )
 kickback = -30
-super_shotgun_sound = true
 dmg = 5
+sound = [ 1 ]
 
 [node name="Axe_78" type="Node" parent="GunStats/Templates"]
 script = ExtResource( 3 )
@@ -63,26 +60,13 @@ mag = 60
 shots_fired = 60
 reload = 2
 weapon_sprite = ExtResource( 9 )
-assault_sound = true
 dmg = 1
 
 [node name="Sounds" type="Node2D" parent="GunStats"]
 
-[node name="Assault_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
-stream = ExtResource( 8 )
+[node name="FireSound" type="AudioStreamPlayer" parent="GunStats/Sounds"]
 bus = "Weapon SFX"
-
-[node name="Pistol_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
-stream = ExtResource( 5 )
-bus = "Game SFX"
-
-[node name="M1_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
-stream = ExtResource( 7 )
-bus = "Game SFX"
-
-[node name="SuperShotgun_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
-stream = ExtResource( 4 )
-bus = "Game SFX"
+script = ExtResource( 10 )
 
 [node name="Bullets" type="Node" parent="GunStats"]
 

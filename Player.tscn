@@ -7,7 +7,7 @@
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/sprites/32x32.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/rope.png" type="Texture" id=7]
-[ext_resource path="res://WeaponMechanics.gd" type="Script" id=8]
+[ext_resource path="res://weapons/WeaponMechanics.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.998139, 2.11467 )

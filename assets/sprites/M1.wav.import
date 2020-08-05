@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/M1.wav-7cc740035c4a1732b15cdd08306b5a09.sample"
+path="res://.import/M1.wav-18bd8d5cea2b07f5909a2127b73eb605.sample"
 
 [deps]
 
-source_file="res://assets/M1.wav"
-dest_files=[ "res://.import/M1.wav-7cc740035c4a1732b15cdd08306b5a09.sample" ]
+source_file="res://assets/sprites/M1.wav"
+dest_files=[ "res://.import/M1.wav-18bd8d5cea2b07f5909a2127b73eb605.sample" ]
 
 [params]
 

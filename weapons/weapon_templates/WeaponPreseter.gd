@@ -13,13 +13,13 @@ export (int) var reload
 export (Texture) var weapon_sprite 
 export (int) var kickback
 export (int) var burst_ammount
-export (bool) var assault_sound
-export (bool) var m1_sound
-export (bool) var super_shotgun_sound
-export (bool) var pistol_sound  
 export (int) var dmg
+export (Array) var sound = [1,2,3]
 
 func activate():
+    get_parent().get_parent().get_parent().get_node("GunStats").get_node("Sounds/FireSound").assault = sound[1]
+    get_parent().get_parent().get_parent().get_node("GunStats").get_node("Sounds/FireSound").pistol = sound[2]
+    get_parent().get_parent().get_parent().get_node("GunStats").get_node("Sounds/FireSound").shotgun = sound[3]
     get_parent().get_parent().get_parent().get_node("GunStats").dmg = dmg
     get_parent().get_parent().get_parent().get_node("GunStats").is_semi_auto = semi_auto
     get_parent().get_parent().get_parent().get_node("GunStats").is_automatic = automatic
@@ -31,10 +31,6 @@ func activate():
     get_parent().get_parent().get_parent().get_node("GunStats").mag = mag
     get_parent().get_parent().get_parent().get_node("GunStats").shots_fired = shots_fired
     get_parent().get_parent().get_parent().get_node("GunStats").kickback = kickback
-    get_parent().get_parent().get_parent().get_node("GunStats").pistol_sound = pistol_sound  
-    get_parent().get_parent().get_parent().get_node("GunStats").super_shotgun_sound = super_shotgun_sound
-    get_parent().get_parent().get_parent().get_node("GunStats").m1_sound = m1_sound
-    get_parent().get_parent().get_parent().get_node("GunStats").assault_sound = assault_sound
     
 
 
