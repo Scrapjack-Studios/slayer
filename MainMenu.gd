@@ -29,6 +29,7 @@ func _on_CreateGame_pressed():
     
 
 func _on_EditProfile_pressed():
+    $EditProfileMenu/VBoxContainer/UserName.text = Global.username
     $Blip1.play()
     $PlayMenu.hide()
     $EditProfileMenu.show()
