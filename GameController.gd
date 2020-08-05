@@ -84,7 +84,7 @@ func _on_player_disconnected(id):
     $CanvasLayer/NetworkUI/DisconnectMessage.hide()
     
 func _on_player_connection_completed():
-    if get_tree().get_network_unique_id() != Network.connected_player and get_tree().get_network_unique_id() != 1:
+    if get_tree().get_network_unique_id() != Network.connected_player and Network.connected_player != 1:
         $CanvasLayer/NetworkUI/ConnectMessage.set_text(Network.connected_player_info["name"] + " has connected")
         $CanvasLayer/NetworkUI/ConnectMessageTimer.start()
         $CanvasLayer/NetworkUI/ConnectMessage.show()
