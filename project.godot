@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="Slayer"
 run/main_scene="res://MainMenu.tscn"
-config/icon="res://assets/sprites/icon.png"
+config/icon="res://assets/icon.png"
 
 [autoload]
 
@@ -146,11 +146,6 @@ Weapon3={
 Weapon4={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":52,"unicode":0,"echo":false,"script":null)
- ]
-}
-reload={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
  ]
 }
 
