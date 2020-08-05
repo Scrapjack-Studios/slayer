@@ -6,7 +6,7 @@ const MAX_PLAYERS = 5
 
 var players = { }
 var start_position = Vector2(360,180)
-var self_data = { name = '', position = Vector2(360, 180) }
+var self_data = {name = '', position = Vector2()}
 var disconnected_player_info
 var connected_player_info
 var connected_player

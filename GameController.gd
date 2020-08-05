@@ -39,7 +39,7 @@ func spawn():
     player.name = str(get_tree().get_network_unique_id())
     player.set_network_master(get_tree().get_network_unique_id())
     add_child(player)
-    player.init(Network.self_data.name, Network.self_data.position)
+    player.init(Network.self_data.name, Network.start_position)
     player.connect("health_changed", self, "on_Player_health_changed")
     player.connect("died", self, "on_Player_died")
     player.connect("respawn", self, "on_Player_respawned")    
