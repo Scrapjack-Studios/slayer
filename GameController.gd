@@ -51,7 +51,7 @@ func spawn():
     
 func on_Player_respawned():
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
-    player.set_position(Network.self_data.position)
+    player.set_position(Network.start_position)
     player.get_node("Camera2D").make_current()
     $CanvasLayer/DeathUI/RespawnAsker.hide()
     $CanvasLayer/DeathUI/RespawnCountdown.hide()  
