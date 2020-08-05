@@ -311,6 +311,5 @@ bus = "Music"
 [connection signal="pressed" from="PlayMenu/VBoxContainer/EditProfile" to="." method="_on_EditProfile_pressed"]
 [connection signal="mouse_entered" from="PlayMenu/VBoxContainer/ShootingRange" to="." method="_on_ShootingRange_mouse_entered"]
 [connection signal="pressed" from="PlayMenu/VBoxContainer/ShootingRange" to="." method="_on_ShootingRange_pressed"]
-[connection signal="text_changed" from="EditProfileMenu/VBoxContainer/UserName" to="EditProfileMenu" method="_on_UserName_text_changed"]
 [connection signal="pressed" from="EditProfileMenu/VBoxContainer/Save" to="EditProfileMenu" method="_on_Save_pressed"]
 [connection signal="pressed" from="SRSetup/VBoxContainer2/StartGame" to="." method="_on_StartGame_pressed"]
