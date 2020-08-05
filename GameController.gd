@@ -84,11 +84,12 @@ func _on_player_disconnected(id):
     $CanvasLayer/NetworkUI/DisconnectMessage.hide()
     
 func _on_player_connection_completed():
-    $CanvasLayer/NetworkUI/ConnectMessage.set_text(Network.connected_player_info["name"] + " has connected")
-    $CanvasLayer/NetworkUI/ConnectMessageTimer.start()
-    $CanvasLayer/NetworkUI/ConnectMessage.show()
-    yield($CanvasLayer/NetworkUI/ConnectMessageTimer, "timeout")
-    $CanvasLayer/NetworkUI/ConnectMessage.hide()
+    if get_tree().get_network_unique_id() != Network.connected_player:
+        $CanvasLayer/NetworkUI/ConnectMessage.set_text(Network.connected_player_info["name"] + " has connected")
+        $CanvasLayer/NetworkUI/ConnectMessageTimer.start()
+        $CanvasLayer/NetworkUI/ConnectMessage.show()
+        yield($CanvasLayer/NetworkUI/ConnectMessageTimer, "timeout")
+        $CanvasLayer/NetworkUI/ConnectMessage.hide()
 
 func _on_server_disconnected():
     # warning-ignore:return_value_discarded
