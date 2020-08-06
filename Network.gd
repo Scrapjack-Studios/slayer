@@ -50,7 +50,6 @@ func close_server():
 func kick_player(player, reason):
     $"/root/GameController".get_node(str(player)).rpc("kicked", reason)
     get_tree().network_peer.disconnect_peer(player)
-    players.erase(player)
     
 func update_position(id, position):
     players[id].position = position
