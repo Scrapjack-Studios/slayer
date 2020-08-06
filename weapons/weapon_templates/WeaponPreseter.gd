@@ -14,8 +14,12 @@ export (Texture) var weapon_sprite
 export (int) var kickback
 export (int) var burst_ammount
 export (int) var dmg
+export(int, "Pistol", "Assault", "Shotgun", "Carbine") var Weapon_Sounds
 
 func activate():
+    get_parent().get_parent().get_parent().get_node("GunStats").get_node("Sounds/FireSound").shotgun = Weapon_Sounds == 2
+    get_parent().get_parent().get_parent().get_node("GunStats").get_node("Sounds/FireSound").pistol = Weapon_Sounds == 0
+    get_parent().get_parent().get_parent().get_node("GunStats").get_node("Sounds/FireSound").assault = Weapon_Sounds == 1
     get_parent().get_parent().get_parent().get_node("GunStats").dmg = dmg
     get_parent().get_parent().get_parent().get_node("GunStats").is_semi_auto = semi_auto
     get_parent().get_parent().get_parent().get_node("GunStats").is_automatic = automatic

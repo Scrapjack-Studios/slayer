@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
 [ext_resource path="res://weapons/weapon_templates/WeaponPreseter.gd" type="Script" id=3]
+[ext_resource path="res://assets/sfx/ui/Button1.wav" type="AudioStream" id=4]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sprites/weapons/AssaultRifle.png" type="Texture" id=9]
 [ext_resource path="res://weapons/FireSound.gd" type="Script" id=10]
@@ -47,6 +48,20 @@ reload = 2
 weapon_sprite = ExtResource( 2 )
 kickback = -30
 dmg = 5
+Weapon_Sounds = 2
+
+[node name="Raven_99" type="Node" parent="GunStats/Templates"]
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "Pump action shotgun"
+}
+semi_auto = true
+cool_down = 0.3
+mag = 99
+shots_fired = 99
+reload = 3
+weapon_sprite = ExtResource( 2 )
+dmg = 5
 
 [node name="Axe_78" type="Node" parent="GunStats/Templates"]
 script = ExtResource( 3 )
@@ -68,6 +83,7 @@ bus = "Weapon SFX"
 script = ExtResource( 10 )
 
 [node name="ReloadSound" type="AudioStreamPlayer" parent="GunStats/Sounds"]
+stream = ExtResource( 4 )
 
 [node name="CoolDownSound" type="AudioStreamPlayer" parent="GunStats/Sounds"]
 bus = "Weapon SFX"

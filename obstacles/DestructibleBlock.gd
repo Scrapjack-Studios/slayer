@@ -16,6 +16,7 @@ func _ready():
     
 func subdivide(body, node):
     if body.is_in_group("bullets"):
+        
         node.queue_free()
         var division = node.get_meta("level")
         if division > division_threshold:
@@ -26,6 +27,7 @@ func subdivide(body, node):
         
         
         Stamp.get_node("CollisionShape2D").shape = Stamp.get_node("CollisionShape2D").shape.duplicate(true)
+        $Break.play()
         var oldExtents = Stamp.get_node("CollisionShape2D").shape.extents
         var oldMass = Stamp.get_mass()
         var oldGravity = Stamp.get_gravity_scale()

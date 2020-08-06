@@ -83,8 +83,7 @@ func _BulletPostition():
             $Bullets.add_child(d)
             $Bullets.add_child(f)
             $Bullets.add_child(h)
-            
-    
+              
         if shot:
             $Sounds/FireSound.play()
 
