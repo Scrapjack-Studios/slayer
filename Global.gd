@@ -8,3 +8,4 @@ var weapon4
 var map
 
 var username
+var kick_reason = ""
