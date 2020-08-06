@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
-[ext_resource path="res://weapons/weapon_templates/WeaponPreseter.gd" type="Script" id=3]
+[ext_resource path="res://weapons/Weapon_Templates.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sfx/ui/Button1.wav" type="AudioStream" id=4]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sprites/weapons/AssaultRifle.png" type="Texture" id=9]
 [ext_resource path="res://weapons/FireSound.gd" type="Script" id=10]
 
 [node name="Weapon" type="Sprite"]
@@ -33,48 +32,7 @@ script = ExtResource( 1 )
 Bullet = ExtResource( 6 )
 dmg = 5
 
-[node name="Templates" type="Node2D" parent="GunStats"]
-
-[node name="Chesterfield_33" type="Node" parent="GunStats/Templates"]
-script = ExtResource( 3 )
-__meta__ = {
-"_editor_description_": "Pump action shotgun"
-}
-shotgun = true
-cool_down = 0.3
-mag = 8
-shots_fired = 8
-reload = 2
-weapon_sprite = ExtResource( 2 )
-kickback = -30
-dmg = 5
-Weapon_Sounds = 2
-
-[node name="Raven_99" type="Node" parent="GunStats/Templates"]
-script = ExtResource( 3 )
-__meta__ = {
-"_editor_description_": "Pump action shotgun"
-}
-semi_auto = true
-cool_down = 0.3
-mag = 99
-shots_fired = 99
-reload = 3
-weapon_sprite = ExtResource( 2 )
-dmg = 5
-
-[node name="Axe_78" type="Node" parent="GunStats/Templates"]
-script = ExtResource( 3 )
-__meta__ = {
-"_editor_description_": "Standard assalt rifle"
-}
-automatic = true
-cool_down = 0.1
-mag = 60
-shots_fired = 60
-reload = 2
-weapon_sprite = ExtResource( 9 )
-dmg = 1
+[node name="Templates" parent="GunStats" instance=ExtResource( 3 )]
 
 [node name="Sounds" type="Node2D" parent="GunStats"]
 

@@ -4,8 +4,9 @@
 
 [sub_resource type="AudioEffectReverb" id=1]
 resource_name = "Reverb"
-room_size = 0.5
-dry = 0.57
+room_size = 0.23
+dry = 0.23
+wet = 0.17
 script = ExtResource( 1 )
 
 [resource]

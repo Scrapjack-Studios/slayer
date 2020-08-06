@@ -27,7 +27,7 @@ func subdivide(body, node):
         
         
         Stamp.get_node("CollisionShape2D").shape = Stamp.get_node("CollisionShape2D").shape.duplicate(true)
-        $Break.play()
+#        $Break.play()
         var oldExtents = Stamp.get_node("CollisionShape2D").shape.extents
         var oldMass = Stamp.get_mass()
         var oldGravity = Stamp.get_gravity_scale()

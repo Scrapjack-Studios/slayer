@@ -16,6 +16,8 @@ export (int) var burst_ammount
 export (int) var dmg
 export(int, "Pistol", "Assault", "Shotgun", "Carbine") var Weapon_Sounds
 
+
+
 func activate():
     get_parent().get_parent().get_parent().get_node("GunStats").get_node("Sounds/FireSound").shotgun = Weapon_Sounds == 2
     get_parent().get_parent().get_parent().get_node("GunStats").get_node("Sounds/FireSound").pistol = Weapon_Sounds == 0
