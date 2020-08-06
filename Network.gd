@@ -42,7 +42,7 @@ func close_server():
     #kick players
     for player in players:
         if player != 1:
-            rpc_id(player,"kicked", "Server Closed")
+            $"/root/GameController".get_node(str(player)).rpc("kicked", "Server Closed")
             get_tree().network_peer.disconnect_peer(player)
     players.clear()
     # terminate server

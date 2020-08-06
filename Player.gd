@@ -374,9 +374,8 @@ sync func respawn():
     emit_signal("respawn")
     
 remote func kicked(reason):
-    print("kicked")
     get_tree().network_peer.disconnect_peer(get_tree().get_network_unique_id())
-    print(reason)
+#    print(reason)
 #    print("You have been kicked from the server, reason: ", reason)
 
 func _on_GrappleTimer_timeout():
