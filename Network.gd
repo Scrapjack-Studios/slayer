@@ -42,12 +42,15 @@ func close_server():
     #kick players
     for player in players:
         if player != 1:
-            $"/root/GameController".get_node(str(player)).rpc("kicked", "Server Closed")
-            get_tree().network_peer.disconnect_peer(player)
-    players.clear()
+            kick_player(player, "Server Closed")
     # terminate server
     get_tree().set_network_peer(null)
 #    emit_signal("server_stopped")
+    
+func kick_player(player, reason):
+    $"/root/GameController".get_node(str(player)).rpc("kicked", reason)
+    get_tree().network_peer.disconnect_peer(player)
+    players.erase(player)
     
 func update_position(id, position):
     players[id].position = position
