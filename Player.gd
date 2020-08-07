@@ -51,22 +51,13 @@ var cool_down_sound
 var reload_sound
 
 func _ready():
-    if $"/root/Global".weapon1 == "shotgun":
-        $Weapon/GunStats/Templates/Chesterfield_33.activate()
-        $Weapon/GunStats/Sounds/FireSound.activate()
-        $Weapon/GunStats.set_sprite()
-    if $"/root/Global".weapon1 == "assault_rifle":
-        $Weapon/GunStats/Templates/Axe_78.activate()
-        $Weapon/GunStats/Sounds/FireSound.activate()
-        $Weapon/GunStats.set_sprite()
-    if $"/root/Global".weapon1 == "pistol":
-        $Weapon/GunStats/Templates/Raven_99.activate()
-        $Weapon/GunStats/Sounds/FireSound.activate()
-        $Weapon/GunStats.set_sprite()
-    if $"/root/Global".weapon1 == "m1":
-        $Weapon/GunStats/Templates/m1.activate()
-        $Weapon/GunStats/Sounds/FireSound.activate()
-        $Weapon/GunStats.set_sprite()
+    get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
+    get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).activate()
+    get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).activate()
+    get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).activate()
+    $Weapon/GunStats/Sounds/FireSound.activate()
+    $Weapon/GunStats.set_sprite()
+
      
 func _input(event: InputEvent) -> void:
     
