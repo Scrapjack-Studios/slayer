@@ -22,7 +22,6 @@ func _on_Join_pressed():
     
     Global.map = load("res://maps/ShootingRange.tscn")
     Global.weapon1 = "shotgun"
-    yield($Blip1, "finished")
     # warning-ignore:return_value_discarded
     get_tree().change_scene("res://GameController.tscn")
     Network.connect_to_server(ip, port, Global.username)
