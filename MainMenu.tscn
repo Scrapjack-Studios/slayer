@@ -163,29 +163,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HSplitContainer" parent="PlayMenu/JoinGameMenu"]
-margin_left = 36.0
-margin_top = 40.0
-margin_right = 331.0
-margin_bottom = 72.0
+[node name="HBoxContainer" type="HSplitContainer" parent="PlayMenu/JoinGameMenu/VBoxContainer"]
+margin_left = -0.0379944
+margin_top = -0.04599
+margin_right = 294.962
+margin_bottom = 31.954
 custom_constants/separation = 0
 split_offset = 100
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="IPAddress" type="LineEdit" parent="PlayMenu/JoinGameMenu/HBoxContainer"]
+[node name="IPAddress" type="LineEdit" parent="PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer"]
 margin_right = 181.0
 margin_bottom = 32.0
 max_length = 15
 placeholder_text = "IP Address"
 
-[node name="Port" type="LineEdit" parent="PlayMenu/JoinGameMenu/HBoxContainer"]
+[node name="Port" type="LineEdit" parent="PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer"]
 margin_left = 189.0
 margin_right = 295.0
 margin_bottom = 32.0
 max_length = 5
 placeholder_text = "Port"
+
+[node name="Join" type="Button" parent="PlayMenu/JoinGameMenu/VBoxContainer"]
+margin_right = 4.0
+margin_bottom = 26.0
+text = "Join"
 
 [node name="EditProfileMenu" type="Control" parent="."]
 visible = false
@@ -359,5 +364,6 @@ bus = "Music"
 [connection signal="pressed" from="PlayMenu/VBoxContainer/EditProfile" to="." method="_on_EditProfile_pressed"]
 [connection signal="mouse_entered" from="PlayMenu/VBoxContainer/ShootingRange" to="." method="_on_ShootingRange_mouse_entered"]
 [connection signal="pressed" from="PlayMenu/VBoxContainer/ShootingRange" to="." method="_on_ShootingRange_pressed"]
+[connection signal="pressed" from="PlayMenu/JoinGameMenu/VBoxContainer/Join" to="." method="_on_Join_pressed"]
 [connection signal="pressed" from="EditProfileMenu/VBoxContainer/Save" to="EditProfileMenu" method="_on_Save_pressed"]
 [connection signal="pressed" from="SRSetup/VBoxContainer2/StartGame" to="." method="_on_StartGame_pressed"]
