@@ -23,11 +23,11 @@ func _ready():
     # warning-ignore:return_value_discarded
     get_tree().connect('network_peer_connected', self, '_on_player_connected')
 
-func create_server(player_nickname):
+func create_server(port, player_nickname):
     self_data.name = player_nickname
     players[1] = self_data
     var peer = NetworkedMultiplayerENet.new()
-    peer.create_server(DEFAULT_PORT, MAX_PLAYERS)
+    peer.create_server(port, MAX_PLAYERS)
     get_tree().set_network_peer(peer)
 
 func connect_to_server(ip, port, player_nickname):
