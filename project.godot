@@ -29,6 +29,7 @@ Network="*res://Network.gd"
 [debug]
 
 gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 

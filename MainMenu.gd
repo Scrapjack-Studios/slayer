@@ -22,20 +22,19 @@ func _on_Join_pressed():
     
     Global.map = load("res://maps/ShootingRange.tscn")
     Global.weapon1 = "shotgun"
-    # warning-ignore:return_value_discarded
     get_tree().change_scene("res://GameController.tscn")
     Network.connect_to_server(ip, port, Global.username)
-    
 
 func _on_CreateGame_pressed():
     $Blip1.play()
+    $PlayMenu/VBoxContainer.hide()
+    $PlayMenu/CreateGameMenu.show()
+    
+func _on_Create_pressed():
     Network.create_server(Global.username)
     Global.map = load("res://maps/ShootingRange.tscn")
     Global.weapon1 = "shotgun"
-    yield($Blip1, "finished")
-    # warning-ignore:return_value_discarded
-    get_tree().change_scene("res://GameController.tscn")
-    
+    get_tree().change_scene("res://GameController.tscn") 
 
 func _on_EditProfile_pressed():
     $EditProfileMenu/VBoxContainer/UserName.text = Global.username
