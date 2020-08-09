@@ -31,9 +31,11 @@ func _on_CreateGame_pressed():
     $PlayMenu/CreateGameMenu.show()
     
 func _on_Create_pressed():
-    Network.create_server(Global.username)
-    Global.map = load("res://maps/ShootingRange.tscn")
+    # TODO: this is awful. do this some other way
+    if $PlayMenu/CreateGameMenu/VBoxContainer/Map.selected == 0:
+        Global.map = load("res://maps/ShootingRange.tscn")
     Global.weapon1 = "shotgun"
+    Network.create_server(Global.username)
     get_tree().change_scene("res://GameController.tscn") 
 
 func _on_EditProfile_pressed():
