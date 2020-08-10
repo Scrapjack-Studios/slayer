@@ -52,9 +52,6 @@ var reload_sound
 
 func _ready():
     get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
-    get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).activate()
-    get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).activate()
-    get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).activate()
     $Weapon/GunStats/Sounds/FireSound.activate()
     $Weapon/GunStats.set_sprite()
 
@@ -72,6 +69,10 @@ func _input(event: InputEvent) -> void:
           
     if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
         $WeaponMechanics.shotgun()
+        GunTimer(false)
+        
+    if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_burst_fire:
+        $WeaponMechanics.burst()
         GunTimer(false)
 
         
@@ -104,60 +105,24 @@ func _input(event: InputEvent) -> void:
         jump_count += 1
         
     if event.is_action_pressed("Weapon1"):
-        if $"/root/Global".weapon1 == "shotgun":
-            $Weapon/GunStats/Templates/shotgun.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon1 == "assault_rifle":
-            $Weapon/GunStats/Templates/assault_rifle.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon1 == "pistol":
-            $Weapon/GunStats/Templates/pistol.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon1 == "m1":
-            $Weapon/GunStats/Templates/m1.activate()
-            $Weapon/GunStats.set_sprite()
+        get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
+        $Weapon/GunStats/Sounds/FireSound.activate()
+        $Weapon/GunStats.set_sprite() 
             
     if event.is_action_pressed("Weapon2"):
-        if $"/root/Global".weapon2 == "shotgun":
-            $Weapon/GunStats/Templates/shotgun.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon2 == "assault_rifle":
-            $Weapon/GunStats/Templates/assault_rifle.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon2 == "pistol":
-            $Weapon/GunStats/Templates/pistol.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon2 == "m1":
-            $Weapon/GunStats/Templates/m1.activate()
-            $Weapon/GunStats.set_sprite()
+        get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).activate()
+        $Weapon/GunStats/Sounds/FireSound.activate()
+        $Weapon/GunStats.set_sprite() 
             
     if event.is_action_pressed("Weapon3"):
-        if $"/root/Global".weapon3 == "shotgun":
-            $Weapon/GunStats/Templates/shotgun.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon3 == "assault_rifle":
-            $Weapon/GunStats/Templates/assault_rifle.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon3 == "pistol":
-            $Weapon/GunStats/Templates/pistol.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon3 == "m1":
-            $Weapon/GunStats/Templates/m1.activate()
-            $Weapon/GunStats.set_sprite()
+        get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).activate()
+        $Weapon/GunStats/Sounds/FireSound.activate()
+        $Weapon/GunStats.set_sprite() 
     
     if event.is_action_pressed("Weapon4"):
-        if $"/root/Global".weapon4 == "shotgun":
-            $Weapon/GunStats/Templates/shotgun.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon4 == "assault_rifle":
-            $Weapon/GunStats/Templates/assault_rifle.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon4 == "pistol":
-            $Weapon/GunStats/Templates/pistol.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon4 == "m1":
-            $Weapon/GunStats/Templates/m1.activate()
-            $Weapon/GunStats.set_sprite()
+        get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).activate()
+        $Weapon/GunStats/Sounds/FireSound.activate()
+        $Weapon/GunStats.set_sprite() 
         
 func _physics_process(delta):
     

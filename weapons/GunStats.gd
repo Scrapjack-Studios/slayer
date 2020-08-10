@@ -7,7 +7,7 @@ var is_automatic
 var is_burst_fire
 var is_semi_auto
 var shotgun
-var kickback = 0
+var kickback = 1
 
 var cool_down = 0
 #cool_down time for each shot, could also be reload time and effects the time in betwene shots of auto fire
@@ -83,10 +83,24 @@ func _BulletPostition():
             $Bullets.add_child(d)
             $Bullets.add_child(f)
             $Bullets.add_child(h)
-              
+   
+        if is_burst_fire:
+            for i in burst_ammount: 
+                var c = Bullet.instance()
+                c.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
+                $Bullets.add_child(c)
+                var t = Timer.new()
+                t.set_wait_time(0.005)
+                t.set_one_shot(true)
+                self.add_child(t)
+                t.start()
+                yield(t, "timeout")
+                t.queue_free()
+                $Sounds/FireSound.play()
+                  
         if shot:
             $Sounds/FireSound.play()
-
+            
 func set_sprite():
     get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
     get_parent().get_node("Weapon_Sprite").scale = get_parent().get_node("GunStats").weapon_size

@@ -34,6 +34,9 @@ func shotgun():
 func automatic(): 
         GunStats._BulletPostition()
         
+          
+func burst(): 
+        GunStats._BulletPostition()
 
 
 
