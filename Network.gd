@@ -68,6 +68,7 @@ func _on_player_connected(connected_player_id):
     var local_player_id = get_tree().get_network_unique_id()
     if not(get_tree().is_network_server()):
         rpc_id(1, '_request_player_info', local_player_id, connected_player_id)
+        rpc_id(1, '_request_map', local_player_id)
 
 remote func _request_player_info(request_from_id, player_id):
     if get_tree().is_network_server():
@@ -78,6 +79,13 @@ remote func _request_players(request_from_id):
         for peer_id in players:
             if( peer_id != request_from_id):
                 rpc_id(request_from_id, '_send_player_info', peer_id, players[peer_id])
+    
+remote func _request_map(request_from_id):
+    if get_tree().is_network_server():
+        rpc_id(request_from_id, '_send_map', Global.map)
+        
+remote func _send_map(map):
+    Global.map = map
 
 remote func _send_player_info(id, info):
     players[id] = info
