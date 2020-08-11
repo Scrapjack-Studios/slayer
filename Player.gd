@@ -54,6 +54,7 @@ var mag_2
 var mag_3
 var mag_4
 var preweapon 
+var weaponnumb = 0
 
 func _ready():
     get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
@@ -125,7 +126,7 @@ func _input(event: InputEvent) -> void:
             mag_4 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).mag
             
             
-    if event.is_action_pressed("Weapon1"):
+    if event.is_action_pressed("Weapon1") or weaponnumb == 1:
         get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
         $Weapon/GunStats/Sounds/FireSound.activate()
         $Weapon/GunStats.set_sprite()
@@ -133,7 +134,7 @@ func _input(event: InputEvent) -> void:
         preweapon = "Weapon1"
         $Weapon/GunStats.shots_fired = mag_1 
         
-    if event.is_action_pressed("Weapon2"):
+    if event.is_action_pressed("Weapon2") or weaponnumb == 2:
         get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).activate()
         $Weapon/GunStats/Sounds/FireSound.activate()
         $Weapon/GunStats.set_sprite() 
@@ -141,7 +142,7 @@ func _input(event: InputEvent) -> void:
         preweapon = "Weapon2"  
         $Weapon/GunStats.shots_fired = mag_2
            
-    if event.is_action_pressed("Weapon3"):
+    if event.is_action_pressed("Weapon3") or weaponnumb == 3:
         get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).activate()
         $Weapon/GunStats/Sounds/FireSound.activate()
         $Weapon/GunStats.set_sprite() 
@@ -149,14 +150,24 @@ func _input(event: InputEvent) -> void:
         preweapon = "Weapon3"      
         $Weapon/GunStats.shots_fired = mag_3
         
-    if event.is_action_pressed("Weapon4"):
+    if event.is_action_pressed("Weapon4") or weaponnumb == 4:
         get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).activate()
         $Weapon/GunStats/Sounds/FireSound.activate()
         $Weapon/GunStats.set_sprite() 
         print(mag_4)
         preweapon = "Weapon4"
         $Weapon/GunStats.shots_fired = mag_4
-        
+    
+
+    if event.is_action_pressed("LastWeapon"):
+        weaponscroll(1)
+
+    elif event.is_action_pressed("NextWeapon"):
+        weaponscroll(-1)
+
+func weaponscroll(dir):
+    weaponnumb += 1 * dir
+            # call the zoom function 
 func _physics_process(delta):
     
     if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
