@@ -93,7 +93,7 @@ remote func _send_player_info(id, info):
     var new_player = load('res://Player.tscn').instance()
     new_player.name = str(id)
     new_player.set_network_master(id)
-    $'/root/GameController'.add_child(new_player)
+#    $'/root/GameController'.add_child(new_player)
     new_player.init(info.name, info.position)
     if connected_player in players:
         connected_player_info = players[connected_player]

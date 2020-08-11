@@ -15,7 +15,7 @@ func _ready():
     # warning-ignore:return_value_discarded
     get_tree().connect('server_disconnected', self, '_on_server_disconnected')
     
-    add_child(Global.map.instance())
+    add_child(load(Global.map).instance())
     spawn()
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     emit_signal("game_started")

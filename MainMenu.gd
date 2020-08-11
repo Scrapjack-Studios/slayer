@@ -33,7 +33,7 @@ func _on_Create_pressed():
     var port = int($PlayMenu/CreateGameMenu/VBoxContainer/Port.text)
     
     if $PlayMenu/CreateGameMenu/VBoxContainer/Map.selected == 0: # TODO: this is awful. do this some other way
-        Global.map = load("res://maps/ShootingRange.tscn")
+        Global.map = "res://maps/ShootingRange.tscn"
     Global.weapon1 = "shotgun"
     
     Network.create_server(port, Global.username)
