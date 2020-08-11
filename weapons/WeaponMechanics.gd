@@ -20,7 +20,7 @@ func reload():
         
         GunStats.shots_fired = GunStats.mag
         GunStats.can_fire = true
-        
+    
         
         
 func semi_auto():

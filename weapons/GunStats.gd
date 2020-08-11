@@ -17,7 +17,7 @@ var burst_ammount = 3
 
 
 
-var bullet_size = Vector2(0.2,0.2)
+var bullet_size = Vector2(0.3,0.3)
 #default is 0.2
 
 var bullet_speed = 3000
@@ -42,6 +42,7 @@ var pistol_sound
 
 var mag = 50
 var shots_fired = 50
+var shots_fired_memory = 50
 var can_fire = true
 var ReloadTime = 2
 var bounce
@@ -52,6 +53,7 @@ func _BulletPostition():
         b.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(b)
         shots_fired -= 1
+        shots_fired_memory -= 1
         shot = true
         if shots_fired == 0:
             can_fire = false   
@@ -105,3 +107,4 @@ func set_sprite():
     get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
     get_parent().get_node("Weapon_Sprite").scale = get_parent().get_node("GunStats").weapon_size
     get_parent().get_node("Weapon_Sprite").position = get_parent().get_node("GunStats").weapon_position
+    shots_fired_memory = shots_fired

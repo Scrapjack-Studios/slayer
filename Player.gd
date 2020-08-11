@@ -49,13 +49,18 @@ var shot = false
 var grapple_count = 0
 var cool_down_sound
 var reload_sound
+var mag_1
+var mag_2
+var mag_3
+var mag_4
+var preweapon 
 
 func _ready():
     get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
     $Weapon/GunStats/Sounds/FireSound.activate()
     $Weapon/GunStats.set_sprite()
-
-     
+    
+    
 func _input(event: InputEvent) -> void:
     
     
@@ -104,32 +109,59 @@ func _input(event: InputEvent) -> void:
         velocity.y = -jump_strength
         jump_count += 1
         
+    if event.is_action_pressed("Weapon1") or event.is_action_pressed("Weapon2") or event.is_action_pressed("Weapon3") or event.is_action_pressed("Weapon4"):
+        if preweapon == "Weapon1":
+            mag_1 = $Weapon/GunStats.shots_fired
+        if preweapon == "Weapon2":
+            mag_2 = $Weapon/GunStats.shots_fired
+        if preweapon == "Weapon3":
+            mag_3 = $Weapon/GunStats.shots_fired
+        if preweapon == "Weapon4":
+            mag_4 = $Weapon/GunStats.shots_fired
+        if not preweapon:
+            mag_1 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).mag
+            mag_2 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).mag
+            mag_3 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).mag
+            mag_4 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).mag
+            
+            
     if event.is_action_pressed("Weapon1"):
         get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
         $Weapon/GunStats/Sounds/FireSound.activate()
-        $Weapon/GunStats.set_sprite() 
-            
+        $Weapon/GunStats.set_sprite()
+        print(mag_1)
+        preweapon = "Weapon1"
+        $Weapon/GunStats.shots_fired = mag_1 
+        
     if event.is_action_pressed("Weapon2"):
         get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).activate()
         $Weapon/GunStats/Sounds/FireSound.activate()
         $Weapon/GunStats.set_sprite() 
-            
+        print(mag_2)
+        preweapon = "Weapon2"  
+        $Weapon/GunStats.shots_fired = mag_2
+           
     if event.is_action_pressed("Weapon3"):
         get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).activate()
         $Weapon/GunStats/Sounds/FireSound.activate()
         $Weapon/GunStats.set_sprite() 
-    
+        print(mag_3)
+        preweapon = "Weapon3"      
+        $Weapon/GunStats.shots_fired = mag_3
+        
     if event.is_action_pressed("Weapon4"):
         get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).activate()
         $Weapon/GunStats/Sounds/FireSound.activate()
         $Weapon/GunStats.set_sprite() 
+        print(mag_4)
+        preweapon = "Weapon4"
+        $Weapon/GunStats.shots_fired = mag_4
         
 func _physics_process(delta):
     
     if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
         $WeaponMechanics.automatic()
         GunTimer(true)
-        
         
     var mpos = get_global_mouse_position()
     
