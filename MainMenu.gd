@@ -20,9 +20,8 @@ func _on_Join_pressed():
     var ip = $PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer/IPAddress.text
     var port = int($PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer/Port.text)
     
-    Global.map = load("res://maps/ShootingRange.tscn")
     Global.weapon1 = "shotgun"
-    get_tree().change_scene("res://GameController.tscn")
+    get_tree().change_scene("res://Lobby.tscn")
     Network.connect_to_server(ip, port, Global.username)
 
 func _on_CreateGame_pressed():
