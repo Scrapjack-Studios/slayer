@@ -86,6 +86,7 @@ remote func _request_map(request_from_id):
         
 remote func _send_map(map):
     Global.map = map
+    get_tree().change_scene("res://GameController.tscn")
 
 remote func _send_player_info(id, info):
     players[id] = info
