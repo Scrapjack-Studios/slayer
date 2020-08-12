@@ -2,21 +2,20 @@ extends Node
 
 signal game_started
 signal respawn_available
+signal player_connection_completed
 
 var player
 var can_respawn
 var wants_to_respawn
 
 func _ready():
-    # warning-ignore:return_value_discarded
     get_tree().connect('network_peer_disconnected', self, '_on_player_disconnected')
-    # warning-ignore:return_value_discarded
-    Network.connect('player_connection_completed', self, '_on_player_connection_completed')
-    # warning-ignore:return_value_discarded
+    get_tree().connect('network_peer_connected', self, '_on_player_connected')
+    connect('player_connection_completed', self, '_on_player_connection_completed')
     get_tree().connect('server_disconnected', self, '_on_server_disconnected')
     
     add_child(load(Global.map).instance())
-    spawn()
+    spawn_self()
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     emit_signal("game_started")
     
@@ -34,7 +33,7 @@ func _on_RespawnAsker_pressed():
         wants_to_respawn = true
         $CanvasLayer/DeathUI/RespawnAsker.set_text("Queued")
 
-func spawn():
+func spawn_self():
     player = load("res://Player.tscn").instance()
     player.name = str(get_tree().get_network_unique_id())
     player.set_network_master(get_tree().get_network_unique_id())
@@ -48,6 +47,17 @@ func spawn():
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     $CanvasLayer/DeathUI/RespawnAsker.hide()
     $CanvasLayer/DeathUI/RespawnCountdown.hide()
+    
+func spawn_peer(id):
+    var info = Network.players[id]
+    var new_player = load('res://Player.tscn').instance()
+    new_player.name = str(id)
+    new_player.set_network_master(id)
+    add_child(new_player)
+    new_player.init(info.name, info.position)
+    if Network.connected_player in Network.players:
+        Network.connected_player_info = Network.players[Network.connected_player]
+        emit_signal("player_connection_completed")
     
 func on_Player_respawned():
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
@@ -75,6 +85,9 @@ func _on_GameController_respawn_available():
         player.rpc("respawn")
         wants_to_respawn = false
         
+func _on_player_connected(id):
+    spawn_peer(id)
+        
 func _on_player_disconnected(id):
     get_node(str(id)).queue_free()
     $CanvasLayer/NetworkUI/DisconnectMessage.set_text(Network.disconnected_player_info["name"] + " has disconnected")
@@ -92,5 +105,4 @@ func _on_player_connection_completed():
         $CanvasLayer/NetworkUI/ConnectMessage.hide()
 
 func _on_server_disconnected():
-    # warning-ignore:return_value_discarded
     get_tree().change_scene("res://MainMenu.tscn")

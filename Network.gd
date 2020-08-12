@@ -15,7 +15,6 @@ var connected_player
 signal player_disconnected
 # warning_ignore:unused_signal
 signal server_disconnected
-signal player_connection_completed
 
 func _ready():
     # warning-ignore:return_value_discarded
@@ -90,11 +89,4 @@ remote func _send_map(map):
 
 remote func _send_player_info(id, info):
     players[id] = info
-    var new_player = load('res://Player.tscn').instance()
-    new_player.name = str(id)
-    new_player.set_network_master(id)
-#    $'/root/GameController'.add_child(new_player)
-    new_player.init(info.name, info.position)
-    if connected_player in players:
-        connected_player_info = players[connected_player]
-        emit_signal("player_connection_completed")
+    
