@@ -55,9 +55,6 @@ func spawn_peer(id):
     new_player.set_network_master(id)
     add_child(new_player)
     new_player.init(info.name, info.position)
-    if Network.connected_player in Network.players:
-        Network.connected_player_info = Network.players[Network.connected_player]
-        emit_signal("player_connection_completed")
     
 func on_Player_respawned():
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
@@ -85,9 +82,6 @@ func _on_GameController_respawn_available():
         player.rpc("respawn")
         wants_to_respawn = false
         
-func _on_player_connected(id):
-    spawn_peer(id)
-        
 func _on_player_disconnected(id):
     get_node(str(id)).queue_free()
     $CanvasLayer/NetworkUI/DisconnectMessage.set_text(Network.disconnected_player_info["name"] + " has disconnected")
@@ -97,7 +91,9 @@ func _on_player_disconnected(id):
     $CanvasLayer/NetworkUI/DisconnectMessage.hide()
     
 func _on_player_connection_completed():
-    if get_tree().get_network_unique_id() != Network.connected_player and Network.connected_player != 1:
+    if get_tree().get_network_unique_id() != Network.connected_player:
+        spawn_peer(Network.connected_player)
+    elif get_tree().get_network_unique_id() != Network.connected_player and Network.connected_player != 1:
         $CanvasLayer/NetworkUI/ConnectMessage.set_text(Network.connected_player_info["name"] + " has connected")
         $CanvasLayer/NetworkUI/ConnectMessageTimer.start()
         $CanvasLayer/NetworkUI/ConnectMessage.show()

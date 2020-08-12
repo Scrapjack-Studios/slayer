@@ -89,4 +89,6 @@ remote func _send_map(map):
 
 remote func _send_player_info(id, info):
     players[id] = info
-    
+    if Network.connected_player in Network.players:
+        Network.connected_player_info = Network.players[Network.connected_player]
+        emit_signal("player_connection_completed")
