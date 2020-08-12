@@ -15,6 +15,7 @@ var connected_player
 signal player_disconnected
 # warning_ignore:unused_signal
 signal server_disconnected
+signal player_connection_completed
 
 func _ready():
     # warning-ignore:return_value_discarded
