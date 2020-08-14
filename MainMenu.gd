@@ -7,6 +7,7 @@ func _on_PlayButton_pressed():
     $OptionsMenu/VideoOptions.hide()
     $OptionsMenu/AudioOptions.hide()
     $PlayMenu/JoinGameMenu.hide()
+    $PlayMenu/CreateGameMenu.hide()
     $PlayMenu.show()
     $PlayMenu/VBoxContainer.show()
     $Button2.play()
@@ -26,6 +27,7 @@ func _on_Join_pressed():
 
 func _on_CreateGame_pressed():
     $Blip1.play()
+    
     $PlayMenu/VBoxContainer.hide()
     $PlayMenu/CreateGameMenu.show()
     
