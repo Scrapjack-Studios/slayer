@@ -177,6 +177,7 @@ __meta__ = {
 [node name="IPAddress" type="LineEdit" parent="PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer"]
 margin_right = 181.0
 margin_bottom = 32.0
+text = "192.168.50.10"
 max_length = 15
 placeholder_text = "IP Address"
 
@@ -184,6 +185,7 @@ placeholder_text = "IP Address"
 margin_left = 189.0
 margin_right = 295.0
 margin_bottom = 32.0
+text = "4000"
 max_length = 5
 placeholder_text = "Port"
 
@@ -220,6 +222,7 @@ margin_left = 188.962
 margin_top = -0.04599
 margin_right = 294.962
 margin_bottom = 31.954
+text = "4000"
 max_length = 5
 placeholder_text = "Port"
 
