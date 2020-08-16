@@ -15,6 +15,7 @@ func _ready():
     
     add_child(load(Global.map).instance())
     spawn_self()
+    Network._request_players(get_tree().get_network_unique_id())
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     emit_signal("game_started")
     
