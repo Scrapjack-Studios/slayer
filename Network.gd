@@ -74,11 +74,18 @@ remote func _request_player_info(request_from_id, player_id):
     if get_tree().is_network_server():
         rpc_id(request_from_id, '_send_player_info', player_id, players[player_id])
 
+remote func _send_player_info(id, info):
+    players[id] = info
+    if Network.connected_player in Network.players:
+        Network.connected_player_info = Network.players[Network.connected_player]
+        emit_signal("player_connection_completed")
+
 remote func _request_players(request_from_id):
     if get_tree().is_network_server():
-        for peer_id in players:
-            if( peer_id != request_from_id):
-                rpc_id(request_from_id, '_send_player_info', peer_id, players[peer_id])
+        rpc_id(request_from_id, '_send_players', Network.players)
+    
+remote func _send_players(players_array):
+    Network.players = players_array
     
 remote func _request_map(request_from_id):
     if get_tree().is_network_server():
@@ -87,9 +94,3 @@ remote func _request_map(request_from_id):
 remote func _send_map(map):
     Global.map = map
     get_tree().change_scene("res://GameController.tscn")
-
-remote func _send_player_info(id, info):
-    players[id] = info
-    if Network.connected_player in Network.players:
-        Network.connected_player_info = Network.players[Network.connected_player]
-        emit_signal("player_connection_completed")
