@@ -16,10 +16,10 @@ func _ready():
     add_child(load(Global.map).instance())
     spawn_self()
     
-    print(Network.players)
-    Network.rpc_id(1, '_request_players', get_tree().get_network_unique_id())
-    print(Network.players)
-    
+    if not is_network_master():
+        Network.rpc_id(1, '_request_players', get_tree().get_network_unique_id())
+        for new_player in Network.players:
+            spawn_peer(new_player)
     
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     emit_signal("game_started")
