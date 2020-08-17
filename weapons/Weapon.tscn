@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
@@ -12,6 +12,11 @@
 [ext_resource path="res://weapons/FireSound.gd" type="Script" id=10]
 [ext_resource path="res://assets/sprites/explosion1.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/explosion2.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/muzzle/m_9.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/muzzle/m_11.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/muzzle/m_6.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/muzzle/m_5.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/muzzle/m_7.png" type="Texture" id=17]
 
 [sub_resource type="AnimatedTexture" id=1]
 frames = 6
@@ -41,6 +46,19 @@ scale = 10.0
 scale_random = 1.0
 color = Color( 0.435294, 0.435294, 0.435294, 1 )
 
+[sub_resource type="AnimatedTexture" id=3]
+frames = 5
+fps = 144.0
+frame_0/texture = ExtResource( 13 )
+frame_1/texture = ExtResource( 15 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 16 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 14 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 17 )
+frame_4/delay_sec = 0.0
+
 [node name="Weapon" type="Sprite"]
 use_parent_material = true
 position = Vector2( 20, 0 )
@@ -61,9 +79,9 @@ position = Vector2( 25, -2.051 )
 rotation = 1.7318e-11
 scale = Vector2( 0.42014, 0.401667 )
 
-[node name="Explosion" type="Sprite" parent="Weapon_Sprite/Muzzle"]
+[node name="Explosion1" type="Sprite" parent="Weapon_Sprite/Muzzle"]
 visible = false
-position = Vector2( -1.95328, 1.04153 )
+position = Vector2( -0.0369568, 0.0772705 )
 rotation = 2.01741
 scale = Vector2( 0.260939, 0.281823 )
 texture = SubResource( 1 )
@@ -77,6 +95,12 @@ lifetime = 2.6
 explosiveness = 0.1
 randomness = 0.2
 process_material = SubResource( 2 )
+
+[node name="Explosion" type="Sprite" parent="Weapon_Sprite/Muzzle"]
+visible = false
+position = Vector2( 22.8646, -0.380317 )
+scale = Vector2( 0.2, 0.15 )
+texture = SubResource( 3 )
 
 [node name="GunStats" type="Node2D" parent="."]
 script = ExtResource( 1 )

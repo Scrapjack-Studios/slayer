@@ -85,9 +85,9 @@ volume_db = 0.097
 [node name="Tracer" type="Particles2D" parent="."]
 position = Vector2( -2.85431, -0.03092 )
 rotation = 1.5708
-amount = 100
+amount = 200
 lifetime = 3.0
-speed_scale = 10.0
+speed_scale = 5.0
 randomness = 1.0
 process_material = SubResource( 5 )
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
