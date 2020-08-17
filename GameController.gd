@@ -20,7 +20,7 @@ func _ready():
         Network.rpc_id(1, '_request_players', get_tree().get_network_unique_id())
         for new_player in Network.players:
             if new_player != get_tree().get_network_unique_id():
-                spawn_peer(new_player)
+                spawn_peer(new_player) 
     
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     emit_signal("game_started")
