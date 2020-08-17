@@ -106,7 +106,7 @@ func _BulletPostition():
             $Sounds/FireSound.play()
             get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").show()
             var t = Timer.new()
-            t.set_wait_time(0.2)
+            t.set_wait_time(0.1)
             t.set_one_shot(true)
             self.add_child(t)
             t.start()

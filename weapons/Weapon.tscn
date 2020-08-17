@@ -1,12 +1,32 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
 [ext_resource path="res://weapons/Weapon_Templates.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sfx/ui/Button1.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sprites/explosion3.png" type="Texture" id=5]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/sprites/explosion4.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/explosion5.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/explosionSmoke1.png" type="Texture" id=9]
 [ext_resource path="res://weapons/FireSound.gd" type="Script" id=10]
-[ext_resource path="res://assets/sprites/explosion3.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/explosion1.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/explosion2.png" type="Texture" id=12]
+
+[sub_resource type="AnimatedTexture" id=1]
+frames = 6
+fps = 144.0
+frame_0/texture = ExtResource( 11 )
+frame_1/texture = ExtResource( 12 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 5 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 7 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 8 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 9 )
+frame_5/delay_sec = 0.0
 
 [node name="Weapon" type="Sprite"]
 use_parent_material = true
@@ -30,9 +50,10 @@ scale = Vector2( 0.42014, 0.401667 )
 
 [node name="Explosion" type="Sprite" parent="Weapon_Sprite/Muzzle"]
 visible = false
-position = Vector2( -2.40137, 1.56529 )
-scale = Vector2( 0.10185, 0.171059 )
-texture = ExtResource( 16 )
+position = Vector2( -1.95328, 1.04153 )
+rotation = 2.01741
+scale = Vector2( 0.260939, 0.281823 )
+texture = SubResource( 1 )
 
 [node name="GunStats" type="Node2D" parent="."]
 script = ExtResource( 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://misc/Explosion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://weapons/Bullet.gd" type="Script" id=3]
@@ -28,6 +28,25 @@ animations = [ {
 "name": "red",
 "speed": 5.0
 } ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.142857, 0.258929, 0.348214, 0.4375, 0.5625, 0.6875, 0.767857, 1 )
+colors = PoolColorArray( 0.817871, 0.385823, 0.0511169, 1, 0.813477, 0.202575, 0, 1, 0.958008, 0.488359, 0, 1, 1, 0.00390625, 0.00390625, 1, 0.680556, 0.431786, 0.0797526, 1, 0.99707, 0.321321, 0, 1, 1, 0.647392, 0.117188, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+spread = 90.0
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = -422.4
+angle_random = 0.27
+scale = 3.0
+scale_random = 1.0
+color_ramp = SubResource( 4 )
 
 [node name="Bullet" type="KinematicBody2D" groups=[
 "Bullet_Colliders",
@@ -62,5 +81,14 @@ wait_time = 3.0
 [node name="Gunsound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = 0.097
+
+[node name="Tracer" type="Particles2D" parent="."]
+position = Vector2( -2.85431, -0.03092 )
+rotation = 1.5708
+amount = 100
+lifetime = 3.0
+speed_scale = 10.0
+randomness = 1.0
+process_material = SubResource( 5 )
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

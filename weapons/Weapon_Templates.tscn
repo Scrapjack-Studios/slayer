@@ -46,7 +46,7 @@ cool_down = 0.1
 mag = 60
 shots_fired = 60
 reload = 2
-weapon_sprite = ExtResource( 2 )
+weapon_sprite = ExtResource( 3 )
 dmg = 1
 Weapon_Sounds = 1
 
