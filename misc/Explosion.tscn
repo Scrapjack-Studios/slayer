@@ -11,23 +11,19 @@
 [ext_resource path="res://assets/sprites/explosionSmoke4.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/explosion2.png" type="Texture" id=10]
 
-
-
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 5 ) ],
-"loop": false,
-"name": "smoke",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 6 ), ExtResource( 10 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 7 ) ],
 "loop": false,
 "name": "boom",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "smoke",
 "speed": 10.0
 } ]
 
 [node name="Explosion" type="AnimatedSprite"]
 frames = SubResource( 1 )
 animation = "smoke"
-_sections_unfolded = [ "Transform" ]
