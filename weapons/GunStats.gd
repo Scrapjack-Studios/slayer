@@ -104,23 +104,22 @@ func _BulletPostition():
                   
         if shot:
             $Sounds/FireSound.play()
-            $Explosion.show()
-            $Explosion.play("smoke")
+            get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").show()
             var t = Timer.new()
-            t.set_wait_time(1)
+            t.set_wait_time(0.2)
             t.set_one_shot(true)
             self.add_child(t)
             t.start()
             yield(t, "timeout")
             t.queue_free()
-            $Explosion.hide()
+            get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").hide()
             
-
 func set_sprite():
     get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
     get_parent().get_node("Weapon_Sprite").scale = get_parent().get_node("GunStats").weapon_size
     get_parent().get_node("Weapon_Sprite").position = get_parent().get_node("GunStats").weapon_position
     shots_fired_memory = shots_fired
+
 
 
 

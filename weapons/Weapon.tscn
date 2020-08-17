@@ -4,9 +4,9 @@
 [ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
 [ext_resource path="res://weapons/Weapon_Templates.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sfx/ui/Button1.wav" type="AudioStream" id=4]
-[ext_resource path="res://misc/Explosion.tscn" type="PackedScene" id=5]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://weapons/FireSound.gd" type="Script" id=10]
+[ext_resource path="res://assets/sprites/explosion3.png" type="Texture" id=16]
 
 [node name="Weapon" type="Sprite"]
 use_parent_material = true
@@ -28,15 +28,16 @@ position = Vector2( 27.7532, -1.9078 )
 rotation = 1.7318e-11
 scale = Vector2( 0.42014, 0.401667 )
 
+[node name="Explosion" type="Sprite" parent="Weapon_Sprite/Muzzle"]
+visible = false
+position = Vector2( -2.40137, 1.56529 )
+scale = Vector2( 0.10185, 0.171059 )
+texture = ExtResource( 16 )
+
 [node name="GunStats" type="Node2D" parent="."]
 script = ExtResource( 1 )
 Bullet = ExtResource( 6 )
 dmg = 5
-
-[node name="Explosion" parent="GunStats" instance=ExtResource( 5 )]
-visible = false
-position = Vector2( 87.9259, 2.34527 )
-scale = Vector2( 0.1942, 0.228904 )
 
 [node name="Templates" parent="GunStats" instance=ExtResource( 3 )]
 
@@ -59,4 +60,3 @@ rotation = -1.57101
 scale = Vector2( 1, 17.9248 )
 
 [node name="ReloadTimer" type="Timer" parent="GunStats"]
-[connection signal="animation_finished" from="GunStats/Explosion" to="." method="_on_Explosion_animation_finished"]
