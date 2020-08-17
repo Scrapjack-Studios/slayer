@@ -194,9 +194,12 @@ func _physics_process(delta):
     if get_local_mouse_position().x < 0: # mouse is facing left
         $Weapon.set_position(Vector2(-22,10))
         $Weapon/Weapon_Sprite.set_flip_v(true)
+        $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(29,5))
     elif get_local_mouse_position().x > 0: # mouse is facing right
         $Weapon.set_position(Vector2(15,0))
+        $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(25,-2))
         $Weapon/Weapon_Sprite.set_flip_v(false)
+        
     if $Chain.hooked:
         _ChainHook()
 

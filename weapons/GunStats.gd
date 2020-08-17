@@ -113,6 +113,15 @@ func _BulletPostition():
             yield(t, "timeout")
             t.queue_free()
             get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").hide()
+            get_parent().get_node("Weapon_Sprite/Muzzle/Smoke").set_emitting(true)
+            var t1 = Timer.new()
+            t1.set_wait_time(1)
+            t1.set_one_shot(true)
+            self.add_child(t1)
+            t1.start()
+            yield(t1, "timeout")
+            t1.queue_free()
+            get_parent().get_node("Weapon_Sprite/Muzzle/Smoke").set_emitting(false)
             
 func set_sprite():
     get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
