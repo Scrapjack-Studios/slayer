@@ -3,6 +3,7 @@ extends Node
 signal game_started
 signal respawn_available
 signal player_connection_completed
+signal player_disconnection_completed
 
 var player
 var can_respawn
@@ -106,6 +107,14 @@ func _on_player_connection_completed():
         $CanvasLayer/NetworkUI/ConnectMessage.show()
         yield($CanvasLayer/NetworkUI/ConnectMessageTimer, "timeout")
         $CanvasLayer/NetworkUI/ConnectMessage.hide()
+        
+func on_player_disconnection_completed(disconnected_player_id):
+  Network.players[disconnected_player_id]["received_disconnect"] = true
+  for disconnected_player in Network.players:
+    if not disconnected_player["received_disconnect"]:
+      return
+  get_tree().set_network_peer(null)
+  get_tree().change_scene("res://MainMenu.tscn")
 
 func _on_server_disconnected():
     get_tree().change_scene("res://MainMenu.tscn")

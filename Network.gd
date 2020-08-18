@@ -6,7 +6,7 @@ const MAX_PLAYERS = 5
 
 var players = { }
 var start_position = Vector2(360,180)
-var self_data = {name = '', position = Vector2()}
+var self_data = {name = '', position = Vector2(), received_disconnect=false}
 var disconnected_player_info
 var connected_player_info
 var connected_player
@@ -45,17 +45,15 @@ func close_server():
         if player != 1:
             kick_player(player, "Server Closed")
 #    emit_signal("server_stopped")
-    
-func on_player_disconnection_completed(player):
-  players[player]["received_disconnect"] = true
-  for player in players:
-    if not player["received_disconnect"]:
-      return
-  get_tree().set_network_peer(null)
 
 func kick_player(player, reason):
     $"/root/GameController".get_node(str(player)).rpc("kicked", reason)
     get_tree().network_peer.disconnect_peer(player)
+    
+remote func kicked(reason):
+    Global.kick_reason = reason
+    get_tree().network_peer.disconnect_peer(get_tree().get_network_unique_id())
+    emit_signal("player_disconnection_completed", get_tree().get_network_unique_id())
     
 func update_position(id, position):
     players[id].position = position

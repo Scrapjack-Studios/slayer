@@ -40,7 +40,6 @@ func _on_Quit_MainMenu_pressed():
     if is_network_master():
         Network.close_server()
         # warning-ignore:return_value_discarded
-        get_tree().change_scene("res://MainMenu.tscn")
     else:
         # warning-ignore:return_value_discarded
         get_tree().change_scene("res://MainMenu.tscn")
