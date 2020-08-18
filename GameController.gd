@@ -108,8 +108,8 @@ func _on_player_connection_completed():
         yield($CanvasLayer/NetworkUI/ConnectMessageTimer, "timeout")
         $CanvasLayer/NetworkUI/ConnectMessage.hide()
         
-func on_player_disconnection_completed(disconnected_player_id):
-  Network.players[disconnected_player_id]["received_disconnect"] = true
+func on_player_disconnection_completed(id):
+  Network.players[id]["received_disconnect"] = true
   for disconnected_player in Network.players:
     if not disconnected_player["received_disconnect"]:
       return
