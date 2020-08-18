@@ -57,6 +57,7 @@ func spawn_self():
 func spawn_peer(id):
     var info = Network.players[id]
     var new_player = load('res://Player.tscn').instance()
+    Network.connect("player_disconnection_completed", new_player, "on_player_disconnection_completed")
     new_player.name = str(id)
     new_player.set_network_master(id)
     add_child(new_player)

@@ -10,12 +10,14 @@ var self_data = {name = '', position = Vector2()}
 var disconnected_player_info
 var connected_player_info
 var connected_player
+var disconnected
 
 # warning_ignore:unused_signal
 signal player_disconnected
 # warning_ignore:unused_signal
 signal server_disconnected
 signal player_connection_completed
+signal player_disconnection_completed
 
 func _ready():
     # warning-ignore:return_value_discarded
@@ -39,14 +41,18 @@ func connect_to_server(ip, port, player_nickname):
     get_tree().set_network_peer(peer)
     
 func close_server():
-    #kick players
     for player in players:
         if player != 1:
             kick_player(player, "Server Closed")
-    # terminate server
-    get_tree().set_network_peer(null)
 #    emit_signal("server_stopped")
     
+func on_player_disconnection_completed(player):
+  players[player]["received_disconnect"] = true
+  for player in players:
+    if not player["received_disconnect"]:
+      return
+  get_tree().set_network_peer(null)
+
 func kick_player(player, reason):
     $"/root/GameController".get_node(str(player)).rpc("kicked", reason)
     get_tree().network_peer.disconnect_peer(player)
@@ -69,6 +75,7 @@ func _on_player_connected(connected_player_id):
     if not(get_tree().is_network_server()):
         rpc_id(1, '_request_player_info', local_player_id, connected_player_id)
         rpc_id(1, '_request_map', local_player_id)
+        
 
 remote func _request_player_info(request_from_id, player_id):
     if get_tree().is_network_server():
