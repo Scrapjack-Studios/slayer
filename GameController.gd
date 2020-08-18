@@ -11,6 +11,7 @@ var wants_to_respawn
 func _ready():
     get_tree().connect('network_peer_disconnected', self, '_on_player_disconnected')
     Network.connect('player_connection_completed', self, '_on_player_connection_completed')
+    Network.connect("player_disconnection_completed", self, "on_player_disconnection_completed")
     get_tree().connect('server_disconnected', self, '_on_server_disconnected')
     
     add_child(load(Global.map).instance())
@@ -57,7 +58,6 @@ func spawn_self():
 func spawn_peer(id):
     var info = Network.players[id]
     var new_player = load('res://Player.tscn').instance()
-    Network.connect("player_disconnection_completed", new_player, "on_player_disconnection_completed")
     new_player.name = str(id)
     new_player.set_network_master(id)
     add_child(new_player)
