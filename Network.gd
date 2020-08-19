@@ -47,12 +47,12 @@ func close_server():
 #    emit_signal("server_stopped")
 
 func kick_player(player, reason):
-    $"/root/GameController".get_node(str(player)).rpc("kicked", reason)
-    get_tree().network_peer.disconnect_peer(player)
+    rpc_id(player, "kicked", reason)
+#    get_tree().network_peer.disconnect_peer(player)
     
 remote func kicked(reason):
     Global.kick_reason = reason
-    get_tree().network_peer.disconnect_peer(get_tree().get_network_unique_id())
+#    get_tree().network_peer.disconnect_peer(get_tree().get_network_unique_id())
     emit_signal("player_disconnection_completed", get_tree().get_network_unique_id())
     
 func update_position(id, position):

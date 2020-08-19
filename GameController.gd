@@ -118,4 +118,5 @@ func on_player_disconnection_completed(id):
     get_tree().change_scene("res://MainMenu.tscn")
 
 func _on_server_disconnected():
-    get_tree().change_scene("res://MainMenu.tscn")
+#    get_tree().change_scene("res://MainMenu.tscn")
+    pass
