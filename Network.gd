@@ -48,6 +48,7 @@ func kick_player(player, reason):
     
 remote func kicked(reason):
     Global.kick_reason = reason
+    get_tree().change_scene("res://MainMenu.tscn")
     emit_signal("player_disconnection_completed", get_tree().get_network_unique_id())
     get_tree().set_network_peer(null)
     print(reason)
@@ -73,7 +74,6 @@ func _on_player_connected(connected_player_id):
         rpc_id(1, '_request_player_info', local_player_id, connected_player_id)
         rpc_id(1, '_request_map', local_player_id)
         
-
 remote func _request_player_info(request_from_id, player_id):
     if get_tree().is_network_server():
         rpc_id(request_from_id, '_send_player_info', player_id, players[player_id])
