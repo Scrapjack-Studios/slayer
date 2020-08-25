@@ -10,10 +10,10 @@ var can_respawn
 var wants_to_respawn
 
 func _ready():
-    get_tree().connect('network_peer_disconnected', self, '_on_player_disconnected')
-    Network.connect('player_connection_completed', self, '_on_player_connection_completed')
+    get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
+    Network.connect("player_connection_completed", self, '_on_player_connection_completed')
     Network.connect("player_disconnection_completed", self, "on_player_disconnection_completed")
-    get_tree().connect('server_disconnected', self, '_on_server_disconnected')
+    Network.connect("server_stopped", self, "on_server_stopped")
     
     add_child(load(Global.map).instance())
     spawn_self()
@@ -118,6 +118,5 @@ func on_player_disconnection_completed(id):
         get_tree().set_network_peer(null)
         get_tree().change_scene("res://MainMenu.tscn")
 
-func _on_server_disconnected():
-#    get_tree().change_scene("res://MainMenu.tscn")
-    pass
+func on_server_stopped():
+    get_tree().change_scene("res://MainMenu.tscn")

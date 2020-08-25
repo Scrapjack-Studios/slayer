@@ -16,6 +16,7 @@ signal player_disconnected
 signal server_disconnected
 signal player_connection_completed
 signal player_disconnection_completed
+signal server_stopped
 
 func _ready():
     get_tree().connect('network_peer_disconnected', self, '_on_player_disconnected')
@@ -39,7 +40,7 @@ func close_server():
     for player in players:
         if player != 1:
             kick_player(player, "Server Closed")
-#    emit_signal("server_stopped")
+    emit_signal("server_stopped")
 
 func kick_player(player, reason):
     rpc_id(player, "kicked", reason)
