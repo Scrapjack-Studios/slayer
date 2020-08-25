@@ -54,6 +54,7 @@ remote func kicked(reason):
     Global.kick_reason = reason
 #    get_tree().network_peer.disconnect_peer(get_tree().get_network_unique_id())
     emit_signal("player_disconnection_completed", get_tree().get_network_unique_id())
+    print(reason)
     
 func update_position(id, position):
     players[id].position = position
@@ -62,6 +63,7 @@ func _connected_to_server():
     var local_player_id = get_tree().get_network_unique_id()
     players[local_player_id] = self_data
     rpc('_send_player_info', local_player_id, self_data)
+    print(Global.kick_reason)
 
 func _on_player_disconnected(id):
 #    disconnected_player_info = players[id]
