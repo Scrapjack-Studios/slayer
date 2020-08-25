@@ -90,13 +90,14 @@ func _on_GameController_respawn_available():
         player.rpc("respawn")
         wants_to_respawn = false
         
-#func _on_player_disconnected(id):
-#    get_node(str(id)).queue_free()
-#    $CanvasLayer/NetworkUI/DisconnectMessage.set_text(Network.disconnected_player_info["name"] + " has disconnected")
-#    $CanvasLayer/NetworkUI/DisconnectMessageTimer.start()
-#    $CanvasLayer/NetworkUI/DisconnectMessage.show()
-#    yield($CanvasLayer/NetworkUI/DisconnectMessageTimer, "timeout")
-#    $CanvasLayer/NetworkUI/DisconnectMessage.hide()
+func _on_player_disconnected(id):
+    get_node(str(id)).queue_free()
+    $CanvasLayer/NetworkUI/DisconnectMessage.set_text(Network.disconnected_player_info["name"] + " has disconnected")
+    $CanvasLayer/NetworkUI/DisconnectMessageTimer.start()
+    $CanvasLayer/NetworkUI/DisconnectMessage.show()
+    yield($CanvasLayer/NetworkUI/DisconnectMessageTimer, "timeout")
+    $CanvasLayer/NetworkUI/DisconnectMessage.hide()
+    pass
     
 func _on_player_connection_completed():
     if get_tree().get_network_unique_id() != Network.connected_player:
