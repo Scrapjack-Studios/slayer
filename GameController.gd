@@ -97,7 +97,6 @@ func _on_player_disconnected(id):
     $CanvasLayer/NetworkUI/DisconnectMessage.show()
     yield($CanvasLayer/NetworkUI/DisconnectMessageTimer, "timeout")
     $CanvasLayer/NetworkUI/DisconnectMessage.hide()
-    pass
     
 func _on_player_connection_completed():
     if get_tree().get_network_unique_id() != Network.connected_player:
@@ -116,8 +115,8 @@ func on_player_disconnection_completed(id):
         for disconnected_player in Network.players:
             if not Network.players[disconnected_player]["received_disconnect"]:
                 return
-#        get_tree().set_network_peer(null)
-#        get_tree().change_scene("res://MainMenu.tscn")
+        get_tree().set_network_peer(null)
+        get_tree().change_scene("res://MainMenu.tscn")
 
 func _on_server_disconnected():
 #    get_tree().change_scene("res://MainMenu.tscn")
