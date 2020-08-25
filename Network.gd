@@ -50,6 +50,7 @@ remote func kicked(reason):
     Global.kick_reason = reason
     get_tree().network_peer.disconnect_peer(get_tree().get_network_unique_id())
     emit_signal("player_disconnection_completed", get_tree().get_network_unique_id())
+    get_tree().set_network_peer(null)
     print(reason)
     
 func update_position(id, position):
