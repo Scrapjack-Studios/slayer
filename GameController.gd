@@ -109,13 +109,14 @@ func _on_player_connection_completed():
         $CanvasLayer/NetworkUI/ConnectMessage.hide()
         
 func on_player_disconnection_completed(id):
-    print(id)
-    Network.players[id]["received_disconnect"] = true
-    for disconnected_player in Network.players:
-        if not Network.players[disconnected_player]["received_disconnect"]:
-            return
-    get_tree().set_network_peer(null)
-    get_tree().change_scene("res://MainMenu.tscn")
+    if is_network_master():
+        print(id)
+        Network.players[id]["received_disconnect"] = true
+        for disconnected_player in Network.players:
+            if not Network.players[disconnected_player]["received_disconnect"]:
+                return
+        get_tree().set_network_peer(null)
+        get_tree().change_scene("res://MainMenu.tscn")
 
 func on_server_stopped():
     get_tree().change_scene("res://MainMenu.tscn")
