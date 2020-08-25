@@ -44,11 +44,11 @@ func close_server():
 
 func kick_player(player, reason):
     rpc_id(player, "kicked", reason)
-#    get_tree().network_peer.disconnect_peer(player)
+    get_tree().network_peer.disconnect_peer(player)
     
 remote func kicked(reason):
     Global.kick_reason = reason
-#    get_tree().network_peer.disconnect_peer(get_tree().get_network_unique_id())
+    get_tree().network_peer.disconnect_peer(get_tree().get_network_unique_id())
     emit_signal("player_disconnection_completed", get_tree().get_network_unique_id())
     print(reason)
     
@@ -63,9 +63,8 @@ func _connected_to_server():
         print("No Reason")
 
 func _on_player_disconnected(id):
-#    disconnected_player_info = players[id]
-#    players.erase(id)
-    pass
+    disconnected_player_info = players[id]
+    players.erase(id)
 
 func _on_player_connected(connected_player_id):
     connected_player = connected_player_id
