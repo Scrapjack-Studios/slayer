@@ -119,5 +119,4 @@ func on_player_disconnection_completed(id):
         get_tree().change_scene("res://MainMenu.tscn")
 
 func on_server_stopped():
-    get_tree().set_network_peer(null)
     get_tree().change_scene("res://MainMenu.tscn")
