@@ -92,7 +92,7 @@ func _on_GameController_respawn_available():
         
 func _on_player_disconnected(id):
     get_node(str(id)).queue_free()
-    $CanvasLayer/NetworkUI/DisconnectMessage.set_text(Network.disconnected_player_info["name"] + " has disconnected")
+#    $CanvasLayer/NetworkUI/DisconnectMessage.set_text(Network.disconnected_player_info["name"] + " has disconnected")
     $CanvasLayer/NetworkUI/DisconnectMessageTimer.start()
     $CanvasLayer/NetworkUI/DisconnectMessage.show()
     yield($CanvasLayer/NetworkUI/DisconnectMessageTimer, "timeout")

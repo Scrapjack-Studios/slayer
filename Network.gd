@@ -63,7 +63,8 @@ func _connected_to_server():
     var local_player_id = get_tree().get_network_unique_id()
     players[local_player_id] = self_data
     rpc('_send_player_info', local_player_id, self_data)
-    print(Global.kick_reason)
+    if not Global.kick_reason:
+        print("No Reason")
 
 func _on_player_disconnected(id):
 #    disconnected_player_info = players[id]
