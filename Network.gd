@@ -43,7 +43,7 @@ func connect_to_server(ip, port, player_nickname):
 func close_server():
     for player in players:
         if player != 1:
-            kick_player(player, "Because")
+            kick_player(player, "Server Closed")
 #    emit_signal("server_stopped")
 
 func kick_player(player, reason):
@@ -54,7 +54,6 @@ remote func kicked(reason):
     Global.kick_reason = reason
 #    get_tree().network_peer.disconnect_peer(get_tree().get_network_unique_id())
     emit_signal("player_disconnection_completed", get_tree().get_network_unique_id())
-    print(reason)
     
 func update_position(id, position):
     players[id].position = position
