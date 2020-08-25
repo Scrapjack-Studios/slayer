@@ -6,7 +6,6 @@ var player
 var paused
 
 func _ready():
-    # warning-ignore:return_value_discarded
     get_parent().get_parent().connect("game_started", self, "on_game_started")
 
 func _process(_delta):
@@ -39,9 +38,7 @@ func _on_Quit_MainMenu_pressed():
     yield($Blip1, "finished")
     if is_network_master():
         Network.close_server()
-        # warning-ignore:return_value_discarded
     else:
-        # warning-ignore:return_value_discarded
         get_tree().change_scene("res://MainMenu.tscn")
     player.get_node("Camera2D").make_current() # fixes strange main menu bug, so don't remove it
 
