@@ -160,22 +160,20 @@ func _physics_process(delta):
         elif Input.is_action_pressed('move_right'):
             direction = MoveDirection.RIGHT
             is_walking = true 
-        elif Input.is_action_just_pressed("jump") and can_jump:
+        
+        if Input.is_action_just_pressed("jump") and can_jump:
             jump()
+            if is_jumping or is_falling:
+                if direction == MoveDirection.RIGHT and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
+                    mantle("right")
+                if direction == MoveDirection.LEFT and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
+                    mantle("left")
         rset_unreliable('puppet_position', position)
         rset('puppet_movement', direction)
         move(direction)
     else:
         move(puppet_movement)
         position = puppet_position
-        
-    if [is_jumping or is_falling] and Input.is_action_pressed('move_right') and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
-        if Input.is_action_just_pressed("jump"):
-            _MantelRight()
-
-    if [is_jumping or is_falling] and Input.is_action_pressed('move_left') and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
-        if Input.is_action_just_pressed("jump"):
-            _MantelLeft()    
     
     if is_on_floor():
         on_air_time = 0
@@ -307,13 +305,22 @@ func jump():
     if jump_count < MAX_JUMP_COUNT:
         velocity.y = -jump_strength
         jump_count += 1
+        is_jumping = true
     # Jump must also be allowed to happen if the character left the floor a little bit ago. Makes controls more snappy.
-    elif on_air_time < JUMP_MAX_AIRBORNE_TIME and not prev_jump_pressed and not is_jumping:
+    if on_air_time < JUMP_MAX_AIRBORNE_TIME and not prev_jump_pressed and not is_jumping:
         velocity.y = -jump_strength
         is_jumping = true
         rotation = 0
     prev_jump_pressed = Input.is_action_just_pressed("jump")          
 
+func mantle(direction):
+    if direction == "right":
+        velocity.x = +CLIMB_AMOUNT
+    elif direction == "left":
+        velocity.x = -CLIMB_AMOUNT
+    velocity.y = -CLIMB_SPEED
+    is_climbing = true   
+            
 func _WallMount():
     velocity.y = lerp(velocity.y,0,0.3)
     jump_strength = 900
@@ -324,10 +331,10 @@ func _WallMount():
     
             
     if not $Wall_Raycasts/Left/Wall_Detect_Left3:
-        _MantelLeft()
+        mantle("right")
             
     if not $Wall_Raycasts/Right/Wall_Detect_Right3:
-        _MantelRight()
+        mantle("left")
                  
     if not is_on_wall() and not is_falling:
         jump_strength = 750
@@ -336,16 +343,6 @@ func _WallMount():
     
 func Kickback(kickback):
     velocity = Vector2(kickback, 0).rotated($Weapon.global_rotation)
-    
-func _MantelRight():
-    velocity.x = +CLIMB_AMOUNT
-    velocity.y = -CLIMB_SPEED
-    is_climbing = true
-    
-func _MantelLeft():       
-    velocity.x = -CLIMB_AMOUNT
-    velocity.y = -CLIMB_SPEED
-    is_climbing = true   
         
 func take_damage(amount):
     health -= amount
