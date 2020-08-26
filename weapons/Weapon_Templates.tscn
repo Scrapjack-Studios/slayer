@@ -1,9 +1,13 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://weapons/Templates.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/weapons/AssaultRifle.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=3]
 [ext_resource path="res://weapons/weapon_templates/WeaponPreseter.gd" type="Script" id=4]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/Shotgun.jpg-a9d649120791938c5d8f8e686c646249.stex"
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/AssaultRifle.png-cdeffb2be842d24feff8c67e4b7e62ea.stex"
 
 [node name="Templates" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,7 +22,7 @@ cool_down = 0.6
 mag = 8
 shots_fired = 8
 reload = 2
-weapon_sprite = ExtResource( 3 )
+weapon_sprite = SubResource( 1 )
 kickback = -30
 dmg = 5
 Weapon_Sounds = 2
@@ -33,7 +37,7 @@ cool_down = 0.3
 mag = 99
 shots_fired = 99
 reload = 3
-weapon_sprite = ExtResource( 3 )
+weapon_sprite = SubResource( 1 )
 dmg = 5
 
 [node name="Axe_78" type="Node" parent="."]
@@ -46,7 +50,7 @@ cool_down = 0.1
 mag = 60
 shots_fired = 60
 reload = 2
-weapon_sprite = ExtResource( 3 )
+weapon_sprite = SubResource( 1 )
 dmg = 1
 Weapon_Sounds = 1
 
@@ -57,6 +61,6 @@ cool_down = 0.3
 mag = 30
 shots_fired = 30
 reload = 2
-weapon_sprite = ExtResource( 2 )
+weapon_sprite = SubResource( 2 )
 burst_ammount = 3
 dmg = 2

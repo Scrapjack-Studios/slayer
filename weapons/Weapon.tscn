@@ -1,7 +1,6 @@
 [gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
 [ext_resource path="res://weapons/Weapon_Templates.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sfx/ui/Button1.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sprites/explosion3.png" type="Texture" id=5]
@@ -17,6 +16,9 @@
 [ext_resource path="res://assets/sprites/muzzle/m_6.png" type="Texture" id=15]
 [ext_resource path="res://assets/sprites/muzzle/m_5.png" type="Texture" id=16]
 [ext_resource path="res://assets/sprites/muzzle/m_7.png" type="Texture" id=17]
+
+[sub_resource type="StreamTexture" id=4]
+load_path = "res://.import/GunTemp.png-bb41e8271afcd81c269b89b01384b946.stex"
 
 [sub_resource type="AnimatedTexture" id=1]
 frames = 6
@@ -68,14 +70,14 @@ region_enabled = true
 region_rect = Rect2( 199, 36, 60, 24 )
 
 [node name="Weapon_Sprite" type="Sprite" parent="."]
-position = Vector2( 7.5631, 5.25409 )
-scale = Vector2( 2.38016, 2.48963 )
-texture = ExtResource( 2 )
+position = Vector2( 37.664, -15.5122 )
+scale = Vector2( 5.07273, 3.83191 )
+texture = SubResource( 4 )
 centered = false
 offset = Vector2( -20, -5 )
 
 [node name="Muzzle" type="Position2D" parent="Weapon_Sprite"]
-position = Vector2( 25, -2.051 )
+position = Vector2( 5, 4.81551 )
 rotation = 1.7318e-11
 scale = Vector2( 0.42014, 0.401667 )
 

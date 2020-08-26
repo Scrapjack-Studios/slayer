@@ -124,9 +124,9 @@ func _BulletPostition():
             get_parent().get_node("Weapon_Sprite/Muzzle/Smoke").set_emitting(false)
             
 func set_sprite():
-    get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
-    get_parent().get_node("Weapon_Sprite").scale = get_parent().get_node("GunStats").weapon_size
-    get_parent().get_node("Weapon_Sprite").position = get_parent().get_node("GunStats").weapon_position
+#    get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
+#    get_parent().get_node("Weapon_Sprite").scale = get_parent().get_node("GunStats").weapon_size
+#    get_parent().get_node("Weapon_Sprite").position = get_parent().get_node("GunStats").weapon_position
     shots_fired_memory = shots_fired
 
 

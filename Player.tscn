@@ -132,6 +132,7 @@ enabled = true
 collide_with_areas = true
 
 [node name="Whip" type="PinJoint2D" parent="."]
+show_behind_parent = true
 position = Vector2( -13.2539, 3.38521 )
 node_a = NodePath("..")
 node_b = NodePath("GrooveJoint2D/RigidBody2D")
