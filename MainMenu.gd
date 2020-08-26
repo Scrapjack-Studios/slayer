@@ -1,5 +1,9 @@
 extends Control
 
+func _process(_delta):
+    if Global.kick_reason:
+        $KickReason.text = "You we're kicked from the server. \n Reason: " + Global.kick_reason
+
 func _on_PlayButton_pressed():
     $SRSetup.hide()
     $OptionsMenu.hide()

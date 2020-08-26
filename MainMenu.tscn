@@ -378,6 +378,19 @@ margin_top = 0.32
 margin_right = -0.599976
 margin_bottom = -0.160095
 
+[node name="KickReason" type="Label" parent="."]
+anchor_left = 0.057
+anchor_top = 0.096
+anchor_right = 0.268
+anchor_bottom = 0.138
+margin_left = 0.55999
+margin_top = 0.32
+margin_right = -0.559998
+margin_bottom = -0.0400085
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Blip1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 bus = "Menu SFX"
