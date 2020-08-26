@@ -1,8 +1,8 @@
 extends Control
 
-func _process(_delta):
+func _on_MainMenu_tree_entered():
     if Global.kick_reason:
-        $KickReason.text = "You we're kicked from the server. \n Reason: " + Global.kick_reason
+        $KickReason.text = "You we're kicked from the server.\nReason: " + Global.kick_reason
 
 func _on_PlayButton_pressed():
     $SRSetup.hide()

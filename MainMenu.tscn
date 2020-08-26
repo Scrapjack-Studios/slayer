@@ -415,6 +415,7 @@ bus = "Menu SFX"
 stream = ExtResource( 11 )
 autoplay = true
 bus = "Music"
+[connection signal="tree_entered" from="." to="." method="_on_MainMenu_tree_entered"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_QuitButton_pressed"]
