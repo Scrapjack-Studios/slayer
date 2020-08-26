@@ -151,6 +151,10 @@ func _physics_process(delta):
         Network.update_position(int(name), position)
     
     var direction = MoveDirection.NONE
+    var mpos = get_global_mouse_position().angle_to_point(position)
+    var weaponflip = $Weapon/Weapon_Sprite.flip_v
+    var weaponpos = $Weapon.position
+    $Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
     on_air_time += delta
     
     if is_network_master():
@@ -179,12 +183,25 @@ func _physics_process(delta):
         elif Input.is_action_just_released("tank_fire"):
             stopped_fire = true
         
+        if get_local_mouse_position().x < 0: # mouse is facing left
+            $Weapon.set_position(Vector2(-22,10))
+            $Weapon/Weapon_Sprite.set_flip_v(true)
+        elif get_local_mouse_position().x > 0: # mouse is facing right
+            $Weapon.set_position(Vector2(15,0))
+            $Weapon/Weapon_Sprite.set_flip_v(false)
+            
+        rset("puppet_mouse_position", mpos)
+        rset("puppet_weapon_position", weaponpos)
+        rset("puppet_weapon_flip", weaponflip)
         rset_unreliable('puppet_position', position)
         rset('puppet_movement', direction)
         move(direction)
     else:
         move(puppet_movement)
         position = puppet_position
+        $Weapon.global_rotation = puppet_mouse_position
+        $Weapon.position = puppet_weapon_position
+        $Weapon/Weapon_Sprite.flip_v = puppet_weapon_flip
     
     if is_on_floor():
         on_air_time = 0
@@ -207,26 +224,6 @@ func _physics_process(delta):
         is_jumping = false
         is_falling = true
         rotation = 0
-            
-    var mpos = get_global_mouse_position().angle_to_point(position)
-    var weaponflip = $Weapon/Weapon_Sprite.flip_v
-    var weaponpos = $Weapon.position
-    
-    if is_network_master():
-        $Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
-        if get_local_mouse_position().x < 0: # mouse is facing left
-            $Weapon.set_position(Vector2(-22,10))
-            $Weapon/Weapon_Sprite.set_flip_v(true)
-        elif get_local_mouse_position().x > 0: # mouse is facing right
-            $Weapon.set_position(Vector2(15,0))
-            $Weapon/Weapon_Sprite.set_flip_v(false)
-        rset("puppet_mouse_position", mpos)
-        rset("puppet_weapon_position", weaponpos)
-        rset("puppet_weapon_flip", weaponflip)
-    else:
-        $Weapon.global_rotation = puppet_mouse_position
-        $Weapon.position = puppet_weapon_position
-        $Weapon/Weapon_Sprite.flip_v = puppet_weapon_flip
         
     if $Chain.hooked:
         _ChainHook()
