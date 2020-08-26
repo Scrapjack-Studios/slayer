@@ -168,6 +168,17 @@ func _physics_process(delta):
                     mantle("right")
                 if direction == MoveDirection.LEFT and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
                     mantle("left")
+                    
+        if Input.is_action_just_pressed("tank_fire") and can_shoot:
+            if $Weapon/GunStats.is_semi_auto:
+                shoot("semi_auto")
+            if $Weapon/GunStats.shotgun:
+                shoot("shotgun")
+            if $Weapon/GunStats.is_automatic:
+                shoot("automatic")
+        elif Input.is_action_just_released("tank_fire"):
+            stopped_fire = true
+        
         rset_unreliable('puppet_position', position)
         rset('puppet_movement', direction)
         move(direction)
@@ -196,48 +207,6 @@ func _physics_process(delta):
         is_jumping = false
         is_falling = true
         rotation = 0
-    
-    if is_network_master():
-        if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
-            can_shoot = false
-            $Weapon/GunStats.rpc("_BulletPostition")
-            var GunTimer = Timer.new()
-            GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-            GunTimer.set_one_shot(true)
-            self.add_child(GunTimer)
-            GunTimer.start()
-            yield(GunTimer, "timeout")
-            GunTimer.queue_free()
-            can_shoot = true
-            
-        if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun:
-            can_shoot = false
-            $Weapon/GunStats.rpc("_BulletPostition")
-            var GunTimer = Timer.new()
-            GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-            GunTimer.set_one_shot(true)
-            self.add_child(GunTimer)
-            GunTimer.start()
-            yield(GunTimer, "timeout")
-            GunTimer.queue_free()
-            can_shoot = true
-            
-        if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-            $Weapon/GunStats._BulletPostition()
-            can_shoot = false
-            var GunTimer = Timer.new()
-            GunTimer.set_physics_process(true)
-            GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-            GunTimer.set_one_shot(true)
-            self.add_child(GunTimer)
-            GunTimer.start()
-            yield(GunTimer, "timeout")
-            GunTimer.queue_free()
-            can_shoot = true
-            shots_fired_auto += 1
-            
-        if Input.is_action_just_released("tank_fire"):
-            stopped_fire = true
             
     var mpos = get_global_mouse_position().angle_to_point(position)
     var weaponflip = $Weapon/Weapon_Sprite.flip_v
@@ -321,6 +290,43 @@ func mantle(direction):
     velocity.y = -CLIMB_SPEED
     is_climbing = true   
             
+func shoot(weapon_type):
+    if weapon_type == "semi_auto":
+        can_shoot = false
+        $Weapon/GunStats.rpc("_BulletPostition")
+        var GunTimer = Timer.new()
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
+        can_shoot = true
+    if weapon_type == "shotgun":
+        can_shoot = false
+        $Weapon/GunStats.rpc("_BulletPostition")
+        var GunTimer = Timer.new()
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
+        can_shoot = true
+    if weapon_type == "automatic":
+        $Weapon/GunStats._BulletPostition()
+        can_shoot = false
+        var GunTimer = Timer.new()
+        GunTimer.set_physics_process(true)
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
+        can_shoot = true
+        shots_fired_auto += 1
+            
 func _WallMount():
     velocity.y = lerp(velocity.y,0,0.3)
     jump_strength = 900
@@ -329,7 +335,6 @@ func _WallMount():
         jump_count = 1
         can_walljump = false
     
-            
     if not $Wall_Raycasts/Left/Wall_Detect_Left3:
         mantle("right")
             
