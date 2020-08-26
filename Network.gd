@@ -41,6 +41,7 @@ func close_server():
         if player != 1:
             kick_player(player, "Server Closed")
     emit_signal("server_stopped")
+    get_tree().set_network_peer(null)
 
 func kick_player(player, reason):
     rpc_id(player, "kicked", reason)

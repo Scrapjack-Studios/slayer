@@ -119,7 +119,6 @@ func _on_StartGame_pressed():
         Global.weapon4 = "m1"
     
     yield($Blip1, "finished")
-    # warning-ignore:return_value_discarded
     get_tree().change_scene("res://GameController.tscn")
     
 func _on_JoinGame_mouse_entered():
