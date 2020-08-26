@@ -168,8 +168,6 @@ func _physics_process(delta):
     else:
         move(puppet_movement)
         position = puppet_position
-        if Input.is_action_just_pressed("jump") and can_jump:
-            jump()
         
     if [is_jumping or is_falling] and Input.is_action_pressed('move_right') and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
         if Input.is_action_just_pressed("jump"):
