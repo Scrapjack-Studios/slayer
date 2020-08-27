@@ -17,10 +17,10 @@
 [ext_resource path="res://assets/sprites/muzzle/m_5.png" type="Texture" id=16]
 [ext_resource path="res://assets/sprites/muzzle/m_7.png" type="Texture" id=17]
 
-[sub_resource type="StreamTexture" id=4]
+[sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/GunTemp.png-bb41e8271afcd81c269b89b01384b946.stex"
 
-[sub_resource type="AnimatedTexture" id=1]
+[sub_resource type="AnimatedTexture" id=2]
 frames = 6
 fps = 144.0
 frame_0/texture = ExtResource( 11 )
@@ -35,7 +35,7 @@ frame_4/delay_sec = 0.0
 frame_5/texture = ExtResource( 9 )
 frame_5/delay_sec = 0.0
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 1
 emission_sphere_radius = 10.0
 flag_disable_z = true
@@ -48,7 +48,7 @@ scale = 10.0
 scale_random = 1.0
 color = Color( 0.435294, 0.435294, 0.435294, 1 )
 
-[sub_resource type="AnimatedTexture" id=3]
+[sub_resource type="AnimatedTexture" id=4]
 frames = 5
 fps = 144.0
 frame_0/texture = ExtResource( 13 )
@@ -72,7 +72,7 @@ region_rect = Rect2( 199, 36, 60, 24 )
 [node name="Weapon_Sprite" type="Sprite" parent="."]
 position = Vector2( 37.664, -15.5122 )
 scale = Vector2( 5.07273, 3.83191 )
-texture = SubResource( 4 )
+texture = SubResource( 1 )
 centered = false
 offset = Vector2( -20, -5 )
 
@@ -86,7 +86,7 @@ visible = false
 position = Vector2( -0.0369568, 0.0772705 )
 rotation = 2.01741
 scale = Vector2( 0.260939, 0.281823 )
-texture = SubResource( 1 )
+texture = SubResource( 2 )
 
 [node name="Smoke" type="Particles2D" parent="Weapon_Sprite/Muzzle"]
 visible = false
@@ -96,13 +96,13 @@ amount = 50
 lifetime = 2.6
 explosiveness = 0.1
 randomness = 0.2
-process_material = SubResource( 2 )
+process_material = SubResource( 3 )
 
 [node name="Explosion" type="Sprite" parent="Weapon_Sprite/Muzzle"]
 visible = false
-position = Vector2( 22.8646, -0.380317 )
-scale = Vector2( 0.2, 0.15 )
-texture = SubResource( 3 )
+position = Vector2( 9.11218, 0.557177 )
+scale = Vector2( 0.0717646, 0.0735144 )
+texture = SubResource( 4 )
 
 [node name="GunStats" type="Node2D" parent="."]
 script = ExtResource( 1 )
