@@ -45,6 +45,8 @@ __meta__ = {
 anchor_top = -0.000925926
 anchor_right = 1.0
 anchor_bottom = 0.999074
+margin_left = 1.5874
+margin_right = 1.5874
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
@@ -102,7 +104,6 @@ margin_right = 0.319946
 margin_bottom = -6.10352e-05
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayMenu"]
-visible = false
 anchor_left = 0.038
 anchor_top = 0.046
 anchor_right = 0.376
@@ -137,6 +138,7 @@ margin_bottom = 102.0
 text = "Edit Profile"
 
 [node name="ShootingRange" type="Button" parent="PlayMenu/VBoxContainer"]
+visible = false
 margin_top = 114.0
 margin_right = 324.0
 margin_bottom = 140.0
@@ -166,10 +168,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HSplitContainer" parent="PlayMenu/JoinGameMenu/VBoxContainer"]
-margin_left = -0.0379944
-margin_top = -0.04599
-margin_right = 294.962
-margin_bottom = 31.954
+margin_right = 325.0
+margin_bottom = 32.0
 custom_constants/separation = 0
 split_offset = 100
 __meta__ = {
@@ -177,23 +177,24 @@ __meta__ = {
 }
 
 [node name="IPAddress" type="LineEdit" parent="PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer"]
-margin_right = 181.0
+margin_right = 206.0
 margin_bottom = 32.0
 text = "192.168.50.66"
 max_length = 15
 placeholder_text = "IP Address"
 
 [node name="Port" type="LineEdit" parent="PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer"]
-margin_left = 189.0
-margin_right = 295.0
+margin_left = 214.0
+margin_right = 325.0
 margin_bottom = 32.0
 text = "4000"
 max_length = 5
 placeholder_text = "Port"
 
 [node name="Join" type="Button" parent="PlayMenu/JoinGameMenu/VBoxContainer"]
-margin_right = 4.0
-margin_bottom = 26.0
+margin_top = 44.0
+margin_right = 325.0
+margin_bottom = 70.0
 text = "Join"
 
 [node name="CreateGameMenu" type="Control" parent="PlayMenu"]

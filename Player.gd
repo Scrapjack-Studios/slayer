@@ -103,15 +103,13 @@ func _input(event: InputEvent) -> void:
                 $Chain.rpc("shoot", event.position - get_viewport().size * .57)
                 is_grappling = true
                 $Whip.hide()
+                grapple_count += 1
             
                 
     
             
         elif event.is_action_released("Graphook") and is_grappling:
             $Chain.rpc("release")
-            $GrappleTimer.start()
-            can_grapple = false
-            is_grappling = false
             $Whip.show()
             is_grappling = false
             if grapple_count == 3:
