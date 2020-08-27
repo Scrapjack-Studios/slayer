@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/ui/MainMenu.png" type="Texture" id=1]
 [ext_resource path="res://MainMenu.gd" type="Script" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://assets/sfx/ui/Blip1.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/music/SandAndBlood.ogg" type="AudioStream" id=11]
 [ext_resource path="res://menus/EditProfileMenu.gd" type="Script" id=12]
+[ext_resource path="res://weapons/Weapon_Templates.tscn" type="PackedScene" id=13]
+[ext_resource path="res://WeaponOptionButoon.gd" type="Script" id=14]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -297,6 +299,9 @@ margin_left = 0.23999
 margin_top = 0.239998
 margin_right = 0.400024
 margin_bottom = -0.0800171
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="SRSetup"]
 anchor_left = 0.038
@@ -313,59 +318,58 @@ __meta__ = {
 }
 
 [node name="MapOptions" type="Label" parent="SRSetup/VBoxContainer2"]
-margin_right = 40.0
+margin_right = 326.0
 margin_bottom = 22.0
 text = "Map"
 
 [node name="Map" type="OptionButton" parent="SRSetup/VBoxContainer2"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_top = 34.0
+margin_right = 326.0
+margin_bottom = 60.0
 toggle_mode = false
 text = "Shooting Range"
 items = [ "Shooting Range", null, false, 0, null ]
 selected = 0
 
 [node name="Weapons" type="Label" parent="SRSetup/VBoxContainer2"]
-margin_right = 40.0
-margin_bottom = 22.0
+margin_top = 72.0
+margin_right = 326.0
+margin_bottom = 94.0
 text = "Weapons"
 
 [node name="Weapon1" type="OptionButton" parent="SRSetup/VBoxContainer2"]
+margin_top = 106.0
 margin_right = 326.0
-margin_bottom = 26.0
-text = "Shotgun"
-items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null, "Pistol", null, false, 2, null, "M1 Garand", null, false, 3, null ]
-selected = 0
+margin_bottom = 132.0
+script = ExtResource( 14 )
 
 [node name="Weapon2" type="OptionButton" parent="SRSetup/VBoxContainer2"]
-margin_top = 38.0
+margin_top = 144.0
 margin_right = 326.0
-margin_bottom = 64.0
+margin_bottom = 170.0
 text = "Shotgun"
-items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null, "Pistol", null, false, 2, null, "M1 Garand", null, false, 3, null ]
-selected = 0
+script = ExtResource( 14 )
 
 [node name="Weapon3" type="OptionButton" parent="SRSetup/VBoxContainer2"]
-margin_top = 76.0
+margin_top = 182.0
 margin_right = 326.0
-margin_bottom = 102.0
-text = "Shotgun"
-items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null, "Pistol", null, false, 2, null, "M1 Garand", null, false, 3, null ]
-selected = 0
+margin_bottom = 208.0
+script = ExtResource( 14 )
 
 [node name="Weapon4" type="OptionButton" parent="SRSetup/VBoxContainer2"]
-margin_top = 114.0
+margin_top = 220.0
 margin_right = 326.0
-margin_bottom = 140.0
-text = "Shotgun"
-items = [ "Shotgun", null, false, 0, null, "Assault Rifle", null, false, 1, null, "Pistol", null, false, 2, null, "M1 Garand", null, false, 3, null ]
-selected = 0
+margin_bottom = 246.0
+script = ExtResource( 14 )
 
 [node name="StartGame" type="Button" parent="SRSetup/VBoxContainer2"]
-margin_top = 152.0
+margin_top = 258.0
 margin_right = 326.0
-margin_bottom = 178.0
+margin_bottom = 284.0
 text = "Start Game"
+
+[node name="Templates" parent="SRSetup/VBoxContainer2" instance=ExtResource( 13 )]
+position = Vector2( -138.152, -145 )
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 3 )]
 visible = false

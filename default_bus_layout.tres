@@ -1,4 +1,13 @@
-[gd_resource type="AudioBusLayout" format=2]
+[gd_resource type="AudioBusLayout" load_steps=3 format=2]
+
+[ext_resource path="res://weapons/WeaponSound.gd" type="Script" id=1]
+
+[sub_resource type="AudioEffectReverb" id=1]
+resource_name = "Reverb"
+room_size = 0.23
+dry = 0.23
+wet = 0.17
+script = ExtResource( 1 )
 
 [resource]
 bus/1/name = "Music"
@@ -19,3 +28,11 @@ bus/3/mute = false
 bus/3/bypass_fx = false
 bus/3/volume_db = 0.0
 bus/3/send = "Master"
+bus/4/name = "Weapon SFX"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = "Master"
+bus/4/effect/0/effect = SubResource( 1 )
+bus/4/effect/0/enabled = true

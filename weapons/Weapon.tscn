@@ -1,16 +1,65 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
-[ext_resource path="res://weapons/weapon_templates/Assault_T.gd" type="Script" id=3]
-[ext_resource path="res://assets/sfx/weapons/Combat_Shotgun.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/sfx/weapons/Pistol.wav" type="AudioStream" id=5]
+[ext_resource path="res://weapons/Weapon_Templates.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sfx/ui/Button1.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sprites/explosion3.png" type="Texture" id=5]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sfx/weapons/M1.wav" type="AudioStream" id=7]
-[ext_resource path="res://assets/sfx/weapons/AssaultRifle.wav" type="AudioStream" id=8]
-[ext_resource path="res://weapons/weapon_templates/Shotgun_T.gd" type="Script" id=9]
-[ext_resource path="res://weapons/weapon_templates/Pistol_T.gd" type="Script" id=10]
-[ext_resource path="res://weapons/weapon_templates/M1_T.gd" type="Script" id=11]
+[ext_resource path="res://assets/sprites/explosion4.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/explosion5.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/explosionSmoke1.png" type="Texture" id=9]
+[ext_resource path="res://weapons/FireSound.gd" type="Script" id=10]
+[ext_resource path="res://assets/sprites/explosion1.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/explosion2.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/muzzle/m_9.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/muzzle/m_11.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/muzzle/m_6.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/muzzle/m_5.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/muzzle/m_7.png" type="Texture" id=17]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/GunTemp.png-bb41e8271afcd81c269b89b01384b946.stex"
+
+[sub_resource type="AnimatedTexture" id=2]
+frames = 6
+fps = 144.0
+frame_0/texture = ExtResource( 11 )
+frame_1/texture = ExtResource( 12 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 5 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 7 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 8 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 9 )
+frame_5/delay_sec = 0.0
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 10.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 10.0
+scale_random = 1.0
+color = Color( 0.435294, 0.435294, 0.435294, 1 )
+
+[sub_resource type="AnimatedTexture" id=4]
+frames = 5
+fps = 144.0
+frame_0/texture = ExtResource( 13 )
+frame_1/texture = ExtResource( 15 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 16 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 14 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 17 )
+frame_4/delay_sec = 0.0
 
 [node name="Weapon" type="Sprite"]
 use_parent_material = true
@@ -21,59 +70,63 @@ region_enabled = true
 region_rect = Rect2( 199, 36, 60, 24 )
 
 [node name="Weapon_Sprite" type="Sprite" parent="."]
-position = Vector2( 22.2715, 5.11179 )
-scale = Vector2( 2.38016, 2.48963 )
-texture = ExtResource( 2 )
+position = Vector2( 37.664, -15.5122 )
+scale = Vector2( 5.07273, 3.83191 )
+texture = SubResource( 1 )
 centered = false
 offset = Vector2( -20, -5 )
 
 [node name="Muzzle" type="Position2D" parent="Weapon_Sprite"]
-position = Vector2( 27.7532, -1.9078 )
+position = Vector2( 5, 4.81551 )
 rotation = 1.7318e-11
 scale = Vector2( 0.42014, 0.401667 )
+
+[node name="Explosion1" type="Sprite" parent="Weapon_Sprite/Muzzle"]
+visible = false
+position = Vector2( -0.0369568, 0.0772705 )
+rotation = 2.01741
+scale = Vector2( 0.260939, 0.281823 )
+texture = SubResource( 2 )
+
+[node name="Smoke" type="Particles2D" parent="Weapon_Sprite/Muzzle"]
+visible = false
+position = Vector2( 8.74566, 0.169222 )
+rotation = -1.55485
+amount = 50
+lifetime = 2.6
+explosiveness = 0.1
+randomness = 0.2
+process_material = SubResource( 3 )
+
+[node name="Explosion" type="Sprite" parent="Weapon_Sprite/Muzzle"]
+visible = false
+position = Vector2( 9.11218, 0.557177 )
+scale = Vector2( 0.0717646, 0.0735144 )
+texture = SubResource( 4 )
 
 [node name="GunStats" type="Node2D" parent="."]
 script = ExtResource( 1 )
 Bullet = ExtResource( 6 )
 
-[node name="Templates" type="Node2D" parent="GunStats"]
-
-[node name="shotgun" type="Node2D" parent="GunStats/Templates"]
-script = ExtResource( 9 )
-
-[node name="assault_rifle" type="Node2D" parent="GunStats/Templates"]
-script = ExtResource( 3 )
-
-[node name="pistol" type="Node2D" parent="GunStats/Templates"]
-script = ExtResource( 10 )
-
-[node name="m1" type="Node2D" parent="GunStats/Templates"]
-script = ExtResource( 11 )
+[node name="Templates" parent="GunStats" instance=ExtResource( 3 )]
 
 [node name="Sounds" type="Node2D" parent="GunStats"]
 
-[node name="Assault_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
-stream = ExtResource( 8 )
-bus = "Game SFX"
+[node name="FireSound" type="AudioStreamPlayer" parent="GunStats/Sounds"]
+bus = "Weapon SFX"
+script = ExtResource( 10 )
 
-[node name="Pistol_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
-stream = ExtResource( 5 )
-bus = "Game SFX"
-
-[node name="M1_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
-stream = ExtResource( 7 )
-bus = "Game SFX"
-
-[node name="SuperShotgun_fire" type="AudioStreamPlayer" parent="GunStats/Sounds"]
+[node name="ReloadSound" type="AudioStreamPlayer" parent="GunStats/Sounds"]
 stream = ExtResource( 4 )
-bus = "Game SFX"
+
+[node name="CoolDownSound" type="AudioStreamPlayer" parent="GunStats/Sounds"]
+bus = "Weapon SFX"
 
 [node name="Bullets" type="Node" parent="GunStats"]
 
 [node name="RayCast2DKick" type="RayCast2D" parent="GunStats"]
 rotation = -1.57101
 scale = Vector2( 1, 17.9248 )
-enabled = true
 
 [node name="ReloadTimer" type="Timer" parent="GunStats"]
 

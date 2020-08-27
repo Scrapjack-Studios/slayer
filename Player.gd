@@ -58,116 +58,139 @@ var stopped_fire = false
 var burst_loop = 0
 var shot = false
 var grapple_count = 0
-var stop
-var force
+var cool_down_sound
+var reload_sound
+var mag_1
+var mag_2
+var mag_3
+var mag_4
+var preweapon 
+var weaponnumb = 0
+var force = Vector2(0, gravity) # create forces 
+var stop = true   
 
 func _ready():
-    if Global.weapon1 == "shotgun":
-        $Weapon/GunStats/Templates/shotgun.activate()
-        $Weapon/GunStats.set_sprite()
-    if Global.weapon1 == "assault_rifle":
-        $Weapon/GunStats/Templates/assault_rifle.activate()
-        $Weapon/GunStats.set_sprite()
-    if Global.weapon1 == "pistol":
-        $Weapon/GunStats/Templates/pistol.activate()
-        $Weapon/GunStats.set_sprite()
-    if Global.weapon1 == "m1":
-        $Weapon/GunStats/Templates/m1.activate()
-        $Weapon/GunStats.set_sprite()
+    get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
+    $Weapon/GunStats/Sounds/FireSound.activate()
+    $Weapon/GunStats.set_sprite()
+    
     
 func _input(event: InputEvent) -> void:
     if is_network_master():
+        
+        
         if Input.is_action_just_pressed("reload"):
-            pass
+            $WeaponMechanics.reload()
         
-        if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
-            pass
-  
-        if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun:
-            pass
-         
-        if event.is_action_released("tank_fire"):
-            pass
         
-    if event.is_action_pressed("Graphook") and can_grapple:
-            rotation = 0
-            $Chain.rpc("shoot", event.position - get_viewport().size * .57)
-            is_grappling = true
-            $Whip.hide()
-    elif event.is_action_released("Graphook") and is_grappling:
-        $Chain.rpc("release")
-        $GrappleTimer.start()
-        can_grapple = false
-        is_grappling = false
-        $Whip.show()
-        
-    if event.is_action_pressed("Weapon1"):
-        if $"/root/Global".weapon1 == "shotgun":
-            $Weapon/GunStats/Templates/shotgun.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon1 == "assault_rifle":
-            $Weapon/GunStats/Templates/assault_rifle.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon1 == "pistol":
-            $Weapon/GunStats/Templates/pistol.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon1 == "m1":
-            $Weapon/GunStats/Templates/m1.activate()
-            $Weapon/GunStats.set_sprite()
+        if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
+            $WeaponMechanics.semi_auto()
+            GunTimer(false)
             
-    if event.is_action_pressed("Weapon2"):
-        if $"/root/Global".weapon2 == "shotgun":
-            $Weapon/GunStats/Templates/shotgun.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon2 == "assault_rifle":
-            $Weapon/GunStats/Templates/assault_rifle.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon2 == "pistol":
-            $Weapon/GunStats/Templates/pistol.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon2 == "m1":
-            $Weapon/GunStats/Templates/m1.activate()
-            $Weapon/GunStats.set_sprite()
+        if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
+            $WeaponMechanics.shotgun()
+            GunTimer(false)
             
-    if event.is_action_pressed("Weapon3"):
-        if $"/root/Global".weapon3 == "shotgun":
-            $Weapon/GunStats/Templates/shotgun.activate()
+        if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_burst_fire:
+            $WeaponMechanics.burst()
+            GunTimer(false)
+    
+            
+        if event.is_action_pressed("Graphook") and can_grapple:
+                rotation = 0
+                $Chain.rpc("shoot", event.position - get_viewport().size * .57)
+                is_grappling = true
+                $Whip.hide()
+            
+                
+    
+            
+        elif event.is_action_released("Graphook") and is_grappling:
+            $Chain.rpc("release")
+            $GrappleTimer.start()
+            can_grapple = false
+            is_grappling = false
+            $Whip.show()
+            is_grappling = false
+            if grapple_count == 3:
+                can_grapple = false
+                $GrappleTimer.start()
+                grapple_count = 0
+            
+            
+            
+        if event.is_action_pressed("Weapon1") or event.is_action_pressed("Weapon2") or event.is_action_pressed("Weapon3") or event.is_action_pressed("Weapon4"):
+            if preweapon == "Weapon1":
+                mag_1 = $Weapon/GunStats.shots_fired
+            if preweapon == "Weapon2":
+                mag_2 = $Weapon/GunStats.shots_fired
+            if preweapon == "Weapon3":
+                mag_3 = $Weapon/GunStats.shots_fired
+            if preweapon == "Weapon4":
+                mag_4 = $Weapon/GunStats.shots_fired
+            if not preweapon:
+                mag_1 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).mag
+                mag_2 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).mag
+                mag_3 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).mag
+                mag_4 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).mag
+                
+    
+                
+        if event.is_action_pressed("Weapon1") or weaponnumb == 1:
+            get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
+            $Weapon/GunStats/Sounds/FireSound.activate()
             $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon3 == "assault_rifle":
-            $Weapon/GunStats/Templates/assault_rifle.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon3 == "pistol":
-            $Weapon/GunStats/Templates/pistol.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon3 == "m1":
-            $Weapon/GunStats/Templates/m1.activate()
-            $Weapon/GunStats.set_sprite()
+            print(mag_1)
+            preweapon = "Weapon1"
+            $Weapon/GunStats.shots_fired = mag_1 
+            
+        if event.is_action_pressed("Weapon2") or weaponnumb == 2:
+            get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).activate()
+            $Weapon/GunStats/Sounds/FireSound.activate()
+            $Weapon/GunStats.set_sprite() 
+            print(mag_2)
+            preweapon = "Weapon2"  
+            $Weapon/GunStats.shots_fired = mag_2
+            
+        if event.is_action_pressed("Weapon3") or weaponnumb == 3:
+            get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).activate()
+            $Weapon/GunStats/Sounds/FireSound.activate()
+            $Weapon/GunStats.set_sprite() 
+            print(mag_3)
+            preweapon = "Weapon3"      
+            $Weapon/GunStats.shots_fired = mag_3
+            
+        if event.is_action_pressed("Weapon4") or weaponnumb == 4:
+            get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).activate()
+            $Weapon/GunStats/Sounds/FireSound.activate()
+            $Weapon/GunStats.set_sprite() 
+            print(mag_4)
+            preweapon = "Weapon4"
+            $Weapon/GunStats.shots_fired = mag_4
+    
+        if event.is_action_pressed("LastWeapon"):
+            weaponscroll(1)
+    
+        elif event.is_action_pressed("NextWeapon"):
+            weaponscroll(-1)
+    
         
-    if event.is_action_pressed("Weapon4"):
-        if $"/root/Global".weapon4 == "shotgun":
-            $Weapon/GunStats/Templates/shotgun.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon4 == "assault_rifle":
-            $Weapon/GunStats/Templates/assault_rifle.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon4 == "pistol":
-            $Weapon/GunStats/Templates/pistol.activate()
-            $Weapon/GunStats.set_sprite()
-        if $"/root/Global".weapon4 == "m1":
-            $Weapon/GunStats/Templates/m1.activate()
-            $Weapon/GunStats.set_sprite()
-        
+
+func weaponscroll(dir):
+    weaponnumb += 1 * dir
+            # call the zoom function 
+
 func _physics_process(delta):
     if get_tree().is_network_server():
         Network.update_position(int(name), position)
-    
+
     var direction = MoveDirection.NONE
     var mpos = get_global_mouse_position().angle_to_point(position)
     var weaponflip = $Weapon/Weapon_Sprite.flip_v
     var weaponpos = $Weapon.position
     $Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
     on_air_time += delta
-    
+
     if is_network_master():
         if Input.is_action_pressed('move_left'):
             direction = MoveDirection.LEFT
@@ -175,24 +198,19 @@ func _physics_process(delta):
         elif Input.is_action_pressed('move_right'):
             direction = MoveDirection.RIGHT
             is_walking = true 
-        
+    
+    
+ 
         if Input.is_action_just_pressed("jump") and can_jump:
             jump()
             if is_jumping or is_falling:
+                is_climbing = true
                 if direction == MoveDirection.RIGHT and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
                     mantle("right")
                 if direction == MoveDirection.LEFT and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
                     mantle("left")
-                    
-        if Input.is_action_just_pressed("tank_fire") and can_shoot:
-            if $Weapon/GunStats.is_semi_auto:
-                shoot("semi_auto")
-            if $Weapon/GunStats.shotgun:
-                shoot("shotgun")
-            if $Weapon/GunStats.is_automatic:
-                shoot("automatic")
-        elif Input.is_action_just_released("tank_fire"):
-            stopped_fire = true
+
+
         
         if get_local_mouse_position().x < 0: # mouse is facing left
             $Weapon.set_position(Vector2(-22,10))
@@ -207,6 +225,7 @@ func _physics_process(delta):
         rset_unreliable('puppet_position', position)
         rset('puppet_movement', direction)
         move(direction)
+        
     else:
         move(puppet_movement)
         position = puppet_position
@@ -214,30 +233,33 @@ func _physics_process(delta):
         $Weapon.position = puppet_weapon_position
         $Weapon/Weapon_Sprite.flip_v = puppet_weapon_flip
     
-    if is_on_floor():
-        on_air_time = 0
-        is_falling = false
-        jump_count = 0
-        has_pressed_jump = false
-        is_climbing = false
-        jump_strength = 750
-        gravity = -1
-    else:
-        gravity = 1300
-        
-    if is_on_wall() and not is_climbing:
-        _WallMount()
-    else:
-        can_walljump = true
-        
-    if is_jumping and velocity.y > 0:
-        # If falling, no longer jumping
-        is_jumping = false
-        is_falling = true
-        rotation = 0
-        
+       
+   
+    var move_left = Input.is_action_pressed("move_left")
+    
+    var move_right = Input.is_action_pressed("move_right")
+    
+    if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
+        $WeaponMechanics.automatic()
+        GunTimer(true)
+    
+    if move_left or move_right:
+        is_walking = true
+    
+
+    
+    if get_local_mouse_position().x < 0: # mouse is facing left
+        $Weapon.set_position(Vector2(-22,-7))
+        $Weapon/Weapon_Sprite.set_flip_v(true)
+        $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(4,1))
+    elif get_local_mouse_position().x > 0: # mouse is facing right
+        $Weapon.set_position(Vector2(15,0))
+        $Weapon/Weapon_Sprite.set_flip_v(false)
+        $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(4,5))
     if $Chain.hooked:
-        _ChainHook() 
+        _ChainHook()
+
+    
     else:
         # Not hooked -> no chain velocity
         chain_velocity = Vector2(0,0)
@@ -246,6 +268,8 @@ func _physics_process(delta):
 
     if is_on_floor():
         rotation = get_floor_normal().angle() + PI/2
+        can_jump = true
+        jump_count = 0
         
     if stop:
         var vsign = sign(velocity.x)
@@ -265,6 +289,11 @@ func _physics_process(delta):
         var collision = get_slide_collision(index)
         if collision.collider.is_in_group("bodies"):
                 collision.collider.apply_central_impulse(-collision.normal * push)
+                
+    if is_on_wall() and not is_climbing:
+        _WallMount()
+    else:
+        can_walljump = true
        
 func move(direction):
     force = Vector2(0, gravity) # create forces
@@ -280,16 +309,25 @@ func move(direction):
                 stop = false
         
 func jump():
-    if jump_count < MAX_JUMP_COUNT:
-        velocity.y = -jump_strength
-        jump_count += 1
-        is_jumping = true
-    # Jump must also be allowed to happen if the character left the floor a little bit ago. Makes controls more snappy.
+    jump_count += 1
+    rotation = 0 
+    velocity.y = -jump_strength
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and not prev_jump_pressed and not is_jumping:
         velocity.y = -jump_strength
         is_jumping = true
-        rotation = 0
-    prev_jump_pressed = Input.is_action_just_pressed("jump")          
+        
+    if jump_count >= MAX_JUMP_COUNT:
+        can_jump = false
+        
+
+
+    
+    # Jump must also be allowed to happen if the character left the floor a little bit ago. Makes controls more snappy.
+    
+    
+    prev_jump_pressed = Input.is_action_pressed("jump")
+    
+
 
 func mantle(direction):
     if direction == "right":
@@ -336,21 +374,35 @@ func shoot(weapon_type):
         can_shoot = true
             
 func _WallMount():
-    velocity.y = lerp(velocity.y,0,0.3)
+    velocity.y = lerp(velocity.y,0,0.2)
     jump_strength = 900
         
     if can_walljump:
         jump_count = 1
         can_walljump = false
+        can_jump = true
                  
     if not is_on_wall() and not is_falling:
         jump_strength = 750
     if velocity.y > 0:
         rotation = 0
     
+func GunTimer(phy):
+    can_shoot = false
+    var GunTimer = Timer.new()
+    GunTimer.set_physics_process(phy)
+    GunTimer.set_wait_time($Weapon/GunStats.cool_down)
+    GunTimer.set_one_shot(true)
+    self.add_child(GunTimer)
+    GunTimer.start()
+    
+    yield(GunTimer, "timeout")
+    GunTimer.queue_free()
+    can_shoot = true
+    
 func Kickback(kickback):
     velocity = Vector2(kickback, 0).rotated($Weapon.global_rotation)
- 
+    
 func take_damage(amount):
     health -= amount
     emit_signal("health_changed", (health * 100 / max_health))
@@ -380,6 +432,7 @@ func _on_GrappleTimer_timeout():
 
 func _on_WallJumpTimer_timeout():
     can_doublejump = true
+
 
 func _ChainHook():
     chain_velocity = to_local($Chain.tip).normalized() * chain_pull

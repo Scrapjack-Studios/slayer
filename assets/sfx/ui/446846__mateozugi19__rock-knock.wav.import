@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/446846__mateozugi19__rock-knock.wav-aea5357dd64a4a108a43183af00311f6.sample"
+
+[deps]
+
+source_file="res://assets/sfx/ui/446846__mateozugi19__rock-knock.wav"
+dest_files=[ "res://.import/446846__mateozugi19__rock-knock.wav-aea5357dd64a4a108a43183af00311f6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

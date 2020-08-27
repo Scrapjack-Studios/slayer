@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://weapons/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://player/Camera2D.gd" type="Script" id=3]
 [ext_resource path="res://player/Chain.tscn" type="PackedScene" id=4]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/32x32.png" type="Texture" id=6]
-[ext_resource path="res://assets/rope.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/32x32.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/rope.png" type="Texture" id=7]
+[ext_resource path="res://weapons/WeaponMechanics.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.998139, 2.11467 )
@@ -30,6 +31,9 @@ collision/safe_margin = 0.05
 script = ExtResource( 2 )
 Bullet = ExtResource( 5 )
 push = 20
+
+[node name="WeaponMechanics" type="Node2D" parent="."]
+script = ExtResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -4.3709, 4.91209 )
@@ -127,6 +131,7 @@ enabled = true
 collide_with_areas = true
 
 [node name="Whip" type="PinJoint2D" parent="."]
+show_behind_parent = true
 position = Vector2( -13.2539, 3.38521 )
 node_a = NodePath("..")
 node_b = NodePath("GrooveJoint2D/RigidBody2D")

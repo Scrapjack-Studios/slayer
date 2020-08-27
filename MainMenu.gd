@@ -40,7 +40,10 @@ func _on_Create_pressed():
     
     if $PlayMenu/CreateGameMenu/VBoxContainer/Map.selected == 0: # TODO: this is awful. do this some other way
         Global.map = "res://maps/ShootingRange.tscn"
-    Global.weapon1 = "shotgun"
+    Global.weapon1 = $SRSetup/VBoxContainer2/Weapon1.get_item_text($SRSetup/VBoxContainer2/Weapon1.selected)
+    Global.weapon2 = $SRSetup/VBoxContainer2/Weapon2.get_item_text($SRSetup/VBoxContainer2/Weapon2.selected)
+    Global.weapon3 = $SRSetup/VBoxContainer2/Weapon3.get_item_text($SRSetup/VBoxContainer2/Weapon3.selected)
+    Global.weapon4 = $SRSetup/VBoxContainer2/Weapon4.get_item_text($SRSetup/VBoxContainer2/Weapon4.selected)
     
     Network.create_server(port, Global.username)
     get_tree().change_scene("res://GameController.tscn") 
@@ -80,51 +83,6 @@ func _on_QuitButton_pressed():
     yield($Button2, "finished")
     get_tree().quit()
 
-func _on_StartGame_pressed():
-    $Blip1.play()
-    
-    if $SRSetup/VBoxContainer2/Map.selected == 0:
-        Global.map = load("res://maps/ShootingRange.tscn")
-    
-    if $SRSetup/VBoxContainer2/Weapon1.selected == 0:
-        Global.weapon1 = "shotgun"
-    if $SRSetup/VBoxContainer2/Weapon1.selected == 1:
-        Global.weapon1 = "assault_rifle"
-    if $SRSetup/VBoxContainer2/Weapon1.selected == 2:
-        Global.weapon1 = "pistol"
-    if $SRSetup/VBoxContainer2/Weapon1.selected == 3:
-        Global.weapon1 = "m1"
-         
-    if $SRSetup/VBoxContainer2/Weapon2.selected == 0:
-        Global.weapon2 = "shotgun"
-    if $SRSetup/VBoxContainer2/Weapon2.selected == 1:
-        Global.weapon2 = "assault_rifle"
-    if $SRSetup/VBoxContainer2/Weapon2.selected == 2:
-        Global.weapon2 = "pistol"
-    if $SRSetup/VBoxContainer2/Weapon2.selected == 3:
-        Global.weapon2 = "m1"
-        
-    if $SRSetup/VBoxContainer2/Weapon3.selected == 0:
-        Global.weapon3 = "shotgun"
-    if $SRSetup/VBoxContainer2/Weapon3.selected == 1:
-        Global.weapon3 = "assault_rifle"
-    if $SRSetup/VBoxContainer2/Weapon3.selected == 2:
-        Global.weapon3 = "pistol"
-    if $SRSetup/VBoxContainer2/Weapon3.selected == 3:
-        Global.weapon3 = "m1"
-        
-    if $SRSetup/VBoxContainer2/Weapon4.selected == 0:
-        Global.weapon4 = "shotgun"
-    if $SRSetup/VBoxContainer2/Weapon4.selected == 1:
-        Global.weapon4 = "assault_rifle"
-    if $SRSetup/VBoxContainer2/Weapon4.selected == 2:
-        Global.weapon4 = "pistol"
-    if $SRSetup/VBoxContainer2/Weapon4.selected == 3:
-        Global.weapon4 = "m1"
-    
-    yield($Blip1, "finished")
-    get_tree().change_scene("res://GameController.tscn")
-    
 func _on_JoinGame_mouse_entered():
     $Hover.play()
 
@@ -136,3 +94,22 @@ func _on_ShootingRange_mouse_entered():
 
 func _on_EditProfile_mouse_entered():
     $Hover.play()
+
+
+func _on_StartGame_pressed():
+    $Blip1.play()
+    
+    if $SRSetup/VBoxContainer2/Map.selected == 0:
+        Global.map = "res://maps/ShootingRange.tscn"
+    
+    Global.weapon1 = $SRSetup/VBoxContainer2/Weapon1.get_item_text($SRSetup/VBoxContainer2/Weapon1.selected)
+    Global.weapon2 = $SRSetup/VBoxContainer2/Weapon2.get_item_text($SRSetup/VBoxContainer2/Weapon2.selected)
+    Global.weapon3 = $SRSetup/VBoxContainer2/Weapon3.get_item_text($SRSetup/VBoxContainer2/Weapon3.selected)
+    Global.weapon4 = $SRSetup/VBoxContainer2/Weapon4.get_item_text($SRSetup/VBoxContainer2/Weapon4.selected)
+         
+    yield($Blip1, "finished")
+    # warning-ignore:return_value_discarded
+    get_tree().change_scene("res://GameController.tscn")
+
+
+
