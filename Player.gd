@@ -80,22 +80,22 @@ func _ready():
 func _input(event: InputEvent) -> void:
     if is_network_master():
         
-        
-        if Input.is_action_just_pressed("reload"):
-            $WeaponMechanics.reload()
-        
-        
-        if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
-            $WeaponMechanics.semi_auto()
-            GunTimer(false)
+        if can_shoot:
+            if Input.is_action_just_pressed("reload"):
+                $WeaponMechanics.reload()
             
-        if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
-            $WeaponMechanics.shotgun()
-            GunTimer(false)
             
-        if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_burst_fire:
-            $WeaponMechanics.burst()
-            GunTimer(false)
+            if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
+                $WeaponMechanics.semi_auto()
+                GunTimer(false)
+                
+            if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
+                $WeaponMechanics.shotgun()
+                GunTimer(false)
+                
+            if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_burst_fire:
+                $WeaponMechanics.burst()
+                GunTimer(false)
     
             
         if event.is_action_pressed("Graphook") and can_grapple:
