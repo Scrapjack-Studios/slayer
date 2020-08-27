@@ -39,7 +39,7 @@ func _physics_process(delta):
             hit()
             $Timer.start()
             if collision.collider.is_in_group("Players"):
-                collision.collider.take_damage(0.1)
+                collision.collider.take_damage(damage)
 
 func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
