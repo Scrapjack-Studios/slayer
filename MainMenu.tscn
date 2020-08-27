@@ -13,7 +13,8 @@
 [ext_resource path="res://assets/music/SandAndBlood.ogg" type="AudioStream" id=11]
 [ext_resource path="res://menus/EditProfileMenu.gd" type="Script" id=12]
 [ext_resource path="res://weapons/Weapon_Templates.tscn" type="PackedScene" id=13]
-[ext_resource path="res://WeaponOptionButoon.gd" type="Script" id=14]
+[ext_resource path="res://weapons/WeaponOptionButton.gd" type="Script" id=14]
+
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
