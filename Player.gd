@@ -140,7 +140,6 @@ func _input(event: InputEvent) -> void:
             get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
             $Weapon/GunStats/Sounds/FireSound.activate()
             $Weapon/GunStats.set_sprite()
-            print(mag_1)
             preweapon = "Weapon1"
             $Weapon/GunStats.shots_fired = mag_1 
             
@@ -148,7 +147,6 @@ func _input(event: InputEvent) -> void:
             get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).activate()
             $Weapon/GunStats/Sounds/FireSound.activate()
             $Weapon/GunStats.set_sprite() 
-            print(mag_2)
             preweapon = "Weapon2"  
             $Weapon/GunStats.shots_fired = mag_2
             
@@ -156,7 +154,6 @@ func _input(event: InputEvent) -> void:
             get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).activate()
             $Weapon/GunStats/Sounds/FireSound.activate()
             $Weapon/GunStats.set_sprite() 
-            print(mag_3)
             preweapon = "Weapon3"      
             $Weapon/GunStats.shots_fired = mag_3
             
@@ -164,7 +161,6 @@ func _input(event: InputEvent) -> void:
             get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).activate()
             $Weapon/GunStats/Sounds/FireSound.activate()
             $Weapon/GunStats.set_sprite() 
-            print(mag_4)
             preweapon = "Weapon4"
             $Weapon/GunStats.shots_fired = mag_4
     
