@@ -43,7 +43,7 @@ var pistol_sound
 var mag = 50
 var shots_fired = 50
 var shots_fired_memory = 50
-var can_fire = true
+master var can_fire = true
 var ReloadTime = 2
 var bounce
 
@@ -58,7 +58,7 @@ sync func _BulletPostition():
         shots_fired_memory -= 1
         shot = true
         if shots_fired == 0:
-            can_fire = false   
+            rset("can_fire", false)   
         if $RayCast2DKick.is_colliding():
             get_parent().get_parent().Kickback(kickback)
             
