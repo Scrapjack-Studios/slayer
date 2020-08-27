@@ -18,7 +18,6 @@
 [ext_resource path="res://assets/sprites/muzzle/m_7.png" type="Texture" id=17]
 
 [sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/GunTemp.png-bb41e8271afcd81c269b89b01384b946.stex"
 
 [sub_resource type="AnimatedTexture" id=2]
 frames = 6

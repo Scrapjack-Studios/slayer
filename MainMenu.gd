@@ -25,7 +25,11 @@ func _on_Join_pressed():
     var ip = $PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer/IPAddress.text
     var port = int($PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer/Port.text)
     
-    Global.weapon1 = "shotgun"
+    Global.weapon1 = $SRSetup/VBoxContainer2/Weapon1.get_item_text($SRSetup/VBoxContainer2/Weapon1.selected)
+    Global.weapon2 = $SRSetup/VBoxContainer2/Weapon2.get_item_text($SRSetup/VBoxContainer2/Weapon2.selected)
+    Global.weapon3 = $SRSetup/VBoxContainer2/Weapon3.get_item_text($SRSetup/VBoxContainer2/Weapon3.selected)
+    Global.weapon4 = $SRSetup/VBoxContainer2/Weapon4.get_item_text($SRSetup/VBoxContainer2/Weapon4.selected)
+    
     get_tree().change_scene("res://menus/LoadingScreen.tscn")
     Network.connect_to_server(ip, port, Global.username)
 
