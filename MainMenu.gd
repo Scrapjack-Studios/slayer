@@ -25,17 +25,16 @@ func _on_Join_pressed():
     var ip = $PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer/IPAddress.text
     var port = int($PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer/Port.text)
     
-    Global.weapon1 = $SRSetup/VBoxContainer2/Weapon1.get_item_text($SRSetup/VBoxContainer2/Weapon1.selected)
-    Global.weapon2 = $SRSetup/VBoxContainer2/Weapon2.get_item_text($SRSetup/VBoxContainer2/Weapon2.selected)
-    Global.weapon3 = $SRSetup/VBoxContainer2/Weapon3.get_item_text($SRSetup/VBoxContainer2/Weapon3.selected)
-    Global.weapon4 = $SRSetup/VBoxContainer2/Weapon4.get_item_text($SRSetup/VBoxContainer2/Weapon4.selected)
+    Global.weapon1 = $PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon1.get_item_text($PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon1.selected)
+    Global.weapon2 = $PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon2.get_item_text($PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon2.selected)
+    Global.weapon3 = $PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon3.get_item_text($PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon3.selected)
+    Global.weapon4 = $PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon4.get_item_text($PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon4.selected)
     
     get_tree().change_scene("res://menus/LoadingScreen.tscn")
     Network.connect_to_server(ip, port, Global.username)
 
 func _on_CreateGame_pressed():
     $Blip1.play()
-    
     $PlayMenu/VBoxContainer.hide()
     $PlayMenu/CreateGameMenu.show()
     
@@ -44,10 +43,10 @@ func _on_Create_pressed():
     
     if $PlayMenu/CreateGameMenu/VBoxContainer/Map.selected == 0: # TODO: this is awful. do this some other way
         Global.map = "res://maps/ShootingRange.tscn"
-    Global.weapon1 = $SRSetup/VBoxContainer2/Weapon1.get_item_text($SRSetup/VBoxContainer2/Weapon1.selected)
-    Global.weapon2 = $SRSetup/VBoxContainer2/Weapon2.get_item_text($SRSetup/VBoxContainer2/Weapon2.selected)
-    Global.weapon3 = $SRSetup/VBoxContainer2/Weapon3.get_item_text($SRSetup/VBoxContainer2/Weapon3.selected)
-    Global.weapon4 = $SRSetup/VBoxContainer2/Weapon4.get_item_text($SRSetup/VBoxContainer2/Weapon4.selected)
+    Global.weapon1 = $PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon1.get_item_text($PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon1.selected)
+    Global.weapon2 = $PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon2.get_item_text($PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon2.selected)
+    Global.weapon3 = $PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon3.get_item_text($PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon3.selected)
+    Global.weapon4 = $PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon4.get_item_text($PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon4.selected)
     
     Network.create_server(port, Global.username)
     get_tree().change_scene("res://GameController.tscn") 
@@ -98,7 +97,7 @@ func _on_ShootingRange_mouse_entered():
 
 func _on_EditProfile_mouse_entered():
     $Hover.play()
-
+    
 
 func _on_StartGame_pressed():
     $Blip1.play()

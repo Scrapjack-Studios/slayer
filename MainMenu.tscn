@@ -197,6 +197,47 @@ margin_right = 325.0
 margin_bottom = 70.0
 text = "Join"
 
+[node name="VBoxContainer3" type="VBoxContainer" parent="PlayMenu/JoinGameMenu/VBoxContainer"]
+margin_top = 82.0
+margin_right = 325.0
+margin_bottom = 256.0
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapons" type="Label" parent="PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3"]
+margin_right = 325.0
+margin_bottom = 22.0
+text = "Weapons"
+
+[node name="Weapon1" type="OptionButton" parent="PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3"]
+margin_top = 34.0
+margin_right = 325.0
+margin_bottom = 60.0
+script = ExtResource( 14 )
+
+[node name="Weapon2" type="OptionButton" parent="PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3"]
+margin_top = 72.0
+margin_right = 325.0
+margin_bottom = 98.0
+script = ExtResource( 14 )
+
+[node name="Weapon3" type="OptionButton" parent="PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3"]
+margin_top = 110.0
+margin_right = 325.0
+margin_bottom = 136.0
+script = ExtResource( 14 )
+
+[node name="Weapon4" type="OptionButton" parent="PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3"]
+margin_top = 148.0
+margin_right = 325.0
+margin_bottom = 174.0
+script = ExtResource( 14 )
+
+[node name="Templates" parent="PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3" instance=ExtResource( 13 )]
+position = Vector2( -138.152, -145 )
+
 [node name="CreateGameMenu" type="Control" parent="PlayMenu"]
 visible = false
 anchor_top = 0.001
@@ -221,28 +262,67 @@ __meta__ = {
 }
 
 [node name="Port" type="LineEdit" parent="PlayMenu/CreateGameMenu/VBoxContainer"]
-margin_left = 188.962
-margin_top = -0.04599
-margin_right = 294.962
-margin_bottom = 31.954
+margin_right = 325.0
+margin_bottom = 32.0
 text = "4000"
 max_length = 5
 placeholder_text = "Port"
 
 [node name="Map" type="OptionButton" parent="PlayMenu/CreateGameMenu/VBoxContainer"]
-margin_left = -2.886
-margin_top = 0.95401
-margin_right = 133.114
-margin_bottom = 40.954
+margin_top = 44.0
+margin_right = 325.0
+margin_bottom = 70.0
 toggle_mode = false
 text = "Shooting Range"
 items = [ "Shooting Range", null, false, 0, null ]
 selected = 0
 
 [node name="Create" type="Button" parent="PlayMenu/CreateGameMenu/VBoxContainer"]
-margin_right = 34.0
-margin_bottom = 26.0
+margin_top = 82.0
+margin_right = 325.0
+margin_bottom = 108.0
 text = "Create"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PlayMenu/CreateGameMenu/VBoxContainer"]
+margin_top = 120.0
+margin_right = 325.0
+margin_bottom = 294.0
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapons" type="Label" parent="PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3"]
+margin_right = 325.0
+margin_bottom = 22.0
+text = "Weapons"
+
+[node name="Weapon1" type="OptionButton" parent="PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3"]
+margin_top = 34.0
+margin_right = 325.0
+margin_bottom = 60.0
+script = ExtResource( 14 )
+
+[node name="Weapon2" type="OptionButton" parent="PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3"]
+margin_top = 72.0
+margin_right = 325.0
+margin_bottom = 98.0
+script = ExtResource( 14 )
+
+[node name="Weapon3" type="OptionButton" parent="PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3"]
+margin_top = 110.0
+margin_right = 325.0
+margin_bottom = 136.0
+script = ExtResource( 14 )
+
+[node name="Weapon4" type="OptionButton" parent="PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3"]
+margin_top = 148.0
+margin_right = 325.0
+margin_bottom = 174.0
+script = ExtResource( 14 )
+
+[node name="Templates" parent="PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3" instance=ExtResource( 13 )]
+position = Vector2( -138.152, -145 )
 
 [node name="EditProfileMenu" type="Control" parent="."]
 visible = false
