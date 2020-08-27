@@ -1,4 +1,4 @@
-extends AudioStreamPlayer
+extends AudioStreamPlayer2D
 
 var assault
 var shotgun

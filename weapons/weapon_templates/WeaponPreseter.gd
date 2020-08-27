@@ -13,7 +13,7 @@ export (int) var reload
 export (Texture) var weapon_sprite 
 export (int) var kickback
 export (int) var burst_ammount
-export (int) var dmg
+export (float) var dmg
 export(int, "Pistol", "Assault", "Shotgun", "Carbine") var Weapon_Sounds
 
 

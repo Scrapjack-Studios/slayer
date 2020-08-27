@@ -110,14 +110,14 @@ Bullet = ExtResource( 6 )
 
 [node name="Sounds" type="Node2D" parent="GunStats"]
 
-[node name="FireSound" type="AudioStreamPlayer" parent="GunStats/Sounds"]
+[node name="FireSound" type="AudioStreamPlayer2D" parent="GunStats/Sounds"]
 bus = "Weapon SFX"
 script = ExtResource( 10 )
 
-[node name="ReloadSound" type="AudioStreamPlayer" parent="GunStats/Sounds"]
+[node name="ReloadSound" type="AudioStreamPlayer2D" parent="GunStats/Sounds"]
 stream = ExtResource( 4 )
 
-[node name="CoolDownSound" type="AudioStreamPlayer" parent="GunStats/Sounds"]
+[node name="CoolDownSound" type="AudioStreamPlayer2D" parent="GunStats/Sounds"]
 bus = "Weapon SFX"
 
 [node name="Bullets" type="Node" parent="GunStats"]

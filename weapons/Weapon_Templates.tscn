@@ -19,7 +19,7 @@ shots_fired = 8
 reload = 2
 weapon_sprite = ExtResource( 2 )
 kickback = -30
-dmg = 5
+dmg = 0.1
 Weapon_Sounds = 2
 
 [node name="Raven_99" type="Node" parent="."]
@@ -33,7 +33,6 @@ mag = 99
 shots_fired = 99
 reload = 3
 weapon_sprite = ExtResource( 2 )
-dmg = 5
 
 [node name="Axe_78" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -46,7 +45,6 @@ mag = 60
 shots_fired = 60
 reload = 2
 weapon_sprite = ExtResource( 2 )
-dmg = 1
 Weapon_Sounds = 1
 
 [node name="DMR" type="Node" parent="."]
@@ -58,4 +56,3 @@ shots_fired = 30
 reload = 2
 weapon_sprite = ExtResource( 2 )
 burst_ammount = 3
-dmg = 2
