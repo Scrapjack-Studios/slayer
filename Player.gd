@@ -9,8 +9,10 @@ enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
 puppet var puppet_position = Vector2()
 puppet var puppet_movement = MoveDirection.NONE
 puppet var puppet_mouse_position = 0
+puppet var puppet_muzzle_position = Vector2()
 puppet var puppet_weapon_position = Vector2()
 puppet var puppet_weapon_flip = false
+
 
 export (float) var max_health = 100
 onready var health = max_health
@@ -188,6 +190,8 @@ func _physics_process(delta):
     var mpos = get_global_mouse_position().angle_to_point(position)
     var weaponflip = $Weapon/Weapon_Sprite.flip_v
     var weaponpos = $Weapon.position
+    var muzzlepos = $Weapon/Weapon_Sprite/Muzzle.position
+    
     $Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
     on_air_time += delta
 
@@ -209,22 +213,26 @@ func _physics_process(delta):
                     mantle("right")
                 if direction == MoveDirection.LEFT and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
                     mantle("left")
-
-
-        
+    
         if get_local_mouse_position().x < 0: # mouse is facing left
-            $Weapon.set_position(Vector2(-22,10))
+            $Weapon.set_position(Vector2(-22,-7))
             $Weapon/Weapon_Sprite.set_flip_v(true)
+            $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(4,1))
         elif get_local_mouse_position().x > 0: # mouse is facing right
             $Weapon.set_position(Vector2(15,0))
             $Weapon/Weapon_Sprite.set_flip_v(false)
+            $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(4,5))
+    
+
             
         rset("puppet_mouse_position", mpos)
         rset("puppet_weapon_position", weaponpos)
+        rset("puppet_muzzle_position", muzzlepos)
         rset("puppet_weapon_flip", weaponflip)
         rset_unreliable('puppet_position', position)
         rset('puppet_movement', direction)
         move(direction)
+        
         
     else:
         move(puppet_movement)
@@ -232,7 +240,7 @@ func _physics_process(delta):
         $Weapon.global_rotation = puppet_mouse_position
         $Weapon.position = puppet_weapon_position
         $Weapon/Weapon_Sprite.flip_v = puppet_weapon_flip
-    
+        $Weapon/Weapon_Sprite/Muzzle.position = puppet_muzzle_position
        
    
     var move_left = Input.is_action_pressed("move_left")
@@ -248,14 +256,9 @@ func _physics_process(delta):
     
 
     
-    if get_local_mouse_position().x < 0: # mouse is facing left
-        $Weapon.set_position(Vector2(-22,-7))
-        $Weapon/Weapon_Sprite.set_flip_v(true)
-        $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(4,1))
-    elif get_local_mouse_position().x > 0: # mouse is facing right
-        $Weapon.set_position(Vector2(15,0))
-        $Weapon/Weapon_Sprite.set_flip_v(false)
-        $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(4,5))
+
+    
+    
     if $Chain.hooked:
         _ChainHook()
 
