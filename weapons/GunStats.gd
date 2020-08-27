@@ -49,7 +49,7 @@ var bounce
 
     
     
-func _BulletPostition():
+sync func _BulletPostition():
     if can_fire:
         var b = Bullet.instance()
         b.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
