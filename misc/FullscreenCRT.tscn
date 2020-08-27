@@ -5,6 +5,7 @@
 [node name="FullscreenCRT" type="CanvasLayer"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 material = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0

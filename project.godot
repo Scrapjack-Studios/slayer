@@ -24,10 +24,12 @@ config/icon="res://assets/icon.png"
 FullscreenCRT="*res://misc/FullscreenCRT.tscn"
 FPSCounter="*res://misc/FPSCounter.tscn"
 Global="*res://Global.gd"
+Network="*res://Network.gd"
 
 [debug]
 
 gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 

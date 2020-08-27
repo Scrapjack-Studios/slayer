@@ -47,7 +47,6 @@ shape = SubResource( 1 )
 position = Vector2( 18.4133, -0.000347614 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
 limit_left = -10000
 limit_top = -10000
 limit_right = 10000
@@ -184,5 +183,15 @@ wait_time = 0.3
 [node name="Blur" type="CanvasModulate" parent="."]
 visible = false
 color = Color( 0.984314, 0.0705882, 0.0705882, 1 )
+
+[node name="Username" type="Label" parent="."]
+margin_left = -60.0
+margin_top = -54.0
+margin_right = 48.0
+margin_bottom = -32.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]
 [connection signal="timeout" from="WallJumpTimer" to="." method="_on_WallJumpTimer_timeout"]

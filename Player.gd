@@ -2,6 +2,15 @@ extends KinematicBody2D
 
 signal health_changed(health)
 signal died
+signal respawn
+
+enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
+
+puppet var puppet_position = Vector2()
+puppet var puppet_movement = MoveDirection.NONE
+puppet var puppet_mouse_position = 0
+puppet var puppet_weapon_position = Vector2()
+puppet var puppet_weapon_flip = false
 
 export (float) var max_health = 100
 onready var health = max_health
@@ -27,6 +36,8 @@ var chain_velocity := Vector2(0,0)
 var gravity = 1500.0 # pixels/second/second
 var rot_dir
 var can_shoot = true
+var can_move = true
+var can_jump = true
 var chain_pull = 55
 var on_air_time = 100
 var is_jumping = false
@@ -47,93 +58,48 @@ var stopped_fire = false
 var burst_loop = 0
 var shot = false
 var grapple_count = 0
+var stop
+var force
 
 func _ready():
-    if $"/root/Global".weapon1 == "shotgun":
+    if Global.weapon1 == "shotgun":
         $Weapon/GunStats/Templates/shotgun.activate()
         $Weapon/GunStats.set_sprite()
-    if $"/root/Global".weapon1 == "assault_rifle":
+    if Global.weapon1 == "assault_rifle":
         $Weapon/GunStats/Templates/assault_rifle.activate()
         $Weapon/GunStats.set_sprite()
-    if $"/root/Global".weapon1 == "pistol":
+    if Global.weapon1 == "pistol":
         $Weapon/GunStats/Templates/pistol.activate()
         $Weapon/GunStats.set_sprite()
-    if $"/root/Global".weapon1 == "m1":
+    if Global.weapon1 == "m1":
         $Weapon/GunStats/Templates/m1.activate()
         $Weapon/GunStats.set_sprite()
     
 func _input(event: InputEvent) -> void:
-    
-    
-    if Input.is_action_just_pressed("reload"):
-        var RTimer = Timer.new()
-        RTimer.set_wait_time($Weapon/GunStats.ReloadTime)
-        RTimer.set_one_shot(true)
-        self.add_child(RTimer)
-        RTimer.start()
-        yield(RTimer, "timeout")
-        RTimer.queue_free()
-        $Weapon/GunStats.shots_fired = $Weapon/GunStats.mag
-        $Weapon/GunStats.can_fire = true
-    
-    
-    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
-        can_shoot = false
-        $Weapon/GunStats._BulletPostition()
-        var GunTimer = Timer.new()
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        can_shoot = true
-
-          
-    if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun:
-        can_shoot = false
-        $Weapon/GunStats._BulletPostition()
-        var GunTimer = Timer.new()
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        can_shoot = true
+    if is_network_master():
+        if Input.is_action_just_pressed("reload"):
+            pass
+        
+        if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
+            pass
+  
+        if event.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.shotgun:
+            pass
          
-    
-    if event.is_action_released("tank_fire"):
-        stopped_fire = true
-        #connect("bullet_collided", Bullet, "on_bullet_collided")
+        if event.is_action_released("tank_fire"):
+            pass
         
     if event.is_action_pressed("Graphook") and can_grapple:
-        rotation = 0
-        # We clicked the mouse -> shoot()
-        $Chain.shoot(event.position - get_viewport().size * .57)
-        is_grappling = true
-        $Whip.hide()
-        grapple_count += 1
-        
-            
-
-        
+            rotation = 0
+            $Chain.rpc("shoot", event.position - get_viewport().size * .57)
+            is_grappling = true
+            $Whip.hide()
     elif event.is_action_released("Graphook") and is_grappling:
-        $Chain.release()
-        $Whip.show()
+        $Chain.rpc("release")
+        $GrappleTimer.start()
+        can_grapple = false
         is_grappling = false
-        if grapple_count == 3:
-            can_grapple = false
-            $GrappleTimer.start()
-            grapple_count = 0
-        
-        
-    
-    if event.is_action_pressed("jump"):
-        is_jumping = false
-    if jump_count < MAX_JUMP_COUNT and event.is_action_pressed("jump"):
-        velocity.y = -jump_strength
-        jump_count += 1
+        $Whip.show()
         
     if event.is_action_pressed("Weapon1"):
         if $"/root/Global".weapon1 == "shotgun":
@@ -176,7 +142,7 @@ func _input(event: InputEvent) -> void:
         if $"/root/Global".weapon3 == "m1":
             $Weapon/GunStats/Templates/m1.activate()
             $Weapon/GunStats.set_sprite()
-    
+        
     if event.is_action_pressed("Weapon4"):
         if $"/root/Global".weapon4 == "shotgun":
             $Weapon/GunStats/Templates/shotgun.activate()
@@ -192,63 +158,92 @@ func _input(event: InputEvent) -> void:
             $Weapon/GunStats.set_sprite()
         
 func _physics_process(delta):
+    if get_tree().is_network_server():
+        Network.update_position(int(name), position)
     
-    if Input.is_action_pressed("tank_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-        $Weapon/GunStats._BulletPostition()
-        can_shoot = false
-        var GunTimer = Timer.new()
-        GunTimer.set_physics_process(true)
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        can_shoot = true
-
+    var direction = MoveDirection.NONE
+    var mpos = get_global_mouse_position().angle_to_point(position)
+    var weaponflip = $Weapon/Weapon_Sprite.flip_v
+    var weaponpos = $Weapon.position
+    $Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
+    on_air_time += delta
     
-    var mpos = get_global_mouse_position()
+    if is_network_master():
+        if Input.is_action_pressed('move_left'):
+            direction = MoveDirection.LEFT
+            is_walking = true
+        elif Input.is_action_pressed('move_right'):
+            direction = MoveDirection.RIGHT
+            is_walking = true 
+        
+        if Input.is_action_just_pressed("jump") and can_jump:
+            jump()
+            if is_jumping or is_falling:
+                if direction == MoveDirection.RIGHT and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
+                    mantle("right")
+                if direction == MoveDirection.LEFT and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
+                    mantle("left")
+                    
+        if Input.is_action_just_pressed("tank_fire") and can_shoot:
+            if $Weapon/GunStats.is_semi_auto:
+                shoot("semi_auto")
+            if $Weapon/GunStats.shotgun:
+                shoot("shotgun")
+            if $Weapon/GunStats.is_automatic:
+                shoot("automatic")
+        elif Input.is_action_just_released("tank_fire"):
+            stopped_fire = true
+        
+        if get_local_mouse_position().x < 0: # mouse is facing left
+            $Weapon.set_position(Vector2(-22,10))
+            $Weapon/Weapon_Sprite.set_flip_v(true)
+        elif get_local_mouse_position().x > 0: # mouse is facing right
+            $Weapon.set_position(Vector2(15,0))
+            $Weapon/Weapon_Sprite.set_flip_v(false)
+            
+        rset("puppet_mouse_position", mpos)
+        rset("puppet_weapon_position", weaponpos)
+        rset("puppet_weapon_flip", weaponflip)
+        rset_unreliable('puppet_position', position)
+        rset('puppet_movement', direction)
+        move(direction)
+    else:
+        move(puppet_movement)
+        position = puppet_position
+        $Weapon.global_rotation = puppet_mouse_position
+        $Weapon.position = puppet_weapon_position
+        $Weapon/Weapon_Sprite.flip_v = puppet_weapon_flip
     
-    $Weapon.global_rotation = mpos.angle_to_point(position)  
-       
-    var force = Vector2(0, gravity) # create forces 
-    
-    var move_left = Input.is_action_pressed("move_left")
-    
-    var move_right = Input.is_action_pressed("move_right")
-    
-    var jump = Input.is_action_pressed("jump")
-    
-    if move_left or move_right:
-        is_walking = true
-    
-    var stop = true
-    
-    if get_local_mouse_position().x < 0: # mouse is facing left
-        $Weapon.set_position(Vector2(-22,10))
-        $Weapon/Weapon_Sprite.set_flip_v(true)
-    elif get_local_mouse_position().x > 0: # mouse is facing right
-        $Weapon.set_position(Vector2(15,0))
-        $Weapon/Weapon_Sprite.set_flip_v(false)
+    if is_on_floor():
+        on_air_time = 0
+        is_falling = false
+        jump_count = 0
+        has_pressed_jump = false
+        is_climbing = false
+        jump_strength = 750
+        gravity = -1
+    else:
+        gravity = 1300
+        
+    if is_on_wall() and not is_climbing:
+        _WallMount()
+    else:
+        can_walljump = true
+        
+    if is_jumping and velocity.y > 0:
+        # If falling, no longer jumping
+        is_jumping = false
+        is_falling = true
+        rotation = 0
+        
     if $Chain.hooked:
-        _ChainHook()
-
-    
+        _ChainHook() 
     else:
         # Not hooked -> no chain velocity
         chain_velocity = Vector2(0,0)
         
     velocity += chain_velocity
 
-    if move_left:
-        if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
-            force.x -= WALK_FORCE
-            stop = false
-    elif move_right:
-        if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
-            force.x += WALK_FORCE
-            stop = false
-        
     if is_on_floor():
         rotation = get_floor_normal().angle() + PI/2
         
@@ -269,50 +264,77 @@ func _physics_process(delta):
     for index in get_slide_count():
         var collision = get_slide_collision(index)
         if collision.collider.is_in_group("bodies"):
-            collision.collider.apply_central_impulse(-collision.normal * push)
+                collision.collider.apply_central_impulse(-collision.normal * push)
+       
+func move(direction):
+    force = Vector2(0, gravity) # create forces
+    stop = true
+    if can_move:
+        if direction == MoveDirection.LEFT:
+            if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
+                force.x -= WALK_FORCE
+                stop = false
+        elif direction == MoveDirection.RIGHT:
+            if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
+                force.x += WALK_FORCE
+                stop = false
         
-    
-    if is_on_floor():
-        on_air_time = 0
-        is_falling = false
-        jump_count = 0
-        has_pressed_jump = false
-        is_climbing = false
-        jump_strength = 750
-        gravity = -1
-    else:
-        gravity = 1300
-        
-    if is_jumping and velocity.y > 0:
-        # If falling, no longer jumping
-        is_jumping = false
-        is_falling = true
-        rotation = 0
-        
-    if [is_jumping or is_falling] and move_right and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
-        if Input.is_action_just_pressed("jump"):
-            _MantelRight()
-
-    if [is_jumping or is_falling] and move_left and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
-        if Input.is_action_just_pressed("jump"):
-            _MantelLeft()
-
-        
-    if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not is_jumping:
-        # Makes controls more snappy.
+func jump():
+    if jump_count < MAX_JUMP_COUNT:
+        velocity.y = -jump_strength
+        jump_count += 1
+        is_jumping = true
+    # Jump must also be allowed to happen if the character left the floor a little bit ago. Makes controls more snappy.
+    if on_air_time < JUMP_MAX_AIRBORNE_TIME and not prev_jump_pressed and not is_jumping:
         velocity.y = -jump_strength
         is_jumping = true
         rotation = 0
-    
-    on_air_time += delta
-    
-    prev_jump_pressed = jump
-    
-    if is_on_wall() and not is_climbing:
-        _WallMount()
-    else:
-        can_walljump = true
+    prev_jump_pressed = Input.is_action_just_pressed("jump")          
 
+func mantle(direction):
+    if direction == "right":
+        velocity.x = +CLIMB_AMOUNT
+    elif direction == "left":
+        velocity.x = -CLIMB_AMOUNT
+    velocity.y = -CLIMB_SPEED
+    is_climbing = true   
+            
+func shoot(weapon_type):
+    if weapon_type == "semi_auto":
+        can_shoot = false
+        $Weapon/GunStats.rpc("_BulletPostition")
+        var GunTimer = Timer.new()
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
+        can_shoot = true
+    if weapon_type == "shotgun":
+        can_shoot = false
+        $Weapon/GunStats.rpc("_BulletPostition")
+        var GunTimer = Timer.new()
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
+        can_shoot = true
+    if weapon_type == "automatic":
+        $Weapon/GunStats._BulletPostition()
+        can_shoot = false
+        var GunTimer = Timer.new()
+        GunTimer.set_physics_process(true)
+        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
+        GunTimer.set_one_shot(true)
+        self.add_child(GunTimer)
+        GunTimer.start()
+        yield(GunTimer, "timeout")
+        GunTimer.queue_free()
+        can_shoot = true
+            
 func _WallMount():
     velocity.y = lerp(velocity.y,0,0.3)
     jump_strength = 900
@@ -320,13 +342,6 @@ func _WallMount():
     if can_walljump:
         jump_count = 1
         can_walljump = false
-    
-            
-    if not $Wall_Raycasts/Left/Wall_Detect_Left3:
-        _MantelLeft()
-            
-    if not $Wall_Raycasts/Right/Wall_Detect_Right3:
-        _MantelRight()
                  
     if not is_on_wall() and not is_falling:
         jump_strength = 750
@@ -335,22 +350,29 @@ func _WallMount():
     
 func Kickback(kickback):
     velocity = Vector2(kickback, 0).rotated($Weapon.global_rotation)
-func _MantelRight():
-    velocity.x = +CLIMB_AMOUNT
-    velocity.y = -CLIMB_SPEED
-    is_climbing = true
-    
-func _MantelLeft():       
-    velocity.x = -CLIMB_AMOUNT
-    velocity.y = -CLIMB_SPEED
-    is_climbing = true   
-        
-
+ 
 func take_damage(amount):
     health -= amount
     emit_signal("health_changed", (health * 100 / max_health))
     if health <= 0:
-        emit_signal("died")
+        rpc("die")
+        
+sync func die():
+    emit_signal("died")
+    hide()
+    set_physics_process(false)
+    can_shoot = false
+    $Camera2D._set_current(false)
+    call_deferred("set_disabled", true, $CollisionShape2D)
+    
+sync func respawn():
+    show()
+    set_physics_process(true)
+    can_shoot = true
+    call_deferred("set_disabled", false, $CollisionShape2D)
+    health = max_health
+    
+    emit_signal("respawn")
 
 func _on_GrappleTimer_timeout():
     $GrappleTimer.stop()
@@ -358,7 +380,6 @@ func _on_GrappleTimer_timeout():
 
 func _on_WallJumpTimer_timeout():
     can_doublejump = true
-
 
 func _ChainHook():
     chain_velocity = to_local($Chain.tip).normalized() * chain_pull
@@ -382,3 +403,6 @@ func _HeadBump():
     $Blur.hide()
     t.queue_free()
 
+func init(username, start_position):
+    $Username.text = username
+    global_position = start_position

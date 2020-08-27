@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/ui/MainMenu.png" type="Texture" id=1]
 [ext_resource path="res://MainMenu.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/sfx/ui/Button1.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sfx/ui/Blip1.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/music/SandAndBlood.ogg" type="AudioStream" id=11]
+[ext_resource path="res://menus/EditProfileMenu.gd" type="Script" id=12]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -99,6 +100,7 @@ margin_right = 0.319946
 margin_bottom = -6.10352e-05
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayMenu"]
+visible = false
 anchor_left = 0.038
 anchor_top = 0.046
 anchor_right = 0.376
@@ -126,11 +128,164 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShootingRange" type="Button" parent="PlayMenu/VBoxContainer"]
+[node name="EditProfile" type="Button" parent="PlayMenu/VBoxContainer"]
 margin_top = 76.0
 margin_right = 324.0
 margin_bottom = 102.0
+text = "Edit Profile"
+
+[node name="ShootingRange" type="Button" parent="PlayMenu/VBoxContainer"]
+margin_top = 114.0
+margin_right = 324.0
+margin_bottom = 140.0
 text = "Shooting Range"
+
+[node name="JoinGameMenu" type="Control" parent="PlayMenu"]
+visible = false
+anchor_top = 0.001
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 0.131
+margin_right = 1.0
+margin_bottom = 2.00006
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayMenu/JoinGameMenu"]
+anchor_left = 0.038
+anchor_top = 0.046
+anchor_right = 0.376
+anchor_bottom = 0.97
+margin_left = -0.442001
+margin_top = 0.0259972
+margin_right = 0.415985
+margin_bottom = 0.0699463
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HSplitContainer" parent="PlayMenu/JoinGameMenu/VBoxContainer"]
+margin_left = -0.0379944
+margin_top = -0.04599
+margin_right = 294.962
+margin_bottom = 31.954
+custom_constants/separation = 0
+split_offset = 100
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IPAddress" type="LineEdit" parent="PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer"]
+margin_right = 181.0
+margin_bottom = 32.0
+text = "192.168.50.66"
+max_length = 15
+placeholder_text = "IP Address"
+
+[node name="Port" type="LineEdit" parent="PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer"]
+margin_left = 189.0
+margin_right = 295.0
+margin_bottom = 32.0
+text = "4000"
+max_length = 5
+placeholder_text = "Port"
+
+[node name="Join" type="Button" parent="PlayMenu/JoinGameMenu/VBoxContainer"]
+margin_right = 4.0
+margin_bottom = 26.0
+text = "Join"
+
+[node name="CreateGameMenu" type="Control" parent="PlayMenu"]
+visible = false
+anchor_top = 0.001
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 0.131
+margin_right = 1.0
+margin_bottom = 2.00006
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayMenu/CreateGameMenu"]
+anchor_left = 0.038
+anchor_top = 0.046
+anchor_right = 0.376
+anchor_bottom = 0.97
+margin_left = -0.442001
+margin_top = 0.0259972
+margin_right = 0.415985
+margin_bottom = 0.0699463
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Port" type="LineEdit" parent="PlayMenu/CreateGameMenu/VBoxContainer"]
+margin_left = 188.962
+margin_top = -0.04599
+margin_right = 294.962
+margin_bottom = 31.954
+text = "4000"
+max_length = 5
+placeholder_text = "Port"
+
+[node name="Map" type="OptionButton" parent="PlayMenu/CreateGameMenu/VBoxContainer"]
+margin_left = -2.886
+margin_top = 0.95401
+margin_right = 133.114
+margin_bottom = 40.954
+toggle_mode = false
+text = "Shooting Range"
+items = [ "Shooting Range", null, false, 0, null ]
+selected = 0
+
+[node name="Create" type="Button" parent="PlayMenu/CreateGameMenu/VBoxContainer"]
+margin_right = 34.0
+margin_bottom = 26.0
+text = "Create"
+
+[node name="EditProfileMenu" type="Control" parent="."]
+visible = false
+anchor_left = 0.055
+anchor_top = 0.095
+anchor_right = 0.554
+anchor_bottom = 0.9
+margin_left = -0.600006
+margin_top = 0.399994
+margin_right = 0.319946
+margin_bottom = -6.10352e-05
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditProfileMenu"]
+anchor_left = 0.038
+anchor_top = 0.046
+anchor_right = 0.376
+anchor_bottom = 0.97
+margin_left = -0.442001
+margin_top = 0.0259972
+margin_right = 0.415985
+margin_bottom = 0.0699463
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UserName" type="LineEdit" parent="EditProfileMenu/VBoxContainer"]
+margin_right = 324.0
+margin_bottom = 32.0
+custom_colors/cursor_color = Color( 0.2, 1, 0, 1 )
+clear_button_enabled = true
+placeholder_text = "Username"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save" type="Button" parent="EditProfileMenu/VBoxContainer"]
+margin_top = 44.0
+margin_right = 324.0
+margin_bottom = 70.0
+text = "Save"
 
 [node name="SRSetup" type="Control" parent="."]
 visible = false
@@ -223,6 +378,19 @@ margin_top = 0.32
 margin_right = -0.599976
 margin_bottom = -0.160095
 
+[node name="KickReason" type="Label" parent="."]
+anchor_left = 0.057
+anchor_top = 0.096
+anchor_right = 0.268
+anchor_bottom = 0.138
+margin_left = 0.55999
+margin_top = 0.32
+margin_right = -0.559998
+margin_bottom = -0.0400085
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Blip1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 bus = "Menu SFX"
@@ -247,6 +415,7 @@ bus = "Menu SFX"
 stream = ExtResource( 11 )
 autoplay = true
 bus = "Music"
+[connection signal="tree_entered" from="." to="." method="_on_MainMenu_tree_entered"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_QuitButton_pressed"]
@@ -254,6 +423,11 @@ bus = "Music"
 [connection signal="pressed" from="PlayMenu/VBoxContainer/JoinGame" to="." method="_on_JoinGame_pressed"]
 [connection signal="mouse_entered" from="PlayMenu/VBoxContainer/CreateGame" to="." method="_on_CreateGame_mouse_entered"]
 [connection signal="pressed" from="PlayMenu/VBoxContainer/CreateGame" to="." method="_on_CreateGame_pressed"]
+[connection signal="mouse_entered" from="PlayMenu/VBoxContainer/EditProfile" to="." method="_on_EditProfile_mouse_entered"]
+[connection signal="pressed" from="PlayMenu/VBoxContainer/EditProfile" to="." method="_on_EditProfile_pressed"]
 [connection signal="mouse_entered" from="PlayMenu/VBoxContainer/ShootingRange" to="." method="_on_ShootingRange_mouse_entered"]
 [connection signal="pressed" from="PlayMenu/VBoxContainer/ShootingRange" to="." method="_on_ShootingRange_pressed"]
+[connection signal="pressed" from="PlayMenu/JoinGameMenu/VBoxContainer/Join" to="." method="_on_Join_pressed"]
+[connection signal="pressed" from="PlayMenu/CreateGameMenu/VBoxContainer/Create" to="." method="_on_Create_pressed"]
+[connection signal="pressed" from="EditProfileMenu/VBoxContainer/Save" to="EditProfileMenu" method="_on_Save_pressed"]
 [connection signal="pressed" from="SRSetup/VBoxContainer2/StartGame" to="." method="_on_StartGame_pressed"]
