@@ -22,13 +22,13 @@ func _on_JoinGame_pressed():
     $PlayMenu/JoinGameMenu.show()
 
 func _on_Join_pressed():
-    var ip = $PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer/IPAddress.text
-    var port = int($PlayMenu/JoinGameMenu/VBoxContainer/HBoxContainer/Port.text)
+    var ip = $PlayMenu/JoinGameMenu/Network/IPAddress.text
+    var port = int($PlayMenu/JoinGameMenu/Network/Port.text)
     
-    Global.weapon1 = $PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon1.get_item_text($PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon1.selected)
-    Global.weapon2 = $PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon2.get_item_text($PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon2.selected)
-    Global.weapon3 = $PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon3.get_item_text($PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon3.selected)
-    Global.weapon4 = $PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon4.get_item_text($PlayMenu/JoinGameMenu/VBoxContainer/VBoxContainer3/Weapon4.selected)
+    Global.weapon1 = $PlayMenu/JoinGameMenu/Weapons/Weapon1.get_item_text($PlayMenu/JoinGameMenu/Weapons/Weapon1.selected)
+    Global.weapon2 = $PlayMenu/JoinGameMenu/Weapons/Weapon2.get_item_text($PlayMenu/JoinGameMenu/Weapons/Weapon2.selected)
+    Global.weapon3 = $PlayMenu/JoinGameMenu/Weapons/Weapon3.get_item_text($PlayMenu/JoinGameMenu/Weapons/Weapon3.selected)
+    Global.weapon4 = $PlayMenu/JoinGameMenu/Weapons/Weapon4.get_item_text($PlayMenu/JoinGameMenu/Weapons/Weapon4.selected)
     
     get_tree().change_scene("res://menus/LoadingScreen.tscn")
     Network.connect_to_server(ip, port, Global.username)
@@ -39,14 +39,14 @@ func _on_CreateGame_pressed():
     $PlayMenu/CreateGameMenu.show()
     
 func _on_Create_pressed():
-    var port = int($PlayMenu/CreateGameMenu/VBoxContainer/Port.text)
+    var port = int($PlayMenu/CreateGameMenu/Port.text)
     
-    if $PlayMenu/CreateGameMenu/VBoxContainer/Map.selected == 0: # TODO: this is awful. do this some other way
+    if $PlayMenu/CreateGameMenu/Map.selected == 0: # TODO: this is awful. do this some other way
         Global.map = "res://maps/ShootingRange.tscn"
-    Global.weapon1 = $PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon1.get_item_text($PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon1.selected)
-    Global.weapon2 = $PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon2.get_item_text($PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon2.selected)
-    Global.weapon3 = $PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon3.get_item_text($PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon3.selected)
-    Global.weapon4 = $PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon4.get_item_text($PlayMenu/CreateGameMenu/VBoxContainer/VBoxContainer3/Weapon4.selected)
+    Global.weapon1 = $PlayMenu/CreateGameMenu/Weapons/Weapon1.get_item_text($PlayMenu/CreateGameMenu/Weapons/Weapon1.selected)
+    Global.weapon2 = $PlayMenu/CreateGameMenu/Weapons/Weapon2.get_item_text($PlayMenu/CreateGameMenu/Weapons/Weapon2.selected)
+    Global.weapon3 = $PlayMenu/CreateGameMenu/Weapons/Weapon3.get_item_text($PlayMenu/CreateGameMenu/Weapons/Weapon3.selected)
+    Global.weapon4 = $PlayMenu/CreateGameMenu/Weapons/Weapon4.get_item_text($PlayMenu/CreateGameMenu/Weapons/Weapon4.selected)
     
     Network.create_server(port, Global.username)
     get_tree().change_scene("res://GameController.tscn") 
