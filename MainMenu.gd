@@ -13,12 +13,12 @@ func _on_PlayButton_pressed():
     $PlayMenu/JoinGameMenu.hide()
     $PlayMenu/CreateGameMenu.hide()
     $PlayMenu.show()
-    $PlayMenu/VBoxContainer.show()
+    $PlayMenu/PlayMenuButtons.show()
     $Button2.play()
     
 func _on_JoinGame_pressed():
     $Blip1.play()
-    $PlayMenu/VBoxContainer.hide()
+    $PlayMenu/PlayMenuButtons.hide()
     $PlayMenu/JoinGameMenu.show()
 
 func _on_Join_pressed():
@@ -35,7 +35,7 @@ func _on_Join_pressed():
 
 func _on_CreateGame_pressed():
     $Blip1.play()
-    $PlayMenu/VBoxContainer.hide()
+    $PlayMenu/PlayMenuButtons.hide()
     $PlayMenu/CreateGameMenu.show()
     
 func _on_Create_pressed():
