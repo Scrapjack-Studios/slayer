@@ -259,7 +259,7 @@ func _physics_process(delta):
         
     velocity += chain_velocity
 
-    if is_on_floor():
+    if is_on_floor() and not Global.paused:
         rotation = get_floor_normal().angle() + PI/2
         can_jump = true
         jump_count = 0

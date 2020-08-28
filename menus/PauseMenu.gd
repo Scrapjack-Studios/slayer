@@ -3,16 +3,15 @@ extends Control
 var game_controller
 var options_menu
 var player
-var paused
 
 func _ready():
     get_parent().get_parent().connect("game_started", self, "on_game_started")
 
 func _process(_delta):
-    if Input.is_action_just_released("pause_menu") and not paused:
+    if Input.is_action_just_released("pause_menu") and not Global.paused:
         self.show()
         pause_game()
-    elif Input.is_action_just_released("pause_menu") and paused and not options_menu.get_node("Buttons").visible and not options_menu.get_node("VideoOptions").visible and not options_menu.get_node("AudioOptions").visible:
+    elif Input.is_action_just_released("pause_menu") and Global.paused and not options_menu.get_node("Buttons").visible and not options_menu.get_node("VideoOptions").visible and not options_menu.get_node("AudioOptions").visible:
         self.hide()
         resume_game()
     elif Input.is_action_just_released("pause_menu") and options_menu.get_node("Buttons").visible:
@@ -52,7 +51,7 @@ func _on_Quit_Desktop_pressed():
         get_tree().quit()
     
 func pause_game():
-    paused = true
+    Global.paused = true
     player.can_shoot = false
     player.can_grapple = false
     player.can_move = false
@@ -60,7 +59,7 @@ func pause_game():
     player.get_node("Camera2D").clear_current()
     
 func resume_game():
-    paused = false
+    Global.paused = false
     player.can_shoot = true
     player.can_grapple = true
     player.can_move = true
