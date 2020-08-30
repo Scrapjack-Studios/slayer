@@ -31,7 +31,7 @@ const STOP_FORCE = 1500
 const JUMP_MAX_AIRBORNE_TIME = 0.4
 const CLIMB_SPEED = 800
 const CLIMB_AMOUNT = 70
-const MAX_JUMP_COUNT = 2
+const MAX_JUMP_COUNT = 1
 
 var velocity = Vector2(0,0) # The velocity of the player (kept over time)
 var chain_velocity := Vector2(0,0)
@@ -309,7 +309,7 @@ func jump():
         velocity.y = -jump_strength
         is_jumping = true
         
-    if jump_count >= MAX_JUMP_COUNT:
+    if jump_count == MAX_JUMP_COUNT:
         can_jump = false
         
 
