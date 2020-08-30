@@ -108,7 +108,7 @@ func _input(event: InputEvent) -> void:
             $Chain.rpc("release")
             $Whip.show()
             is_grappling = false
-            if grapple_count == 3:
+            if grapple_count == 4:
                 can_grapple = false
                 $GrappleTimer.start()
                 grapple_count = 0
@@ -309,7 +309,7 @@ func jump():
         velocity.y = -jump_strength
         is_jumping = true
         
-    if jump_count == MAX_JUMP_COUNT:
+    if jump_count >= MAX_JUMP_COUNT:
         can_jump = false
         
 
