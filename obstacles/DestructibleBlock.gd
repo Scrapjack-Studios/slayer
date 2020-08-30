@@ -4,7 +4,7 @@ var sprite_scale
 var collision_scale_x
 var collision_scale_y
 var division_threshold
-
+var can_break = true
 func _ready():
     $StaticBody2D.set_meta("level", 0)
     # warning-ignore:return_value_discarded
@@ -15,8 +15,8 @@ func _ready():
     division_threshold = $StaticBody2D/CollisionShape2D.scale.x / 2
     
 func subdivide(body, node):
-    if body.is_in_group("bullets"):
-        
+    if body.is_in_group("bullets") and can_break:
+        can_break = false
         node.queue_free()
         var division = node.get_meta("level")
         if division > division_threshold:
@@ -68,12 +68,11 @@ func subdivide(body, node):
         call_deferred("add_child", Stamp)
         
         
-#        var RTimer = Timer.new()
-#        RTimer.set_wait_time(5)
-#        RTimer.set_one_shot(true)
-#        self.add_child(RTimer)
-#        RTimer.start()
-#        yield(RTimer, "timeout")
-#        RTimer.queue_free()
-#        Stamp.set_sleeping(true)
-#        Clone.set_sleeping(true)
+        var RTimer = Timer.new()
+        RTimer.set_wait_time(0.4)
+        RTimer.set_one_shot(true)
+        self.add_child(RTimer)
+        RTimer.start()
+        yield(RTimer, "timeout")
+        RTimer.queue_free()
+        can_break = true
