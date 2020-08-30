@@ -108,7 +108,7 @@ func _input(event: InputEvent) -> void:
             $Chain.rpc("release")
             $Whip.show()
             is_grappling = false
-            if grapple_count == 4:
+            if grapple_count == 3:
                 can_grapple = false
                 $GrappleTimer.start()
                 grapple_count = 0
@@ -175,7 +175,7 @@ func weaponscroll(dir):
 func _physics_process(delta):
     if get_tree().is_network_server():
         Network.update_position(int(name), position)
-
+    
     var direction = MoveDirection.NONE
     var mpos = get_global_mouse_position().angle_to_point(position)
     var weaponflip = $Weapon/Weapon_Sprite.flip_v
@@ -193,8 +193,7 @@ func _physics_process(delta):
             direction = MoveDirection.RIGHT
             is_walking = true 
     
-    
- 
+        
         if Input.is_action_just_pressed("jump") and can_jump:
             jump()
             if is_jumping or is_falling:
@@ -263,6 +262,7 @@ func _physics_process(delta):
         rotation = get_floor_normal().angle() + PI/2
         can_jump = true
         jump_count = 0
+        grapple_count = 0
         
     if stop:
         var vsign = sign(velocity.x)
@@ -380,6 +380,7 @@ func _WallMount():
     if velocity.y > 0:
         rotation = 0
     
+        
 func GunTimer(phy):
     can_shoot = false
     var GunTimer = Timer.new()
