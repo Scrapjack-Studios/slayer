@@ -4,6 +4,17 @@ func _on_MainMenu_tree_entered():
     if Global.kick_reason:
         $KickReason.text = "You we're kicked from the server.\nReason: " + Global.kick_reason
 
+func _ready():
+    if Global.just_launched:
+        FullscreenCRT.get_node("ColorRect").show()
+        $CanvasLayer/SplashScreen.show()
+        $CanvasLayer/SplashScreen.play()
+        Global.just_launched = false
+        
+func _on_SplashScreen_finished():
+    $CanvasLayer/SplashScreen.hide()
+    FullscreenCRT.get_node("ColorRect").hide()
+
 func _on_PlayButton_pressed():
     $SRSetup.hide()
     $OptionsMenu.hide()
@@ -113,6 +124,3 @@ func _on_StartGame_pressed():
     yield($Blip1, "finished")
     # warning-ignore:return_value_discarded
     get_tree().change_scene("res://GameController.tscn")
-
-
-

@@ -11,3 +11,4 @@ var username
 var kick_reason = ""
 
 var paused = false
+var just_launched = true
