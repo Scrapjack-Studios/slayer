@@ -195,6 +195,7 @@ func _physics_process(delta):
     
         if Input.is_action_just_pressed("jump") and can_jump:
             jump()
+            rotation = 0
             if is_jumping or is_falling:
                 is_climbing = true
                 if direction == MoveDirection.RIGHT and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
@@ -258,7 +259,7 @@ func _physics_process(delta):
     velocity += chain_velocity
 
     if is_on_floor() and not Global.paused:
-        rotation = get_floor_normal().angle() + PI/2
+#        rotation = get_floor_normal().angle() + PI/2
         can_jump = true
         jump_count = 0
         grapple_count = 0
@@ -286,9 +287,6 @@ func _physics_process(delta):
         _WallMount()
     else:
         can_walljump = true
-    
-    if is_jumping or is_falling:
-        rotation = 0   
     
 func move(direction):
     force = Vector2(0, gravity) # create forces
