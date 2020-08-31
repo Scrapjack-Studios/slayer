@@ -23,6 +23,7 @@ func _save_settings():
     config.set_value("video", "fullscreen", $VideoOptions/VBoxContainer/Fullscreen.is_pressed())
     config.set_value("video", "fullscreen_crt", $VideoOptions/VBoxContainer/FullscreenCRT.is_pressed())
     config.set_value("video", "fps_counter", $VideoOptions/VBoxContainer/FPSCounter.is_pressed())
+    config.set_value("video", "splash_screens", $VideoOptions/VBoxContainer/SplashScreens.is_pressed())
     
     selected_id = get_node("VideoOptions/VBoxContainer/Resolution").get_selected_id()
     string_splitter = get_node("VideoOptions/VBoxContainer/Resolution").get_item_text(selected_id).split("x")
@@ -49,6 +50,8 @@ func _load_settings():
         string_splitter = get_node("VideoOptions/VBoxContainer/Resolution").get_item_text(item).split("x")
         if int(string_splitter[0]) == config.get_value("video", "vid_width") && int(string_splitter[1]) == config.get_value("video", "vid_height"):
             get_node("VideoOptions/VBoxContainer/Resolution").select(item)
+    $VideoOptions/VBoxContainer/SplashScreens.set_pressed(config.get_value("video", "splash_screens")) 
+            
     # audio
     $AudioOptions/VBoxContainer/Mute.set_pressed(config.get_value("audio", "mute"))
     $AudioOptions/VBoxContainer/MusicVolume.set_value(config.get_value("audio", "music_volume"))
@@ -63,6 +66,7 @@ func _reset_settings():
     config.set_value("video", "fps_counter", false)
     config.set_value("video", "vid_width", 1920)
     config.set_value("video", "vid_height", 1080)
+    config.set_value("video", "splash_screens", true)
     config.set_value("audio", "mute", false)
     config.set_value("audio", "music_volume", 50)
     config.set_value("audio", "game_volume", 50)
@@ -86,6 +90,8 @@ func _apply_settings():
     
     OS.set_window_size(Vector2(config.get_value("video", "vid_width"), config.get_value("video", "vid_height")))
     
+    Global.wants_splashscreens = config.get_value("video", "splash_screens")
+    
     # audio
     AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), config.get_value("audio", "mute"))
     AudioServer.set_bus_mute(AudioServer.get_bus_index("Game SFX"), config.get_value("audio", "mute"))
@@ -95,6 +101,8 @@ func _apply_settings():
         AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear2db(config.get_value("audio", "music_volume")/100))
         AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Game SFX"), linear2db(config.get_value("audio", "game_volume")/100))
         AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Menu SFX"), linear2db(config.get_value("audio", "menu_volume")/100))
+
+    _save_settings()
 
 # buttons
             

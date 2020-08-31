@@ -5,7 +5,7 @@ func _on_MainMenu_tree_entered():
         $KickReason.text = "You we're kicked from the server.\nReason: " + Global.kick_reason
 
 func _ready():
-    if Global.just_launched:
+    if Global.just_launched and Global.wants_splashscreens:
         FullscreenCRT.get_node("ColorRect").show()
         $CanvasLayer/SplashScreen.show()
         $CanvasLayer/SplashScreen.play()
