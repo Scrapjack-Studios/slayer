@@ -48,7 +48,8 @@ func kick_player(player, reason):
     get_tree().network_peer.disconnect_peer(player)
     
 remote func kicked(reason):
-    Global.kick_reason = reason
+    Global.kick_reason = reason 
+    get_parent().get_node("GameController").get_node(str(get_tree().get_network_unique_id())).get_node("Camera2D").make_current()
     get_tree().change_scene("res://MainMenu.tscn")
     emit_signal("player_disconnection_completed", get_tree().get_network_unique_id())
     get_tree().set_network_peer(null)

@@ -122,5 +122,4 @@ func _on_StartGame_pressed():
     Global.weapon4 = $SRSetup/VBoxContainer2/Weapon4.get_item_text($SRSetup/VBoxContainer2/Weapon4.selected)
          
     yield($Blip1, "finished")
-    # warning-ignore:return_value_discarded
     get_tree().change_scene("res://GameController.tscn")
