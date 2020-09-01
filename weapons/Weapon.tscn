@@ -75,7 +75,7 @@ centered = false
 offset = Vector2( -20, -5 )
 
 [node name="Muzzle" type="Position2D" parent="Weapon_Sprite"]
-position = Vector2( 5, 4.81551 )
+position = Vector2( 5, 4.04816 )
 rotation = 1.7318e-11
 scale = Vector2( 0.42014, 0.401667 )
 

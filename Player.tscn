@@ -180,8 +180,6 @@ visible = false
 position = Vector2( 0.284856, -15.6097 )
 shape = SubResource( 4 )
 
-[node name="RayCast2D2" type="RayCast2D" parent="."]
-
 [node name="WallJumpTimer" type="Timer" parent="."]
 wait_time = 0.3
 

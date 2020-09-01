@@ -206,11 +206,11 @@ func _physics_process(delta):
         if get_local_mouse_position().x < 0: # mouse is facing left
             $Weapon.set_position(Vector2(-22,-7))
             $Weapon/Weapon_Sprite.set_flip_v(true)
-            $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(4,1))
+            $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(10,1))
         elif get_local_mouse_position().x > 0: # mouse is facing right
             $Weapon.set_position(Vector2(15,0))
             $Weapon/Weapon_Sprite.set_flip_v(false)
-            $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(4,5))
+            $Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(10,5))
     
 
             
@@ -292,7 +292,7 @@ func move(direction):
     stop = true
     if not can_build_momentum:
         if momentum >= 2:
-            momentum -= momentum / 2
+            momentum -= momentum / 1.5
     can_build_momentum = true
     if can_move:
         if direction == MoveDirection.LEFT:
@@ -301,14 +301,14 @@ func move(direction):
                 stop = false
                 if can_build_momentum:
                     for n in direction:
-                        momentum += 0.0002
+                        momentum += 0.0003
         elif direction == MoveDirection.RIGHT:
             if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED * momentum:
                 force.x += WALK_FORCE
                 stop = false
                 if can_build_momentum:
                     for n in direction:
-                        momentum += 0.0002
+                        momentum += 0.0003
         
 func jump():
     jump_count += 1
