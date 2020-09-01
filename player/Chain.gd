@@ -14,7 +14,7 @@ var flying = false	# Whether the chain is moving through the air
 var hooked = false	# Whether the chain has connected to a wall
 
 # shoot() shoots the chain in a given direction
-sync func shoot(dir: Vector2) -> void:
+sync func shoot():
     $WhipSound.play()
     direction = get_local_mouse_position().normalized() # Normalize the direction and save it
     flying = true # Keep track of our current scan

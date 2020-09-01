@@ -95,7 +95,7 @@ func _input(event: InputEvent) -> void:
             
         if event.is_action_pressed("Graphook") and can_grapple:
                 rotation = 0
-                $Chain.rpc("shoot", event.position - get_viewport().size)
+                $Chain.rpc("shoot")
                 is_grappling = true
                 $Whip.hide()
                 grapple_count += 1
@@ -192,9 +192,9 @@ func _physics_process(delta):
             direction = MoveDirection.RIGHT
             is_walking = true 
     
-        
         if Input.is_action_just_pressed("jump") and can_jump:
             jump()
+            rotation = 0
             if is_jumping or is_falling:
                 is_climbing = true
                 if direction == MoveDirection.RIGHT and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
@@ -258,7 +258,7 @@ func _physics_process(delta):
     velocity += chain_velocity
 
     if is_on_floor() and not Global.paused:
-        rotation = get_floor_normal().angle() + PI/2
+#        rotation = get_floor_normal().angle() + PI/2
         can_jump = true
         jump_count = 0
         grapple_count = 0
@@ -286,7 +286,7 @@ func _physics_process(delta):
         _WallMount()
     else:
         can_walljump = true
-       
+    
 func move(direction):
     force = Vector2(0, gravity) # create forces
     stop = true
@@ -302,7 +302,6 @@ func move(direction):
         
 func jump():
     jump_count += 1
-    rotation = 0 
     velocity.y = -jump_strength
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and not prev_jump_pressed and not is_jumping:
         velocity.y = -jump_strength
