@@ -11,6 +11,12 @@ func _ready():
         $CanvasLayer/SplashScreen.play()
         Global.just_launched = false
         
+func _input(event):
+    if event is InputEventKey and event.pressed:
+        $CanvasLayer/SplashScreen.hide()
+        $CanvasLayer/SplashScreen.paused = true
+        FullscreenCRT.get_node("ColorRect").hide()
+        
 func _on_SplashScreen_finished():
     $CanvasLayer/SplashScreen.hide()
     FullscreenCRT.get_node("ColorRect").hide()
