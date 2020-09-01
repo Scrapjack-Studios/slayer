@@ -69,8 +69,9 @@ var mag_4
 var preweapon 
 var weaponnumb = 0
 var force = Vector2(0, gravity) # create forces 
-var stop = true   
-
+var stop = true
+var momentum = 1
+var can_build_momentum = true
 func _ready():
     get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
     $Weapon/GunStats/Sounds/FireSound.activate()
@@ -266,7 +267,6 @@ func _physics_process(delta):
     if stop:
         var vsign = sign(velocity.x)
         var vlen = abs(velocity.x)
-        
         vlen -= STOP_FORCE * delta
         if vlen < 0:
             vlen = 0
@@ -288,20 +288,31 @@ func _physics_process(delta):
         can_walljump = true
     
 func move(direction):
-    force = Vector2(0, gravity) # create forces
+    force = Vector2(0, gravity)# create forces
     stop = true
+    if not can_build_momentum:
+        if momentum >= 2:
+            momentum -= momentum / 2
+    can_build_momentum = true
     if can_move:
         if direction == MoveDirection.LEFT:
-            if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
+            if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED * momentum:
                 force.x -= WALK_FORCE
                 stop = false
+                if can_build_momentum:
+                    for n in direction:
+                        momentum += 0.0002
         elif direction == MoveDirection.RIGHT:
-            if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
+            if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED * momentum:
                 force.x += WALK_FORCE
                 stop = false
+                if can_build_momentum:
+                    for n in direction:
+                        momentum += 0.0002
         
 func jump():
     jump_count += 1
+    can_build_momentum = false
     velocity.y = -jump_strength
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and not prev_jump_pressed and not is_jumping:
         velocity.y = -jump_strength
@@ -326,48 +337,13 @@ func mantle(direction):
     elif direction == "left":
         velocity.x = -CLIMB_AMOUNT
     velocity.y = -CLIMB_SPEED
-    is_climbing = true   
+    is_climbing = true
             
-func shoot(weapon_type):
-    if weapon_type == "semi_auto":
-        can_shoot = false
-        $Weapon/GunStats.rpc("_BulletPostition")
-        var GunTimer = Timer.new()
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        can_shoot = true
-    if weapon_type == "shotgun":
-        can_shoot = false
-        $Weapon/GunStats.rpc("_BulletPostition")
-        var GunTimer = Timer.new()
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        can_shoot = true
-    if weapon_type == "automatic":
-        $Weapon/GunStats._BulletPostition()
-        can_shoot = false
-        var GunTimer = Timer.new()
-        GunTimer.set_physics_process(true)
-        GunTimer.set_wait_time(get_node("Weapon/GunStats").cool_down)
-        GunTimer.set_one_shot(true)
-        self.add_child(GunTimer)
-        GunTimer.start()
-        yield(GunTimer, "timeout")
-        GunTimer.queue_free()
-        can_shoot = true
-            
+
 func _WallMount():
     velocity.y = lerp(velocity.y,0,0.2)
     jump_strength = 900
-        
+    can_build_momentum = false
     if can_walljump:
         jump_count = 1
         can_walljump = false

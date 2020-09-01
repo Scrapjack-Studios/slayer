@@ -78,6 +78,11 @@ position = Vector2( -749.166, 141.023 )
 rotation = -3.14159
 scale = Vector2( 1.76809, -1.59256 )
 
+[node name="StaticBody2D60" parent="." instance=ExtResource( 3 )]
+position = Vector2( -1585.75, -594.771 )
+rotation = -3.14159
+scale = Vector2( 1.76809, -1.59256 )
+
 [node name="StaticBody2D22" parent="." instance=ExtResource( 3 )]
 position = Vector2( 178.37, -498.609 )
 rotation = 3.14159
@@ -177,8 +182,12 @@ position = Vector2( 786.178, 881.473 )
 scale = Vector2( 10.2, 2.6 )
 
 [node name="StaticBody2D37" parent="." instance=ExtResource( 3 )]
-position = Vector2( -650.61, 1018.51 )
+position = Vector2( -640.531, 1018.51 )
 scale = Vector2( 10.2, 2.6 )
+
+[node name="StaticBody2D59" parent="." instance=ExtResource( 3 )]
+position = Vector2( -5035.13, 1119.3 )
+scale = Vector2( 24.28, 2.6 )
 
 [node name="StaticBody2D33" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1076.86, 1014.36 )
@@ -275,13 +284,13 @@ position = Vector2( 3379.35, -2959.57 )
 position = Vector2( 454.915, -823.986 )
 
 [node name="DestructibleBlock2" parent="." instance=ExtResource( 1 )]
-position = Vector2( -1722.97, 784.778 )
+position = Vector2( -2095.91, -1956.81 )
 
 [node name="DestructibleBlock5" parent="." instance=ExtResource( 1 )]
-position = Vector2( -1915.31, 779.121 )
+position = Vector2( -2217.69, -1710.48 )
 
 [node name="DestructibleBlock6" parent="." instance=ExtResource( 1 )]
-position = Vector2( -1932.28, 575.474 )
+position = Vector2( -1962.52, -1490.8 )
 
 [node name="DestructibleBlock7" parent="." instance=ExtResource( 1 )]
 position = Vector2( -591.603, -1540.19 )
