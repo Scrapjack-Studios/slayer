@@ -74,6 +74,7 @@ func spawn_peer(id):
     
 func on_Player_respawned():
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
+    player.get_node("Weapon/GunStats").shots_fired = player.get_node("Weapon/GunStats").mag
     player.set_position(Network.start_position)
     player.get_node("Camera2D").make_current()
     $CanvasLayer/DeathUI/RespawnAsker.hide()
