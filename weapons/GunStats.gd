@@ -41,8 +41,8 @@ var super_shotgun_sound
 var pistol_sound  
 
 var mag = 50
-var shots_fired = 50
-var shots_fired_memory = 50
+master var shots_fired
+master var shots_fired_memory
 master var can_fire = true
 var ReloadTime = 2
 var bounce
@@ -54,8 +54,8 @@ sync func _BulletPostition():
         var b = Bullet.instance()
         b.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(b)
-        shots_fired -= 1
-        shots_fired_memory -= 1
+        rset("shots_fired", shots_fired - 1)
+        rset("shots_fired_memory", shots_fired_memory - 1)
         shot = true
         if shots_fired == 0:
             rset("can_fire", false)   
