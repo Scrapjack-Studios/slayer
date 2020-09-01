@@ -52,18 +52,18 @@ func _on_Quit_Desktop_pressed():
     
 func pause_game():
     Global.paused = true
-    player.can_shoot = false
     player.can_grapple = false
     player.can_move = false
     player.can_jump = false
+    player.get_node("Weapon/GunStats").can_fire = false
     player.get_node("Camera2D").clear_current()
     
 func resume_game():
     Global.paused = false
-    player.can_shoot = true
     player.can_grapple = true
     player.can_move = true
     player.can_jump = true
+    player.get_node("Weapon/GunStats").can_fire = true
     player.get_node("Camera2D").make_current()
     
 func on_game_started():
