@@ -29,19 +29,20 @@ func _physics_process(delta):
                 collision.collider.get_parent().subdivide(self , collision.collider)
         if collision.collider.is_in_group("PC"):
             collision.collider.get_parent().hit()
-        
+
         if collision.collider.is_in_group("bullets"):
             velocity = Vector2(0, 0)
             $Sprite.hide()
             $Explosion.show()
             $Explosion.play("smoke")
             $Tracer.hide()
-        elif not collision.collider.is_in_group("bullets"):
-            if not collision.collider.name == str(get_tree().get_network_unique_id()):
-                hit()
-                $Timer.start()
-                if collision.collider.is_in_group("Players"):
-                    collision.collider.take_damage(damage)
+
+        if not collision.collider.name == str(get_tree().get_network_unique_id()):
+            hit()
+
+            $Timer.start()
+            if collision.collider.is_in_group("Players"):
+                collision.collider.take_damage(damage)
 
 func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
