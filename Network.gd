@@ -78,15 +78,14 @@ remote func _request_player_info(request_from_id, player_id):
         rpc_id(request_from_id, '_send_player_info', player_id, players[player_id])
 
 remote func _send_player_info(id, info):
-    print(players)
-#    var seen = Dictionary()
-#    for player_id in players:
-#        var username = players[player_id]["name"]
-#        if seen.has(username):
-#            seen[username] += 1
-#            self_data["name"] = username + "(" + seen[username] + ")"
-#        else:
-#            seen[username] = 1
+    var seen = Dictionary()
+    for player_id in players:
+        var username = players[player_id]["name"]
+        if seen.has(username):
+            seen[username] += 1
+            self_data["name"] = username + "(" + seen[username] + ")"
+        else:
+            seen[username] = 1
     players[id] = info
     if Network.connected_player in Network.players:
         Network.connected_player_info = Network.players[Network.connected_player]
