@@ -66,7 +66,15 @@ func _on_player_disconnected(id):
     disconnected_player_info = players[id]
     players.erase(id)
 
-func _on_player_connected(connected_player_id): 
+func _on_player_connected(connected_player_id):
+    var seen = Dictionary()
+    for player_id in Network.players:
+        var username = Network.players[player_id]["name"]
+        if seen.has(username):
+            seen[username] += 1
+            self_data["name"] = username + "(" + seen[username] + ")"
+        else:
+            seen[username] = 1 
     connected_player = connected_player_id
     var local_player_id = get_tree().get_network_unique_id()
     if not(get_tree().is_network_server()):
