@@ -83,7 +83,7 @@ remote func _send_player_info(id, info):
         var username = players[player_id]["name"]
         if seen.has(username):
             seen[username] += 1
-            self_data["name"] = username + "(" + seen[username] + ")"
+            players[player_id]["name"] = username + "(" + seen[username] + ")"
         else:
             seen[username] = 1
     players[id] = info
