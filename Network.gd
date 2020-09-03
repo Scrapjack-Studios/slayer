@@ -66,7 +66,7 @@ func _on_player_disconnected(id):
     disconnected_player_info = players[id]
     players.erase(id)
 
-func _on_player_connected(connected_player_id):
+func _on_player_connected(connected_player_id): 
     connected_player = connected_player_id
     var local_player_id = get_tree().get_network_unique_id()
     if not(get_tree().is_network_server()):
