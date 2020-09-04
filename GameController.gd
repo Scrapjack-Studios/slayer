@@ -9,12 +9,21 @@ var player
 var can_respawn
 var wants_to_respawn
 
-func _ready():
-    print(Network.players)
+func _ready():   
     get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
     Network.connect("player_connection_completed", self, '_on_player_connection_completed')
     Network.connect("player_disconnection_completed", self, "on_player_disconnection_completed")
     Network.connect("server_stopped", self, "on_server_stopped")
+    
+    var seen = {}
+    for player_id in Network.players:
+        var username = Network.players[player_id]["name"]
+        if seen.has(username):
+            seen[username] += 1
+            Network.players[player_id]["name"] = username + "(" + seen[username] + ")"
+            print("duplicate")
+        else:
+            seen[username] = 1
     
     add_child(load(Global.map).instance())
     spawn_self()
