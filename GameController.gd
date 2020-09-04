@@ -108,6 +108,7 @@ func _on_player_disconnected(id):
     $CanvasLayer/NetworkUI/DisconnectMessage.hide()
     
 func _on_player_connection_completed():
+    print(Network.players)
     if get_tree().get_network_unique_id() != Network.connected_player:
         spawn_peer(Network.connected_player)
     elif get_tree().get_network_unique_id() != Network.connected_player and Network.connected_player != 1:
