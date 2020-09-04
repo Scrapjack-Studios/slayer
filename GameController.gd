@@ -20,7 +20,7 @@ func _ready():
         var username = Network.players[player_id]["name"]
         if seen.has(username):
             seen[username] += 1
-            Network.players[player_id]["name"] = username + "(" + seen[username] + ")"
+            Network.players[player_id]["name"] = username + "(" + str(seen[username]) + ")"
             print("duplicate")
         else:
             seen[username] = 1
