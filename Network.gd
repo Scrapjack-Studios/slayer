@@ -72,21 +72,22 @@ func _on_player_connected(connected_player_id):
     if not(get_tree().is_network_server()):
         rpc_id(1, '_request_player_info', local_player_id, connected_player_id)
         rpc_id(1, '_request_map', local_player_id)
+#    var seen = {}
+#    for player_id in players:
+#        var username = players[player_id]["name"]
+#        if seen.has(username):
+#            seen[username] += 1
+#            players[player_id]["name"] = username + "(" + seen[username] + ")"
+#            print("duplicate")
+#        else:
+#            seen[username] = 1
         
 remote func _request_player_info(request_from_id, player_id):
     if get_tree().is_network_server():
         rpc_id(request_from_id, '_send_player_info', player_id, players[player_id])
 
 remote func _send_player_info(id, info):
-    var seen = Dictionary()
-    for player_id in players:
-        var username = players[player_id]["name"]
-        if seen.has(username):
-            seen[username] += 1
-            players[player_id]["name"] = username + "(" + seen[username] + ")"
-            print("duplicate")
-        else:
-            seen[username] = 1
+    print(players)
     players[id] = info
     if Network.connected_player in Network.players:
         Network.connected_player_info = Network.players[Network.connected_player]
