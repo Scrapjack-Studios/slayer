@@ -37,12 +37,12 @@ func _physics_process(delta):
             $Explosion.play("smoke")
             $Tracer.hide()
 
-        if not collision.collider.name == str(get_tree().get_network_unique_id()):
+        if collision.collider.is_in_group("Enemies"):
             hit()
-
-            $Timer.start()
             if collision.collider.is_in_group("Players"):
                 collision.collider.take_damage(damage)
+            $Timer.start()
+            
 
 func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
