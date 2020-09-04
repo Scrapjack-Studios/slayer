@@ -84,6 +84,7 @@ remote func _send_player_info(id, info):
         if seen.has(username):
             seen[username] += 1
             players[player_id]["name"] = username + "(" + seen[username] + ")"
+            print("duplicate")
         else:
             seen[username] = 1
     players[id] = info
