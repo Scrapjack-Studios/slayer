@@ -6,7 +6,7 @@ const MAX_PLAYERS = 5
 
 var players = { }
 var start_position = Vector2(360,180)
-var self_data = {name = '', position = Vector2(), received_disconnect=false}
+var self_data = {username = '', position = Vector2(), received_disconnect=false}
 var disconnected_player_info
 var connected_player_info
 var connected_player
@@ -22,15 +22,15 @@ func _ready():
     get_tree().connect('network_peer_disconnected', self, '_on_player_disconnected')
     get_tree().connect('network_peer_connected', self, '_on_player_connected')
 
-func create_server(port, player_nickname):
-    self_data.name = player_nickname
+func create_server(port, username):
+    self_data.username = username
     players[1] = self_data
     var peer = NetworkedMultiplayerENet.new()
     peer.create_server(port, MAX_PLAYERS)
     get_tree().set_network_peer(peer)
 
-func connect_to_server(ip, port, player_nickname):
-    self_data.name = player_nickname
+func connect_to_server(ip, port, username):
+    self_data.username = username
     get_tree().connect('connected_to_server', self, '_connected_to_server')
     var peer = NetworkedMultiplayerENet.new()
     peer.create_client(ip, port)

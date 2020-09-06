@@ -17,11 +17,10 @@ func _ready():
     
     var seen = {}
     for player_id in Network.players:
-        var username = Network.players[player_id]["name"]
+        var username = Network.players[player_id]["username"]
         if seen.has(username):
             seen[username] += 1
-            Network.players[player_id]["name"] = username + "(" + str(seen[username]) + ")"
-            print("duplicate")
+            Network.players[player_id]["username"] = username + "(" + str(seen[username]) + ")"
         else:
             seen[username] = 1
     
@@ -64,7 +63,7 @@ func spawn_self():
     player.name = str(get_tree().get_network_unique_id())
     player.set_network_master(get_tree().get_network_unique_id())
     add_child(player)
-    player.init(Network.self_data.name, Network.start_position)
+    player.init(Network.self_data.username, Network.start_position)
     player.connect("health_changed", self, "on_Player_health_changed")
     player.connect("died", self, "on_Player_died")
     player.connect("respawn", self, "on_Player_respawned")    
