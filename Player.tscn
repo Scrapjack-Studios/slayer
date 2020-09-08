@@ -29,7 +29,7 @@ collision_layer = 20
 collision/safe_margin = 0.05
 script = ExtResource( 2 )
 Bullet = ExtResource( 5 )
-push = 20
+push = 100
 
 [node name="WeaponMechanics" type="Node2D" parent="."]
 script = ExtResource( 8 )
@@ -125,7 +125,21 @@ collide_with_areas = true
 [node name="Upper_Detect" type="RayCast2D" parent="Wall_Raycasts"]
 position = Vector2( -4.11721, -30.9484 )
 rotation = 3.14143
-scale = Vector2( 1.00532, 0.102961 )
+scale = Vector2( 0.759022, 0.570449 )
+enabled = true
+collide_with_areas = true
+
+[node name="Upper_Detect2" type="RayCast2D" parent="Wall_Raycasts"]
+position = Vector2( 19.4953, -30.7427 )
+rotation = 3.47798
+scale = Vector2( 0.759022, 0.570449 )
+enabled = true
+collide_with_areas = true
+
+[node name="Upper_Detect3" type="RayCast2D" parent="Wall_Raycasts"]
+position = Vector2( -27.9283, -30.5589 )
+rotation = 2.74325
+scale = Vector2( 0.759022, 0.570449 )
 enabled = true
 collide_with_areas = true
 

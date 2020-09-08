@@ -72,6 +72,8 @@ var force = Vector2(0, gravity) # create forces
 var stop = true
 var momentum = 1
 var can_build_momentum = true
+var inertia = false
+
 func _ready():
     get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
     $Weapon/GunStats/Sounds/FireSound.activate()
@@ -276,7 +278,7 @@ func _physics_process(delta):
     # Integrate forces to velocity
     velocity += force * delta    
     # Integrate velocity into motion and move
-    velocity = move_and_slide(velocity, Vector2(0, -1), false, 4, PI/4, false)
+    velocity = move_and_slide(velocity, Vector2(0, -1), false, 4, PI/4, inertia)
     for index in get_slide_count():
         var collision = get_slide_collision(index)
         if collision.collider.is_in_group("bodies"):
@@ -317,17 +319,24 @@ func jump():
     if on_air_time < JUMP_MAX_AIRBORNE_TIME and not prev_jump_pressed and not is_jumping:
         velocity.y = -jump_strength
         is_jumping = true
-        
+    
+    
     if jump_count >= MAX_JUMP_COUNT:
-        can_jump = false
-        
-
-
-    
-    # Jump must also be allowed to happen if the character left the floor a little bit ago. Makes controls more snappy.
-    
-    
+        can_jump = false 
     prev_jump_pressed = Input.is_action_pressed("jump")
+    # Jump must also be allowed to happen if the character left the floor a little bit ago. Makes controls more snappy.
+    inertia = true
+    var GunTimer = Timer.new()
+    GunTimer.set_physics_process(false)
+    GunTimer.set_wait_time(0.05)
+    GunTimer.set_one_shot(true)
+    self.add_child(GunTimer)
+    GunTimer.start()
+    yield(GunTimer, "timeout")
+    inertia = false
+    GunTimer.queue_free()
+    
+    
     
 
 
