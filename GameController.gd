@@ -61,7 +61,7 @@ func spawn_self():
             seen[username] = 1
             
     if seen[Network.self_data.username] > 1:
-        displayname = username + "(" + str(seen[username]) + ")"
+        displayname = username + "(" + str(seen[Network.self_data.username]) + ")"
     else:
         displayname = Network.self_data.username
     
@@ -93,7 +93,7 @@ func spawn_peer(id):
             seen[username] = 1
             
     if seen[info.username] > 1:
-        displayname = username + "(" + str(seen[username]) + ")"
+        displayname = username + "(" + str(seen[info.username]) + ")"
     else:
         displayname = info.username
     
