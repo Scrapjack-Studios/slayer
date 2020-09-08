@@ -95,7 +95,7 @@ func spawn_peer(id):
     if seen[info.username] > 1:
         displayname = username + "(" + str(seen[username]) + ")"
     else:
-        displayname = Network.self_data.username
+        displayname = info.username
     
     var new_player = load('res://Player.tscn').instance()
     new_player.name = str(id)
