@@ -132,7 +132,7 @@ func _on_GameController_respawn_available():
         
 func _on_player_disconnected(id):
     get_node(str(id)).queue_free()
-    $CanvasLayer/NetworkUI/DisconnectMessage.set_text(Network.disconnected_player_info["name"] + " has disconnected")
+    $CanvasLayer/NetworkUI/DisconnectMessage.set_text(Network.disconnected_player_info["username"] + " has disconnected")
     $CanvasLayer/NetworkUI/DisconnectMessageTimer.start()
     $CanvasLayer/NetworkUI/DisconnectMessage.show()
     yield($CanvasLayer/NetworkUI/DisconnectMessageTimer, "timeout")
@@ -142,7 +142,7 @@ func _on_player_connection_completed():
     if get_tree().get_network_unique_id() != Network.connected_player:
         spawn_peer(Network.connected_player)
     elif get_tree().get_network_unique_id() != Network.connected_player and Network.connected_player != 1:
-        $CanvasLayer/NetworkUI/ConnectMessage.set_text(Network.connected_player_info["name"] + " has connected")
+        $CanvasLayer/NetworkUI/ConnectMessage.set_text(Network.connected_player_info["username"] + " has connected")
         $CanvasLayer/NetworkUI/ConnectMessageTimer.start()
         $CanvasLayer/NetworkUI/ConnectMessage.show()
         yield($CanvasLayer/NetworkUI/ConnectMessageTimer, "timeout")
