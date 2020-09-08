@@ -80,18 +80,23 @@ func spawn_self():
     $CanvasLayer/DeathUI/RespawnCountdown.hide()
     
 func spawn_peer(id):
+    var info = Network.players[id]
+    
     var seen = {}
     var displayname = ""
+    var username = ""
     for player_id in Network.players:
-        var username = Network.players[player_id]["username"]
+        username = Network.players[player_id]["username"]
         if seen.has(username):
             seen[username] += 1
-            displayname = username + "(" + str(seen[username]) + ")"
         else:
             seen[username] = 1
-            displayname = username
+            
+    if seen[info.username] > 1:
+        displayname = username + "(" + str(seen[username]) + ")"
+    else:
+        displayname = Network.self_data.username
     
-    var info = Network.players[id]
     var new_player = load('res://Player.tscn').instance()
     new_player.name = str(id)
     new_player.set_network_master(id)
