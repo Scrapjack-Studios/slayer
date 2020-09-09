@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/sprites/32x32.png" type="Texture" id=1]
 [ext_resource path="res://obstacles/DestructibleBlock.gd" type="Script" id=2]
@@ -6,25 +6,6 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9.5487, 9.614 )
-
-[sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0, 0.140741, 0.251852, 0.318519, 0.385185, 0.474074, 0.548148, 0.614815, 0.725926, 0.822222, 0.888889, 1 )
-colors = PoolColorArray( 0, 0, 0, 1, 0.148148, 0.148148, 0.148148, 1, 0.251852, 0.251852, 0.251852, 1, 0.311111, 0.311111, 0.311111, 1, 0.37037, 0.37037, 0.37037, 1, 0.440712, 0.440712, 0.440712, 1, 0.499331, 0.499331, 0.499331, 1, 0.605533, 0.605533, 0.605533, 1, 0.719322, 0.719322, 0.719322, 1, 0.817938, 0.817938, 0.817938, 1, 0.886212, 0.886212, 0.886212, 1, 1, 1, 1, 1 )
-
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
-
-[sub_resource type="ParticlesMaterial" id=4]
-emission_shape = 1
-emission_sphere_radius = 77.56
-flag_disable_z = true
-gravity = Vector3( 0, 98, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-tangential_accel = 1.0
-scale = 10.0
-scale_random = 1.0
-color_ramp = SubResource( 3 )
 
 [node name="DestructibleBlock" type="Node2D" groups=[
 "bodies",
@@ -58,16 +39,6 @@ show_behind_parent = true
 position = Vector2( -0.00826263, -0.0250664 )
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 1 )
-
-[node name="Particles2D" type="Particles2D" parent="StaticBody2D/CollisionShape2D"]
-position = Vector2( -0.0976105, -0.00405121 )
-scale = Vector2( 0.125, 0.125 )
-emitting = false
-amount = 100
-speed_scale = 1.69
-explosiveness = 0.3
-randomness = 0.55
-process_material = SubResource( 4 )
 
 [node name="Break" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

@@ -21,7 +21,7 @@ export (PackedScene) var Bullet
 export (int) var rot_speed
 export (int) var damage
 export (float) var bullet_lifetime
-export (int, 20, 200) var push = 550
+export (int, 20, 1000) var push
 
 const FLOOR_ANGLE_TOLERANCE = 70 # Angle in degrees towards either side that the player can consider "floor"
 const WALK_FORCE = 1600
@@ -68,7 +68,7 @@ var mag_3
 var mag_4
 var preweapon 
 var weaponnumb = 0
-var force = Vector2(0, gravity) # create forces 
+var force = Vector2(200, gravity) # create forces 
 var stop = true
 var momentum = 1
 var can_build_momentum = true
@@ -278,7 +278,7 @@ func _physics_process(delta):
     # Integrate forces to velocity
     velocity += force * delta    
     # Integrate velocity into motion and move
-    velocity = move_and_slide(velocity, Vector2(0, -1), false, 4, PI/4, inertia)
+    velocity = move_and_slide(velocity, Vector2(0, -1), false, 4, PI/4, false)
     for index in get_slide_count():
         var collision = get_slide_collision(index)
         if collision.collider.is_in_group("bodies"):
