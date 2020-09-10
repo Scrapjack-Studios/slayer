@@ -8,6 +8,7 @@ signal player_disconnection_completed
 var player
 var can_respawn
 var wants_to_respawn
+var map_node
 
 func _ready():
     get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
@@ -26,13 +27,14 @@ func _ready():
     
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     
-    var map_node = Global.map.trim_prefix("res://maps/")
+    map_node = Global.map.trim_prefix("res://maps/")
     map_node = map_node.trim_suffix(".tscn")
     while not has_node(map_node):
         pass
     for body in get_tree().get_nodes_in_group("bodies"):
         if body is RigidBody2D:
             create_physics_puppet(body)
+#            body.queue_free()
 
     emit_signal("game_started")
     
@@ -63,12 +65,10 @@ func create_physics_puppet(body):
             body_collision_scale = child.scale
             body_collision_shape = child.shape
 
-    var new_body = KinematicBody2D.new()
-    var new_body_collision = CollisionShape2D.new()
-    var new_body_sprite = Sprite.new()
-    get_node("ShootingRange").add_child(new_body)
-    new_body.add_child(new_body_collision)
-#    new_body_collision.add_child(new_body_sprite)
+    var new_body = load("res://obstacles/PhysicsPuppet.tscn").instance()
+    var new_body_collision = new_body.get_node("CollisionShape2D")
+    var new_body_sprite = new_body.get_node("CollisionShape2D/Sprite")
+    get_node(map_node).add_child(new_body)
     
     new_body.position = body_pos
     new_body.rotation = body_rot

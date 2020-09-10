@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="PhysicsPuppet" type="KinematicBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="CollisionShape2D"]
