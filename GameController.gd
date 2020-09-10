@@ -26,12 +26,14 @@ func _ready():
     
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
     
-    while not has_node("ShootingRange"):
+    var map_node = Global.map.trim_prefix("res://maps/")
+    map_node = map_node.trim_suffix(".tscn")
+    while not has_node(map_node):
         pass
     for body in get_tree().get_nodes_in_group("bodies"):
         if body is RigidBody2D:
             create_physics_puppet(body)
-    
+
     emit_signal("game_started")
     
 func _process(_delta):  
