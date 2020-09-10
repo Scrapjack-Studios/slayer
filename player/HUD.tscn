@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://player/HealthBar.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/savior.ttf" type="DynamicFontData" id=3]
@@ -7,6 +7,12 @@
 bg_color = Color( 0.737255, 0.113725, 0.113725, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.298039, 0.572549, 0.0470588, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
 
 [sub_resource type="DynamicFont" id=3]
 size = 100
@@ -32,6 +38,19 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HealthBarChange" type="ProgressBar" parent="HealthBar"]
+show_behind_parent = true
+margin_right = 317.0
+margin_bottom = 42.0
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UpdateTween" type="Tween" parent="HealthBar"]
 
 [node name="AmmoCounter" type="Label" parent="."]
 anchor_left = 0.758
