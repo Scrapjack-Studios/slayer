@@ -1,9 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://player/HealthBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/fonts/savior.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.737255, 0.113725, 0.113725, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+
+[sub_resource type="DynamicFont" id=3]
 size = 100
 font_data = ExtResource( 3 )
 
@@ -15,9 +19,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HealthBar" parent="." instance=ExtResource( 2 )]
-margin_right = 1920.0
-margin_bottom = 1080.0
+[node name="HealthBar" type="ProgressBar" parent="."]
+margin_left = 4.0
+margin_top = 5.1189
+margin_right = 321.0
+margin_bottom = 47.1189
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AmmoCounter" type="Label" parent="."]
 anchor_left = 0.758
@@ -29,7 +41,7 @@ margin_top = -0.255432
 margin_right = 3.31836
 margin_bottom = -0.33551
 size_flags_stretch_ratio = 0.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "10"
 align = 1
 __meta__ = {
@@ -37,12 +49,12 @@ __meta__ = {
 }
 
 [node name="GrappleCooldown" type="ProgressBar" parent="."]
-anchor_right = 0.044
-anchor_bottom = 0.072
-margin_left = 2.43193
-margin_top = 50.4262
-margin_right = -7.04807
-margin_bottom = -3.33382
+anchor_top = 0.046
+anchor_bottom = 0.046
+margin_left = 3.06189
+margin_top = 0.116222
+margin_right = 78.0619
+margin_bottom = 24.1162
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
 percent_visible = false
 __meta__ = {

@@ -24,7 +24,7 @@ func _ready():
             if new_player != get_tree().get_network_unique_id():
                 spawn_peer(new_player) 
     
-    $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
+    $CanvasLayer/HUD/HealthBar.value = player.health
     emit_signal("game_started")
     
 func _process(_delta):
@@ -40,7 +40,7 @@ func _process(_delta):
         $CanvasLayer/HUD/AmmoCooldown.max_value = player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").wait_time
         
 func on_Player_health_changed(health):
-    $CanvasLayer/HUD/HealthBar/TextureProgress.value = health
+    $CanvasLayer/HUD/HealthBar.value = health
 
 func _on_RespawnAsker_pressed():
     if can_respawn:
@@ -60,7 +60,7 @@ func spawn_self():
     player.connect("respawn", self, "on_Player_respawned")    
     player.health = player.max_health
     player.get_node("Camera2D").make_current()
-    $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
+    $CanvasLayer/HUD/HealthBar.value = player.health
     $CanvasLayer/DeathUI/RespawnAsker.hide()
     $CanvasLayer/DeathUI/RespawnCountdown.hide()
     
@@ -73,7 +73,7 @@ func spawn_peer(id):
     new_player.init(info.name, info.position)
     
 func on_Player_respawned():
-    $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
+    $CanvasLayer/HUD/HealthBar.value = player.health
     player.get_node("Weapon/GunStats").shots_fired = player.get_node("Weapon/GunStats").mag
     player.set_position(Network.start_position)
     player.get_node("Camera2D").make_current()
