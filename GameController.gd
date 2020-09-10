@@ -38,9 +38,6 @@ func _process(_delta):
         $CanvasLayer/HUD/AmmoCooldown.value = player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").time_left
     if player:
         $CanvasLayer/HUD/AmmoCooldown.max_value = player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").wait_time
-        
-func on_Player_health_changed(health):
-    $CanvasLayer/HUD/HealthBar.value = health
 
 func _on_RespawnAsker_pressed():
     if can_respawn:
@@ -55,7 +52,7 @@ func spawn_self():
     player.set_network_master(get_tree().get_network_unique_id())
     add_child(player)
     player.init(Network.self_data.name, Network.start_position)
-    player.connect("health_changed", self, "on_Player_health_changed")
+    player.connect("health_changed", $CanvasLayer/HUD/HealthBar, "on_Player_health_changed")
     player.connect("died", self, "on_Player_died")
     player.connect("respawn", self, "on_Player_respawned")    
     player.health = player.max_health
