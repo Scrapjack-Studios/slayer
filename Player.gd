@@ -194,7 +194,14 @@ func _physics_process(delta):
         elif Input.is_action_pressed('move_right'):
             direction = MoveDirection.RIGHT
             is_walking = true 
-    
+            
+        if Input.is_action_just_pressed("hold"):
+            chain_pull = 40
+            
+        if Input.is_action_just_released("hold"):
+            chain_pull = 55
+
+            
         if Input.is_action_just_pressed("jump") and can_jump:
             jump()
             rotation = 0
@@ -278,7 +285,7 @@ func _physics_process(delta):
     # Integrate forces to velocity
     velocity += force * delta    
     # Integrate velocity into motion and move
-    velocity = move_and_slide(velocity, Vector2(0, -1), false, 4, PI/4, false)
+    velocity = move_and_slide(velocity, Vector2(0, -1), false, 4, PI/4, inertia)
     for index in get_slide_count():
         var collision = get_slide_collision(index)
         if collision.collider.is_in_group("bodies"):
@@ -325,16 +332,6 @@ func jump():
         can_jump = false 
     prev_jump_pressed = Input.is_action_pressed("jump")
     # Jump must also be allowed to happen if the character left the floor a little bit ago. Makes controls more snappy.
-    inertia = true
-    var GunTimer = Timer.new()
-    GunTimer.set_physics_process(false)
-    GunTimer.set_wait_time(0.05)
-    GunTimer.set_one_shot(true)
-    self.add_child(GunTimer)
-    GunTimer.start()
-    yield(GunTimer, "timeout")
-    inertia = false
-    GunTimer.queue_free()
     
     
     

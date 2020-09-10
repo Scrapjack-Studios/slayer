@@ -10,6 +10,7 @@
 [node name="ShootingRange" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
+rect_scale = Vector2( 1.00349, 1 )
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -76,6 +77,26 @@ scale = Vector2( 1.76809, -1.59256 )
 [node name="StaticBody2D30" parent="." instance=ExtResource( 3 )]
 position = Vector2( -749.166, 141.023 )
 rotation = -3.14159
+scale = Vector2( 1.76809, -1.59256 )
+
+[node name="StaticBody2D61" parent="." instance=ExtResource( 3 )]
+position = Vector2( -3465.13, 718.238 )
+rotation = -3.14159
+scale = Vector2( 1.76809, -1.59256 )
+
+[node name="StaticBody2D62" parent="." instance=ExtResource( 3 )]
+position = Vector2( -3471.94, 992.38 )
+rotation = -3.14159
+scale = Vector2( 1.76809, -1.59256 )
+
+[node name="StaticBody2D63" parent="." instance=ExtResource( 3 )]
+position = Vector2( -3731.53, 1149.83 )
+rotation = -1.55493
+scale = Vector2( 1.76809, -1.59256 )
+
+[node name="StaticBody2D64" parent="." instance=ExtResource( 3 )]
+position = Vector2( -3717.49, 642.63 )
+rotation = -1.55493
 scale = Vector2( 1.76809, -1.59256 )
 
 [node name="StaticBody2D60" parent="." instance=ExtResource( 3 )]
@@ -186,7 +207,7 @@ position = Vector2( -640.531, 1018.51 )
 scale = Vector2( 10.2, 2.6 )
 
 [node name="StaticBody2D59" parent="." instance=ExtResource( 3 )]
-position = Vector2( -5035.13, 1119.3 )
+position = Vector2( -5040.16, 1131.07 )
 scale = Vector2( 24.28, 2.6 )
 
 [node name="StaticBody2D33" parent="." instance=ExtResource( 3 )]
@@ -240,7 +261,13 @@ position = Vector2( 3314.01, 954.655 )
 position = Vector2( 3696.12, 996.53 )
 
 [node name="DestructibleBlock" parent="." instance=ExtResource( 1 )]
-position = Vector2( 862.208, -454.682 )
+position = Vector2( 862.208, -473.709 )
+
+[node name="DestructibleBlock22" parent="." instance=ExtResource( 1 )]
+position = Vector2( -4924.38, 901.057 )
+
+[node name="DestructibleBlock23" parent="." instance=ExtResource( 1 )]
+position = Vector2( -4910.16, 715.541 )
 
 [node name="DestructibleBlock4" parent="." instance=ExtResource( 1 )]
 position = Vector2( -63.9075, -837.74 )
@@ -281,7 +308,7 @@ rotation = -0.350951
 position = Vector2( 3379.35, -2959.57 )
 
 [node name="DestructibleBlock3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 454.915, -823.986 )
+position = Vector2( 450.175, -823.986 )
 
 [node name="DestructibleBlock2" parent="." instance=ExtResource( 1 )]
 position = Vector2( -2095.91, -1956.81 )
