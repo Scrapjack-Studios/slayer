@@ -172,9 +172,12 @@ NextWeapon={
 2d_physics/layer_3="Player"
 2d_physics/layer_4="Hook"
 2d_physics/layer_5="Enemies"
+2d_render/layer_6="2424"
 2d_physics/layer_6="GrappleAble"
+2d_render/layer_8="4144"
 
 [rendering]
 
 quality/2d/use_pixel_snap=true
+quality/shadows/filter_mode=0
 quality/dynamic_fonts/use_oversampling=false

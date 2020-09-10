@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://misc/Explosion.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/light.png" type="Texture" id=2]
 [ext_resource path="res://weapons/Bullet.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites/bulletBlue2_outline.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/bulletRed2_outline.png" type="Texture" id=5]
@@ -89,5 +90,16 @@ lifetime = 3.0
 speed_scale = 5.0
 randomness = 1.0
 process_material = SubResource( 5 )
+
+[node name="Light2D" type="Light2D" parent="Tracer"]
+position = Vector2( -0.0993241, 39.3043 )
+rotation = -1.5708
+scale = Vector2( 1.76122, 0.434891 )
+texture = ExtResource( 2 )
+texture_scale = 0.05
+color = Color( 0.980392, 0.572549, 0, 1 )
+energy = 0.6
+shadow_enabled = true
+shadow_gradient_length = 3084.6
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

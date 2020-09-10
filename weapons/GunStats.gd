@@ -105,6 +105,7 @@ sync func _BulletPostition():
         if shot:
             $Sounds/FireSound.play()
             get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").show()
+            get_parent().get_node("Weapon_Sprite/Muzzle/Flash").show()
             var t = Timer.new()
             t.set_wait_time(0.1)
             t.set_one_shot(true)
@@ -113,6 +114,7 @@ sync func _BulletPostition():
             yield(t, "timeout")
             t.queue_free()
             get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").hide()
+            get_parent().get_node("Weapon_Sprite/Muzzle/Flash").hide()
             get_parent().get_node("Weapon_Sprite/Muzzle/Smoke").set_emitting(true)
             var t1 = Timer.new()
             t1.set_wait_time(1)

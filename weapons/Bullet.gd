@@ -48,11 +48,12 @@ func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
     
 func hit():
+    $Tracer.hide()
     velocity = Vector2(0, 0)
     $Sprite.hide()
     $Explosion.show()
     $Explosion.play("smoke")
-    $Tracer.hide()
+    
 func _on_Lifetime_timeout():
     hit()
 

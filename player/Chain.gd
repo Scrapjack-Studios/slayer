@@ -1,6 +1,7 @@
 extends Node2D
 
-onready var links = $Links      # A slightly easier reference to the links
+onready var links = $Links 
+onready var lights = $Links/LightOccluder2D     # A slightly easier reference to the links
 var direction := Vector2(0,0)   # The direction in which the chain was shot
 var tip := Vector2(0,0)         # The global position the tip should be in
 var hit = false                             # We use an extra var for this, because the chain is 
@@ -49,7 +50,6 @@ func _process(_delta: float) -> void:
     links.position = tip_loc
     # The links are moved to start at the tip
     links.region_rect.size.y = tip_loc.length() * 1.01
-
 # Every physics frame we update the tip position
 func _physics_process(_delta: float) -> void:
     $Tip.global_position = tip

@@ -1,11 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://player/Chain.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/grapplehook.png" type="Texture" id=2]
 [ext_resource path="res://assets/ropes/ropeLinkLong.png" type="Texture" id=3]
 [ext_resource path="res://player/Whipbetter.wav" type="AudioStream" id=4]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="OccluderPolygon2D" id=3]
+cull_mode = 1
+polygon = PoolVector2Array( -8.04334, 16.5697, -7.97311, 41.7445, -5.65552, 44.0273, 0.805658, 44.0908, 2.14003, 42.7591, 1.85911, 16.1258, -0.177564, 14.0966, -5.65552, 14.0332 )
+
+[sub_resource type="OccluderPolygon2D" id=1]
+cull_mode = 1
+polygon = PoolVector2Array( -13.1063, 15.0724, -12.9813, 6.0724, -3.91879, -10.9276, 5.33121, 6.0099, 5.45621, 15.0724, 4.51871, 15.0099, 2.64371, 12.5724, 3.33121, 10.3849, 0.518707, 7.4474, -2.35629, 1.8224, -2.54379, 15.7599, -5.35629, 15.5099, -4.73129, 2.1349, -7.60629, 6.1349, -10.6063, 10.1349, -9.73129, 11.1349, -9.66879, 13.0099 )
+
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 3.34429
 height = 7.74051
 
@@ -22,20 +30,27 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 10, 30 )
 region_filter_clip = true
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Links"]
+occluder = SubResource( 3 )
+
 [node name="Tip" type="KinematicBody2D" parent="."]
 position = Vector2( -0.268707, -10.7599 )
 collision_layer = 8
 
 [node name="Hook" type="Sprite" parent="Tip"]
-position = Vector2( -2.77917, 0.170228 )
+position = Vector2( -2.84167, 0.170228 )
 rotation = -3.14159
 scale = Vector2( 0.638879, -0.645122 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, 8 )
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Tip"]
+position = Vector2( -0.0625, 0 )
+occluder = SubResource( 1 )
+
 [node name="Capsuleshape2D" type="CollisionShape2D" parent="Tip"]
 position = Vector2( 0.314436, 20.4793 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="WhipSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
