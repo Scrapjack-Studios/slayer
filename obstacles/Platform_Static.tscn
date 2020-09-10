@@ -2,7 +2,6 @@
 
 [ext_resource path="res://assets/sprites/external-content.duckduckgo.com.jpg" type="Texture" id=1]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 126.019, 25.1544 )
 
@@ -19,9 +18,3 @@ shape = SubResource( 1 )
 scale = Vector2( 1.4, -0.28 )
 texture = ExtResource( 1 )
 region_rect = Rect2( 31.2719, 26.1082, 0.638771, 2.49119 )
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )

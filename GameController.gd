@@ -25,9 +25,16 @@ func _ready():
                 spawn_peer(new_player) 
     
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
+    
+    while not has_node("ShootingRange"):
+        pass
+    for body in get_tree().get_nodes_in_group("bodies"):
+        if body is RigidBody2D:
+            create_physics_puppet(body)
+    
     emit_signal("game_started")
     
-func _process(_delta):
+func _process(_delta):  
     if $CanvasLayer/DeathUI/RespawnCountdown.visible:
         $CanvasLayer/DeathUI/RespawnCountdown.set_text(str(int($CanvasLayer/DeathUI/RespawnTimer.time_left)))
     if player:
@@ -38,6 +45,34 @@ func _process(_delta):
         $CanvasLayer/HUD/AmmoCooldown.value = player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").time_left
     if player:
         $CanvasLayer/HUD/AmmoCooldown.max_value = player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").wait_time
+            
+func create_physics_puppet(body):
+    var body_pos
+    var body_rot
+    var body_collision_scale
+    var body_collision_shape
+    var body_sprite_texture
+    
+    body_pos = body.position
+    body_rot = body.rotation
+    for child in body.get_children():
+        if child is CollisionShape2D:
+            body_sprite_texture = child.get_child(0).texture
+            body_collision_scale = child.scale
+            body_collision_shape = child.shape
+
+    var new_body = KinematicBody2D.new()
+    var new_body_collision = CollisionShape2D.new()
+    var new_body_sprite = Sprite.new()
+    get_node("ShootingRange").add_child(new_body)
+    new_body.add_child(new_body_collision)
+#    new_body_collision.add_child(new_body_sprite)
+    
+    new_body.position = body_pos
+    new_body.rotation = body_rot
+    new_body_collision.scale = body_collision_scale
+    new_body_collision.shape = body_collision_shape
+#    new_body_sprite.texture = body_sprite_texture
         
 func on_Player_health_changed(health):
     $CanvasLayer/HUD/HealthBar/TextureProgress.value = health
