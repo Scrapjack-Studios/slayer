@@ -111,6 +111,9 @@ margin_left = -0.600006
 margin_top = 0.399994
 margin_right = 0.319946
 margin_bottom = -6.10352e-05
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlayMenuButtons" type="VBoxContainer" parent="PlayMenu"]
 visible = false

@@ -20,7 +20,6 @@ extents = Vector2( 0.998139, 2.11467 )
 extents = Vector2( 18.1528, 6.02961 )
 
 [sub_resource type="OccluderPolygon2D" id=5]
-cull_mode = 1
 polygon = PoolVector2Array( 18.0733, 39.4698, -26.8281, 40.1665, -27.1655, -29.8371, 18.4428, -29.473 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -33,7 +32,7 @@ collision_layer = 20
 collision/safe_margin = 0.05
 script = ExtResource( 2 )
 Bullet = ExtResource( 5 )
-push = 200
+push = 1000
 
 [node name="WeaponMechanics" type="Node2D" parent="."]
 script = ExtResource( 8 )

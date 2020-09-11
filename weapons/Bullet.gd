@@ -31,7 +31,7 @@ func _physics_process(delta):
             collision.collider.get_parent().hit()
         if collision.collider.is_in_group("tiles"):
             hit_pos = get_position()
-            collision.collider.get_parent().hit(hit_pos)
+            collision.collider.get_parent().hit(hit_pos, damage)
         if collision.collider.is_in_group("bullets"):
             velocity = Vector2(0, 0)
             $Sprite.hide()

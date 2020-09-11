@@ -7,7 +7,7 @@
 [node name="Templates" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Axe_78" type="Node" parent="."]
+[node name="Axe_74" type="Node" parent="."]
 script = ExtResource( 4 )
 __meta__ = {
 "_editor_description_": "Standard assalt rifle"
@@ -18,7 +18,35 @@ mag = 60
 shots_fired = 60
 reload = 2
 weapon_sprite = ExtResource( 2 )
-dmg = 0.8
+dmg = 1.0
+Weapon_Sounds = 1
+
+[node name="TestAxe" type="Node" parent="."]
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": "Standard assalt rifle"
+}
+automatic = true
+cool_down = 0.1
+mag = 10000
+shots_fired = 10000
+reload = 2
+weapon_sprite = ExtResource( 2 )
+dmg = 10.0
+Weapon_Sounds = 1
+
+[node name="test_axe2" type="Node" parent="."]
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": "Standard assalt rifle"
+}
+semi_auto = true
+cool_down = 0.1
+mag = 60
+shots_fired = 60
+reload = 2
+weapon_sprite = ExtResource( 2 )
+dmg = 100.0
 Weapon_Sounds = 1
 
 [node name="Chesterfield_33" type="Node" parent="."]
