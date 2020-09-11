@@ -1,51 +1,17 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/Shotgun.png" type="Texture" id=2]
 [ext_resource path="res://weapons/Weapon_Templates.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sfx/ui/Button1.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/sprites/explosion3.png" type="Texture" id=5]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sprites/explosion4.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/explosion5.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/explosionSmoke1.png" type="Texture" id=9]
 [ext_resource path="res://weapons/FireSound.gd" type="Script" id=10]
-[ext_resource path="res://assets/sprites/explosion1.png" type="Texture" id=11]
-[ext_resource path="res://assets/sprites/explosion2.png" type="Texture" id=12]
 [ext_resource path="res://assets/sprites/muzzle/m_9.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/muzzle/m_11.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/muzzle/m_6.png" type="Texture" id=15]
 [ext_resource path="res://assets/sprites/muzzle/m_5.png" type="Texture" id=16]
 [ext_resource path="res://assets/sprites/muzzle/m_7.png" type="Texture" id=17]
 [ext_resource path="res://assets/sprites/light.png" type="Texture" id=18]
-
-[sub_resource type="AnimatedTexture" id=1]
-frames = 6
-fps = 144.0
-frame_0/texture = ExtResource( 11 )
-frame_1/texture = ExtResource( 12 )
-frame_1/delay_sec = 0.0
-frame_2/texture = ExtResource( 5 )
-frame_2/delay_sec = 0.0
-frame_3/texture = ExtResource( 7 )
-frame_3/delay_sec = 0.0
-frame_4/texture = ExtResource( 8 )
-frame_4/delay_sec = 0.0
-frame_5/texture = ExtResource( 9 )
-frame_5/delay_sec = 0.0
-
-[sub_resource type="ParticlesMaterial" id=2]
-emission_shape = 1
-emission_sphere_radius = 10.0
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 20.0
-initial_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 10.0
-scale_random = 1.0
-color = Color( 0.435294, 0.435294, 0.435294, 1 )
 
 [sub_resource type="AnimatedTexture" id=3]
 frames = 5
@@ -59,6 +25,9 @@ frame_3/texture = ExtResource( 14 )
 frame_3/delay_sec = 0.0
 frame_4/texture = ExtResource( 17 )
 frame_4/delay_sec = 0.0
+
+[sub_resource type="OccluderPolygon2D" id=4]
+polygon = PoolVector2Array( -11.3218, 3.13318, 4.90299, 2.85498, 4.96949, 7.00013, -8.83933, 7.05577, -9.28263, 9.08662, -12.6295, 9.11444, -12.962, 5.94298 )
 
 [node name="Weapon" type="Sprite"]
 use_parent_material = true
@@ -80,23 +49,6 @@ position = Vector2( 5, 4.04816 )
 rotation = 1.7318e-11
 scale = Vector2( 0.42014, 0.401667 )
 
-[node name="Explosion1" type="Sprite" parent="Weapon_Sprite/Muzzle"]
-visible = false
-position = Vector2( -0.0369568, 0.0772705 )
-rotation = 2.01741
-scale = Vector2( 0.260939, 0.281823 )
-texture = SubResource( 1 )
-
-[node name="Smoke" type="Particles2D" parent="Weapon_Sprite/Muzzle"]
-visible = false
-position = Vector2( 8.74566, 0.169222 )
-rotation = -1.55485
-amount = 50
-lifetime = 2.6
-explosiveness = 0.1
-randomness = 0.2
-process_material = SubResource( 2 )
-
 [node name="Explosion" type="Sprite" parent="Weapon_Sprite/Muzzle"]
 visible = false
 position = Vector2( 9.11218, 0.557177 )
@@ -112,6 +64,9 @@ texture_scale = 0.04
 color = Color( 0.968627, 0.545098, 0, 1 )
 energy = 2.0
 shadow_gradient_length = 2933.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Weapon_Sprite"]
+occluder = SubResource( 4 )
 
 [node name="GunStats" type="Node2D" parent="."]
 script = ExtResource( 1 )

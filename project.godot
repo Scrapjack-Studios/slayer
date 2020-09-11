@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "Explosion",
+"language": "GDScript",
+"path": "res://Explosion.gd"
+}, {
 "base": "Node",
 "class": "weapon_setter",
 "language": "GDScript",
 "path": "res://weapons/weapon_templates/WeaponPreseter.gd"
 } ]
 _global_script_class_icons={
+"Explosion": "",
 "weapon_setter": ""
 }
 
@@ -33,6 +39,7 @@ Network="*res://Network.gd"
 
 [debug]
 
+gdscript/completion/autocomplete_setters_and_getters=true
 gdscript/warnings/unused_signal=false
 gdscript/warnings/return_value_discarded=false
 
