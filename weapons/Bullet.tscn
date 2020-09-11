@@ -99,7 +99,6 @@ texture = ExtResource( 2 )
 texture_scale = 0.05
 color = Color( 0.980392, 0.572549, 0, 1 )
 energy = 0.6
-shadow_enabled = true
 shadow_gradient_length = 3084.6
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
