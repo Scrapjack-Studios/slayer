@@ -127,11 +127,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JoinGame" type="Button" parent="PlayMenu/PlayMenuButtons"]
-margin_right = 324.0
-margin_bottom = 26.0
-text = "Join Game"
-
 [node name="CreateGame" type="Button" parent="PlayMenu/PlayMenuButtons"]
 margin_top = 38.0
 margin_right = 324.0
@@ -140,6 +135,11 @@ text = "Create Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="JoinGame" type="Button" parent="PlayMenu/PlayMenuButtons"]
+margin_right = 324.0
+margin_bottom = 26.0
+text = "Join Game"
 
 [node name="EditProfile" type="Button" parent="PlayMenu/PlayMenuButtons"]
 margin_top = 76.0
@@ -517,10 +517,10 @@ bus = "Music"
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="mouse_entered" from="PlayMenu/PlayMenuButtons/JoinGame" to="." method="_on_JoinGame_mouse_entered"]
-[connection signal="pressed" from="PlayMenu/PlayMenuButtons/JoinGame" to="." method="_on_JoinGame_pressed"]
 [connection signal="mouse_entered" from="PlayMenu/PlayMenuButtons/CreateGame" to="." method="_on_CreateGame_mouse_entered"]
 [connection signal="pressed" from="PlayMenu/PlayMenuButtons/CreateGame" to="." method="_on_CreateGame_pressed"]
+[connection signal="mouse_entered" from="PlayMenu/PlayMenuButtons/JoinGame" to="." method="_on_JoinGame_mouse_entered"]
+[connection signal="pressed" from="PlayMenu/PlayMenuButtons/JoinGame" to="." method="_on_JoinGame_pressed"]
 [connection signal="mouse_entered" from="PlayMenu/PlayMenuButtons/EditProfile" to="." method="_on_EditProfile_mouse_entered"]
 [connection signal="pressed" from="PlayMenu/PlayMenuButtons/EditProfile" to="." method="_on_EditProfile_pressed"]
 [connection signal="mouse_entered" from="PlayMenu/PlayMenuButtons/ShootingRange" to="." method="_on_ShootingRange_mouse_entered"]
