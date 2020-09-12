@@ -16,6 +16,7 @@ extents = Vector2( 82.7093, 79.5699 )
 [node name="DamagingBlock" type="StaticBody2D"]
 position = Vector2( 310.033, 726.973 )
 script = ExtResource( 1 )
+damage = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 2.52264, 20.1815 )
