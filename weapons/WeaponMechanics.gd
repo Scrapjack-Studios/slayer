@@ -24,18 +24,22 @@ func reload():
         
         
 func semi_auto():
+    if is_network_master():
         GunStats.rpc("_BulletPostition")
         
 
 func shotgun():
+    if is_network_master():
         GunStats.rpc("_BulletPostition")
         
 
-func automatic(): 
+func automatic():
+    if is_network_master():
         GunStats.rpc("_BulletPostition")
         
           
-func burst(): 
+func burst():
+    if is_network_master():
         GunStats.rpc("_BulletPostition")
 
 
