@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://player/HealthBar.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/savior.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -36,7 +35,6 @@ margin_bottom = 35.0
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 percent_visible = false
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

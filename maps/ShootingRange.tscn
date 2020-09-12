@@ -338,10 +338,6 @@ position = Vector2( 2059.29, -2464.47 )
 position = Vector2( -813.885, 1996.34 )
 scale = Vector2( 81.44, 1 )
 
-[node name="DamagingBlock2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1122.11, 724.34 )
-scale = Vector2( 2.58686, 0.809435 )
-
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 autoplay = true

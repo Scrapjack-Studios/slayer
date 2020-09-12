@@ -52,12 +52,13 @@ func spawn_self():
     player.set_network_master(get_tree().get_network_unique_id())
     add_child(player)
     player.init(Network.self_data.name, Network.start_position)
-    player.connect("health_changed", $CanvasLayer/HUD/HealthBar, "on_Player_health_changed")
+    player.connect("health_changed", self, "on_Player_health_changed")
     player.connect("died", self, "on_Player_died")
     player.connect("respawn", self, "on_Player_respawned")    
     player.health = player.max_health
     player.get_node("Camera2D").make_current()
     $CanvasLayer/HUD/HealthBar.value = player.health
+    $CanvasLayer/HUD/HealthBar/HealthBarChange.value = player.health
     $CanvasLayer/DeathUI/RespawnAsker.hide()
     $CanvasLayer/DeathUI/RespawnCountdown.hide()
     
@@ -90,6 +91,11 @@ func on_Player_died():
     yield($CanvasLayer/DeathUI/RespawnTimer, "timeout")
     can_respawn = true
     emit_signal("respawn_available")
+    
+func on_Player_health_changed(health):
+    $CanvasLayer/HUD/HealthBar.value = health
+    $CanvasLayer/HUD/HealthBar/UpdateTween.interpolate_property($CanvasLayer/HUD/HealthBar/HealthBarChange, "value", $CanvasLayer/HUD/HealthBar/HealthBarChange.value, health, 0.6, Tween.TRANS_SINE, Tween.EASE_OUT, 0.4)
+    $CanvasLayer/HUD/HealthBar/UpdateTween.start()
     
 func _on_GameController_respawn_available():
     if wants_to_respawn:
