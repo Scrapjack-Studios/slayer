@@ -24,19 +24,19 @@ func reload():
         
         
 func semi_auto():
-        GunStats.rpc("_BulletPostition")
+        GunStats._BulletPostition()
         
 
 func shotgun():
-        GunStats.rpc("_BulletPostition")
+        GunStats._BulletPostition()
         
 
 func automatic(): 
-        GunStats.rpc("_BulletPostition")
+        GunStats._BulletPostition()
         
           
 func burst(): 
-        GunStats.rpc("_BulletPostition")
+        GunStats._BulletPostition()
 
 
 

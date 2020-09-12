@@ -17,7 +17,7 @@ bg_color = Color( 0.298039, 0.572549, 0.0470588, 1 )
 size = 100
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.172549, 0.137255, 0.772549, 1 )
 
 [sub_resource type="StyleBoxFlat" id=7]
@@ -82,7 +82,7 @@ margin_left = 0.221889
 margin_top = 0.167099
 margin_right = 75.2219
 margin_bottom = 24.1671
-custom_styles/fg = SubResource( 8 )
+custom_styles/fg = SubResource( 6 )
 custom_styles/bg = SubResource( 7 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
 percent_visible = false
