@@ -24,7 +24,7 @@ func _ready():
             if new_player != get_tree().get_network_unique_id():
                 spawn_peer(new_player) 
     
-    $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
+    $CanvasLayer/HUD/HealthBar.value = player.health
     emit_signal("game_started")
     
 func _process(_delta):
@@ -38,9 +38,6 @@ func _process(_delta):
         $CanvasLayer/HUD/AmmoCooldown.value = player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").time_left
     if player:
         $CanvasLayer/HUD/AmmoCooldown.max_value = player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").wait_time
-        
-func on_Player_health_changed(health):
-    $CanvasLayer/HUD/HealthBar/TextureProgress.value = health
 
 func _on_RespawnAsker_pressed():
     if can_respawn:
@@ -60,7 +57,8 @@ func spawn_self():
     player.connect("respawn", self, "on_Player_respawned")    
     player.health = player.max_health
     player.get_node("Camera2D").make_current()
-    $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
+    $CanvasLayer/HUD/HealthBar.value = player.health
+    $CanvasLayer/HUD/HealthBar/HealthBarChange.value = player.health
     $CanvasLayer/DeathUI/RespawnAsker.hide()
     $CanvasLayer/DeathUI/RespawnCountdown.hide()
     
@@ -73,7 +71,7 @@ func spawn_peer(id):
     new_player.init(info.name, info.position)
     
 func on_Player_respawned():
-    $CanvasLayer/HUD/HealthBar/TextureProgress.value = player.health
+    $CanvasLayer/HUD/HealthBar.value = player.health
     player.get_node("Weapon/GunStats").shots_fired = player.get_node("Weapon/GunStats").mag
     player.set_position(Network.start_position)
     player.get_node("Camera2D").make_current()
@@ -93,6 +91,11 @@ func on_Player_died():
     yield($CanvasLayer/DeathUI/RespawnTimer, "timeout")
     can_respawn = true
     emit_signal("respawn_available")
+    
+func on_Player_health_changed(health):
+    $CanvasLayer/HUD/HealthBar.value = health
+    $CanvasLayer/HUD/HealthBar/UpdateTween.interpolate_property($CanvasLayer/HUD/HealthBar/HealthBarChange, "value", $CanvasLayer/HUD/HealthBar/HealthBarChange.value, health, 0.6, Tween.TRANS_SINE, Tween.EASE_OUT, 0.4)
+    $CanvasLayer/HUD/HealthBar/UpdateTween.start()
     
 func _on_GameController_respawn_available():
     if wants_to_respawn:
