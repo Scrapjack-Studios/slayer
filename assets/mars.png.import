@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/mars.png-70ce1fa35e7a615ca1cfa3e7a6196127.image"
+
+[deps]
+
+source_file="res://assets/mars.png"
+dest_files=[ "res://.import/mars.png-70ce1fa35e7a615ca1cfa3e7a6196127.image" ]
+
+[params]
+
