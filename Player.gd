@@ -113,6 +113,7 @@ func _input(event: InputEvent) -> void:
             if grapple_count == 3:
                 can_grapple = false
                 $GrappleTimer.start()
+                get_parent().get_node("CanvasLayer/HUD/GrappleCooldown").show()
                 grapple_count = 0
             
             
@@ -401,6 +402,7 @@ sync func respawn():
     emit_signal("respawn")
 
 func _on_GrappleTimer_timeout():
+    get_parent().get_node("CanvasLayer/HUD/GrappleCooldown").hide()
     $GrappleTimer.stop()
     can_grapple = true
 

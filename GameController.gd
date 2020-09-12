@@ -32,11 +32,8 @@ func _process(_delta):
         $CanvasLayer/DeathUI/RespawnCountdown.set_text(str(int($CanvasLayer/DeathUI/RespawnTimer.time_left)))
     if player:
         $CanvasLayer/HUD/AmmoCounter.text = str(player.get_node("Weapon").get_node("GunStats").shots_fired)+"/"+str(player.get_node("Weapon").get_node("GunStats").mag)
-    if player:
         $CanvasLayer/HUD/GrappleCooldown.value = player.get_node("GrappleTimer").get_time_left() * 25
-    if player:
         $CanvasLayer/HUD/AmmoCooldown.value = player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").time_left
-    if player:
         $CanvasLayer/HUD/AmmoCooldown.max_value = player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").wait_time
 
 func _on_RespawnAsker_pressed():
@@ -54,7 +51,7 @@ func spawn_self():
     player.init(Network.self_data.name, Network.start_position)
     player.connect("health_changed", self, "on_Player_health_changed")
     player.connect("died", self, "on_Player_died")
-    player.connect("respawn", self, "on_Player_respawned")    
+    player.connect("respawn", self, "on_Player_respawned")   
     player.health = player.max_health
     player.get_node("Camera2D").make_current()
     $CanvasLayer/HUD/HealthBar.value = player.health
