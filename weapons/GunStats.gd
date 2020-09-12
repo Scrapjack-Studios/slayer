@@ -54,14 +54,14 @@ sync func _BulletPostition():
         var b = Bullet.instance()
         b.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(b)
-        rset("shots_fired", shots_fired - 1)
-        rset("shots_fired_memory", shots_fired_memory - 1)
+        shots_fired =- 1
+        shots_fired_memory =- 1
         shot = true
         if shots_fired == 0:
-            rset("can_fire", false)   
+            can_fire = false  
         if $RayCast2DKick.is_colliding():
             get_parent().get_parent().Kickback(kickback)
-            
+             
         if shotgun:
             var c = Bullet.instance()
             var d = Bullet.instance()
