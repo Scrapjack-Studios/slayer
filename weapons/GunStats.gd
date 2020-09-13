@@ -35,10 +35,10 @@ var can_fire = true
 var ReloadTime = 2
 var bounce
 
-sync func bulletstats():
+func bulletstats():
     if can_fire:
         print("bulletstats")
-        fire()
+        rpc("fire")
         shots_fired -= 1
         if shots_fired == 0:
             can_fire = false
@@ -46,7 +46,7 @@ sync func bulletstats():
             effects()
         
 sync func fire():
-    print("fire")
+    
     if shotgun:
         shot = true
         $Sounds/FireSound.play()
