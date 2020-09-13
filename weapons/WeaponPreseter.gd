@@ -14,6 +14,7 @@ export (Texture) var weapon_sprite
 export (int) var kickback
 export (int) var burst_ammount
 export (float) var dmg
+export (int) var shotgun_pellets
 export(int, "Pistol", "Assault", "Shotgun", "Carbine") var Weapon_Sounds
 
 
@@ -28,8 +29,9 @@ func activate():
     get_parent().get_parent().get_parent().get_node("GunStats").is_burst_fire = burst_fire
     get_parent().get_parent().get_parent().get_node("GunStats").shotgun = shotgun
     get_parent().get_parent().get_parent().get_node("GunStats").burst_ammount = burst_ammount
+    get_parent().get_parent().get_parent().get_node("GunStats").shotgun_pellets = shotgun_pellets
     get_parent().get_parent().get_parent().get_node("GunStats").cool_down = cool_down
-    get_parent().get_parent().get_parent().get_node("GunStats").weapon_sprite = weapon_sprite
+#    get_parent().get_parent().get_parent().get_node("GunStats").weapon_sprite = weapon_sprite
     get_parent().get_parent().get_parent().get_node("GunStats").mag = mag
     get_parent().get_parent().get_parent().get_node("GunStats").shots_fired = shots_fired
     get_parent().get_parent().get_parent().get_node("GunStats").kickback = kickback

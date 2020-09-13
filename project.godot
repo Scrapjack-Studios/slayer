@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "weapon_setter",
 "language": "GDScript",
-"path": "res://weapons/weapon_templates/WeaponPreseter.gd"
+"path": "res://weapons/WeaponPreseter.gd"
 } ]
 _global_script_class_icons={
 "weapon_setter": ""
