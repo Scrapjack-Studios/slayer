@@ -28,7 +28,8 @@ func _physics_process(delta):
             if collision.collider.is_in_group("destruct"):
                 collision.collider.get_parent().subdivide(self , collision.collider)
         if collision.collider.is_in_group("PC"):
-            collision.collider.get_parent().hit(position)
+            collision.collider.get_parent().hit(global_position)
+            
 
         if collision.collider.is_in_group("bullets"):
             velocity = Vector2(0, 0)

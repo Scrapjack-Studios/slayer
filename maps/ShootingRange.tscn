@@ -370,5 +370,5 @@ stream = ExtResource( 5 )
 autoplay = true
 bus = "Music"
 
-[node name="Node2D" parent="." instance=ExtResource( 6 )]
+[node name="GoreBlock" parent="." instance=ExtResource( 6 )]
 position = Vector2( 82.3649, 763.869 )

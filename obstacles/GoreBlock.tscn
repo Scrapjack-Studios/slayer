@@ -27,3 +27,5 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Block/CollisionShape2D"]
 texture = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
