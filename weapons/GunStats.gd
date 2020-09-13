@@ -13,7 +13,7 @@ var cool_down = 0
 var burst_ammount = 3
 #how many bullets are shot in one burst
 var shotgun_pellets
-var shotgun_spread
+var shotgun_spread = 0
 var bullet_size = Vector2(0.3,0.3)
 #default is 0.2
 var bullet_speed = 3000
@@ -36,13 +36,14 @@ var ReloadTime = 2
 var bounce
 
 sync func bulletstats():
-    print("bulletstats")
-    fire()
-    shots_fired -= 1
-    if shots_fired == 0:
-        can_fire = false
-    if shot:
-        effects()
+    if can_fire:
+        print("bulletstats")
+        fire()
+        shots_fired -= 1
+        if shots_fired == 0:
+            can_fire = false
+        if shot:
+            effects()
         
 sync func fire():
     print("fire")
@@ -53,7 +54,7 @@ sync func fire():
             var c = Bullet.instance()
             c.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation + shotgun_spread,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
             $Bullets.add_child(c)
-            shotgun_spread =+ 1
+            shotgun_spread =+ 0.01
             
     if is_burst_fire:
         for i in burst_ammount: 

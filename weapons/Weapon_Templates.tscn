@@ -20,6 +20,7 @@ reload = 2
 weapon_sprite = ExtResource( 2 )
 kickback = -30
 dmg = 0.25
+shotgun_pellets = 5
 Weapon_Sounds = 2
 
 [node name="Raven_99" type="Node" parent="."]
