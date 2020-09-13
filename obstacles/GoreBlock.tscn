@@ -14,9 +14,26 @@ extents = Vector2( 15.9101, 15.7292 )
 ]]
 script = ExtResource( 2 )
 
+[node name="GibSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="BloodParticles" type="Particles2D" parent="."]
+position = Vector2( 30.0819, 0.666346 )
+emitting = false
+amount = 50
+lifetime = 1.5
+one_shot = true
+speed_scale = 1.5
+explosiveness = 0.5
+visibility_rect = Rect2( -100, -100, 200, 150 )
+local_coords = false
+process_material = ExtResource( 4 )
+texture = ExtResource( 3 )
+
 [node name="Block" type="StaticBody2D" parent="." groups=[
 "PC",
 ]]
+scale = Vector2( 1.96, 3.28 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Block" groups=[
 "PC",
@@ -25,15 +42,3 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Block/CollisionShape2D"]
 texture = ExtResource( 1 )
-
-[node name="GibSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-
-[node name="BloodParticles" type="Particles2D" parent="."]
-emitting = false
-amount = 400
-lifetime = 2.0
-one_shot = true
-local_coords = false
-process_material = ExtResource( 4 )
-texture = ExtResource( 3 )
