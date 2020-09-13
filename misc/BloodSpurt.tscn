@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/sprites/blood.png" type="Texture" id=1]
+[ext_resource path="res://assets/particle_materials/blood.tres" type="Material" id=2]
+
+[node name="BloodParticles" type="Particles2D"]
+position = Vector2( 30.0819, 0.666346 )
+emitting = false
+amount = 50
+lifetime = 1.5
+one_shot = true
+speed_scale = 1.5
+explosiveness = 0.5
+visibility_rect = Rect2( -100, -100, 200, 150 )
+local_coords = false
+process_material = ExtResource( 2 )
+texture = ExtResource( 1 )
