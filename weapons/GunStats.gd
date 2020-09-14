@@ -99,10 +99,6 @@ func effects():
     $EffectsTimer.start(0.1)
     yield($EffectsTimer, "timeout")
     get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").hide()
-    get_parent().get_node("Weapon_Sprite/Muzzle/Smoke").set_emitting(true)
-    $EffectsTimer.start(0.1)
-    yield($EffectsTimer, "timeout")
-    get_parent().get_node("Weapon_Sprite/Muzzle/Smoke").set_emitting(false)
 
 
 
