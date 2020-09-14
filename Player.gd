@@ -92,7 +92,6 @@ func _input(event: InputEvent) -> void:
         if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
             $WeaponMechanics.shotgun()
             GunTimer(false)
-            print('shotgun')
         if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_burst_fire:
             $WeaponMechanics.burst()
             GunTimer(false)
