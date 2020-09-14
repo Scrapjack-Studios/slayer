@@ -37,21 +37,20 @@ var bounce
 
 func bulletstats():
     if can_fire:
-        rpc("fire")
+        rpc("fire", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
         if shot:
             effects()
         
-sync func fire():
-    
+sync func fire(weapon_position, weapon_rotation):
     if shotgun:
         shots_fired -= 1
         shot = true
         $Sounds/FireSound.play()
-        for i in shotgun_pellets:
+        for shotgun_pellet in shotgun_pellets:
             shotgun_spread =+ 0.5
-            var pelltet = Bullet.instance()
-            pelltet.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation + rand_range(-0.1,0.1),'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
-            $Bullets.add_child(pelltet)
+            var pellet = Bullet.instance()
+            pellet.start_at(weapon_position, weapon_rotation + rand_range(-0.1,0.1),'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
+            $Bullets.add_child(pellet)
             $ShotDelayTimer.start(0.000000000001)
             yield($ShotDelayTimer, "timeout")
             if shots_fired == 0:
@@ -62,7 +61,7 @@ sync func fire():
         for i in burst_ammount: 
             shots_fired -= 1
             var c = Bullet.instance()
-            c.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
+            c.start_at(weapon_position, weapon_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
             $Bullets.add_child(c)
             shot = true
             $Sounds/FireSound.play()
@@ -73,7 +72,7 @@ sync func fire():
     if is_automatic:
         shots_fired -= 1
         var c = Bullet.instance()
-        c.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
+        c.start_at(weapon_position, weapon_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(c)
         shot = true
         $Sounds/FireSound.play()
@@ -82,7 +81,7 @@ sync func fire():
     if is_semi_auto:
         shots_fired -= 1
         var c = Bullet.instance()
-        c.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
+        c.start_at(weapon_position, weapon_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(c)
         shot = true
         $Sounds/FireSound.play()
