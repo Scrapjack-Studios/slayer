@@ -19,7 +19,7 @@ var bullet_size = Vector2(0.3,0.3)
 var bullet_speed = 3000
 #velocity of bullet
 var bullet_lifetime
-var weapon_size = Vector2(2,2)
+var weapon_size = Vector2(4,4)
 #weapon size
 var weapon_position = Vector2(0,0)
 #weapon location

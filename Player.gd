@@ -353,7 +353,7 @@ func _WallMount():
     jump_strength = 900
     can_build_momentum = false
     if can_walljump:
-        jump_count = 1
+        jump_count = 0
         can_walljump = false
         can_jump = true
                  
