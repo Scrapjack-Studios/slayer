@@ -102,7 +102,7 @@ collide_with_areas = true
 [node name="Left" type="Node2D" parent="Wall_Raycasts"]
 
 [node name="Wall_Detect_Left" type="RayCast2D" parent="Wall_Raycasts/Left"]
-position = Vector2( -30.316, -13.4256 )
+position = Vector2( -27.6441, -10.0841 )
 rotation = 1.57469
 enabled = true
 cast_to = Vector2( 0, 30 )

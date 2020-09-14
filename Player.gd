@@ -31,7 +31,7 @@ const STOP_FORCE = 1500
 const JUMP_MAX_AIRBORNE_TIME = 0.4
 const CLIMB_SPEED = 800
 const CLIMB_AMOUNT = 70
-const MAX_JUMP_COUNT = 1
+const MAX_JUMP_COUNT = 2
 
 var velocity = Vector2(0,0) # The velocity of the player (kept over time)
 var chain_velocity := Vector2(0,0)
@@ -70,7 +70,7 @@ var preweapon
 var weaponnumb = 0
 var force = Vector2(200, gravity) # create forces 
 var stop = true
-var momentum = 1
+var momentum = 1.2
 var can_build_momentum = true
 var inertia = false
 
@@ -303,7 +303,7 @@ func move(direction):
     stop = true
     if not can_build_momentum:
         if momentum >= 2:
-            momentum -= momentum / 1.5
+            momentum -= momentum / 1.7
     can_build_momentum = true
     if can_move:
         if direction == MoveDirection.LEFT:

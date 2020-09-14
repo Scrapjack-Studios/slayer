@@ -13,7 +13,7 @@ var cool_down = 0
 var burst_ammount = 3
 #how many bullets are shot in one burst
 var shotgun_pellets
-var shotgun_spread = 0
+var shotgun_spread = 0.1
 var bullet_size = Vector2(0.3,0.3)
 #default is 0.2
 var bullet_speed = 3000
@@ -37,27 +37,35 @@ var bounce
 
 func bulletstats():
     if can_fire:
-        print("bulletstats")
         rpc("fire")
-        shots_fired -= 1
-        if shots_fired == 0:
-            can_fire = false
         if shot:
             effects()
         
 sync func fire():
     
     if shotgun:
+        shots_fired -= 1
         shot = true
         $Sounds/FireSound.play()
         for i in shotgun_pellets:
-            var c = Bullet.instance()
-            c.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation + shotgun_spread,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
-            $Bullets.add_child(c)
-            shotgun_spread =+ 0.01
-            
+            shotgun_spread =+ 0.5
+            var pelltet = Bullet.instance()
+            pelltet.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation + rand_range(-0.1,0.1),'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
+            $Bullets.add_child(pelltet)
+            var t = Timer.new()
+            t.set_wait_time(0.000000000001)
+            t.set_one_shot(true)
+            self.add_child(t)
+            t.start()
+            yield(t, "timeout")
+            t.queue_free()
+            if shots_fired == 0:
+                can_fire = false
+        if shots_fired == 0:
+            can_fire = false
     if is_burst_fire:
         for i in burst_ammount: 
+            shots_fired -= 1
             var c = Bullet.instance()
             c.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
             $Bullets.add_child(c)
@@ -70,21 +78,26 @@ sync func fire():
             t.start()
             yield(t, "timeout")
             t.queue_free()
-            
+        if shots_fired == 0:
+            can_fire = false
     if is_automatic:
+        shots_fired -= 1
         var c = Bullet.instance()
         c.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(c)
         shot = true
         $Sounds/FireSound.play()
-        
+        if shots_fired == 0:
+            can_fire = false
     if is_semi_auto:
+        shots_fired -= 1
         var c = Bullet.instance()
         c.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(c)
         shot = true
         $Sounds/FireSound.play()
-                
+        if shots_fired == 0:
+            can_fire = false   
                           
 func set_sprite():
 #    get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
