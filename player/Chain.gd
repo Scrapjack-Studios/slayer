@@ -20,16 +20,7 @@ sync func shoot():
     direction = get_local_mouse_position().normalized() # Normalize the direction and save it
     flying = true # Keep track of our current scan
     tip = self.global_position
-    var t = Timer.new()
-    t.set_wait_time(1)
-    t.set_one_shot(true)
-    self.add_child(t)
-    t.start()
-    yield(t, "timeout")
-    t.queue_free()
     # reset the tip position to the player's position
-    if not hooked:
-        release()
     # if tip has not hooked after a second release and reset timer
 
 sync func release() -> void:
