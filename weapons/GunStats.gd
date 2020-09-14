@@ -42,7 +42,6 @@ func bulletstats():
             effects()
         
 sync func fire():
-    
     if shotgun:
         shots_fired -= 1
         shot = true
@@ -52,13 +51,8 @@ sync func fire():
             var pelltet = Bullet.instance()
             pelltet.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation + rand_range(-0.1,0.1),'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
             $Bullets.add_child(pelltet)
-            var t = Timer.new()
-            t.set_wait_time(0.000000000001)
-            t.set_one_shot(true)
-            self.add_child(t)
-            t.start()
-            yield(t, "timeout")
-            t.queue_free()
+            $ShotDelayTimer.start(0.000000000001)
+            yield($ShotDelayTimer, "timeout")
             if shots_fired == 0:
                 can_fire = false
         if shots_fired == 0:
@@ -71,13 +65,8 @@ sync func fire():
             $Bullets.add_child(c)
             shot = true
             $Sounds/FireSound.play()
-            var t = Timer.new()
-            t.set_wait_time(0.1)
-            t.set_one_shot(true)
-            self.add_child(t)
-            t.start()
-            yield(t, "timeout")
-            t.queue_free()
+            $ShotDelayTimer.start(0.1)
+            yield($ShotDelayTimer, "timeout")
         if shots_fired == 0:
             can_fire = false
     if is_automatic:
@@ -106,22 +95,12 @@ func set_sprite():
 
 func effects():
     get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").show()
-    var t = Timer.new()
-    t.set_wait_time(0.1)
-    t.set_one_shot(true)
-    self.add_child(t)
-    t.start()
-    yield(t, "timeout")
-    t.queue_free()
+    $EffectsTimer.start(0.1)
+    yield($EffectsTimer, "timeout")
     get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").hide()
     get_parent().get_node("Weapon_Sprite/Muzzle/Smoke").set_emitting(true)
-    var t1 = Timer.new()
-    t1.set_wait_time(1)
-    t1.set_one_shot(true)
-    self.add_child(t1)
-    t1.start()
-    yield(t1, "timeout")
-    t1.queue_free()
+    $EffectsTimer.start(0.1)
+    yield($EffectsTimer, "timeout")
     get_parent().get_node("Weapon_Sprite/Muzzle/Smoke").set_emitting(false)
 
 
