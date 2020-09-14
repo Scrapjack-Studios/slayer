@@ -97,3 +97,6 @@ scale = Vector2( 1, 17.9248 )
 
 [node name="ShotDelayTimer" type="Timer" parent="GunStats"]
 one_shot = true
+
+[node name="EffectsTimer" type="Timer" parent="GunStats"]
+one_shot = true

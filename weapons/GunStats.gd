@@ -8,37 +8,26 @@ var is_burst_fire
 var is_semi_auto
 var shotgun
 var kickback = 1
-
 var cool_down = 0
 #cool_down time for each shot, could also be reload time and effects the time in betwene shots of auto fire
-
 var burst_ammount = 3
 #how many bullets are shot in one burst
 var shotgun_pellets
 var shotgun_spread = 0.1
 var bullet_size = Vector2(0.3,0.3)
 #default is 0.2
-
 var bullet_speed = 3000
 #velocity of bullet
-
 var bullet_lifetime
-
-var weapon_sprite
-#Weapon sprite duh
-
-var weapon_size = Vector2(2,2)
+var weapon_size = Vector2(4,4)
 #weapon size
-
 var weapon_position = Vector2(0,0)
 #weapon location
 var shot = false    
-
 var assault_sound
 var m1_sound
 var super_shotgun_sound
 var pistol_sound  
-
 var mag = 50
 var shots_fired = 50
 var shots_fired_memory = 50
@@ -63,13 +52,8 @@ sync func fire():
             var pelltet = Bullet.instance()
             pelltet.start_at(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation + rand_range(-0.1,0.1),'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
             $Bullets.add_child(pelltet)
-            var t = Timer.new()
-            t.set_wait_time(0.000000000001)
-            t.set_one_shot(true)
-            self.add_child(t)
-            t.start()
-            yield(t, "timeout")
-            t.queue_free()
+            $ShotDelayTimer.start(0.000000000001)
+            yield($ShotDelayTimer, "timeout")
             if shots_fired == 0:
                 can_fire = false
         if shots_fired == 0:
@@ -82,14 +66,8 @@ sync func fire():
             $Bullets.add_child(c)
             shot = true
             $Sounds/FireSound.play()
-            get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").show()
-            var t = Timer.new()
-            t.set_wait_time(0.1)
-            t.set_one_shot(true)
-            self.add_child(t)
-            t.start()
-            yield(t, "timeout")
-            t.queue_free()
+            $ShotDelayTimer.start(0.1)
+            yield($ShotDelayTimer, "timeout")
         if shots_fired == 0:
             can_fire = false
     if is_automatic:
@@ -118,14 +96,13 @@ func set_sprite():
 
 func effects():
     get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").show()
-    var t = Timer.new()
-    t.set_wait_time(0.1)
-    t.set_one_shot(true)
-    self.add_child(t)
-    t.start()
-    yield(t, "timeout")
-    t.queue_free()
+    $EffectsTimer.start(0.1)
+    yield($EffectsTimer, "timeout")
     get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").hide()
+    get_parent().get_node("Weapon_Sprite/Muzzle/Smoke").set_emitting(true)
+    $EffectsTimer.start(0.1)
+    yield($EffectsTimer, "timeout")
+    get_parent().get_node("Weapon_Sprite/Muzzle/Smoke").set_emitting(false)
 
 
 
