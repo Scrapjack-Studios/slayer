@@ -37,12 +37,11 @@ var bounce
 
 func bulletstats():
     if can_fire:
-        fire(get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
         rpc("fire", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
         if shot:
             effects()
         
-remote func fire(weapon_position, weapon_rotation):
+sync func fire(weapon_position, weapon_rotation):
     if shotgun:
         shots_fired -= 1
         shot = true
