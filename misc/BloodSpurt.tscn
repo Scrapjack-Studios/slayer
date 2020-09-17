@@ -6,10 +6,10 @@
 [node name="BloodParticles" type="Particles2D"]
 position = Vector2( 30.0819, 0.666346 )
 emitting = false
-amount = 50
-lifetime = 1.5
+amount = 1
+lifetime = 0.5
 one_shot = true
-speed_scale = 1.5
+speed_scale = 2.0
 explosiveness = 0.5
 visibility_rect = Rect2( -100, -100, 200, 150 )
 local_coords = false
