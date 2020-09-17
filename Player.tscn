@@ -32,7 +32,7 @@ collision_layer = 4
 collision/safe_margin = 0.05
 script = ExtResource( 2 )
 Bullet = ExtResource( 5 )
-push = 1000
+push = 100
 
 [node name="WeaponMechanics" type="Node2D" parent="."]
 script = ExtResource( 8 )

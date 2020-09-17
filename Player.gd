@@ -21,7 +21,8 @@ export (PackedScene) var Bullet
 export (int) var rot_speed
 export (int) var damage
 export (float) var bullet_lifetime
-export (int, 20, 3000) var push
+export (int, 20, 10000) var push
+export (bool) var inertia
 
 const FLOOR_ANGLE_TOLERANCE = 70 # Angle in degrees towards either side that the player can consider "floor"
 const WALK_FORCE = 1600
@@ -72,7 +73,7 @@ var force = Vector2(200, gravity) # create forces
 var stop = true
 var momentum = 1.2
 var can_build_momentum = true
-var inertia = false
+
 
 func _ready():
     get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
