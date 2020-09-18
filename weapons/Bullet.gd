@@ -30,7 +30,7 @@ func _physics_process(delta):
             if collision.collider.is_in_group("destruct"):
                 collision.collider.get_parent().subdivide(self , collision.collider)
         elif collision.collider.is_in_group("PC"):
-            collision.collider.get_parent().hit(global_position, get_parent().get_parent().get_parent().global_rotation)
+            collision.collider.get_parent().hit(global_position, get_parent().get_parent().get_parent().global_rotation, damage)
         elif collision.collider.is_in_group("bullets"):
             velocity = Vector2(0, 0)
             $Sprite.hide()
