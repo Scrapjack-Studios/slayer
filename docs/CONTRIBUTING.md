@@ -10,4 +10,4 @@ Before reporting a bug, make sure nobody has reported it before you. Also, remem
 
 [Godot's official GDScript Style guide](https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_styleguide.html)
 
-I'm not going to pretend that I've been following this so far, but we should try to work towards making our code follow it.
+I'm not going to pretend that I've been following this so far, but we should try to work towards making our code follow it. Follow everything except for the part about using tabs instead of spaces.
