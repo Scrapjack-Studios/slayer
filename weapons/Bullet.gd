@@ -23,27 +23,24 @@ func start_at(pos, dir, type, dmg, _lifetime, size, speed):
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta, false)
     if collision:
+        hit()  
+        
         if collision.collider.is_in_group("bodies"):
             collision.collider.apply_central_impulse(-collision.normal * push)
             if collision.collider.is_in_group("destruct"):
                 collision.collider.get_parent().subdivide(self , collision.collider)
-        if collision.collider.is_in_group("PC"):
+        elif collision.collider.is_in_group("PC"):
             collision.collider.get_parent().hit(global_position, get_parent().get_parent().get_parent().global_rotation)
-            
-
-        if collision.collider.is_in_group("bullets"):
+        elif collision.collider.is_in_group("bullets"):
             velocity = Vector2(0, 0)
             $Sprite.hide()
             $Explosion.show()
             $Explosion.play("smoke")
             $Tracer.hide()
-        
-        if collision.collider.is_in_group("Enemies"):
+        elif collision.collider.is_in_group("Enemies"):
             if collision.collider.is_in_group("Players"):
                 collision.collider.take_damage(damage)
-            $Timer.start()
-            hit()  
-        hit()       
+            $Timer.start()   
 
 func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
