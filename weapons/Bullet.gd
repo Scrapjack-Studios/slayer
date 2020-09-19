@@ -54,6 +54,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 func hit():
     $Tracer.hide()
     velocity = Vector2(0, 0)
+    $CollisionShape2D.disabled = true
     $Sprite.hide()
     $Explosion.show()
     $Explosion.play("smoke")
