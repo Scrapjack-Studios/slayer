@@ -24,7 +24,7 @@ func _physics_process(delta):
     var collision = move_and_collide(velocity * delta, false)
     if collision:
         if collision.collider.name == str(get_tree().get_network_unique_id()):
-            set_collision_layer_bit(3, false)
+            set_collision_mask_bit(3, false)
         if collision.collider.is_in_group("bodies"):
             collision.collider.apply_central_impulse(-collision.normal * push)
             if collision.collider.is_in_group("destruct"):
