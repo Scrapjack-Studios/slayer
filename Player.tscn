@@ -33,6 +33,7 @@ collision/safe_margin = 0.05
 script = ExtResource( 2 )
 Bullet = ExtResource( 5 )
 push = 100
+inertia = true
 
 [node name="WeaponMechanics" type="Node2D" parent="."]
 script = ExtResource( 8 )

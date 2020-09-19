@@ -66,9 +66,8 @@ func spawn_peer(id):
     new_player.set_network_master(id)
     add_child(new_player)
     new_player.init(info.name, info.position)
-#    new_player.set_collision_layer_bit(5, true)
-#    new_player.set_collision_layer_bit(3, true)
-#
+    new_player.set_collision_layer_bit(5, true)
+    
 func on_Player_respawned():
     $CanvasLayer/HUD/HealthBar.value = player.health
     player.get_node("Weapon/GunStats").shots_fired = player.get_node("Weapon/GunStats").mag
