@@ -23,27 +23,24 @@ func start_at(pos, dir, type, dmg, _lifetime, size, speed):
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta, false)
     if collision:
-        if not collision.collider.name == 1:
-            if collision.collider.is_in_group("bodies"):
-                collision.collider.apply_central_impulse(-collision.normal * push)
-                if collision.collider.is_in_group("destruct"):
-                    collision.collider.get_parent().subdivide(self , collision.collider)
-            if collision.collider.is_in_group("PC"):
-                collision.collider.get_parent().hit()
-            if collision.collider.is_in_group("tiles"):
-                hit_pos = get_position()
-                collision.collider.get_parent().hit(hit_pos, damage)
-            if collision.collider.is_in_group("bullets"):
-                velocity = Vector2(0, 0)
-                $Sprite.hide()
-                $Explosion.show()
-                $Explosion.play("smoke")
-                $Tracer.hide()
-                $Timer.start()
-                hit()  
-            
-            
-            if collision.collider.is_in_group("Players"):
+        if collision.collider.is_in_group("bodies"):
+            collision.collider.apply_central_impulse(-collision.normal * push)
+            if collision.collider.is_in_group("destruct"):
+                collision.collider.get_parent().subdivide(self , collision.collider)
+        if collision.collider.is_in_group("PC"):
+            collision.collider.get_parent().hit()
+        if collision.collider.is_in_group("tiles"):
+            hit_pos = get_position()
+            collision.collider.get_parent().hit(hit_pos, damage)
+        if collision.collider.is_in_group("bullets"):
+            velocity = Vector2(0, 0)
+            $Sprite.hide()
+            $Explosion.show()
+            $Explosion.play("smoke")
+            $Tracer.hide()
+            $Timer.start()
+            hit()      
+        if collision.collider.is_in_group("Players"):
                 collision.collider.take_damage(damage)
                 
         hit()       
