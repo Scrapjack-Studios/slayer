@@ -38,13 +38,13 @@ func _physics_process(delta):
             $Explosion.show()
             $Explosion.play("smoke")
             $Tracer.hide()
-            
-        
-        if collision.collider.is_in_group("Enemies"):
-            if collision.collider.is_in_group("Players"):
-                collision.collider.take_damage(damage)
             $Timer.start()
             hit()  
+        
+        
+        if collision.collider.is_in_group("Players"):
+            collision.collider.take_damage(damage)
+            
         hit()       
 
 func _on_VisibilityNotifier2D_screen_exited():
