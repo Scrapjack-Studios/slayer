@@ -41,7 +41,7 @@ func bulletstats():
         if shot:
             effects()
         
-sync func fire(weapon_position, weapon_rotation):
+sync func fire(weapon_position, weapon_rotation):    
     if shotgun:
         shots_fired -= 1
         shot = true
@@ -51,6 +51,8 @@ sync func fire(weapon_position, weapon_rotation):
             var pellet = Bullet.instance()
             pellet.start_at(weapon_position, weapon_rotation + rand_range(-0.1,0.1),'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
             $Bullets.add_child(pellet)
+            if not is_network_master():
+                pellet.set_collision_layer_bit(6, true)
             $ShotDelayTimer.start(0.000000000001)
             yield($ShotDelayTimer, "timeout")
             if shots_fired == 0:
@@ -64,6 +66,8 @@ sync func fire(weapon_position, weapon_rotation):
             c.start_at(weapon_position, weapon_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
             $Bullets.add_child(c)
             shot = true
+            if not is_network_master():
+                c.set_collision_layer_bit(6, true)
             $Sounds/FireSound.play()
             $ShotDelayTimer.start(0.1)
             yield($ShotDelayTimer, "timeout")
@@ -75,6 +79,8 @@ sync func fire(weapon_position, weapon_rotation):
         c.start_at(weapon_position, weapon_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(c)
         shot = true
+        if not is_network_master():
+            c.set_collision_layer_bit(6, true)
         $Sounds/FireSound.play()
         if shots_fired == 0:
             can_fire = false
@@ -84,6 +90,8 @@ sync func fire(weapon_position, weapon_rotation):
         c.start_at(weapon_position, weapon_rotation,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(c)
         shot = true
+        if not is_network_master():
+            c.set_collision_layer_bit(6, true)
         $Sounds/FireSound.play()
         if shots_fired == 0:
             can_fire = false   
