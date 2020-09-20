@@ -29,8 +29,6 @@ func _physics_process(delta):
             collision.collider.apply_central_impulse(-collision.normal * push)
             if collision.collider.is_in_group("destruct"):
                 collision.collider.get_parent().subdivide(self , collision.collider)
-        elif collision.collider.is_in_group("PC"):
-            collision.collider.get_parent().hit(global_position, get_parent().get_parent().get_parent().global_rotation, damage)
         elif collision.collider.is_in_group("bullets"):
             velocity = Vector2(0, 0)
             $Sprite.hide()
@@ -40,6 +38,7 @@ func _physics_process(delta):
         elif collision.collider.is_in_group("Enemies"):
             if collision.collider.is_in_group("Players"):
                 collision.collider.take_damage(damage)
+                collision.collider.rpc("spew_blood", global_position, get_parent().get_parent().get_parent().global_rotation)
             $Timer.start()   
 
 func _on_VisibilityNotifier2D_screen_exited():

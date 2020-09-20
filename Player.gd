@@ -383,6 +383,27 @@ func take_damage(amount):
     if health <= 0:
         rpc("die")
         
+sync func spew_blood(pos, rot):
+    var rng = RandomNumberGenerator.new()
+    
+    rng.randomize()
+    var number = rng.randi_range(1,3)
+    if number == 1:
+        $BloodGore/BloodSound1.play()
+    elif number == 2:
+        $BloodGore/BloodSound2.play()
+    elif number == 3:
+        $BloodGore/BloodSound3.play()
+
+    var blood_emitter = load("res://misc/BloodSpurt.tscn").instance()
+    $BloodGore.add_child(blood_emitter)
+    blood_emitter.global_position = pos
+    blood_emitter.global_rotation = rng.randf_range((rot + PI) - 1, rot + PI)
+    blood_emitter.emitting = true
+    $BloodGore/BloodTimer.start(blood_emitter.lifetime)
+    yield($BloodGore/BloodTimer, "timeout")
+    blood_emitter.queue_free()
+        
 sync func die():
     emit_signal("died")
     hide()
@@ -390,6 +411,7 @@ sync func die():
     can_shoot = false
     $Camera2D._set_current(false)
     call_deferred("set_disabled", true, $CollisionShape2D)
+    $BloodGore/GibSound.play()
     
 sync func respawn():
     show()
