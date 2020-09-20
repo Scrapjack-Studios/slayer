@@ -29,6 +29,7 @@ polygon = PoolVector2Array( 18.0733, 39.4698, -26.8281, 40.1665, -27.1655, -29.8
 position = Vector2( 2.89905, -3.43567 )
 rotation = -0.000230981
 collision_layer = 4
+collision_mask = 65
 collision/safe_margin = 0.05
 script = ExtResource( 2 )
 Bullet = ExtResource( 5 )
