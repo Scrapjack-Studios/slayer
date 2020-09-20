@@ -179,8 +179,7 @@ func weaponscroll(dir):
 func _physics_process(delta):
     
     if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-        print("hoop")
-        $WeaponMechanics.automatic()
+        get_node("/root/GameController").get_node(str(get_tree().get_network_unique_id())).get_node("WeaponMechanics").automatic()
         GunTimer(true)
     
     if get_tree().is_network_server():

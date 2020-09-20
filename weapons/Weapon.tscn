@@ -35,7 +35,7 @@ position = Vector2( 20, 0 )
 scale = Vector2( 0.700347, 0.738675 )
 offset = Vector2( 23, 0 )
 region_enabled = true
-region_rect = Rect2( 199, 36, 60, 24 )
+region_rect = Rect2( 497, 100, 1, 0 )
 
 [node name="Weapon_Sprite" type="Sprite" parent="."]
 position = Vector2( 37.664, -15.5122 )
