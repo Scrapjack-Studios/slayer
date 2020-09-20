@@ -178,10 +178,6 @@ func weaponscroll(dir):
 
 func _physics_process(delta):
     
-    if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-        get_node("/root/GameController").get_node(str(get_tree().get_network_unique_id())).get_node("WeaponMechanics").automatic()
-        GunTimer(true)
-    
     if get_tree().is_network_server():
         Network.update_position(int(name), position)
     
@@ -218,6 +214,10 @@ func _physics_process(delta):
                     mantle("right")
                 if direction == MoveDirection.LEFT and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
                     mantle("left")
+    
+        if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
+            $WeaponMechanics.automatic()
+            GunTimer(true)   
     
         if get_local_mouse_position().x < 0: # mouse is facing left
             $Weapon.set_position(Vector2(-22,-7))
