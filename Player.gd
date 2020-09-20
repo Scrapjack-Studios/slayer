@@ -177,6 +177,12 @@ func weaponscroll(dir):
             # call the zoom function 
 
 func _physics_process(delta):
+    
+    if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
+        print("hoop")
+        $WeaponMechanics.automatic()
+        GunTimer(true)
+    
     if get_tree().is_network_server():
         Network.update_position(int(name), position)
     
@@ -246,10 +252,6 @@ func _physics_process(delta):
     var move_left = Input.is_action_pressed("move_left")
     
     var move_right = Input.is_action_pressed("move_right")
-    
-    if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-        $WeaponMechanics.automatic()
-        GunTimer(true)
     
     if move_left or move_right:
         is_walking = true
