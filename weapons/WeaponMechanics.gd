@@ -24,19 +24,19 @@ func reload():
         
         
 func semi_auto():
-    GunStats.bulletstats()
+    GunStats.fire()
         
 
 func shotgun():
-    GunStats.bulletstats()
+    GunStats.fire()
         
 
 func automatic():
-    GunStats.bulletstats()
+    GunStats.fire()
         
           
 func burst():
-    GunStats.bulletstats()
+    GunStats.fire()
 
 
 
