@@ -1,49 +1,42 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprites/32x32.png" type="Texture" id=1]
 [ext_resource path="res://obstacles/GoreBlock.gd" type="Script" id=2]
-[ext_resource path="res://obstacles/Gore.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/RigidBodyParticles2D/RigidBodyParticles2D.tscn" type="PackedScene" id=4]
-[ext_resource path="res://obstacles/81042__rock-savage__blood-hitting-window.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sfx/player/blood_spurt1.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sfx/player/blood_spurt2.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sfx/player/blood_spurt3.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.9101, 15.7292 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 0.1, 0.1 )
-
-[node name="PC" type="Node2D" groups=[
+[node name="GoreBlock" type="Node2D" groups=[
 "PC",
 ]]
 script = ExtResource( 2 )
 
-[node name="Node2D" type="StaticBody2D" parent="." groups=[
+[node name="BloodSound1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "Game SFX"
+
+[node name="BloodSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "Game SFX"
+
+[node name="BloodSound3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "Game SFX"
+
+[node name="Block" type="StaticBody2D" parent="." groups=[
 "PC",
 ]]
+scale = Vector2( 1.96, 3.28 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D" groups=[
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block" groups=[
 "PC",
 ]]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="Node2D/CollisionShape2D"]
+[node name="Sprite" type="Sprite" parent="Block/CollisionShape2D"]
 texture = ExtResource( 1 )
 
-[node name="RigidBodyParticles2D" parent="." instance=ExtResource( 4 )]
-emitting = false
-amount = 200
-amount_random = 0.224
-particle_scene = ExtResource( 3 )
-explosiveness = 0.5
-emission_shape = SubResource( 6 )
-lifetime = 3.0
-impulse = 200.0
-impulse_random = 0.259
-force = 5.0
-force_random = 0.729
-force_angle_degrees = 160.941
-force_spread_degrees = 34.882
-initial_rotation_degrees = 93.176
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+[node name="Timer" type="Timer" parent="."]

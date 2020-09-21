@@ -23,39 +23,35 @@ func start_at(pos, dir, type, dmg, _lifetime, size, speed):
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta, false)
     if collision:
+        hit()  
+        
         if collision.collider.is_in_group("bodies"):
             collision.collider.apply_central_impulse(-collision.normal * push)
             if collision.collider.is_in_group("destruct"):
                 collision.collider.get_parent().subdivide(self , collision.collider)
-        if collision.collider.is_in_group("PC"):
-            collision.collider.get_parent().hit()
-        if collision.collider.is_in_group("tiles"):
-            hit_pos = get_position()
-            collision.collider.get_parent().hit(hit_pos, damage)
-        if collision.collider.is_in_group("bullets"):
+        elif collision.collider.is_in_group("bullets"):
             velocity = Vector2(0, 0)
             $Sprite.hide()
             $Explosion.show()
             $Explosion.play("smoke")
             $Tracer.hide()
-            $Timer.start()
-            hit()      
-        if collision.collider.is_in_group("Players"):
+        elif collision.collider.is_in_group("Enemies"):
+            if collision.collider.is_in_group("Players"):
                 collision.collider.take_damage(damage)
-                
-        hit()       
+                collision.collider.rpc("spew_blood", global_position, get_parent().get_parent().get_parent().global_rotation)
+            $Timer.start()   
 
 func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
     
 func hit():
-    $Tracer.hide()
-    velocity = Vector2(0, 0)
+    velocity = Vector2(0,0)
     $CollisionShape2D.disabled = true
     $Sprite.hide()
     $Explosion.show()
     $Explosion.play("smoke")
-    
+    $Tracer.hide()
+
 func _on_Lifetime_timeout():
     hit()
 
