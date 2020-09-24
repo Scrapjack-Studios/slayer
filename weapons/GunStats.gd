@@ -75,26 +75,22 @@ sync func spawn_projectile(type, pos, rot):
             var pellet = Bullet.instance()
             pellet.start_at(pos, rot + rand_range(-0.1,0.1),'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
             $Bullets.add_child(pellet)
-            if not is_network_master():
-                pellet.set_collision_layer_bit(6, true)
+            pellet.set_collision_layer_bit(6, true)
     elif type == "burst_fire":
         var bullet = Bullet.instance()
         bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(bullet)
-        if not is_network_master():
-            bullet.set_collision_layer_bit(6, true)
+        bullet.set_collision_layer_bit(6, true)
     elif type == "auto":
         var bullet = Bullet.instance()
         bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(bullet)
-        if not is_network_master():
-            bullet.set_collision_layer_bit(6, true)
+        bullet.set_collision_layer_bit(6, true)
     elif type == "semi_auto":
         var bullet = Bullet.instance()
         bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
         $Bullets.add_child(bullet)
-        if not is_network_master():
-            bullet.set_collision_layer_bit(6, true)
+        bullet.set_collision_layer_bit(6, true)
                           
 func set_sprite():
 #    get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
