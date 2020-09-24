@@ -36,7 +36,6 @@ func _physics_process(delta):
             $Explosion.play("smoke")
             $Tracer.hide()
         if collision.collider.is_in_group("Players"):
-            print("hoop")
             collision.collider.take_damage(damage)
             collision.collider.rpc("spew_blood", global_position, get_parent().get_parent().get_parent().global_rotation)
         $Timer.start()   
