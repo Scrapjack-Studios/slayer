@@ -413,7 +413,7 @@ sync func die():
     set_physics_process(false)
     can_shoot = false
     $Camera2D._set_current(false)
-    call_deferred("set_disabled", true, $CollisionShape2D)
+    $CollisionShape2D.call_deferred("set_disabled", true)
     $BloodGore/GibSound.play()
     
 sync func respawn():
