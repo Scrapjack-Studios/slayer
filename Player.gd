@@ -420,7 +420,7 @@ sync func respawn():
     show()
     set_physics_process(true)
     can_shoot = true
-    call_deferred("set_disabled", false, $CollisionShape2D)
+    $CollisionShape2D.disabled = false
     health = max_health
     
     emit_signal("respawn")
