@@ -35,11 +35,11 @@ func _physics_process(delta):
             $Explosion.show()
             $Explosion.play("smoke")
             $Tracer.hide()
-        elif collision.collider.is_in_group("Enemies"):
-            if collision.collider.is_in_group("Players"):
-                collision.collider.take_damage(damage)
-                collision.collider.rpc("spew_blood", global_position, get_parent().get_parent().get_parent().global_rotation)
-            $Timer.start()   
+        if collision.collider.is_in_group("Players"):
+            print("hoop")
+            collision.collider.take_damage(damage)
+            collision.collider.rpc("spew_blood", global_position, get_parent().get_parent().get_parent().global_rotation)
+        $Timer.start()   
 
 func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
