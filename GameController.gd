@@ -69,7 +69,9 @@ func spawn_peer(id):
     new_player.init(info.name, info.position)
     
 remote func who_died(username):
-    print(username + " died")
+    var obituary_row = load("res://menus/ObituaryRow.tscn").instance()
+    $CanvasLayer/DeathUI/Obituary.add_child(obituary_row)
+    obituary_row.get_node("Victim").text = username
     
 func on_Player_died():
     $CanvasLayer/DeathUI/YouDied.show()
