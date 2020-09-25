@@ -63,7 +63,7 @@ func spawn_peer(id):
     var info = Network.players[id]
     var new_player = load('res://Player.tscn').instance()
     new_player.set_collision_layer_bit(4, true)
-    new_player.set_collision_layer_bit(5, true)
+#    new_player.set_collision_layer_bit(5, true)
     new_player.name = str(id)
     new_player.set_network_master(id)
     add_child(new_player)
