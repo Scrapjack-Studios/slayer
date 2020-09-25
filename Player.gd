@@ -385,7 +385,7 @@ func take_damage(amount):
     emit_signal("health_changed", (health * 100 / max_health))
     if health <= 0:
         rpc("die")
-        get_node("/root/GameController").rpc("who_died", $Username)
+        get_node("/root/GameController").rpc("who_died", $Username.text)
         
 sync func spew_blood(pos, rot):
     var rng = RandomNumberGenerator.new()
