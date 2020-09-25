@@ -408,13 +408,14 @@ sync func spew_blood(pos, rot):
     blood_emitter.queue_free()
         
 sync func die():
-    emit_signal("died", Network.self_data.name)
     hide()
     set_physics_process(false)
     can_shoot = false
     $Camera2D._set_current(false)
     $CollisionShape2D.disabled = true
     $BloodGore/GibSound.play()
+    if not is_network_master():
+        emit_signal("died", Network.players[get_tree().get_network_unique_id()])
     
 sync func respawn():
     show()
