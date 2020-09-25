@@ -66,6 +66,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ObituaryRowTimeout" type="Timer" parent="CanvasLayer/DeathUI/Obituary"]
+wait_time = 4.0
+one_shot = true
+
 [node name="RespawnAsker" type="Button" parent="CanvasLayer/DeathUI"]
 visible = false
 anchor_left = 0.5

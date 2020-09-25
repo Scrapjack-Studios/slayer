@@ -72,6 +72,9 @@ remote func who_died(username):
     var obituary_row = load("res://menus/ObituaryRow.tscn").instance()
     $CanvasLayer/DeathUI/Obituary.add_child(obituary_row)
     obituary_row.get_node("Victim").text = username
+    $CanvasLayer/DeathUI/Obituary/ObituaryRowTimeout.start()
+    yield($CanvasLayer/DeathUI/Obituary/ObituaryRowTimeout, "timeout")
+    obituary_row.queue_free()
     
 func on_Player_died():
     $CanvasLayer/DeathUI/YouDied.show()
