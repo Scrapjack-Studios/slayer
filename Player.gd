@@ -386,6 +386,7 @@ func take_damage(amount):
     if health <= 0:
         rpc("die")
         get_node("/root/GameController").rpc("who_died", Network.self_data.name)
+        print(Network.self_data.name)
         
 sync func spew_blood(pos, rot):
     var rng = RandomNumberGenerator.new()
