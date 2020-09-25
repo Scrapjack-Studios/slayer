@@ -409,6 +409,7 @@ sync func spew_blood(pos, rot):
     blood_emitter.queue_free()
         
 sync func die():
+    emit_signal("died")
     hide()
     set_physics_process(false)
     can_shoot = false
