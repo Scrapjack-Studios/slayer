@@ -64,9 +64,13 @@ func spawn_peer(id):
     var new_player = load('res://Player.tscn').instance()
     new_player.set_collision_layer_bit(4, true)
     new_player.name = str(id)
+    new_player.connect("died", self, "on_Peer_died")
     new_player.set_network_master(id)
     add_child(new_player)
     new_player.init(info.name, info.position)
+    
+func on_Peer_died():
+    print("so sad")
     
 func on_Player_respawned():
     $CanvasLayer/HUD/HealthBar.value = player.health
