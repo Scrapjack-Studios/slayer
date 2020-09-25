@@ -13,7 +13,6 @@
 [ext_resource path="res://assets/sprites/muzzle/m_7.png" type="Texture" id=17]
 [ext_resource path="res://assets/sprites/light.png" type="Texture" id=18]
 
-
 [sub_resource type="AnimatedTexture" id=1]
 frames = 5
 fps = 144.0

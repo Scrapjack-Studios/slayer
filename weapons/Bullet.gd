@@ -10,7 +10,7 @@ func _ready():
     set_process(true)
     
 # warning-ignore:shadowed_variable
-func start_at(pos, dir, type, dmg, _lifetime, size, speed, weapon_type):
+func start_at(pos, dir, type, dmg, _lifetime, size, speed):
     $Sprite.animation = type
     position = pos
     rotation = dir
@@ -20,7 +20,6 @@ func start_at(pos, dir, type, dmg, _lifetime, size, speed, weapon_type):
     velocity = Vector2(speed, 0).rotated(dir)
     add_to_group("bullets")
     speed = speed
-    weapon_type = weapon_type
 
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta, false)
@@ -37,7 +36,7 @@ func _physics_process(delta):
             $Explosion.play("smoke")
             $Tracer.hide()
         if collision.collider.is_in_group("Players"):
-            collision.collider.take_damage(damage, weapon_type, get_parent().get_parent().get_parent().get_parent().username)
+            collision.collider.take_damage(damage, get_parent().get_parent().get_parent().get_node("Weapon_Sprite").texture.resource_path, get_parent().get_parent().get_parent().get_parent().username)
             collision.collider.rpc("spew_blood", global_position, get_parent().get_parent().get_parent().global_rotation)
         $Timer.start()   
 

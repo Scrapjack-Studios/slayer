@@ -380,12 +380,12 @@ func GunTimer(phy):
 func Kickback(kickback):
     velocity = Vector2(kickback, 0).rotated($Weapon.global_rotation)
     
-func take_damage(amount, weapon_type, damager):
+func take_damage(amount, weapon, damager):
     health -= amount
     emit_signal("health_changed", (health * 100 / max_health))
     if health <= 0:
         rpc("die")
-        get_node("/root/GameController").rpc("who_died", username, weapon_type, damager)
+        get_node("/root/GameController").rpc("who_died", username, weapon, damager)
         
 sync func die():
     emit_signal("died")
