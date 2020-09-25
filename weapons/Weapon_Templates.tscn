@@ -18,7 +18,7 @@ mag = 60
 shots_fired = 60
 reload = 2
 weapon_sprite = ExtResource( 2 )
-dmg = 0.8
+dmg = 2.0
 Weapon_Sounds = 1
 
 [node name="TestAxe" type="Node" parent="."]
