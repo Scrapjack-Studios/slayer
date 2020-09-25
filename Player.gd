@@ -380,7 +380,8 @@ func GunTimer(phy):
 func Kickback(kickback):
     velocity = Vector2(kickback, 0).rotated($Weapon.global_rotation)
     
-func take_damage(amount):
+func take_damage(amount, damager):
+    print(damager)
     health -= amount
     emit_signal("health_changed", (health * 100 / max_health))
     if health <= 0:
