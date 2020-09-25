@@ -381,12 +381,12 @@ func Kickback(kickback):
     velocity = Vector2(kickback, 0).rotated($Weapon.global_rotation)
     
 func take_damage(amount, damager):
-    print(damager)
+    var last_damager = damager
     health -= amount
     emit_signal("health_changed", (health * 100 / max_health))
     if health <= 0:
         rpc("die")
-        get_node("/root/GameController").rpc("who_died", username)
+        get_node("/root/GameController").rpc("who_died", username, last_damager)
         
 sync func spew_blood(pos, rot):
     var rng = RandomNumberGenerator.new()
