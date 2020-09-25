@@ -385,6 +385,7 @@ func take_damage(amount):
     emit_signal("health_changed", (health * 100 / max_health))
     if health <= 0:
         rpc("die")
+        get_node("/root/GameController").rpc("who_died", Network.self_data.name)
         
 sync func spew_blood(pos, rot):
     var rng = RandomNumberGenerator.new()
@@ -414,9 +415,6 @@ sync func die():
     $Camera2D._set_current(false)
     $CollisionShape2D.disabled = true
     $BloodGore/GibSound.play()
-    if not is_network_master():
-        emit_signal("died")
-        print(get_tree().get_network_unique_id())
     
 sync func respawn():
     show()
