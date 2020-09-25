@@ -69,16 +69,8 @@ func spawn_peer(id):
     add_child(new_player)
     new_player.init(info.name, info.position)
     
-func on_Peer_died():
-    print("so sad")
-    
-func on_Player_respawned():
-    $CanvasLayer/HUD/HealthBar.value = player.health
-    player.get_node("Weapon/GunStats").shots_fired = player.get_node("Weapon/GunStats").mag
-    player.set_position(Network.start_position)
-    player.get_node("Camera2D").make_current()
-    $CanvasLayer/DeathUI/RespawnAsker.hide()
-    $CanvasLayer/DeathUI/RespawnCountdown.hide()  
+func on_Peer_died(username):
+    print(username + " died")
     
 func on_Player_died():
     $CanvasLayer/DeathUI/YouDied.show()
@@ -93,6 +85,14 @@ func on_Player_died():
     yield($CanvasLayer/DeathUI/RespawnTimer, "timeout")
     can_respawn = true
     emit_signal("respawn_available")
+    
+func on_Player_respawned():
+    $CanvasLayer/HUD/HealthBar.value = player.health
+    player.get_node("Weapon/GunStats").shots_fired = player.get_node("Weapon/GunStats").mag
+    player.set_position(Network.start_position)
+    player.get_node("Camera2D").make_current()
+    $CanvasLayer/DeathUI/RespawnAsker.hide()
+    $CanvasLayer/DeathUI/RespawnCountdown.hide()  
     
 func on_Player_health_changed(health):
     $CanvasLayer/HUD/HealthBar.value = health
