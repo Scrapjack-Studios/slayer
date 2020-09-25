@@ -10,7 +10,7 @@ func _ready():
     set_process(true)
     
 # warning-ignore:shadowed_variable
-func start_at(pos, dir, type, dmg, _lifetime, size, speed):
+func start_at(pos, dir, type, dmg, _lifetime, size, speed, weapon_type):
     $Sprite.animation = type
     position = pos
     rotation = dir
@@ -20,7 +20,7 @@ func start_at(pos, dir, type, dmg, _lifetime, size, speed):
     velocity = Vector2(speed, 0).rotated(dir)
     add_to_group("bullets")
     speed = speed
-    weapon_type = type
+    weapon_type = weapon_type
 
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta, false)
