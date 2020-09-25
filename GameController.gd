@@ -71,7 +71,11 @@ func spawn_peer(id):
 remote func who_died(username):
     var obituary_row = load("res://menus/ObituaryRow.tscn").instance()
     $CanvasLayer/DeathUI/Obituary.add_child(obituary_row)
+    
+    obituary_row.get_node("Killer").text = "Jack the Ripper"
+    obituary_row.get_node("Weapon").texture = load("res://assets/sprites/weapons/Shotgun.png")
     obituary_row.get_node("Victim").text = username
+    
     $CanvasLayer/DeathUI/Obituary/ObituaryRowTimeout.start()
     yield($CanvasLayer/DeathUI/Obituary/ObituaryRowTimeout, "timeout")
     obituary_row.queue_free()

@@ -15,7 +15,7 @@ margin_right = 126.0
 margin_bottom = 22.0
 text = "Jack the Ripper"
 
-[node name="MurderWeapon" type="TextureRect" parent="."]
+[node name="Weapon" type="TextureRect" parent="."]
 margin_left = 130.0
 margin_right = 155.0
 margin_bottom = 22.0
