@@ -13,9 +13,9 @@ puppet var puppet_muzzle_position = Vector2()
 puppet var puppet_weapon_position = Vector2()
 puppet var puppet_weapon_flip = false
 
-
 export (float) var max_health = 100
 onready var health = max_health
+var username
 
 export (PackedScene) var Bullet
 export (int) var rot_speed
@@ -385,7 +385,7 @@ func take_damage(amount):
     emit_signal("health_changed", (health * 100 / max_health))
     if health <= 0:
         rpc("die")
-        get_node("/root/GameController").rpc("who_died", $Username.text)
+        get_node("/root/GameController").rpc("who_died", username)
         
 sync func spew_blood(pos, rot):
     var rng = RandomNumberGenerator.new()
@@ -455,6 +455,7 @@ func _HeadBump():
     $Blur.hide()
     t.queue_free()
 
-func init(username, start_position):
-    $Username.text = username
+func init(player_username, start_position):
+    username = player_username
+    $Username.text = player_username
     global_position = start_position
