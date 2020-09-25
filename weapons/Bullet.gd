@@ -5,6 +5,7 @@ export (int) var speed
 export (int, 0, 200) var push = 100
 var damage
 var hit_pos
+var weapon_type
 func _ready():
     set_process(true)
     
@@ -19,6 +20,7 @@ func start_at(pos, dir, type, dmg, _lifetime, size, speed):
     velocity = Vector2(speed, 0).rotated(dir)
     add_to_group("bullets")
     speed = speed
+    weapon_type = type
 
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta, false)
@@ -35,7 +37,7 @@ func _physics_process(delta):
             $Explosion.play("smoke")
             $Tracer.hide()
         if collision.collider.is_in_group("Players"):
-            collision.collider.take_damage(damage, get_parent().get_parent().get_parent().get_parent().username)
+            collision.collider.take_damage(damage, weapon_type, get_parent().get_parent().get_parent().get_parent().username)
             collision.collider.rpc("spew_blood", global_position, get_parent().get_parent().get_parent().global_rotation)
         $Timer.start()   
 
