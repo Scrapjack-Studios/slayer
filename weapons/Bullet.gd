@@ -36,7 +36,7 @@ func _physics_process(delta):
             $Explosion.play("smoke")
             $Tracer.hide()
         if collision.collider.is_in_group("Players"):
-            collision.collider.take_damage(damage, get_parent().get_parent().get_parent().get_node("Weapon_Sprite").texture.resource_path, get_parent().get_parent().get_parent().get_parent().username)
+            collision.collider.take_damage(damage, load(get_parent().get_parent().get_parent().get_node("Weapon_Sprite").texture.resource_path), get_parent().get_parent().get_parent().get_parent().username)
             collision.collider.rpc("spew_blood", global_position, get_parent().get_parent().get_parent().global_rotation)
         $Timer.start()   
 
