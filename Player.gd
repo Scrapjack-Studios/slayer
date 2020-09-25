@@ -415,7 +415,7 @@ sync func die():
     $CollisionShape2D.disabled = true
     $BloodGore/GibSound.play()
     if not is_network_master():
-        emit_signal("died", Network.players[get_tree().get_network_unique_id()])
+        emit_signal("died", Network.players[get_tree().get_network_unique_id()][name])
     
 sync func respawn():
     show()
