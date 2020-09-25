@@ -414,8 +414,9 @@ sync func die():
     $Camera2D._set_current(false)
     $CollisionShape2D.disabled = true
     $BloodGore/GibSound.play()
-    if is_network_master():
-        emit_signal("died", Network.self_data.name)
+    if not is_network_master():
+        emit_signal("died")
+        print(get_tree().get_network_unique_id())
     
 sync func respawn():
     show()
@@ -423,7 +424,6 @@ sync func respawn():
     can_shoot = true
     $CollisionShape2D.disabled = false
     health = max_health
-    
     emit_signal("respawn")
 
 func _on_GrappleTimer_timeout():
