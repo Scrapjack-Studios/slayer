@@ -73,8 +73,8 @@ var force = Vector2(200, gravity) # create forces
 var stop = true
 var momentum = 1.2
 var can_build_momentum = true
-
-
+var wallmount = false
+var auto_climb = true
 func _ready():
     get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
     $Weapon/GunStats/Sounds/FireSound.activate()
@@ -295,11 +295,13 @@ func _physics_process(delta):
                 collision.collider.apply_central_impulse(-collision.normal * push)
                 
     if is_on_wall() and not is_climbing:
-        _WallMount()
+        wallmount()
     else:
         can_walljump = true
-    
+        wallmount = false
 func move(direction):
+    
+        
     force = Vector2(0, gravity)# create forces
     stop = true
     if not can_build_momentum:
@@ -321,7 +323,20 @@ func move(direction):
                 if can_build_momentum:
                     for n in direction:
                         momentum += 0.0003
-        
+                        
+        if auto_climb:
+            if MoveDirection.LEFT:
+                if $Wall_Raycasts/Left/Wall_Detect_Left4.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding():
+                    jump_strength = 500
+                    jump()
+                    jump_strength = 750
+            if MoveDirection.RIGHT:
+                if $Wall_Raycasts/Right/Wall_Detect_Right4.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding():
+                    jump_strength = 500
+                    jump()
+                    jump_strength = 750
+            
+            
 func jump():
     jump_count += 1
     can_build_momentum = false
@@ -349,9 +364,10 @@ func mantle(direction):
     is_climbing = true
             
 
-func _WallMount():
+func wallmount():
     velocity.y = lerp(velocity.y,0,0.2)
     jump_strength = 900
+    wallmount = true
     can_build_momentum = false
     if can_walljump:
         jump_count = 0
@@ -360,6 +376,7 @@ func _WallMount():
                  
     if not is_on_wall() and not is_falling:
         jump_strength = 750
+        wallmount = false
     if velocity.y > 0:
         rotation = 0
     
