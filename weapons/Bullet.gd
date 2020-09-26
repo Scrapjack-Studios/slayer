@@ -24,6 +24,11 @@ func _physics_process(delta):
     var collision = move_and_collide(velocity * delta, false)
     if collision:
         hit()  
+        
+        if collision.collider.is_in_group("tiles"):
+            hit_pos = get_position()
+            collision.collider.get_parent().hit(hit_pos, damage)
+
         if collision.collider.is_in_group("bodies"):
             collision.collider.apply_central_impulse(-collision.normal * push)
             if collision.collider.is_in_group("destruct"):

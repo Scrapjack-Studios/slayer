@@ -10,7 +10,7 @@ func hit(location_hit : Vector2, damage : float):
     total_damage += damage
     
     
-    if total_damage == 100:
+    if total_damage == 10:
     
         for i in count:
             var rand_pos: = Vector2(rand_range(-rand_size, rand_size), rand_range(-rand_size, rand_size))
