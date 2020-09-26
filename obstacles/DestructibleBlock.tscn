@@ -4,7 +4,6 @@
 [ext_resource path="res://obstacles/DestructibleBlock.gd" type="Script" id=2]
 [ext_resource path="res://assets/sfx/rock_destroy.wav" type="AudioStream" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9.5487, 9.614 )
 
@@ -41,11 +40,11 @@ position = Vector2( -0.00826263, -0.0250664 )
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 1 )
 
-[node name="Break" type="AudioStreamPlayer" parent="."]
+[node name="Break" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 volume_db = -2.019
 
-[node name="Fall" type="AudioStreamPlayer" parent="."]
+[node name="Fall" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 volume_db = -15.01
 pitch_scale = 0.79
