@@ -14,15 +14,15 @@ extents = Vector2( 15.9101, 15.7292 )
 ]]
 script = ExtResource( 2 )
 
-[node name="BloodSound1" type="AudioStreamPlayer" parent="."]
+[node name="BloodSound1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 bus = "Game SFX"
 
-[node name="BloodSound2" type="AudioStreamPlayer" parent="."]
+[node name="BloodSound2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 bus = "Game SFX"
 
-[node name="BloodSound3" type="AudioStreamPlayer" parent="."]
+[node name="BloodSound3" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 bus = "Game SFX"
 

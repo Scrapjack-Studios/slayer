@@ -32,14 +32,8 @@ margin_right = 335.0
 margin_bottom = 52.0
 
 [node name="DeathUI" type="Control" parent="CanvasLayer"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -58,18 +52,23 @@ custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 0.827451, 0.0627451, 0.0627451, 1 )
 text = "YOU DIED"
 
-[node name="TheyDied" type="RichTextLabel" parent="CanvasLayer/DeathUI"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -312.5
-margin_top = -89.5
-margin_right = 312.5
-margin_bottom = 89.5
-custom_fonts/normal_font = SubResource( 1 )
-custom_colors/default_color = Color( 0.827451, 0.0627451, 0.0627451, 1 )
+[node name="Obituary" type="VBoxContainer" parent="CanvasLayer/DeathUI"]
+anchor_left = 0.007
+anchor_top = 0.988
+anchor_right = 0.007
+anchor_bottom = 0.988
+margin_left = -0.440001
+margin_top = -129.04
+margin_right = 253.56
+margin_bottom = -0.0400391
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ObituaryRowTimeout" type="Timer" parent="CanvasLayer/DeathUI/Obituary"]
+wait_time = 4.0
+one_shot = true
 
 [node name="RespawnAsker" type="Button" parent="CanvasLayer/DeathUI"]
 visible = false
@@ -154,6 +153,8 @@ mouse_filter = 2
 
 [node name="OptionsMenu" parent="CanvasLayer" instance=ExtResource( 2 )]
 pause_mode = 2
+margin_top = -1.5874
+margin_bottom = -1.5874
 mouse_filter = 2
 [connection signal="respawn_available" from="." to="." method="_on_GameController_respawn_available"]
 [connection signal="pressed" from="CanvasLayer/DeathUI/RespawnAsker" to="." method="_on_RespawnAsker_pressed"]

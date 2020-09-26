@@ -68,13 +68,16 @@ func spawn_peer(id):
     add_child(new_player)
     new_player.init(info.name, info.position)
     
-func on_Player_respawned():
-    $CanvasLayer/HUD/HealthBar.value = player.health
-    player.get_node("Weapon/GunStats").shots_fired = player.get_node("Weapon/GunStats").mag
-    player.set_position(Network.start_position)
-    player.get_node("Camera2D").make_current()
-    $CanvasLayer/DeathUI/RespawnAsker.hide()
-    $CanvasLayer/DeathUI/RespawnCountdown.hide()  
+remote func who_died(victim, weapon_sprite, killer):
+    var obituary_row = load("res://menus/ObituaryRow.tscn").instance()
+    $CanvasLayer/DeathUI/Obituary.add_child(obituary_row)
+    obituary_row.get_node("Killer").text = killer
+    obituary_row.get_node("Weapon").texture = load(weapon_sprite)
+    obituary_row.get_node("Victim").text = victim
+    
+    $CanvasLayer/DeathUI/Obituary/ObituaryRowTimeout.start()
+    yield($CanvasLayer/DeathUI/Obituary/ObituaryRowTimeout, "timeout")
+    obituary_row.queue_free()
     
 func on_Player_died():
     $CanvasLayer/DeathUI/YouDied.show()
@@ -89,6 +92,14 @@ func on_Player_died():
     yield($CanvasLayer/DeathUI/RespawnTimer, "timeout")
     can_respawn = true
     emit_signal("respawn_available")
+    
+func on_Player_respawned():
+    $CanvasLayer/HUD/HealthBar.value = player.health
+    player.get_node("Weapon/GunStats").shots_fired = player.get_node("Weapon/GunStats").mag
+    player.set_position(Network.start_position)
+    player.get_node("Camera2D").make_current()
+    $CanvasLayer/DeathUI/RespawnAsker.hide()
+    $CanvasLayer/DeathUI/RespawnCountdown.hide()  
     
 func on_Player_health_changed(health):
     $CanvasLayer/HUD/HealthBar.value = health
