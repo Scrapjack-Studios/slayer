@@ -86,6 +86,7 @@ func _input(event: InputEvent) -> void:
         
         if Input.is_action_just_pressed("reload"):
                 $WeaponMechanics.reload()
+                $Camera2D/ScreenShake.start(3)
         
         if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
             $WeaponMechanics.semi_auto()

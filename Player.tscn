@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://weapons/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/sfx/player/blood_spurt1.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sfx/player/blood_spurt3.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sfx/player/gib1.wav" type="AudioStream" id=12]
+[ext_resource path="res://misc/ScreenShake.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.998139, 2.11467 )
@@ -63,6 +64,8 @@ limit_bottom = 10000
 limit_smoothed = true
 smoothing_enabled = true
 script = ExtResource( 3 )
+
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 13 )]
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
