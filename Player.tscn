@@ -216,10 +216,6 @@ shape = SubResource( 4 )
 [node name="WallJumpTimer" type="Timer" parent="."]
 wait_time = 0.3
 
-[node name="Blur" type="CanvasModulate" parent="."]
-visible = false
-color = Color( 0.984314, 0.0705882, 0.0705882, 1 )
-
 [node name="Username" type="Label" parent="."]
 margin_left = -60.0
 margin_top = -54.0

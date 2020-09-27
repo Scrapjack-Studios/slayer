@@ -461,18 +461,6 @@ func _ChainHook():
         chain_velocity.y *= 1.65
     rotation = 0
 
-func _HeadBump():
-    $Blur.show()
-    OS.delay_msec(15)
-    var t = Timer.new()
-    t.set_wait_time(0.3)
-    t.set_one_shot(true)
-    self.add_child(t)
-    t.start()
-    yield(t, "timeout")
-    $Blur.hide()
-    t.queue_free()
-
 func init(player_username, start_position):
     username = player_username
     $Username.text = player_username
