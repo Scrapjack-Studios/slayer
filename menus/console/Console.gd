@@ -6,7 +6,7 @@ func _input(event: InputEvent) -> void:
     if event.is_action_pressed("toggle_console"):
         if not visible:
             show()
-        if visible:
+        elif visible:
             hide()
     if event.is_action_pressed("ui_accept"):
         update_scrollback($Scrollback/Prompt/LineEdit.text)
