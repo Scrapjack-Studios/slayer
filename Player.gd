@@ -86,7 +86,6 @@ func _input(event: InputEvent) -> void:
         
         if Input.is_action_just_pressed("reload"):
                 $WeaponMechanics.reload()
-                $Camera2D/ScreenShake.start(3)
         
         if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
             $WeaponMechanics.semi_auto()
@@ -300,9 +299,11 @@ func _physics_process(delta):
     else:
         can_walljump = true
         wallmount = false
-func move(direction):
-    
         
+#    if $Wall_Raycasts/Upper_Detect.is_colliding():
+#        $Camera2D/ScreenShake.start(0.5, 16, 8)
+        
+func move(direction):   
     force = Vector2(0, gravity)# create forces
     stop = true
     if not can_build_momentum:
