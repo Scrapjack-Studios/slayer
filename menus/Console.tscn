@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://menus/Console.gd" type="Script" id=1]
+
+[node name="Console" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.435
+margin_bottom = 0.199951
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0.113725, 0.301961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scrollback" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Prompt" type="LineEdit" parent="Scrollback"]
+margin_top = 438.0
+margin_right = 1920.0
+margin_bottom = 470.0
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
