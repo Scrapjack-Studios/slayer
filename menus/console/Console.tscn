@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://menus/Console.gd" type="Script" id=1]
+[ext_resource path="res://menus/console/Console.gd" type="Script" id=1]
 
 [node name="Console" type="Control"]
 pause_mode = 2
@@ -28,10 +28,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Prompt" type="LineEdit" parent="Scrollback"]
-margin_top = 438.0
+[node name="Prompt" type="HBoxContainer" parent="Scrollback"]
+margin_top = 437.0
 margin_right = 1920.0
-margin_bottom = 470.0
+margin_bottom = 469.0
+custom_constants/separation = 8
+
+[node name="PromptSymbol" type="Label" parent="Scrollback/Prompt"]
+margin_top = 5.0
+margin_right = 17.0
+margin_bottom = 27.0
+text = " $"
+
+[node name="LineEdit" type="LineEdit" parent="Scrollback/Prompt"]
+margin_left = 25.0
+margin_right = 1920.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
 caret_blink = true
 __meta__ = {
 "_edit_use_anchors_": false
