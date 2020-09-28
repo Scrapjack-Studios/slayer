@@ -3,6 +3,11 @@ extends Control
 onready var scrollback_position = 0
 
 func _input(event: InputEvent) -> void:
+    if event.is_action_pressed("toggle_console"):
+        if not visible:
+            show()
+        if visible:
+            hide()
     if event.is_action_pressed("ui_accept"):
         update_scrollback($Scrollback/Prompt/LineEdit.text)
         run_command($Scrollback/Prompt/LineEdit.text)
@@ -10,7 +15,7 @@ func _input(event: InputEvent) -> void:
         
 func update_scrollback(command):
     var scrollback_line = load("res://menus/console/ScrollbackLine.tscn").instance()
-    scrollback_line.text = " $ " + command
+    scrollback_line.text = "$ " + command
     $Scrollback.add_child(scrollback_line)
     $Scrollback.move_child(scrollback_line, scrollback_position)
     scrollback_position += 1
@@ -24,5 +29,8 @@ func console_print(statement):
         
 func run_command(command):
     if command == "help":
-        console_print("no")    
+        Help()
+        
+func Help():
+    console_print("Figure it out yourself")
 

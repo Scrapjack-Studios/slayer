@@ -2,7 +2,9 @@
 
 [ext_resource path="res://menus/console/Console.gd" type="Script" id=1]
 
-[node name="Console" type="Control"]
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Console" type="Control" parent="."]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 0.435
@@ -12,40 +14,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="Console"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0.113725, 0.301961 )
+color = Color( 0, 0, 0.113725, 0.588235 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Scrollback" type="VBoxContainer" parent="."]
-anchor_right = 1.0
+[node name="Scrollback" type="VBoxContainer" parent="Console"]
+anchor_left = 0.007
+anchor_right = 0.993
 anchor_bottom = 1.0
+margin_left = 0.559999
+margin_right = 0.439941
+margin_bottom = 6.10352e-05
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Prompt" type="HBoxContainer" parent="Scrollback"]
-margin_top = 437.0
-margin_right = 1920.0
-margin_bottom = 469.0
+[node name="Prompt" type="HBoxContainer" parent="Console/Scrollback"]
+margin_top = 438.0
+margin_right = 1893.0
+margin_bottom = 470.0
 custom_constants/separation = 8
 
-[node name="PromptSymbol" type="Label" parent="Scrollback/Prompt"]
+[node name="PromptSymbol" type="Label" parent="Console/Scrollback/Prompt"]
 margin_top = 5.0
-margin_right = 17.0
+margin_right = 9.0
 margin_bottom = 27.0
-text = " $"
+text = "$"
 
-[node name="LineEdit" type="LineEdit" parent="Scrollback/Prompt"]
-margin_left = 25.0
-margin_right = 1920.0
+[node name="LineEdit" type="LineEdit" parent="Console/Scrollback/Prompt"]
+margin_left = 17.0
+margin_right = 1893.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 caret_blink = true
+caret_blink_speed = 0.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
