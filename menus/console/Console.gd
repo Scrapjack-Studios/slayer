@@ -4,10 +4,7 @@ onready var scrollback_position = 0
 
 func _input(event: InputEvent) -> void:
     if event.is_action_pressed("toggle_console"):
-        if not visible:
-            show()
-        elif visible:
-            hide()
+        visible = not visible
     if event.is_action_pressed("ui_accept"):
         update_scrollback($Scrollback/Prompt/LineEdit.text)
         run_command($Scrollback/Prompt/LineEdit.text)
