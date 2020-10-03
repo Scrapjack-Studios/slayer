@@ -14,8 +14,8 @@ puppet var puppet_weapon_position = Vector2()
 puppet var puppet_weapon_flip = false
 
 export (float) var max_health = 100
+export (String) var username
 onready var health = max_health
-var username
 
 export (PackedScene) var Bullet
 export (int) var rot_speed

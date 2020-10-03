@@ -19,16 +19,19 @@ func _input(event: InputEvent) -> void:
             run_command(user_input[0],user_input[1])
         else:
             run_command(user_input[0])
-            
         $Scrollback/Prompt/LineEdit.clear()
+        
+# console helpers:
         
 func run_command(command, argument=""):
     if command == "help":
         Help(argument)
     if command == "kill":
         if $"/root".has_node("GameController"):
-            if not argument:
-                KillSelf()
+            if argument:
+                Kill()
+            else:
+                Kill()
         else:
             console_print("You must be in a game to run this command")
         
@@ -45,8 +48,9 @@ func console_print(statement):
     $Scrollback.add_child(scrollback_line)
     $Scrollback.move_child(scrollback_line, scrollback_position)
     scrollback_position += 1
+    # a lot of this looks like duplicate code from update_scrollback
         
-# Console commands:
+# console commands:
 
 func Help(argument=""):
     if not argument:
@@ -56,8 +60,5 @@ func Help(argument=""):
         console_print("Takes in a player username as an argument. If no username is given,")
         console_print("kills the player that ran the command.")
     
-func KillSelf():
-    var victim = $"/root/GameController".get_node(str(get_tree().get_network_unique_id()))
+func Kill(victim = $"/root/GameController".get_node(str(get_tree().get_network_unique_id()))):
     victim.take_damage(100, "shotgun", str(get_tree().get_network_unique_id())) # TODO: change weapon
-    
-
