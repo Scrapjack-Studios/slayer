@@ -29,9 +29,7 @@ func run_command(command, argument=""):
     if command == "kill":
         if $"/root".has_node("GameController"):
             if argument:
-                for player in Network.players:
-                    print(Network.players.keys())
-                    print(Network.players[player].name)
+                Network.rpc_id(1, '_request_player_username', int(argument), get_tree().get_network_unique_id())
                 Kill()
             else:
                 Kill()
