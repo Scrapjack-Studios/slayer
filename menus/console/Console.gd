@@ -5,6 +5,7 @@ signal console_history_saved
 onready var scrollback_position = 0
 
 var history = []
+var commands = ["help", "commands", "kill"]
 var histposinv = 0
 var histpos = 0
 var admin = true
@@ -67,6 +68,8 @@ func on_quitting():
 func run_command(command, argument=""):
     if command == "help":
         Help(argument)
+    if command == "commands":
+        Commands()
     if command == "kill":
         if $"/root".has_node("GameController"):
             if argument:
@@ -96,13 +99,19 @@ func console_print(statement):
 # console commands:
 
 func Help(argument=""):
-    if not argument:
+    if argument == "help" or not argument:
         console_print("Takes in a command as an argument, and gives a short description")
         console_print("of the command.")
+    elif argument == "commands":
+        console_print("Prints a list of available commands.")
     elif argument == "kill":
         console_print("Kills the player instantly by dealing 100 points of damage")
         console_print("Takes in a player username as an argument. If no username is given,")
         console_print("kills the player that ran the command.")
+        
+func Commands():
+    for command in commands:
+        console_print(command)
     
 func Kill(victim):
      # TODO: change killing weapon
