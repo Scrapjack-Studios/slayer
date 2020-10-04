@@ -2,6 +2,8 @@ extends Control
 
 onready var scrollback_position = 0
 
+var history = []
+var histpos = 0
 var admin = true
 
 func _input(event: InputEvent) -> void:
@@ -11,25 +13,22 @@ func _input(event: InputEvent) -> void:
         elif not visible:
             visible = true
             # uses call deferred so the console hotkey isn't inputted into the line edit
-            $Scrollback/Prompt/LineEdit.call_deferred("grab_focus") 
-    if event.is_action_pressed("ui_accept"):
-        var user_input = $Scrollback/Prompt/LineEdit.text.split(" ")
-        update_scrollback($Scrollback/Prompt/LineEdit.text)
-        if len(user_input) > 1:
-            run_command(user_input[0],user_input[1])
-        else:
-            run_command(user_input[0])
-        var histfile = File.new()
-        if histfile.file_exists("user://histfile.txt"):
-            histfile.open("user://histfile.txt", File.READ_WRITE)
-            histfile.seek_end()
-            histfile.store_line($Scrollback/Prompt/LineEdit.text)
-            histfile.close()
-        else:
-            histfile.open("user://histfile.txt", File.WRITE)
-            histfile.store_line($Scrollback/Prompt/LineEdit.text)
-            histfile.close()
-        $Scrollback/Prompt/LineEdit.clear()
+            $Scrollback/Prompt/LineEdit.call_deferred("grab_focus")
+    if visible:
+        if event.is_action_pressed("ui_accept"):
+            var user_input = $Scrollback/Prompt/LineEdit.text.split(" ")
+            update_scrollback($Scrollback/Prompt/LineEdit.text)
+            if len(user_input) > 1:
+                run_command(user_input[0],user_input[1])
+            else:
+                run_command(user_input[0])
+            history.append($Scrollback/Prompt/LineEdit.text)
+            console_print(history)
+            $Scrollback/Prompt/LineEdit.clear()
+        if event.is_action_pressed("ui_up"):
+            if history and histpos < len(history):
+                console_print(history[histpos])
+                histpos += 1
         
 # console helpers:
         
