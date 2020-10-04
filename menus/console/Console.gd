@@ -26,28 +26,28 @@ func _input(event: InputEvent) -> void:
         elif not visible:
             visible = true
             # uses call deferred so the console hotkey isn't inputted into the line edit
-            $Scrollback/Prompt/LineEdit.call_deferred("grab_focus")
+            $ScrollContainer/Scrollback/Prompt/LineEdit.call_deferred("grab_focus")
     if visible:
         if event.is_action_pressed("ui_accept"):
-            var user_input = $Scrollback/Prompt/LineEdit.text.split(" ")
-            update_scrollback($Scrollback/Prompt/LineEdit.text)
+            var user_input = $ScrollContainer/Scrollback/Prompt/LineEdit.text.split(" ")
+            update_scrollback($ScrollContainer/Scrollback/Prompt/LineEdit.text)
             if len(user_input) > 1:
                 run_command(user_input[0],user_input[1])
             else:
                 run_command(user_input[0])
-            history.append($Scrollback/Prompt/LineEdit.text)
-            $Scrollback/Prompt/LineEdit.clear()
+            history.append($ScrollContainer/Scrollback/Prompt/LineEdit.text)
+            $ScrollContainer/Scrollback/Prompt/LineEdit.clear()
         if event.is_action_pressed("ui_up"):
             if history and histposinv < len(history):
                 var histinv = history.duplicate()
                 histinv.invert()
-                $Scrollback/Prompt/LineEdit.text = histinv[histposinv]
+                $ScrollContainer/Scrollback/Prompt/LineEdit.text = histinv[histposinv]
                 histposinv += 1
             else:
                 histposinv = 0
         if event.is_action_pressed("ui_down"):
             if history and histpos < len(history):
-                $Scrollback/Prompt/LineEdit.text = history[histpos]
+                $ScrollContainer/Scrollback/Prompt/LineEdit.text = history[histpos]
                 histpos += 1
             else:
                 histpos = 0
@@ -91,15 +91,15 @@ func run_command(command, argument=""):
 func update_scrollback(command):
     var scrollback_line = load("res://menus/console/ScrollbackLine.tscn").instance()
     scrollback_line.text = "$ " + command
-    $Scrollback.add_child(scrollback_line)
-    $Scrollback.move_child(scrollback_line, scrollback_position)
+    $ScrollContainer/Scrollback.add_child(scrollback_line)
+    $ScrollContainer/Scrollback.move_child(scrollback_line, scrollback_position)
     scrollback_position += 1
     
 func console_print(statement):
     var scrollback_line = load("res://menus/console/ScrollbackLine.tscn").instance()
     scrollback_line.text = str(statement)
-    $Scrollback.add_child(scrollback_line)
-    $Scrollback.move_child(scrollback_line, scrollback_position)
+    $ScrollContainer/Scrollback.add_child(scrollback_line)
+    $ScrollContainer/Scrollback.move_child(scrollback_line, scrollback_position)
     scrollback_position += 1
         
 # console commands:
