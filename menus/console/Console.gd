@@ -65,4 +65,4 @@ func Help(argument=""):
     
 func Kill(victim):
      # TODO: change weapon
-    $"/root/GameController".get_node(str(victim)).take_damage(100, "shotgun", get_tree().get_network_unique_id())
+    $"/root/GameController".get_node(str(victim)).take_damage(100, "shotgun", Global.username)
