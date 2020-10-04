@@ -27,7 +27,9 @@ func _input(event: InputEvent) -> void:
             $Scrollback/Prompt/LineEdit.clear()
         if event.is_action_pressed("ui_up"):
             if history and histpos < len(history):
-                console_print(history[histpos])
+                var histinv = history.duplicate()
+                histinv.invert()
+                console_print(histinv[histpos])
                 histpos += 1
         
 # console helpers:
