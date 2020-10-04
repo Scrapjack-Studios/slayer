@@ -26,6 +26,10 @@ __meta__ = {
 [node name="ScrollContainer" type="ScrollContainer" parent="Console"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 5.0
+margin_right = -10.0
+mouse_default_cursor_shape = 1
 follow_focus = true
 scroll_horizontal_enabled = false
 __meta__ = {
@@ -33,28 +37,26 @@ __meta__ = {
 }
 
 [node name="Scrollback" type="VBoxContainer" parent="Console/ScrollContainer"]
-margin_right = 123.0
-margin_bottom = 32.0
-alignment = 2
+margin_right = 113.0
+margin_bottom = 22.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Prompt" type="HBoxContainer" parent="Console/ScrollContainer/Scrollback"]
-margin_right = 123.0
-margin_bottom = 32.0
+margin_right = 113.0
+margin_bottom = 22.0
 custom_constants/separation = 8
 
 [node name="PromptSymbol" type="Label" parent="Console/ScrollContainer/Scrollback/Prompt"]
-margin_top = 5.0
 margin_right = 9.0
-margin_bottom = 27.0
+margin_bottom = 22.0
 text = "$"
 
 [node name="LineEdit" type="LineEdit" parent="Console/ScrollContainer/Scrollback/Prompt"]
 margin_left = 17.0
-margin_right = 123.0
-margin_bottom = 32.0
+margin_right = 113.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
 max_length = 315
 expand_to_text_length = true
