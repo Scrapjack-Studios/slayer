@@ -1,11 +1,16 @@
 extends Control
 
+signal quit_ready
+
 onready var scrollback_position = 0
 
 var history = []
 var histposinv = 0
 var histpos = 0
 var admin = true
+
+func _ready() -> void:
+    Global.connect("quitting", self, "on_quitting")
 
 func _input(event: InputEvent) -> void:
     if event.is_action_pressed("toggle_console"):
@@ -39,6 +44,17 @@ func _input(event: InputEvent) -> void:
                 histpos += 1
             else:
                 histpos = 0
+                
+func on_quitting():
+    if history:
+        var histfile = File.new()
+        histfile.open("user://histfile.txt", File.WRITE)
+        for command in history:
+            histfile.store_line(command)
+        histfile.close()
+        emit_signal("quit_ready")
+    else:
+        emit_signal("quit_ready")
         
 # console helpers:
         

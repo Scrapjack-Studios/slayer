@@ -101,7 +101,7 @@ func _on_OptionsButton_pressed():
 func _on_QuitButton_pressed():
     $Button2.play()
     yield($Button2, "finished")
-    get_tree().quit()
+    Global.quit()
 
 func _on_JoinGame_mouse_entered():
     $Hover.play()
