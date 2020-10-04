@@ -3,6 +3,7 @@ extends Control
 onready var scrollback_position = 0
 
 var history = []
+var histposinv = 0
 var histpos = 0
 var admin = true
 
@@ -23,14 +24,21 @@ func _input(event: InputEvent) -> void:
             else:
                 run_command(user_input[0])
             history.append($Scrollback/Prompt/LineEdit.text)
-            console_print(history)
             $Scrollback/Prompt/LineEdit.clear()
         if event.is_action_pressed("ui_up"):
-            if history and histpos < len(history):
+            if history and histposinv < len(history):
                 var histinv = history.duplicate()
                 histinv.invert()
-                console_print(histinv[histpos])
+                $Scrollback/Prompt/LineEdit.text = histinv[histposinv]
+                histposinv += 1
+            else:
+                histposinv = 0
+        if event.is_action_pressed("ui_down"):
+            if history and histpos < len(history):
+                $Scrollback/Prompt/LineEdit.text = history[histpos]
                 histpos += 1
+            else:
+                histpos = 0
         
 # console helpers:
         
