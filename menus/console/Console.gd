@@ -29,10 +29,12 @@ func run_command(command, argument=""):
     if command == "kill":
         if $"/root".has_node("GameController"):
             if argument:
-                Network.rpc_id(1, '_request_player_username', int(argument), get_tree().get_network_unique_id())
-                Kill()
+                var username = argument
+                for id in Network.players:
+                    if Network.players[id]["name"] == username:
+                        Kill(id)
             else:
-                Kill()
+                Kill(get_tree().get_network_unique_id())
         else:
             console_print("You must be in a game to run this command")
         
@@ -61,5 +63,6 @@ func Help(argument=""):
         console_print("Takes in a player username as an argument. If no username is given,")
         console_print("kills the player that ran the command.")
     
-func Kill(victim = $"/root/GameController".get_node(str(get_tree().get_network_unique_id()))):
-    victim.take_damage(100, "shotgun", str(get_tree().get_network_unique_id())) # TODO: change weapon
+func Kill(victim):
+     # TODO: change weapon
+    $"/root/GameController".get_node(str(victim)).take_damage(100, "shotgun", get_tree().get_network_unique_id())

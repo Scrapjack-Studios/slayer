@@ -97,11 +97,3 @@ remote func _request_map(request_from_id):
 remote func _send_map(map):
     Global.map = map
     get_tree().change_scene("res://GameController.tscn")
-    
-remote func _request_player_username(request_from_id, player_id):
-    if get_tree().is_network_server():
-        var player_username = players[player_id]
-        rpc_id(request_from_id, "_send_player_username", player_username)
-        
-remote func _send_player_username(username):
-    print(username)
