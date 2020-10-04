@@ -19,6 +19,16 @@ func _input(event: InputEvent) -> void:
             run_command(user_input[0],user_input[1])
         else:
             run_command(user_input[0])
+        var histfile = File.new()
+        if histfile.file_exists("user://histfile.txt"):
+            histfile.open("user://histfile.txt", File.READ_WRITE)
+            histfile.seek_end()
+            histfile.store_line($Scrollback/Prompt/LineEdit.text)
+            histfile.close()
+        else:
+            histfile.open("user://histfile.txt", File.WRITE)
+            histfile.store_line($Scrollback/Prompt/LineEdit.text)
+            histfile.close()
         $Scrollback/Prompt/LineEdit.clear()
         
 # console helpers:
@@ -51,7 +61,6 @@ func console_print(statement):
     $Scrollback.add_child(scrollback_line)
     $Scrollback.move_child(scrollback_line, scrollback_position)
     scrollback_position += 1
-    # a lot of this looks like duplicate code from update_scrollback
         
 # console commands:
 
