@@ -68,9 +68,9 @@ func on_quitting():
 func run_command(command, argument=""):
     if command == "help":
         Help(argument)
-    if command == "commands":
+    elif command == "commands":
         Commands()
-    if command == "kill":
+    elif command == "kill":
         if $"/root".has_node("GameController"):
             if argument:
                 var username = argument
@@ -79,6 +79,12 @@ func run_command(command, argument=""):
                         Kill(id)
             else:
                 Kill(get_tree().get_network_unique_id())
+        else:
+            console_print("You must be in a game to run this command")
+    elif command == "spawn":
+        if $"/root".has_node("GameController"):
+            if argument:
+                Spawn(argument)
         else:
             console_print("You must be in a game to run this command")
         
@@ -116,3 +122,6 @@ func Commands():
 func Kill(victim):
      # TODO: change killing weapon
     $"/root/GameController".get_node(str(victim)).take_damage(100, "shotgun", Global.username)
+    
+func Spawn(object):
+    print(object)
