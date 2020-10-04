@@ -11,6 +11,12 @@ var admin = true
 
 func _ready() -> void:
     Global.connect("quitting", self, "on_quitting")
+    var histfile = File.new()
+    if histfile.file_exists("user://histfile.txt"):
+        histfile.open("user://histfile.txt", File.READ)
+        var histstr = histfile.get_as_text().strip_escapes()
+        for command in len(histstr):
+            history.append(histstr[command])
 
 func _input(event: InputEvent) -> void:
     if event.is_action_pressed("toggle_console"):
@@ -50,7 +56,7 @@ func on_quitting():
         var histfile = File.new()
         histfile.open("user://histfile.txt", File.WRITE)
         for command in history:
-            histfile.store_line(command)
+            histfile.store_string(command + "\n")
         histfile.close()
         emit_signal("console_history_saved")
     else:
@@ -91,12 +97,13 @@ func console_print(statement):
 
 func Help(argument=""):
     if not argument:
-        console_print("Figure it out yourself")
+        console_print("Takes in a command as an argument, and gives a short description")
+        console_print("of the command.")
     elif argument == "kill":
         console_print("Kills the player instantly by dealing 100 points of damage")
         console_print("Takes in a player username as an argument. If no username is given,")
         console_print("kills the player that ran the command.")
     
 func Kill(victim):
-     # TODO: change weapon
+     # TODO: change killing weapon
     $"/root/GameController".get_node(str(victim)).take_damage(100, "shotgun", Global.username)
