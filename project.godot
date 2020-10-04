@@ -35,8 +35,8 @@ config/icon="res://assets/sprites/icon.png"
 FullscreenCRT="*res://misc/FullscreenCRT.tscn"
 FPSCounter="*res://misc/FPSCounter.tscn"
 Global="*res://Global.gd"
-Network="*res://Network.gd"
 Console="*res://menus/console/Console.tscn"
+Network="*res://Network.gd"
 
 [debug]
 

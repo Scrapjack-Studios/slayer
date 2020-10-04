@@ -1,6 +1,6 @@
 extends Control
 
-signal quit_ready
+signal console_history_saved
 
 onready var scrollback_position = 0
 
@@ -52,9 +52,9 @@ func on_quitting():
         for command in history:
             histfile.store_line(command)
         histfile.close()
-        emit_signal("quit_ready")
+        emit_signal("console_history_saved")
     else:
-        emit_signal("quit_ready")
+        emit_signal("console_history_saved")
         
 # console helpers:
         
