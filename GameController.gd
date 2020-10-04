@@ -68,11 +68,11 @@ func spawn_peer(id):
     add_child(new_player)
     new_player.init(info.name, info.position)
     
-remote func who_died(victim, weapon_sprite, killer):
+remote func who_died(victim, weapon, killer):
     var obituary_row = load("res://menus/ObituaryRow.tscn").instance()
     $CanvasLayer/DeathUI/Obituary.add_child(obituary_row)
     obituary_row.get_node("Killer").text = killer
-    obituary_row.get_node("Weapon").texture = load(weapon_sprite)
+    obituary_row.get_node("Weapon").texture = load("res://assets/sprites/weapons/" + weapon + ".png")
     obituary_row.get_node("Victim").text = victim
     
     $CanvasLayer/DeathUI/Obituary/ObituaryRowTimeout.start()
