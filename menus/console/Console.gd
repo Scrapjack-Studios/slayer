@@ -6,6 +6,13 @@ onready var scrollback_position = 0
 
 var history = []
 var commands = ["help", "commands", "kill"]
+var spawnable_objects = {
+    "misc": {
+        "blood_spurt":"res://misc/BloodSpurt.tscn",
+        "explosion":"res://misc/Explosion.tscn"
+    }
+}
+    
 var histposinv = 0
 var histpos = 0
 var admin = true
