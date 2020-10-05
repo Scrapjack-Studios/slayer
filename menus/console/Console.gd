@@ -7,10 +7,13 @@ onready var scrollback_position = 0
 var history = []
 var commands = ["help", "commands", "kill"]
 var spawnable_objects = {
-    "misc": {
-        "blood_spurt":"res://misc/BloodSpurt.tscn",
-        "explosion":"res://misc/Explosion.tscn"
-    }
+    "blood_spurt":"misc/BloodSpurt.tscn",
+    "explosion":"misc/Explosion.tscn",
+    "damaging_block":"obstacles/DamagingBlock.tscn",
+    "destructible_block":"obstaclesDestructibleBlock.tscn",
+    "gore_block":"obstacles/GoreBlock.tscn",
+    "physics_platform":"obstacles/Platform_Physics.tscn",
+    "static_platform":"obstacles/Platform_Static.tscn",
 }
     
 var histposinv = 0
