@@ -36,6 +36,7 @@ FullscreenCRT="*res://misc/FullscreenCRT.tscn"
 FPSCounter="*res://misc/FPSCounter.tscn"
 Global="*res://Global.gd"
 Network="*res://Network.gd"
+Console="*res://addons/quentincaffeino-console/src/Console.tscn"
 
 [debug]
 
@@ -49,6 +50,10 @@ window/size/width=1920
 window/size/height=1080
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "gut", "quentincaffeino-console" )
 
 [gui]
 
