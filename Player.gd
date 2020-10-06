@@ -104,6 +104,16 @@ func _input(event: InputEvent) -> void:
 				is_grappling = true
 				$Whip.hide()
 				grapple_count += 1
+				
+		elif event.is_action_released("Graphook") and is_grappling:
+			$Chain.rpc("release")
+			$Whip.show()
+			is_grappling = false
+			if grapple_count == 3:
+				can_grapple = false
+				$GrappleTimer.start()
+				get_parent().get_node("CanvasLayer/HUD/GrappleCooldown").show()
+				grapple_count = 0
 			
 				
 		if auto_climb and can_move and InputEventAction:
@@ -118,16 +128,7 @@ func _input(event: InputEvent) -> void:
 					jump()
 					jump_strength = 750
 			
-		elif event.is_action_released("Graphook") and is_grappling:
-			$Chain.rpc("release")
-			$Whip.show()
-			is_grappling = false
-			if grapple_count == 3:
-				can_grapple = false
-				$GrappleTimer.start()
-				get_parent().get_node("CanvasLayer/HUD/GrappleCooldown").show()
-				grapple_count = 0
-			
+		
 			
 			
 		if event.is_action_pressed("Weapon1") or event.is_action_pressed("Weapon2") or event.is_action_pressed("Weapon3") or event.is_action_pressed("Weapon4"):

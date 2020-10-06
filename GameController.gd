@@ -81,6 +81,7 @@ remote func who_died(victim, weapon_sprite, killer):
 	
 func on_Player_died():
 	$CanvasLayer/DeathUI/YouDied.show()
+	$CanvasLayer/DeathUI/Weapons.show()
 	$CanvasLayer/DeathUI/YouDiedTimer.start()
 	yield($CanvasLayer/DeathUI/YouDiedTimer, "timeout")
 	$CanvasLayer/DeathUI/YouDied.hide()
@@ -99,7 +100,12 @@ func on_Player_respawned():
 	player.set_position(Network.start_position)
 	player.get_node("Camera2D").make_current()
 	$CanvasLayer/DeathUI/RespawnAsker.hide()
+	$CanvasLayer/DeathUI/Weapons.hide()
 	$CanvasLayer/DeathUI/RespawnCountdown.hide()  
+	Global.weapon1 = $CanvasLayer/DeathUI/Weapons/Weapon1.get_item_text($CanvasLayer/DeathUI/Weapons/Weapon1.selected)
+	Global.weapon2 = $CanvasLayer/DeathUI/Weapons/Weapon2.get_item_text($CanvasLayer/DeathUI/Weapons/Weapon2.selected)
+	Global.weapon3 = $CanvasLayer/DeathUI/Weapons/Weapon3.get_item_text($CanvasLayer/DeathUI/Weapons/Weapon3.selected)
+	Global.weapon4 = $CanvasLayer/DeathUI/Weapons/Weapon4.get_item_text($CanvasLayer/DeathUI/Weapons/Weapon4.selected)
 	
 func on_Player_health_changed(health):
 	$CanvasLayer/HUD/HealthBar.value = health

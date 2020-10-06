@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://GameController.gd" type="Script" id=1]
 [ext_resource path="res://menus/OptionsMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://menus/PauseMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/fonts/savior.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Loadout.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 200
@@ -106,6 +107,13 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="Weapons" parent="CanvasLayer/DeathUI" instance=ExtResource( 6 )]
+visible = false
+margin_left = 765.216
+margin_top = 632.718
+margin_right = 1089.22
+margin_bottom = 780.718
+
 [node name="NetworkUI" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -158,3 +166,5 @@ margin_bottom = -1.5874
 mouse_filter = 2
 [connection signal="respawn_available" from="." to="." method="_on_GameController_respawn_available"]
 [connection signal="pressed" from="CanvasLayer/DeathUI/RespawnAsker" to="." method="_on_RespawnAsker_pressed"]
+
+[editable path="CanvasLayer/DeathUI/Weapons"]

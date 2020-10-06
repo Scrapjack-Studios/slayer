@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://weapons/Weapon_Templates.tscn" type="PackedScene" id=1]
+[ext_resource path="res://weapons/WeaponOptionButton.gd" type="Script" id=3]
+
+[node name="Weapons" type="VBoxContainer"]
+margin_top = 34.0
+margin_right = 324.0
+margin_bottom = 174.0
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon1" type="OptionButton" parent="."]
+margin_right = 324.0
+margin_bottom = 28.0
+script = ExtResource( 3 )
+
+[node name="Weapon2" type="OptionButton" parent="."]
+margin_top = 40.0
+margin_right = 324.0
+margin_bottom = 68.0
+script = ExtResource( 3 )
+
+[node name="Weapon3" type="OptionButton" parent="."]
+margin_top = 80.0
+margin_right = 324.0
+margin_bottom = 108.0
+script = ExtResource( 3 )
+
+[node name="Weapon4" type="OptionButton" parent="."]
+margin_top = 120.0
+margin_right = 324.0
+margin_bottom = 148.0
+script = ExtResource( 3 )
+
+[node name="Templates" parent="." instance=ExtResource( 1 )]
+position = Vector2( -138.152, -145 )

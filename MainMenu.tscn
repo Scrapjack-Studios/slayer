@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/ui/MainMenu.png" type="Texture" id=1]
 [ext_resource path="res://MainMenu.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://weapons/Weapon_Templates.tscn" type="PackedScene" id=13]
 [ext_resource path="res://weapons/WeaponOptionButton.gd" type="Script" id=14]
 [ext_resource path="res://assets/videos/splash.webm" type="VideoStream" id=15]
+[ext_resource path="res://Loadout.tscn" type="PackedScene" id=16]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -177,40 +178,7 @@ margin_right = 324.0
 margin_bottom = 22.0
 text = "Weapons"
 
-[node name="Weapons" type="VBoxContainer" parent="PlayMenu/JoinGameMenu"]
-margin_top = 34.0
-margin_right = 324.0
-margin_bottom = 174.0
-custom_constants/separation = 12
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Weapon1" type="OptionButton" parent="PlayMenu/JoinGameMenu/Weapons"]
-margin_right = 324.0
-margin_bottom = 26.0
-script = ExtResource( 14 )
-
-[node name="Weapon2" type="OptionButton" parent="PlayMenu/JoinGameMenu/Weapons"]
-margin_top = 38.0
-margin_right = 324.0
-margin_bottom = 64.0
-script = ExtResource( 14 )
-
-[node name="Weapon3" type="OptionButton" parent="PlayMenu/JoinGameMenu/Weapons"]
-margin_top = 76.0
-margin_right = 324.0
-margin_bottom = 102.0
-script = ExtResource( 14 )
-
-[node name="Weapon4" type="OptionButton" parent="PlayMenu/JoinGameMenu/Weapons"]
-margin_top = 114.0
-margin_right = 324.0
-margin_bottom = 140.0
-script = ExtResource( 14 )
-
-[node name="Templates" parent="PlayMenu/JoinGameMenu/Weapons" instance=ExtResource( 13 )]
-position = Vector2( -138.152, -145 )
+[node name="Weapons" parent="PlayMenu/JoinGameMenu" instance=ExtResource( 16 )]
 
 [node name="NetworkHeader" type="Label" parent="PlayMenu/JoinGameMenu"]
 margin_top = 186.0
@@ -264,45 +232,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Weapons" parent="PlayMenu/CreateGameMenu" instance=ExtResource( 16 )]
+
 [node name="WeaponsHeader" type="Label" parent="PlayMenu/CreateGameMenu"]
 margin_right = 324.0
 margin_bottom = 22.0
 text = "Weapons"
-
-[node name="Weapons" type="VBoxContainer" parent="PlayMenu/CreateGameMenu"]
-margin_top = 34.0
-margin_right = 324.0
-margin_bottom = 174.0
-custom_constants/separation = 12
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Weapon1" type="OptionButton" parent="PlayMenu/CreateGameMenu/Weapons"]
-margin_right = 324.0
-margin_bottom = 26.0
-script = ExtResource( 14 )
-
-[node name="Weapon2" type="OptionButton" parent="PlayMenu/CreateGameMenu/Weapons"]
-margin_top = 38.0
-margin_right = 324.0
-margin_bottom = 64.0
-script = ExtResource( 14 )
-
-[node name="Weapon3" type="OptionButton" parent="PlayMenu/CreateGameMenu/Weapons"]
-margin_top = 76.0
-margin_right = 324.0
-margin_bottom = 102.0
-script = ExtResource( 14 )
-
-[node name="Weapon4" type="OptionButton" parent="PlayMenu/CreateGameMenu/Weapons"]
-margin_top = 114.0
-margin_right = 324.0
-margin_bottom = 140.0
-script = ExtResource( 14 )
-
-[node name="Templates" parent="PlayMenu/CreateGameMenu/Weapons" instance=ExtResource( 13 )]
-position = Vector2( -138.152, -145 )
 
 [node name="PortHeader" type="Label" parent="PlayMenu/CreateGameMenu"]
 margin_top = 186.0
@@ -532,3 +467,7 @@ bus = "Music"
 [connection signal="pressed" from="PlayMenu/CreateGameMenu/Create" to="." method="_on_Create_pressed"]
 [connection signal="pressed" from="EditProfileMenu/VBoxContainer/Save" to="EditProfileMenu" method="_on_Save_pressed"]
 [connection signal="pressed" from="SRSetup/VBoxContainer2/StartGame" to="." method="_on_StartGame_pressed"]
+
+[editable path="PlayMenu/JoinGameMenu/Weapons"]
+
+[editable path="PlayMenu/CreateGameMenu/Weapons"]
