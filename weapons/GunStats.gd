@@ -36,76 +36,76 @@ var ReloadTime = 2
 var bounce
 
 func fire():
-    if can_fire:
-        if shotgun:
-            shots_fired -= 1
-            effects()
-            $Sounds/FireSound.play()
-            rpc("spawn_projectile", "shotgun", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
-            if shots_fired == 0:
-                can_fire = false 
-        elif is_burst_fire:
-            for bullet in burst_ammount: 
-                shots_fired -= 1
-                effects()
-                $Sounds/FireSound.play()
-                rpc("spawn_projectile", "burst_fire", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
-                if shots_fired == 0:
-                    can_fire = false    
-        elif is_automatic:
-            shots_fired -= 1
-            effects()
-            $Sounds/FireSound.play()
-            rpc("spawn_projectile", "auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
-            if shots_fired == 0:
-                can_fire = false
-        elif is_semi_auto:
-            shots_fired -= 1
-            effects()
-            $Sounds/FireSound.play()
-            rpc("spawn_projectile", "semi_auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
-            if shots_fired == 0:
-                can_fire = false
+	if can_fire:
+		if shotgun:
+			shots_fired -= 1
+			effects()
+			$Sounds/FireSound.play()
+			rpc("spawn_projectile", "shotgun", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
+			if shots_fired == 0:
+				can_fire = false 
+		elif is_burst_fire:
+			for bullet in burst_ammount: 
+				shots_fired -= 1
+				effects()
+				$Sounds/FireSound.play()
+				rpc("spawn_projectile", "burst_fire", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
+				if shots_fired == 0:
+					can_fire = false    
+		elif is_automatic:
+			shots_fired -= 1
+			effects()
+			$Sounds/FireSound.play()
+			rpc("spawn_projectile", "auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
+			if shots_fired == 0:
+				can_fire = false
+		elif is_semi_auto:
+			shots_fired -= 1
+			effects()
+			$Sounds/FireSound.play()
+			rpc("spawn_projectile", "semi_auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
+			if shots_fired == 0:
+				can_fire = false
 
-      
+	  
 sync func spawn_projectile(type, pos, rot):
-    if type == "shotgun":
-        for shotgun_pellet in shotgun_pellets:
-            shotgun_spread =+ 0.5
-            var pellet = Bullet.instance()
-            pellet.start_at(pos, rot + rand_range(-0.1,0.1),'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
-            $Bullets.add_child(pellet)
-            if not is_network_master():
-                pellet.set_collision_layer_bit(6, true)
-    elif type == "burst_fire":
-        var bullet = Bullet.instance()
-        bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
-        $Bullets.add_child(bullet)
-        if not is_network_master():
-            bullet.set_collision_layer_bit(6, true)
-    elif type == "auto":
-        var bullet = Bullet.instance()
-        bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
-        $Bullets.add_child(bullet)
-        if not is_network_master():
-            bullet.set_collision_layer_bit(6, true)
-    elif type == "semi_auto":
-        var bullet = Bullet.instance()
-        bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
-        $Bullets.add_child(bullet)
-        if not is_network_master():
-            bullet.set_collision_layer_bit(6, true)
-                          
+	if type == "shotgun":
+		for shotgun_pellet in shotgun_pellets:
+			shotgun_spread =+ 0.5
+			var pellet = Bullet.instance()
+			pellet.start_at(pos, rot + rand_range(-0.04,0.04),'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
+			$Bullets.add_child(pellet)
+			if not is_network_master():
+				pellet.set_collision_layer_bit(6, true)
+	elif type == "burst_fire":
+		var bullet = Bullet.instance()
+		bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
+		$Bullets.add_child(bullet)
+		if not is_network_master():
+			bullet.set_collision_layer_bit(6, true)
+	elif type == "auto":
+		var bullet = Bullet.instance()
+		bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
+		$Bullets.add_child(bullet)
+		if not is_network_master():
+			bullet.set_collision_layer_bit(6, true)
+	elif type == "semi_auto":
+		var bullet = Bullet.instance()
+		bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
+		$Bullets.add_child(bullet)
+		if not is_network_master():
+			bullet.set_collision_layer_bit(6, true)
+						  
 func set_sprite():
 #    get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
-    get_parent().get_node("Weapon_Sprite").scale = get_parent().get_node("GunStats").weapon_size
+	get_parent().get_node("Weapon_Sprite").scale = get_parent().get_node("GunStats").weapon_size
 #    get_parent().get_node("Weapon_Sprite").position = get_parent().get_node("GunStats").weapon_position
 
 func effects():
-    get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").show()
-    $EffectsTimer.start(0.1)
-    yield($EffectsTimer, "timeout")
-    get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").hide()
+	get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").show()
+	$EffectsTimer.start(0.1)
+	yield($EffectsTimer, "timeout")
+	get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").hide()
 
 
 

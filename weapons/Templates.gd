@@ -4,4 +4,4 @@ var weapon_list
 
 
 func _enter_tree():
-    weapon_list = get_children()
+	weapon_list = get_children()
