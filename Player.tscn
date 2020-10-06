@@ -95,7 +95,7 @@ cast_to = Vector2( 0, 30 )
 collide_with_areas = true
 
 [node name="Wall_Detect_Right4" type="RayCast2D" parent="Wall_Raycasts/Right"]
-position = Vector2( -0.5336, 32.1185 )
+position = Vector2( -5.87369, 35.2875 )
 rotation = -1.58225
 enabled = true
 cast_to = Vector2( 0, 30 )
@@ -125,7 +125,7 @@ cast_to = Vector2( 0, 30 )
 collide_with_areas = true
 
 [node name="Wall_Detect_Left4" type="RayCast2D" parent="Wall_Raycasts/Left"]
-position = Vector2( -4.936, 32.2388 )
+position = Vector2( -2.43376, 34.7422 )
 rotation = 1.57469
 enabled = true
 cast_to = Vector2( 0, 30 )
@@ -198,7 +198,7 @@ scale = Vector2( 0.438508, 0.558329 )
 texture = ExtResource( 7 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Whip/GrooveJoint2D/RigidBody2D"]
-position = Vector2( 3.47328, 2.00998 )
+position = Vector2( 3.59615, 1.55169 )
 rotation = -1.13057
 scale = Vector2( 1.63873, 1 )
 shape = SubResource( 3 )
@@ -248,5 +248,7 @@ stream = ExtResource( 12 )
 bus = "Game SFX"
 
 [node name="BloodTimer" type="Timer" parent="BloodGore"]
+
+[node name="Delay" type="Timer" parent="."]
 [connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]
 [connection signal="timeout" from="WallJumpTimer" to="." method="_on_WallJumpTimer_timeout"]

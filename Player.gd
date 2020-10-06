@@ -75,6 +75,7 @@ var momentum = 1.2
 var can_build_momentum = true
 var wallmount = false
 var auto_climb = true
+
 func _ready():
 	get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
 	$Weapon/GunStats/Sounds/FireSound.activate()
@@ -105,7 +106,17 @@ func _input(event: InputEvent) -> void:
 				grapple_count += 1
 			
 				
-	
+		if auto_climb and can_move and InputEventAction:
+			if MoveDirection.LEFT:
+				if $Wall_Raycasts/Left/Wall_Detect_Left4.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding():
+					jump_strength = 500
+					jump()
+					jump_strength = 750
+			if MoveDirection.RIGHT:
+				if $Wall_Raycasts/Right/Wall_Detect_Right4.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding():
+					jump_strength = 500
+					jump()
+					jump_strength = 750
 			
 		elif event.is_action_released("Graphook") and is_grappling:
 			$Chain.rpc("release")
@@ -276,6 +287,7 @@ func _physics_process(delta):
 		jump_count = 0
 		grapple_count = 0
 		
+		
 	if stop:
 		var vsign = sign(velocity.x)
 		var vlen = abs(velocity.x)
@@ -327,20 +339,7 @@ func move(direction):
 				if can_build_momentum:
 					for n in direction:
 						momentum += 0.0003
-		not MoveDirection.LEFT
-		not MoveDirection.RIGHT
 		
-		if auto_climb and can_move and InputEventAction:
-			if MoveDirection.LEFT:
-				if $Wall_Raycasts/Left/Wall_Detect_Left4.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding():
-					jump_strength = 500
-					jump()
-					jump_strength = 750
-			elif MoveDirection.RIGHT:
-				if $Wall_Raycasts/Right/Wall_Detect_Right4.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding():
-					jump_strength = 500
-					jump()
-					jump_strength = 750
 			
 			
 func jump():
