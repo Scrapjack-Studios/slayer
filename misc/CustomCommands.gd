@@ -11,25 +11,26 @@ var spawnable_objects = {
 }
 
 func _ready() -> void:
-	Console.add_command("kill", self, "kill")\
+	Console.add_command("kill", self, "Kill")\
 		.set_description("Kills the player instantly by dealing 100 points of damage. Takes in a player username as an argument. If no username is given, kills the player that ran the command.")\
 		.add_argument('victim', TYPE_STRING)\
 		.register()
+	Console.add_command("spawn", self, "Spawn")\
+		.set_description("Spawns the specified object at the specified position. If no position is specified, the object is spawned 10 units to the right of the player.")\
+		.add_argument('object', TYPE_STRING)\
+		.add_argument('position', TYPE_VECTOR2)\
+		.register()
 
-#func Help(argument=""):
-#    if argument == "help" or not argument:
-#        console_print("Takes in a command as an argument, and gives a short description")
-#        console_print("of the command.")
-#    elif argument == "commands":
-#        console_print("Prints a list of available commands.")
-#    elif argument == "kill":
-#        console_print("Kills the player instantly by dealing 100 points of damage")
-#        console_print("Takes in a player username as an argument. If no username is given,")
-#        console_print("kills the player that ran the command.")
+# Custom console commands:
+
+func Kill(victim=null):
+	if get_node("/root").has_node("GameController"):
+		if not victim:
+			$"/root/GameController".get_node(str(get_tree().get_network_unique_id())).take_damage(100, "shotgun", Global.username)
+		else:
+			$"/root/GameController".get_node(str(victim)).take_damage(100, "shotgun", Global.username) # TODO: change killing weapon
+	else:
+		Console.write_line("This command must be executed in-game.")
 	
-func kill(victim=get_tree().get_network_unique_id()):
-	 # TODO: change killing weapon
-	$"/root/GameController".get_node(str(victim)).take_damage(100, "shotgun", Global.username)
-	
-func Spawn(object):
+func Spawn(object=null,position=Vector2(10,0)):
 	print(object)
