@@ -191,8 +191,12 @@ func toggle_console():
 		self.Line.clear()
 		self.Line.grab_focus()
 		self._animationPlayer.play_backwards('fade')
+		if get_node("/root").has_node("GameController"):
+			Global.pause_game()
 	else:
 		self._animationPlayer.play('fade')
+		if get_node("/root").has_node("GameController"):
+			Global.resume_game()
 
 	is_console_shown = !self.is_console_shown
 
