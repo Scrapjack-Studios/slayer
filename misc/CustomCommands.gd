@@ -16,9 +16,8 @@ func _ready() -> void:
 		.add_argument('victim', TYPE_STRING)\
 		.register()
 	Console.add_command("spawn", self, "Spawn")\
-		.set_description("Spawns the specified object at the specified position. If no position is specified, the object is spawned 500 units to the right of the player.")\
+		.set_description("Spawns the specified object 500 units to the right of the player.")\
 		.add_argument('object', TYPE_STRING)\
-		.add_argument('position', TYPE_VECTOR2)\
 		.register()
 
 # Custom console commands:
