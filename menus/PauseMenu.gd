@@ -10,10 +10,10 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_released("pause_menu") and not Global.paused:
 		self.show()
-		pause_game()
+		Global.pause_game()
 	elif Input.is_action_just_released("pause_menu") and Global.paused and not options_menu.get_node("Buttons").visible and not options_menu.get_node("VideoOptions").visible and not options_menu.get_node("AudioOptions").visible:
 		self.hide()
-		resume_game()
+		Global.resume_game()
 	elif Input.is_action_just_released("pause_menu") and options_menu.get_node("Buttons").visible:
 		options_menu.get_node("Buttons").hide()
 	elif Input.is_action_just_released("pause_menu") and options_menu.get_node("VideoOptions").visible:
@@ -25,7 +25,7 @@ func _process(_delta):
 
 func _on_Resume_pressed():
 	self.hide()
-	resume_game()
+	Global.resume_game()
 	$Blip1.play()
 
 func _on_Options_pressed():
@@ -49,22 +49,6 @@ func _on_Quit_Desktop_pressed():
 		get_tree().quit()
 	else:
 		get_tree().quit()
-	
-func pause_game():
-	Global.paused = true
-	player.can_grapple = false
-	player.can_move = false
-	player.can_jump = false
-	player.get_node("Weapon/GunStats").can_fire = false
-	player.get_node("Camera2D").clear_current()
-	
-func resume_game():
-	Global.paused = false
-	player.can_grapple = true
-	player.can_move = true
-	player.can_jump = true
-	player.get_node("Weapon/GunStats").can_fire = true
-	player.get_node("Camera2D").make_current()
 	
 func on_game_started():
 	game_controller = get_parent().get_parent()
