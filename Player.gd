@@ -403,20 +403,21 @@ func GunTimer(phy):
 func Kickback(kickback):
 	velocity = Vector2(kickback, 0).rotated($Weapon.global_rotation)
 	
-func take_damage(amount, weapon, damager):
+func take_damage(amount, weapon, damager, impact_pos=global_position, weapon_rot=global_rotation):
 	health -= amount
 	emit_signal("health_changed", (health * 100 / max_health))
+	rpc("spew_blood", impact_pos, weapon_rot)
 	if health <= 0:
 		rpc("die")
 		get_node("/root/GameController").rpc("who_died", username, weapon, damager)
 		
 sync func die():
+	$CollisionShape2D.set_deferred("disabled", true)
 	emit_signal("died")
 	hide()
 	set_physics_process(false)
 	can_shoot = false
 	$Camera2D._set_current(false)
-	$CollisionShape2D.disabled = true
 	$BloodGore/GibSound.play()
 	
 sync func spew_blood(pos, rot):

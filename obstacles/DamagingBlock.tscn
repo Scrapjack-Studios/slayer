@@ -3,7 +3,7 @@
 [ext_resource path="res://obstacles/DamagingBlock.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 71.5219, 66.8818 )
+extents = Vector2( 48.9444, 48.6545 )
 
 [sub_resource type="Gradient" id=2]
 
