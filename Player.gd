@@ -412,12 +412,14 @@ func take_damage(amount, weapon, damager, impact_pos=global_position, weapon_rot
 		get_node("/root/GameController").rpc("who_died", username, weapon, damager)
 		
 sync func die():
-	$CollisionShape2D.set_deferred("disabled", true)
 	emit_signal("died")
 	hide()
 	set_physics_process(false)
 	can_shoot = false
 	$Camera2D._set_current(false)
+#	$CollisionShape2D.set_deferred("disabled", true)
+	$CollisionShape2D.disabled = true 
+	# this won't work while flushing queries, but changing it via set_deferred will make the player take 50 damage as soon as they respawn.
 	$BloodGore/GibSound.play()
 	
 sync func spew_blood(pos, rot):
