@@ -1,13 +1,13 @@
 extends Node
 
 var spawnable_objects = {
-	"blood_spurt":"misc/BloodSpurt.tscn",
-	"explosion":"misc/Explosion.tscn",
-	"damaging_block":"obstacles/DamagingBlock.tscn",
-	"destructible_block":"obstaclesDestructibleBlock.tscn",
-	"gore_block":"obstacles/GoreBlock.tscn",
-	"physics_platform":"obstacles/Platform_Physics.tscn",
-	"static_platform":"obstacles/Platform_Static.tscn",
+	"blood_spurt":"misc/BloodSpurt",
+	"explosion":"misc/Explosion",
+	"damaging_block":"obstacles/DamagingBlock",
+	"destructible_block":"obstaclesDestructibleBlock",
+	"gore_block":"obstacles/GoreBlock",
+	"physics_platform":"obstacles/Platform_Physics",
+	"static_platform":"obstacles/Platform_Static",
 }
 
 func _ready() -> void:
@@ -16,7 +16,7 @@ func _ready() -> void:
 		.add_argument('victim', TYPE_STRING)\
 		.register()
 	Console.add_command("spawn", self, "Spawn")\
-		.set_description("Spawns the specified object at the specified position. If no position is specified, the object is spawned 10 units to the right of the player.")\
+		.set_description("Spawns the specified object at the specified position. If no position is specified, the object is spawned 500 units to the right of the player.")\
 		.add_argument('object', TYPE_STRING)\
 		.add_argument('position', TYPE_VECTOR2)\
 		.register()
@@ -32,5 +32,15 @@ func Kill(victim=null):
 	else:
 		Console.write_line("This command must be executed in-game.")
 	
-func Spawn(object=null,position=Vector2(10,0)):
-	print(object)
+func Spawn(object=null,position=null):
+	if get_node("/root").has_node("GameController"):
+		if object in spawnable_objects:
+			var spawned_object = load("res://" + spawnable_objects[object] + ".tscn").instance()
+			get_node("/root/GameController/" + Global.map).add_child(spawned_object)
+			if position:
+				spawned_object.set_position(position)
+			else:
+				var player_pos = get_node("/root/GameController/" + str(get_tree().get_network_unique_id())).get_position()
+				spawned_object.set_position(player_pos + Vector2(500,0))		
+	else:
+		Console.write_line("This command must be executed in-game.") # change this to error if that's a thing
