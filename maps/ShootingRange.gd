@@ -4,7 +4,7 @@ onready var tilemap: = $TileMap
 var total_damage = 0
 
 func hit(location_hit : Vector2, damage : float):
-	var pos: = location_hit
+#	var pos: = location_hit
 	var rand_size: = 1
 	var count: = 1
 	total_damage += damage
