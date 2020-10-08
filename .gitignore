@@ -1,3 +1,4 @@
-.import
-logs/
-.directory
+.import/
+export.cfg
+export_presets.cfg
+*.x86_64

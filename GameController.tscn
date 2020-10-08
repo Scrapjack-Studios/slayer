@@ -164,7 +164,6 @@ pause_mode = 2
 margin_top = -1.5874
 margin_bottom = -1.5874
 mouse_filter = 2
-[connection signal="respawn_available" from="." to="." method="_on_GameController_respawn_available"]
 [connection signal="pressed" from="CanvasLayer/DeathUI/RespawnAsker" to="." method="_on_RespawnAsker_pressed"]
 
 [editable path="CanvasLayer/DeathUI/Weapons"]
