@@ -43,6 +43,13 @@ func _physics_process(delta):
 		if collision.collider.is_in_group("Players"):
 			var player = get_parent().get_parent().get_parent().get_parent()
 			collision.collider.take_damage(damage, player.get_node("Weapon/Weapon_Sprite").texture.resource_path, player.username, global_position, player.get_node("Weapon").global_rotation)
+			if collision.collider.health == 0:
+				$KillMarker.show()
+				$KillMarker.hide()
+			else:
+				$HitMarker.show()
+				$HitMarker.hide()
+			
 		$Timer.start()   
 
 func _on_VisibilityNotifier2D_screen_exited():
