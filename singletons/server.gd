@@ -25,6 +25,13 @@ func connect_to_server(ip, port):
 	network.connect("connection_failed", self, "on_connection_failed")
 	network.connect("connection_succeeded", self, "on_connection_succeeded")
 
+remote func kicked(reason):
+	Global.kick_reason = reason 
+	get_parent().get_node("GameController").get_node(str(get_tree().get_network_unique_id())).get_node("Camera2D").make_current()
+	get_tree().change_scene("res://MainMenu.tscn")
+	emit_signal("player_disconnection_completed", get_tree().get_network_unique_id())
+	get_tree().set_network_peer(null)
+
 func on_connection_failed():
 	print("Failed to connect to server")
 
