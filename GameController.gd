@@ -108,10 +108,13 @@ func on_Player_respawned():
 	Global.weapon4 = $CanvasLayer/DeathUI/Weapons/Weapon4.get_item_text($CanvasLayer/DeathUI/Weapons/Weapon4.selected)
 	
 func on_Player_health_changed(health):
-	$CanvasLayer/HUD/HealthBar.value = health
+	$CanvasLayer/HUD/HealthBar.value =+ health
 	$CanvasLayer/HUD/HealthBar/UpdateTween.interpolate_property($CanvasLayer/HUD/HealthBar/HealthBarChange, "value", $CanvasLayer/HUD/HealthBar/HealthBarChange.value, health, 0.6, Tween.TRANS_SINE, Tween.EASE_OUT, 0.4)
 	$CanvasLayer/HUD/HealthBar/UpdateTween.start()
-	
+	$CanvasLayer/Timer.start(0.5)
+	yield($CanvasLayer/Timer, "timeout")
+	$CanvasLayer/HUD/HealthBar.value == 0
+	$CanvasLayer/Timer.queue_free()
 func _on_GameController_respawn_available():
 	if wants_to_respawn:
 		player.rpc("respawn")

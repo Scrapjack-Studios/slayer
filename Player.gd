@@ -119,12 +119,12 @@ func _input(event: InputEvent) -> void:
 		if auto_climb and can_move and InputEventAction:
 			if MoveDirection.LEFT:
 				if $Wall_Raycasts/Left/Wall_Detect_Left4.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding():
-					jump_strength = 500
+					jump_strength = 350
 					jump()
 					jump_strength = 750
 			if MoveDirection.RIGHT:
 				if $Wall_Raycasts/Right/Wall_Detect_Right4.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding():
-					jump_strength = 500
+					jump_strength = 350
 					jump()
 					jump_strength = 750
 			
