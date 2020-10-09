@@ -46,18 +46,8 @@ func _physics_process(_delta: float) -> void:
 	# The player might have moved and thus updated the position of the tip -> reset it
 	if flying:
 		# if move_and_collide() always moves, but returns true if we did collide
-		if $Tip.move_and_collide(direction * SPEED ,false ,true, false): 
-			var collision = $Tip.move_and_collide(direction * SPEED ,false ,true, false)   
+		if $Tip.move_and_collide(direction * SPEED ,false ,true, false):  
 			hooked = true
-			flying = false
-			
-#    if $Tip.move_and_collide(direction * SPEED ,false ,true, false): 
-#        var collision = $Tip.move_and_collide(direction * SPEED ,false ,true, false)
-##        if collision.collider.is_in_group("bodies"):
-##                collision.collider.apply_central_impulse(-collision.normal * (10 * links.region_rect.size.y))
-##                $Tip.global_position = collision.collider.position
-				
-				
+			flying = false			
 	tip = $Tip.global_position
-	
 	# set `tip` as starting position for next frame

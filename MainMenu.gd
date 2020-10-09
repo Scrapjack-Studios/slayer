@@ -59,7 +59,7 @@ func _on_Create_pressed():
 	var port = int($PlayMenu/CreateGameMenu/Port.text)
 	
 	if $PlayMenu/CreateGameMenu/Map.selected == 0: # TODO: this is awful. do this some other way
-		Global.map = "res://maps/ShootingRange.tscn"
+		Global.map = "ShootingRange"
 	Global.weapon1 = $PlayMenu/CreateGameMenu/Weapons/Weapon1.get_item_text($PlayMenu/CreateGameMenu/Weapons/Weapon1.selected)
 	Global.weapon2 = $PlayMenu/CreateGameMenu/Weapons/Weapon2.get_item_text($PlayMenu/CreateGameMenu/Weapons/Weapon2.selected)
 	Global.weapon3 = $PlayMenu/CreateGameMenu/Weapons/Weapon3.get_item_text($PlayMenu/CreateGameMenu/Weapons/Weapon3.selected)
@@ -120,7 +120,7 @@ func _on_StartGame_pressed():
 	$Blip1.play()
 	
 	if $SRSetup/VBoxContainer2/Map.selected == 0:
-		Global.map = "res://maps/ShootingRange.tscn"
+		Global.map = "ShootingRange"
 	
 	Global.weapon1 = $SRSetup/VBoxContainer2/Weapon1.get_item_text($SRSetup/VBoxContainer2/Weapon1.selected)
 	Global.weapon2 = $SRSetup/VBoxContainer2/Weapon2.get_item_text($SRSetup/VBoxContainer2/Weapon2.selected)

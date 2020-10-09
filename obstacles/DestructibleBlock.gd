@@ -17,7 +17,7 @@ func _ready():
 	collision_scale_y = $StaticBody2D/CollisionShape2D.scale.y / 3
 	division_threshold = $StaticBody2D/CollisionShape2D.scale.x / 3
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not can_break:
 		var GunTimer = Timer.new()
 		GunTimer.set_physics_process(false)

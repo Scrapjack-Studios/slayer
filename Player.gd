@@ -308,7 +308,7 @@ func _physics_process(delta):
 				collision.collider.apply_central_impulse(-collision.normal * push)
 				
 	if is_on_wall() and not is_climbing:
-		wallmount()
+		wall_cling()
 	else:
 		can_walljump = true
 		wallmount = false
@@ -325,7 +325,6 @@ func move(direction):
 	can_build_momentum = true
 	if can_move:
 		if direction == MoveDirection.LEFT:
-			not MoveDirection.RIGHT
 			if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED * momentum:
 				force.x -= WALK_FORCE
 				stop = false
@@ -333,7 +332,6 @@ func move(direction):
 					for n in direction:
 						momentum += 0.0003
 		elif direction == MoveDirection.RIGHT:
-			not MoveDirection.LEFT
 			if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED * momentum:
 				force.x += WALK_FORCE
 				stop = false
@@ -370,7 +368,7 @@ func mantle(direction):
 	is_climbing = true
 			
 
-func wallmount():
+func wall_cling():
 	velocity.y = lerp(velocity.y,0,0.2)
 	jump_strength = 900
 	wallmount = true
@@ -403,9 +401,10 @@ func GunTimer(phy):
 func Kickback(kickback):
 	velocity = Vector2(kickback, 0).rotated($Weapon.global_rotation)
 	
-func take_damage(amount, weapon, damager):
+func take_damage(amount, weapon, damager, impact_pos=global_position, weapon_rot=global_rotation):
 	health -= amount
 	emit_signal("health_changed", (health * 100 / max_health))
+	rpc("spew_blood", impact_pos, weapon_rot)
 	if health <= 0:
 		rpc("die")
 		get_node("/root/GameController").rpc("who_died", username, weapon, damager)
@@ -416,7 +415,9 @@ sync func die():
 	set_physics_process(false)
 	can_shoot = false
 	$Camera2D._set_current(false)
-	$CollisionShape2D.disabled = true
+#	$CollisionShape2D.set_deferred("disabled", true)
+	$CollisionShape2D.disabled = true 
+	# this won't work while flushing queries, but changing it via set_deferred will make the player take 50 damage as soon as they respawn.
 	$BloodGore/GibSound.play()
 	
 sync func spew_blood(pos, rot):

@@ -15,7 +15,7 @@ func _ready():
 	Network.connect("player_disconnection_completed", self, "on_player_disconnection_completed")
 	Network.connect("server_stopped", self, "on_server_stopped")
 	
-	add_child(load(Global.map).instance())
+	add_child(load("res://maps/" + Global.map + ".tscn").instance())
 	spawn_self()
 	
 	if not is_network_master():
