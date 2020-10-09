@@ -95,6 +95,7 @@ randomness = 1.0
 process_material = SubResource( 5 )
 
 [node name="Light2D" type="Light2D" parent="Tracer"]
+visible = false
 position = Vector2( -0.0993241, 39.3043 )
 rotation = -1.5708
 scale = Vector2( 1.76122, 0.434891 )
@@ -105,11 +106,16 @@ energy = 0.6
 shadow_gradient_length = 3084.6
 
 [node name="HitMarker" type="Sprite" parent="."]
-visible = false
+position = Vector2( 0.44595, 0.594597 )
+scale = Vector2( 0.373189, 0.375666 )
 texture = ExtResource( 8 )
 
 [node name="KillMarker" type="Sprite" parent="."]
 visible = false
+position = Vector2( -0.297302, 0 )
+scale = Vector2( 0.586363, 0.596991 )
 texture = ExtResource( 9 )
+
+[node name="Timer2" type="Timer" parent="."]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -45,9 +45,13 @@ func _physics_process(delta):
 			collision.collider.take_damage(damage, player.get_node("Weapon/Weapon_Sprite").texture.resource_path, player.username, global_position, player.get_node("Weapon").global_rotation)
 			if collision.collider.health == 0:
 				$KillMarker.show()
+				$Timer2.start(0.5)
+				yield($Timer2,"timeout")
 				$KillMarker.hide()
 			else:
 				$HitMarker.show()
+				$Timer2.start(0.5)
+				yield($Timer2,"timeout")
 				$HitMarker.hide()
 			
 		$Timer.start()   
