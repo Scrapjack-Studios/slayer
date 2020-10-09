@@ -1,12 +1,8 @@
 extends Node
 
 var network = NetworkedMultiplayerENet.new()
-var ip = "127.0.0.1"
-var port = 4000
-
 var players = { }
-var start_position = Vector2(360,180)
-var self_data = {name = '', position = Vector2(), received_disconnect=false}
+var self_data = {username = '', position = Vector2(), received_disconnect=false}
 var disconnected_player_info
 var connected_player_info
 var connected_player
@@ -18,12 +14,10 @@ signal player_connection_completed
 signal player_disconnection_completed
 signal server_stopped
 
-func connect_to_server(ip, port):
+func connect_to_server(ip, port, username):
+	self_data.username = username
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)
-
-	network.connect("connection_failed", self, "on_connection_failed")
-	network.connect("connection_succeeded", self, "on_connection_succeeded")
 
 remote func kicked(reason):
 	Global.kick_reason = reason 
@@ -32,8 +26,29 @@ remote func kicked(reason):
 	emit_signal("player_disconnection_completed", get_tree().get_network_unique_id())
 	get_tree().set_network_peer(null)
 
-func on_connection_failed():
-	print("Failed to connect to server")
+# gets called by the server when a player connects, and then the player sends their info
+remote func fetch_player_info():
+	rpc_id(1, "recieve_player_info", get_tree().get_network_unique_id(), self_data)
+	
+#remote func receive_players_info(id, info):
+#	players[id] = info
+#	if connected_player in players:
+#		connected_player_info = players[connected_player]
+#		emit_signal("player_connection_completed")
+#	print(players)
 
-func on_connection_succeeded():
-	print("Connected to server")
+#remote func _request_players(request_from_id):
+#	if get_tree().is_network_server():
+#		rpc_id(request_from_id, '_send_players', players)
+#
+#remote func _send_players(players_array):
+#	players = players_array
+#
+#remote func _request_map(request_from_id):
+#	if get_tree().is_network_server():
+#		rpc_id(request_from_id, '_send_map', Global.map)
+#
+#remote func _send_map(map):
+#	Global.map = map
+#	get_tree().change_scene("res://GameController.tscn")
+
