@@ -4,10 +4,7 @@ var network = NetworkedMultiplayerENet.new()
 var ip = "127.0.0.1"
 var port = 4000
 
-func _ready() -> void:
-	connect_to_server()
-
-func connect_to_server():
+func connect_to_server(ip, port):
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)
 

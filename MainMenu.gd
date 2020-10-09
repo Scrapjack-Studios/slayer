@@ -28,7 +28,6 @@ func _on_PlayButton_pressed():
 	$OptionsMenu/VideoOptions.hide()
 	$OptionsMenu/AudioOptions.hide()
 	$PlayMenu/JoinGameMenu.hide()
-	$PlayMenu/CreateGameMenu.hide()
 	$PlayMenu.show()
 	$PlayMenu/PlayMenuButtons.show()
 	$Button2.play()
@@ -48,25 +47,8 @@ func _on_Join_pressed():
 	Global.weapon4 = $PlayMenu/JoinGameMenu/Weapons/Weapon4.get_item_text($PlayMenu/JoinGameMenu/Weapons/Weapon4.selected)
 	
 	get_tree().change_scene("res://menus/LoadingScreen.tscn")
-	Network.connect_to_server(ip, port, Global.username)
-
-func _on_CreateGame_pressed():
-	$Blip1.play()
-	$PlayMenu/PlayMenuButtons.hide()
-	$PlayMenu/CreateGameMenu.show()
-	
-func _on_Create_pressed():
-	var port = int($PlayMenu/CreateGameMenu/Port.text)
-	
-	if $PlayMenu/CreateGameMenu/Map.selected == 0: # TODO: this is awful. do this some other way
-		Global.map = "ShootingRange"
-	Global.weapon1 = $PlayMenu/CreateGameMenu/Weapons/Weapon1.get_item_text($PlayMenu/CreateGameMenu/Weapons/Weapon1.selected)
-	Global.weapon2 = $PlayMenu/CreateGameMenu/Weapons/Weapon2.get_item_text($PlayMenu/CreateGameMenu/Weapons/Weapon2.selected)
-	Global.weapon3 = $PlayMenu/CreateGameMenu/Weapons/Weapon3.get_item_text($PlayMenu/CreateGameMenu/Weapons/Weapon3.selected)
-	Global.weapon4 = $PlayMenu/CreateGameMenu/Weapons/Weapon4.get_item_text($PlayMenu/CreateGameMenu/Weapons/Weapon4.selected)
-	
-	Network.create_server(port, Global.username)
-	get_tree().change_scene("res://GameController.tscn") 
+#	Network.connect_to_server(ip, port, Global.username)
+	Server.connect_to_server(ip, port)
 
 func _on_EditProfile_pressed():
 	$EditProfileMenu/VBoxContainer/UserName.text = Global.username
