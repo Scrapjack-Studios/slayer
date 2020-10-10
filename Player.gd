@@ -191,7 +191,7 @@ func weaponscroll(dir):
 func _physics_process(delta):
 	
 	if get_tree().is_network_server():
-		Network.update_position(int(name), position)
+		Server.update_position(int(name), position)
 	
 	var direction = MoveDirection.NONE
 	var mpos = get_global_mouse_position().angle_to_point(position)

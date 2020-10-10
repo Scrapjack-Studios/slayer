@@ -35,20 +35,13 @@ func _on_Options_pressed():
 func _on_Quit_MainMenu_pressed():
 	$Blip1.play()
 	yield($Blip1, "finished")
-	if is_network_master():
-		Network.close_server()
-	else:
-		get_tree().change_scene("res://MainMenu.tscn")
+	get_tree().change_scene("res://MainMenu.tscn")
 	player.get_node("Camera2D").make_current() # fixes strange main menu bug, so don't remove it
 
 func _on_Quit_Desktop_pressed():
 	$Blip1.play()
 	yield($Blip1, "finished")
-	if is_network_master():
-		Network.close_server()
-		get_tree().quit()
-	else:
-		get_tree().quit()
+	get_tree().quit()
 	
 func on_game_started():
 	game_controller = get_parent().get_parent()
