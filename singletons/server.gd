@@ -21,9 +21,9 @@ func connect_to_server(ip, port, username):
 
 # gets called by the server when a player connects, and then the player sends their info
 remote func fetch_player_info():
-	rpc_id(1, "receive_player_info", get_tree().get_network_unique_id(), self_data)
+	rpc_id(1, "get_player_info", get_tree().get_network_unique_id(), self_data)
 
-remote func receive_game_data(map):
+remote func get_map(map):
 	Global.map = map
 	get_tree().change_scene("res://GameController.tscn")
 
