@@ -84,7 +84,6 @@ func _ready():
 	
 func _input(event: InputEvent) -> void:
 	if is_network_master():
-		
 		if Input.is_action_just_pressed("reload"):
 				$WeaponMechanics.reload()
 		
@@ -181,18 +180,11 @@ func _input(event: InputEvent) -> void:
 	
 		elif event.is_action_pressed("NextWeapon"):
 			weaponscroll(-1)
-	
-		
 
 func weaponscroll(dir):
-	weaponnumb += 1 * dir
-			# call the zoom function 
+	weaponnumb += 1 * dir # call the zoom function 
 
 func _physics_process(delta):
-	
-	if get_tree().is_network_server():
-		Server.update_position(int(name), position)
-	
 	var direction = MoveDirection.NONE
 	var mpos = get_global_mouse_position().angle_to_point(position)
 	var weaponflip = $Weapon/Weapon_Sprite.flip_v
