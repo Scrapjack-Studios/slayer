@@ -3,16 +3,6 @@ extends Node
 var network = NetworkedMultiplayerENet.new()
 var players = {}
 var self_data = {username = '', position = Vector2(), received_disconnect=false}
-var disconnected_player_info
-var connected_player_info
-var connected_player
-var disconnected
-
-signal player_disconnected
-signal server_disconnected
-signal player_connection_completed
-signal player_disconnection_completed
-signal server_stopped
 
 func connect_to_server(ip, port, username):
 	self_data.username = username
@@ -26,6 +16,9 @@ remote func fetch_player_info():
 remote func get_map(map):
 	Global.map = map
 	get_tree().change_scene("res://GameController.tscn")
+
+remote func get_players_list(players_list):
+	players = players_list
 
 remote func kicked(reason):
 	Global.kick_reason = reason 
