@@ -11,9 +11,9 @@ var wants_to_respawn
 
 func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
-	Server.connect("player_connection_completed", self, '_on_player_connection_completed')
-	Server.connect("player_disconnection_completed", self, "on_player_disconnection_completed")
-	Server.connect("server_stopped", self, "on_server_stopped")
+#	Server.connect("player_connection_completed", self, '_on_player_connection_completed')
+#	Server.connect("player_disconnection_completed", self, "on_player_disconnection_completed")
+#	Server.connect("server_stopped", self, "on_server_stopped")
 	
 	add_child(load("res://maps/" + Global.map + ".tscn").instance())
 	spawn_self()
