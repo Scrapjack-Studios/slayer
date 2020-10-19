@@ -18,10 +18,9 @@ func _ready():
 	add_child(load("res://maps/" + Global.map + ".tscn").instance())
 	spawn_self()
 	
-#	Server.rpc_id(1, '_request_players', get_tree().get_network_unique_id())
-#	for new_player in Network.players:
-#		if new_player != get_tree().get_network_unique_id():
-#			spawn_peer(new_player) 
+	# spawn the player(s) that have already joined the game
+	for existing_player in Server.players:
+		spawn_peer(existing_player) 
 	
 	$CanvasLayer/HUD/HealthBar.value = player.health
 	emit_signal("game_started")
@@ -33,7 +32,8 @@ func _process(_delta):
 		$CanvasLayer/HUD/AmmoCounter.text = str(player.get_node("Weapon").get_node("GunStats").shots_fired)+"/"+str(player.get_node("Weapon").get_node("GunStats").mag)
 		$CanvasLayer/HUD/GrappleCooldown.value = player.get_node("GrappleTimer").get_time_left() * 25
 		$CanvasLayer/HUD/AmmoCooldown.value = player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").time_left
-		$CanvasLayer/HUD/AmmoCooldown.max_value = player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").wait_time
+		$CanvasLayer/HUD/AmmoCooldown.max_value
+		player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").wait_time
 
 func _on_RespawnAsker_pressed():
 	if can_respawn:
