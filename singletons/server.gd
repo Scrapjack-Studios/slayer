@@ -1,11 +1,11 @@
 extends Node
 
-var network = NetworkedMultiplayerENet.new()
 var players = {}
 var self_data = {username = '', position = Vector2(), received_disconnect=false}
 var start_position
 
 func connect_to_server(ip, port, username):
+	var network = NetworkedMultiplayerENet.new()
 	self_data.username = username
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)
