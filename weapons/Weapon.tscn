@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/shotgun.png" type="Texture" id=2]
@@ -26,9 +26,6 @@ frame_3/delay_sec = 0.0
 frame_4/texture = ExtResource( 17 )
 frame_4/delay_sec = 0.0
 
-[sub_resource type="OccluderPolygon2D" id=2]
-polygon = PoolVector2Array( -11.3218, 3.13318, 4.90299, 2.85498, 4.96949, 7.00013, -8.83933, 7.05577, -9.28263, 9.08662, -12.6295, 9.11444, -12.962, 5.94298 )
-
 [node name="Weapon" type="Sprite"]
 use_parent_material = true
 position = Vector2( 20, 0 )
@@ -38,14 +35,14 @@ region_enabled = true
 region_rect = Rect2( 497, 100, 1, 0 )
 
 [node name="Weapon_Sprite" type="Sprite" parent="."]
-position = Vector2( 37.664, -15.5122 )
+position = Vector2( 6.18154, -53.4629 )
 scale = Vector2( 5.07273, 3.83191 )
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( -20, -5 )
 
 [node name="Muzzle" type="Position2D" parent="Weapon_Sprite"]
-position = Vector2( 5, 4.04816 )
+position = Vector2( 7.12784, 12.9505 )
 rotation = 1.7318e-11
 scale = Vector2( 0.42014, 0.401667 )
 
@@ -64,10 +61,6 @@ texture_scale = 0.04
 color = Color( 0.968627, 0.545098, 0, 1 )
 energy = 2.0
 shadow_gradient_length = 2933.0
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Weapon_Sprite"]
-visible = false
-occluder = SubResource( 2 )
 
 [node name="GunStats" type="Node2D" parent="."]
 script = ExtResource( 1 )
