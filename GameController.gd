@@ -2,8 +2,6 @@ extends Node
 
 signal game_started
 signal respawn_available
-signal player_connection_completed
-signal player_disconnection_completed
 
 var player
 var can_respawn
@@ -11,18 +9,12 @@ var wants_to_respawn
 
 func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
-#	Server.connect("player_connection_completed", self, '_on_player_connection_completed')
-#	Server.connect("player_disconnection_completed", self, "on_player_disconnection_completed")
-#	Server.connect("server_stopped", self, "on_server_stopped")
 	
 	add_child(load("res://maps/" + Global.map + ".tscn").instance())
-	spawn_self()
 	
 	# spawn the player(s) that have already joined the game
-	for existing_player in Server.players:
-		spawn_peer(existing_player) 
-	
-	$CanvasLayer/HUD/HealthBar.value = player.health
+#	for existing_player in Server.players:
+#		spawn_peer(existing_player) 
 	emit_signal("game_started")
 	
 func _process(_delta):
@@ -42,31 +34,25 @@ func _on_RespawnAsker_pressed():
 		wants_to_respawn = true
 		$CanvasLayer/DeathUI/RespawnAsker.set_text("Queued")
 
-func spawn_self():
-	player = load("res://Player.tscn").instance()
-	player.name = str(get_tree().get_network_unique_id())
-	player.set_network_master(get_tree().get_network_unique_id())
+remote func spawn(id, info):
+	var player = load('res://Player.tscn').instance()
+	player.name = str(id)
+	player.set_network_master(id)
 	add_child(player)
-	player.init(Server.self_data.username, Server.start_position)
-	player.connect("health_changed", self, "on_Player_health_changed")
-	player.connect("died", self, "on_Player_died")
-	player.connect("respawn", self, "on_Player_respawned")   
-	player.health = player.max_health
-	player.get_node("Camera2D").make_current()
-	$CanvasLayer/HUD/HealthBar.value = player.health
-	$CanvasLayer/HUD/HealthBar/HealthBarChange.value = player.health
-	$CanvasLayer/DeathUI/RespawnAsker.hide()
-	$CanvasLayer/DeathUI/RespawnCountdown.hide()
-	
-func spawn_peer(id):
-	var info = Server.players[id]
-	var new_player = load('res://Player.tscn').instance()
-	new_player.set_collision_layer_bit(4, true)
-	new_player.name = str(id)
-	new_player.set_network_master(id)
-	add_child(new_player)
-	new_player.init(info.name, info.position)
-	
+	player.init(info.name, info.position)
+	if id == get_tree().get_network_unique_id():
+		player.connect("health_changed", self, "on_Player_health_changed")
+		player.connect("died", self, "on_Player_died")
+		player.connect("respawn", self, "on_Player_respawned")   
+		player.health = player.max_health
+		player.get_node("Camera2D").make_current()
+		$CanvasLayer/HUD/HealthBar.value = player.health
+		$CanvasLayer/HUD/HealthBar/HealthBarChange.value = player.health
+		$CanvasLayer/DeathUI/RespawnAsker.hide()
+		$CanvasLayer/DeathUI/RespawnCountdown.hide()
+	else:
+		player.set_collision_layer_bit(4, true)
+
 remote func who_died(victim, weapon_sprite, killer):
 	var obituary_row = load("res://menus/ObituaryRow.tscn").instance()
 	$CanvasLayer/DeathUI/Obituary.add_child(obituary_row)
@@ -124,15 +110,15 @@ func _on_player_disconnected(id):
 	yield($CanvasLayer/NetworkUI/DisconnectMessageTimer, "timeout")
 	$CanvasLayer/NetworkUI/DisconnectMessage.hide()
 	
-func _on_player_connection_completed():
-	if get_tree().get_network_unique_id() != Server.connected_player:
-		spawn_peer(Server.connected_player)
-	elif get_tree().get_network_unique_id() != Server.connected_player:
-		$CanvasLayer/NetworkUI/ConnectMessage.set_text(Server.connected_player_info["name"] + " has connected")
-		$CanvasLayer/NetworkUI/ConnectMessageTimer.start()
-		$CanvasLayer/NetworkUI/ConnectMessage.show()
-		yield($CanvasLayer/NetworkUI/ConnectMessageTimer, "timeout")
-		$CanvasLayer/NetworkUI/ConnectMessage.hide()
+#func on_player_connection_completed():
+#	if get_tree().get_network_unique_id() != Server.connected_player:
+#		spawn_peer(Server.connected_player)
+#	elif get_tree().get_network_unique_id() != Server.connected_player:
+#		$CanvasLayer/NetworkUI/ConnectMessage.set_text(Server.connected_player_info["name"] + " has connected")
+#		$CanvasLayer/NetworkUI/ConnectMessageTimer.start()
+#		$CanvasLayer/NetworkUI/ConnectMessage.show()
+#		yield($CanvasLayer/NetworkUI/ConnectMessageTimer, "timeout")
+#		$CanvasLayer/NetworkUI/ConnectMessage.hide()
 		
 #func on_player_disconnection_completed(id):
 #	if is_network_master():
