@@ -18,35 +18,7 @@ mag = 60
 shots_fired = 60
 reload = 2
 weapon_sprite = ExtResource( 2 )
-dmg = 2.0
-Weapon_Sounds = 1
-
-[node name="TestAxe" type="Node" parent="."]
-script = ExtResource( 4 )
-__meta__ = {
-"_editor_description_": "Standard assalt rifle"
-}
-automatic = true
-cool_down = 0.1
-mag = 10000
-shots_fired = 10000
-reload = 2
-weapon_sprite = ExtResource( 2 )
-dmg = 10.0
-Weapon_Sounds = 1
-
-[node name="test_axe2" type="Node" parent="."]
-script = ExtResource( 4 )
-__meta__ = {
-"_editor_description_": "Standard assalt rifle"
-}
-semi_auto = true
-cool_down = 0.1
-mag = 60
-shots_fired = 60
-reload = 2
-weapon_sprite = ExtResource( 2 )
-dmg = 100.0
+dmg = 4.0
 Weapon_Sounds = 1
 
 [node name="Chesterfield_33" type="Node" parent="."]
@@ -61,7 +33,7 @@ shots_fired = 8
 reload = 2
 weapon_sprite = ExtResource( 2 )
 kickback = -30
-dmg = 0.7
+dmg = 10.0
 shotgun_pellets = 7
 Weapon_Sounds = 2
 
@@ -76,7 +48,7 @@ mag = 99
 shots_fired = 99
 reload = 3
 weapon_sprite = ExtResource( 2 )
-dmg = 5.0
+dmg = 7.0
 
 [node name="Novin_Mausk" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -101,4 +73,4 @@ shots_fired = 30
 reload = 2
 weapon_sprite = ExtResource( 2 )
 burst_ammount = 3
-dmg = 2.0
+dmg = 4.0
