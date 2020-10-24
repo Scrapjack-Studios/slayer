@@ -40,7 +40,7 @@ func fire():
 		if shotgun:
 			shots_fired -= 1
 			effects()
-			$Sounds/FireSound.play()
+			$Sounds/FireSound.rpc("play_firesound")
 			rpc("spawn_projectile", "shotgun", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
 			if shots_fired == 0:
 				can_fire = false 
@@ -48,21 +48,21 @@ func fire():
 			for bullet in burst_ammount: 
 				shots_fired -= 1
 				effects()
-				$Sounds/FireSound.play()
+				$Sounds/FireSound.rpc("play_firesound")
 				rpc("spawn_projectile", "burst_fire", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
 				if shots_fired == 0:
 					can_fire = false    
 		elif is_automatic:
 			shots_fired -= 1
 			effects()
-			$Sounds/FireSound.play()
+			$Sounds/FireSound.rpc("play_firesound")
 			rpc("spawn_projectile", "auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
 			if shots_fired == 0:
 				can_fire = false
 		elif is_semi_auto:
 			shots_fired -= 1
 			effects()
-			$Sounds/FireSound.play()
+			$Sounds/FireSound.rpc("play_firesound")
 			rpc("spawn_projectile", "semi_auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation)
 			if shots_fired == 0:
 				can_fire = false

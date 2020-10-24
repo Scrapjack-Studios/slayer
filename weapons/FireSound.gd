@@ -11,3 +11,6 @@ func activate():
 		stream = load("res://assets/sfx/weapons/Pistol.wav")
 	if shotgun:
 		stream = load("res://assets/sfx/weapons/Combat_Shotgun.wav")
+
+sync func play_firesound():
+	play()
