@@ -34,6 +34,7 @@ var shots_fired_memory = 50
 var can_fire = true
 var ReloadTime = 2
 var bounce
+var area_effect =
 
 func fire():
 	if can_fire:
@@ -103,9 +104,11 @@ func set_sprite():
 
 func effects():
 	get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").show()
+	get_parent().get_node("Weapon_Sprite/Muzzle/Flash").show()
 	$EffectsTimer.start(0.1)
 	yield($EffectsTimer, "timeout")
 	get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").hide()
+	get_parent().get_node("Weapon_Sprite/Muzzle/Flash").hide()
 
 
 

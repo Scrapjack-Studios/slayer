@@ -96,6 +96,10 @@ func _input(event: InputEvent) -> void:
 			$WeaponMechanics.burst()
 			GunTimer(false)
 			
+		if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
+			$WeaponMechanics.shotgun()
+			GunTimer(false)
+			
 		if event.is_action_pressed("Graphook") and can_grapple:
 				rotation = 0
 				$Chain.rpc("shoot")
@@ -228,9 +232,7 @@ func _physics_process(delta):
 		if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
 			$WeaponMechanics.automatic()
 			GunTimer(true)   
-		if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
-			$WeaponMechanics.shotgun()
-			GunTimer(false)
+		
 	
 		if get_local_mouse_position().x < 0: # mouse is facing left
 			$Weapon.set_position(Vector2(-22,-7))
