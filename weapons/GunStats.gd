@@ -34,8 +34,7 @@ var shots_fired_memory = 50
 var can_fire = true
 var ReloadTime = 2
 var bounce
-var area_effect =
-
+var area_effect
 func fire():
 	if can_fire:
 		if shotgun:

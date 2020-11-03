@@ -17,10 +17,11 @@ export (float) var dmg
 export (int) var shotgun_pellets
 export (int) var area_effect
 export(int, "Pistol", "Assault", "Shotgun", "Carbine") var Weapon_Sounds
-var GunStatsRef = get_parent().get_parent().get_parent().get_node("GunStats")
+
 
 
 func activate():
+	var GunStatsRef = get_parent().get_parent().get_parent().get_node("GunStats")
 	GunStatsRef.get_node("Sounds/FireSound").shotgun = Weapon_Sounds == 2
 	GunStatsRef.get_node("Sounds/FireSound").pistol = Weapon_Sounds == 0
 	GunStatsRef.get_node("Sounds/FireSound").assault = Weapon_Sounds == 1
@@ -32,7 +33,7 @@ func activate():
 	GunStatsRef.burst_ammount = burst_ammount
 	GunStatsRef.shotgun_pellets = shotgun_pellets
 	GunStatsRef.cool_down = cool_down
-	GunStatsRef.weapon_sprite = weapon_sprite
+#	GunStatsRef.weapon_sprite = weapon_sprite
 	GunStatsRef.mag = mag
 	GunStatsRef.shots_fired = shots_fired
 	GunStatsRef.kickback = kickback
