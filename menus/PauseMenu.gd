@@ -8,6 +8,7 @@ func _ready():
 	get_parent().get_parent().connect("game_started", self, "on_game_started")
 
 func _process(_delta):
+	print(game_controller.get_children())
 	if Input.is_action_just_released("pause_menu") and not Global.paused:
 		self.show()
 		Global.pause_game()
