@@ -13,8 +13,8 @@ func _ready():
 	add_child(load("res://maps/" + Global.map + ".tscn").instance())
 	
 	# spawn the player(s) that have already joined the game
-#	for existing_player in Server.players:
-#		spawn_peer(existing_player) 
+	for existing_player in Server.players:
+		spawn(existing_player, Server.players[existing_player]) 
 	emit_signal("game_started")
 	
 func _process(_delta):
