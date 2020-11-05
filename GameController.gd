@@ -39,9 +39,9 @@ remote func spawn(id, info):
 	player.name = str(id)
 	player.set_network_master(id)
 	add_child(player)
-	Global.player_node = get_node(str(id))
 	player.init(info.username, info.position)
 	if id == get_tree().get_network_unique_id():
+		Global.player_node = get_node(str(id))
 		player.connect("health_changed", self, "on_Player_health_changed")
 		player.connect("died", self, "on_Player_died")
 		player.connect("respawn", self, "on_Player_respawned")   
