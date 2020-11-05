@@ -45,7 +45,6 @@ func _on_Quit_Desktop_pressed():
 func on_game_started():
 	game_controller = get_parent().get_parent()
 	options_menu = game_controller.get_node("CanvasLayer/OptionsMenu")
-	player = game_controller.get_node(str(get_tree().get_network_unique_id()))
 
 func _on_Resume_mouse_entered():
 	$Hover.play()
