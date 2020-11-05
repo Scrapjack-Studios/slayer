@@ -9,6 +9,7 @@ var weapon4
 
 var map
 
+var player_node
 var username
 var kick_reason = ""
 
@@ -34,3 +35,10 @@ func resume_game():
 	player.can_jump = true
 	player.get_node("Weapon/GunStats").can_fire = true
 	player.get_node("Camera2D").make_current()
+
+func quit_mainmenu():
+	get_tree().change_scene("res://MainMenu.tscn")
+	player_node.get_node("Camera2D").make_current() # fixes strange main menu bug, so don't remove it
+	
+func quit_desktop():
+	pass

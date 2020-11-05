@@ -8,7 +8,6 @@ func _ready():
 	get_parent().get_parent().connect("game_started", self, "on_game_started")
 
 func _process(_delta):
-	print(game_controller.get_children())
 	if Input.is_action_just_released("pause_menu") and not Global.paused:
 		self.show()
 		Global.pause_game()
@@ -36,8 +35,7 @@ func _on_Options_pressed():
 func _on_Quit_MainMenu_pressed():
 	$Blip1.play()
 	yield($Blip1, "finished")
-	get_tree().change_scene("res://MainMenu.tscn")
-	player.get_node("Camera2D").make_current() # fixes strange main menu bug, so don't remove it
+	Global.quit_mainmenu()
 
 func _on_Quit_Desktop_pressed():
 	$Blip1.play()
