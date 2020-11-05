@@ -27,7 +27,7 @@ __meta__ = {
 "_editor_description_": "Pump action shotgun"
 }
 shotgun = true
-cool_down = 0.6
+cool_down = 0.9
 mag = 8
 shots_fired = 8
 reload = 2

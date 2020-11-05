@@ -53,6 +53,7 @@ scale = Vector2( 0.0717646, 0.0735144 )
 texture = SubResource( 1 )
 
 [node name="Flash" type="Light2D" parent="Weapon_Sprite/Muzzle"]
+visible = false
 position = Vector2( 5.96899, -0.83184 )
 scale = Vector2( 0.705924, 0.766417 )
 texture = ExtResource( 18 )

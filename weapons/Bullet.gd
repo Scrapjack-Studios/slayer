@@ -63,19 +63,19 @@ func hit():
 	velocity = Vector2(0,0)
 	$CollisionShape2D.disabled = true
 	$Sprite.hide()
-	$Explosion.show()
-	$Explosion.play("smoke")
+#	$Explosion.show()
+#	$Explosion.play("smoke")
 	$Tracer.hide()
 
 func _on_Lifetime_timeout():
 	hit()
 
-func _on_Explosion_animation_finished():
-	queue_free()
+#func _on_Explosion_animation_finished():
+#	queue_free()
 
 func _on_Timer_timeout():
 	velocity = Vector2(0, 0)
 	$Sprite.hide()
-	$Explosion.show()
-	$Explosion.play("smoke")
+#	$Explosion.show()
+#	$Explosion.play("smoke")
 	$Tracer.hide()
