@@ -6,9 +6,11 @@ export (int, 0, 200) var push = 100
 var damage
 var hit_pos
 var weapon_type
+var player
+
 func _ready():
 	set_process(true)
-	
+	player = get_parent().get_parent().get_parent().get_parent()
 # warning-ignore:shadowed_variable
 func start_at(pos, dir, type, dmg, _lifetime, size, speed):
 	$Sprite.animation = type
@@ -29,7 +31,7 @@ func _physics_process(delta):
 		if collision.collider.is_in_group("tiles"):
 			hit_pos = get_position()
 			collision.collider.get_parent().hit(hit_pos, damage)
-
+			collision.collider.hit(hit_pos, player.get_node("Weapon").global_rotation)
 		if collision.collider.is_in_group("bodies"):
 			collision.collider.apply_central_impulse(-collision.normal * push)
 			if collision.collider.is_in_group("destruct"):
@@ -41,7 +43,6 @@ func _physics_process(delta):
 			$Explosion.play("smoke")
 			$Tracer.hide()
 		if collision.collider.is_in_group("Players"):
-			var player = get_parent().get_parent().get_parent().get_parent()
 			collision.collider.take_damage(damage, player.get_node("Weapon/Weapon_Sprite").texture.resource_path, player.username, global_position, player.get_node("Weapon").global_rotation)
 			if collision.collider.health == 0:
 				$KillMarker.show()
