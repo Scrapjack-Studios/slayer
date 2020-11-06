@@ -1,6 +1,6 @@
 extends Node
 
-signal recieved_players_list
+signal received_players_list
 
 var players = {}
 var self_data = {username = '', position = Vector2(), received_disconnect=false}
