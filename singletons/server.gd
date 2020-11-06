@@ -1,5 +1,7 @@
 extends Node
 
+signal recieved_players_list
+
 var players = {}
 var self_data = {username = '', position = Vector2(), received_disconnect=false}
 var start_position
@@ -11,7 +13,7 @@ func connect_to_server(ip, port, username):
 	get_tree().set_network_peer(network)
 
 # gets called by the server when a player connects, and then the player sends their info
-remote func fetch_player_info():
+remote func fetch_player_info():	
 	rpc_id(1, "get_player_info", get_tree().get_network_unique_id(), self_data)
 
 remote func get_map(map):
@@ -21,6 +23,7 @@ remote func get_map(map):
 
 remote func get_players_list(players_list):
 	players = players_list
+	emit_signal("received_players_list")
 
 remote func get_start_position(start_pos):
 	start_position = start_pos

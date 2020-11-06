@@ -9,13 +9,17 @@ var wants_to_respawn
 
 func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
+	Server.connect("received_players_list", self, "on_players_list_received")
 	
 	add_child(load("res://maps/" + Global.map + ".tscn").instance())
 	
 	# spawn the player(s) that have already joined the game
+	print(Server.players)
+	emit_signal("game_started")
+	
+func on_players_list_received():
 	for existing_player in Server.players:
 		spawn(existing_player, Server.players[existing_player]) 
-	emit_signal("game_started")
 	
 func _process(_delta):
 	if $CanvasLayer/DeathUI/RespawnCountdown.visible:
