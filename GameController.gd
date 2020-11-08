@@ -19,7 +19,8 @@ func _ready():
 	
 func on_players_list_received():
 	for existing_player in Server.players:
-		spawn(existing_player, Server.players[existing_player]) 
+		if existing_player != get_tree().get_network_unique_id():
+			spawn(existing_player, Server.players[existing_player]) 
 	
 func _process(_delta):
 	if $CanvasLayer/DeathUI/RespawnCountdown.visible:
