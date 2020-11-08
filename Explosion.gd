@@ -46,9 +46,8 @@ var shapes: = [
 ]
 
 
-func _init(map:TileMap, _position:Vector2)->void:
+func _init(map:TileMap, _position:Vector2):
 	var map_position: Vector2 = map.world_to_map(map.to_local(_position))
 	for shape in shapes:
 		for pos in shape:
 			map.set_cellv(map_position + pos, -1)
-		yield(map.get_tree().create_timer(0.017), "timeout")
