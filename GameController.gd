@@ -17,8 +17,10 @@ func _ready():
 	emit_signal("game_started")
 	
 func on_players_list_received():
+	print(Server.players)
 	for existing_player in Server.players:
-		spawn(existing_player, Server.players[existing_player]) 
+		if existing_player != get_tree().get_network_unique_id():
+			spawn(existing_player, Server.players[existing_player]) 
 	
 func _process(_delta):
 	if $CanvasLayer/DeathUI/RespawnCountdown.visible:
@@ -106,13 +108,13 @@ func _on_GameController_respawn_available():
 		player.rpc("respawn")
 		wants_to_respawn = false
 		
-func _on_player_disconnected(id):
-	get_node(str(id)).queue_free()
-	$CanvasLayer/NetworkUI/DisconnectMessage.set_text(Server.disconnected_player_info["name"] + " has disconnected")
-	$CanvasLayer/NetworkUI/DisconnectMessageTimer.start()
-	$CanvasLayer/NetworkUI/DisconnectMessage.show()
-	yield($CanvasLayer/NetworkUI/DisconnectMessageTimer, "timeout")
-	$CanvasLayer/NetworkUI/DisconnectMessage.hide()
+#func _on_player_disconnected(id):
+#	get_node(str(id)).queue_free()
+#	$CanvasLayer/NetworkUI/DisconnectMessage.set_text(Server.disconnected_player_info["name"] + " has disconnected")
+#	$CanvasLayer/NetworkUI/DisconnectMessageTimer.start()
+#	$CanvasLayer/NetworkUI/DisconnectMessage.show()
+#	yield($CanvasLayer/NetworkUI/DisconnectMessageTimer, "timeout")
+#	$CanvasLayer/NetworkUI/DisconnectMessage.hide()
 	
 #func on_player_connection_completed():
 #	if get_tree().get_network_unique_id() != Server.connected_player:
