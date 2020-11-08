@@ -19,6 +19,7 @@ shots_fired = 60
 reload = 2
 weapon_sprite = ExtResource( 2 )
 dmg = 4.0
+area_effect = 20
 Weapon_Sounds = 1
 
 [node name="Chesterfield_33" type="Node" parent="."]
@@ -35,6 +36,7 @@ weapon_sprite = ExtResource( 2 )
 kickback = -30
 dmg = 7.0
 shotgun_pellets = 10
+area_effect = 50
 Weapon_Sounds = 2
 
 [node name="Raven_99" type="Node" parent="."]
@@ -63,6 +65,21 @@ reload = 3
 weapon_sprite = ExtResource( 2 )
 kickback = 10
 dmg = 70.0
+
+[node name="RPG" type="Node" parent="."]
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": "Pump action shotgun"
+}
+semi_auto = true
+cool_down = 2.0
+mag = 3
+shots_fired = 3
+reload = 3
+weapon_sprite = ExtResource( 2 )
+kickback = 10
+dmg = 500.0
+area_effect = 200
 
 [node name="DMR" type="Node" parent="."]
 script = ExtResource( 4 )

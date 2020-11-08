@@ -7,12 +7,14 @@ var damage
 var hit_pos
 var weapon_type
 var player
+var area_effect
+
 
 func _ready():
 	set_process(true)
 	player = get_parent().get_parent().get_parent().get_parent()
 # warning-ignore:shadowed_variable
-func start_at(pos, dir, type, dmg, _lifetime, size, speed):
+func start_at(pos, dir, type, dmg, _lifetime, size, speed, area_dmg):
 	$Sprite.animation = type
 	position = pos
 	rotation = dir
@@ -22,6 +24,7 @@ func start_at(pos, dir, type, dmg, _lifetime, size, speed):
 	velocity = Vector2(speed, 0).rotated(dir)
 	add_to_group("bullets")
 	speed = speed
+	area_effect = area_dmg
 
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta, false)
@@ -30,7 +33,7 @@ func _physics_process(delta):
 		
 		if collision.collider.is_in_group("tiles"):
 			hit_pos = get_position()
-			collision.collider.get_parent().hit(hit_pos, damage)
+			collision.collider.get_parent().hit(hit_pos, damage, area_effect)
 			collision.collider.hit(hit_pos, player.get_node("Weapon").global_rotation)
 		if collision.collider.is_in_group("bodies"):
 			collision.collider.apply_central_impulse(-collision.normal * push)

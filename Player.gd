@@ -74,7 +74,7 @@ var stop = true
 var momentum = 1.2
 var can_build_momentum = true
 var wallmount = false
-var auto_climb = true
+#var auto_climb = true
 
 func _ready():
 	get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
@@ -118,17 +118,17 @@ func _input(event: InputEvent) -> void:
 				grapple_count = 0
 			
 				
-		if auto_climb and can_move and InputEventAction:
-			if MoveDirection.LEFT:
-				if $Wall_Raycasts/Left/Wall_Detect_Left4.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding():
-					jump_strength = 350
-					jump()
-					jump_strength = 750
-			if MoveDirection.RIGHT:
-				if $Wall_Raycasts/Right/Wall_Detect_Right4.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding():
-					jump_strength = 350
-					jump()
-					jump_strength = 750
+#		if auto_climb and can_move and InputEventAction:
+#			if MoveDirection.LEFT:
+#				if $Wall_Raycasts/Left/Wall_Detect_Left4.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding():
+#					jump_strength = 350
+#					jump()
+#					jump_strength = 750
+#			if MoveDirection.RIGHT:
+#				if $Wall_Raycasts/Right/Wall_Detect_Right4.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding():
+#					jump_strength = 350
+#					jump()
+#					jump_strength = 750
 			
 		
 			

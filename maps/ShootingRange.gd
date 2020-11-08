@@ -3,15 +3,13 @@ extends Control
 onready var tilemap: = $TileMap
 var total_damage = 0
 
-func hit(location_hit : Vector2, damage : float):
+func hit(location_hit : Vector2, damage : float, area_effect : int):
+	Explosion.new(tilemap, location_hit)
 #	var pos: = location_hit
-	var rand_size = 0.5
-	var count = 0.5
-	total_damage += damage
+	var rand_size = 20
+	var count = 6 + area_effect
 	
-	if total_damage == 1:
-	
-		for i in count:
-			var rand_pos: = Vector2(rand_range(-rand_size, rand_size), rand_range(-rand_size, rand_size))
-			Explosion.new(tilemap, location_hit + rand_pos) 
-			total_damage = 0
+
+	for i in count:
+		var rand_pos: = Vector2(rand_range(-rand_size, rand_size), rand_range(-rand_size, rand_size))
+		Explosion.new(tilemap, location_hit + rand_pos) 
