@@ -14,13 +14,11 @@ func _ready():
 	add_child(load("res://maps/" + Global.map + ".tscn").instance())
 	
 	# spawn the player(s) that have already joined the game
-	print(Server.players)
 	emit_signal("game_started")
 	
 func on_players_list_received():
 	for existing_player in Server.players:
-		if existing_player != get_tree().get_network_unique_id():
-			spawn(existing_player, Server.players[existing_player]) 
+		spawn(existing_player, Server.players[existing_player]) 
 	
 func _process(_delta):
 	if $CanvasLayer/DeathUI/RespawnCountdown.visible:
