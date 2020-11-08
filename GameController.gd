@@ -17,11 +17,10 @@ func _ready():
 	emit_signal("game_started")
 	
 func on_players_list_received():
-	print(Server.players)
-	for existing_player in Server.players:
-		if existing_player != get_tree().get_network_unique_id():
-			spawn(existing_player, Server.players[existing_player]) 
-	
+	for peer in Server.players:
+		if peer != get_tree().get_network_unique_id():
+			spawn(peer, Server.players[peer]) 
+
 func _process(_delta):
 	if $CanvasLayer/DeathUI/RespawnCountdown.visible:
 		$CanvasLayer/DeathUI/RespawnCountdown.set_text(str(int($CanvasLayer/DeathUI/RespawnTimer.time_left)))
