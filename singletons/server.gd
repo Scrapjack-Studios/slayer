@@ -22,6 +22,8 @@ remote func get_map(map):
 	get_tree().change_scene("res://GameController.tscn")
 
 remote func get_players_list(players_list):
+	if players: # if players list isn't empty
+		var old_players_list = players
 	players = players_list
 	emit_signal("received_players_list")
 
