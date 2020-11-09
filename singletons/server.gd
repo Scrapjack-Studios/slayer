@@ -3,6 +3,7 @@ extends Node
 signal received_players_list
 
 var players = {}
+var old_players = {}
 var self_data = {username = '', position = Vector2(), received_disconnect=false}
 var start_position
 
@@ -21,10 +22,11 @@ remote func get_map(map):
 	Global.map = map
 	get_tree().change_scene("res://GameController.tscn")
 
-remote func get_players_list(players_list):
+remote func get_players_list(updated_players_list):
 	if players: # if players list isn't empty
-		var old_players_list = players
-	players = players_list
+		# store old player list
+		old_players = players
+	players = updated_players_list
 	emit_signal("received_players_list")
 
 remote func get_start_position(start_pos):

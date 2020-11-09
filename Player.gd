@@ -208,7 +208,6 @@ func _physics_process(delta):
 		if Input.is_action_just_released("hold"):
 			chain_pull = 55
 
-			
 		if Input.is_action_just_pressed("jump") and can_jump:
 			jump()
 			rotation = 0

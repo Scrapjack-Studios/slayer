@@ -17,7 +17,16 @@ func _ready():
 	emit_signal("game_started")
 	
 func on_players_list_received():
-	for peer in Server.players:
+	var peers = {}
+	# compare old and updated players list
+	if Server.old_players:
+		for new_peer in Server.players:
+			# only store new players
+			if not new_peer in Server.old_players:
+				peers[new_peer] = new_peer.values()
+	else:
+		peers = Server.players
+	for peer in peers:
 		if peer != get_tree().get_network_unique_id():
 			spawn(peer, Server.players[peer]) 
 
@@ -39,7 +48,7 @@ func _on_RespawnAsker_pressed():
 		$CanvasLayer/DeathUI/RespawnAsker.set_text("Queued")
 
 remote func spawn(id, info):
-	var player = load('res://Player.tscn').instance()
+	player = load('res://Player.tscn').instance()
 	player.name = str(id)
 	player.set_network_master(id)
 	add_child(player)
