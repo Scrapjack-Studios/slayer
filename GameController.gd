@@ -23,7 +23,8 @@ func on_players_list_received():
 		for new_peer in Server.players:
 			# only store new players
 			if not new_peer in Server.old_players:
-				peers[new_peer] = new_peer.values()
+				peers[new_peer] = Server.players[new_peer]
+				print(peers)
 	else:
 		peers = Server.players
 	for peer in peers:
