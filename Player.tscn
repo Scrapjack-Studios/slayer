@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://weapons/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/sfx/player/blood_spurt3.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sfx/player/gib1.wav" type="AudioStream" id=12]
 [ext_resource path="res://misc/ScreenShake.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/sprites/light.png" type="Texture" id=14]
 
 [sub_resource type="PhysicsMaterial" id=1]
 
@@ -257,5 +258,12 @@ position = Vector2( -4.38814, 4.89539 )
 rotation = 0.000126217
 scale = Vector2( 23.308, 17 )
 shape = SubResource( 5 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -1.18457, 2.38315 )
+scale = Vector2( 0.356763, 0.382021 )
+texture = ExtResource( 14 )
+energy = 0.9
+shadow_enabled = true
 [connection signal="timeout" from="GrappleTimer" to="." method="_on_GrappleTimer_timeout"]
 [connection signal="timeout" from="WallJumpTimer" to="." method="_on_WallJumpTimer_timeout"]

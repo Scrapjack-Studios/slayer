@@ -62,6 +62,14 @@ color = Color( 0.968627, 0.545098, 0, 1 )
 energy = 0.5
 shadow_gradient_length = 2933.0
 
+[node name="Light2D" type="Light2D" parent="Weapon_Sprite/Muzzle"]
+visible = false
+position = Vector2( 319.914, -3.05176e-05 )
+scale = Vector2( 0.27625, 0.355007 )
+texture = ExtResource( 18 )
+color = Color( 0.701961, 0.643137, 0.25098, 1 )
+shadow_enabled = true
+
 [node name="GunStats" type="Node2D" parent="."]
 script = ExtResource( 1 )
 Bullet = ExtResource( 6 )
