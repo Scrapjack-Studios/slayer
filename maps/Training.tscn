@@ -1,69 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://obstacles/Platform_Physics.tscn" type="PackedScene" id=2]
-[ext_resource path="res://obstacles/Platform_Static.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/music/CantBeSaved.ogg" type="AudioStream" id=5]
 
 [node name="Training" type="Control"]
-margin_left = -4480.75
-margin_top = -4477.09
-margin_right = 17927.2
-margin_bottom = 2585.91
+margin_left = -5991.79
+margin_top = -3553.38
+margin_right = 16416.2
+margin_bottom = 3509.62
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StaticBody2D4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 9023.07, 3050.31 )
-scale = Vector2( 1.15, 6.5 )
-
-[node name="StaticBody2D5" parent="." instance=ExtResource( 3 )]
-position = Vector2( 7879.9, 3908.94 )
-scale = Vector2( 1.15, 6.5 )
-
-[node name="StaticBody2D6" parent="." instance=ExtResource( 3 )]
-position = Vector2( 8375.67, 3343.93 )
-scale = Vector2( 1.15, 6.5 )
-
-[node name="StaticBody2D8" parent="." instance=ExtResource( 3 )]
-position = Vector2( 9709.15, 2746.78 )
-scale = Vector2( 1.15, 6.5 )
-
-[node name="StaticBody2D9" parent="." instance=ExtResource( 3 )]
-position = Vector2( 14384.6, 2704.02 )
-scale = Vector2( 1.15, 6.5 )
-
-[node name="StaticBody2D10" parent="." instance=ExtResource( 3 )]
-position = Vector2( 11555.1, 2732.53 )
-scale = Vector2( 1.15, 6.5 )
-
-[node name="StaticBody2D13" parent="." instance=ExtResource( 3 )]
-position = Vector2( 11284.3, 2247.88 )
-scale = Vector2( 1.15, 6.5 )
-
-[node name="StaticBody2D11" parent="." instance=ExtResource( 3 )]
-position = Vector2( 11797.4, 2732.53 )
-scale = Vector2( 1.15, 6.5 )
-
-[node name="StaticBody2D12" parent="." instance=ExtResource( 3 )]
-position = Vector2( 12068.3, 2226.5 )
-scale = Vector2( 1.15, 6.5 )
-
-[node name="StaticBody2D7" parent="." instance=ExtResource( 3 )]
-position = Vector2( 7544.86, 4262.19 )
-scale = Vector2( 1.15, 6.5 )
-
-[node name="StaticBody2D33" parent="." instance=ExtResource( 3 )]
-position = Vector2( 6404.69, 4460.33 )
-scale = Vector2( 8.96781, -1.91842 )
-
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 autoplay = true
 bus = "Music"
-
-[node name="RigidBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 11797.8, 1041.62 )
-rotation = -3.08178
-scale = Vector2( 0.885948, 70.5841 )

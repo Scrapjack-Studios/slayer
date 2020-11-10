@@ -95,8 +95,7 @@ randomness = 1.0
 process_material = SubResource( 5 )
 
 [node name="Light2D" type="Light2D" parent="Tracer"]
-visible = false
-position = Vector2( -0.0993241, 39.3043 )
+position = Vector2( -0.192051, 11.0926 )
 rotation = -1.5708
 scale = Vector2( 1.76122, 0.434891 )
 texture = ExtResource( 2 )

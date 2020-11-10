@@ -71,7 +71,7 @@ var preweapon
 var weaponnumb = 0
 var force = Vector2(200, gravity) # create forces 
 var stop = true
-var momentum = 1.2
+var momentum = 2
 var can_build_momentum = true
 var wallmount = false
 #var auto_climb = true
@@ -322,31 +322,20 @@ func _physics_process(delta):
 func move(direction):   
 	force = Vector2(0, gravity)# create forces
 	stop = true
-	if not can_build_momentum:
-		if momentum >= 2:
-			momentum -= momentum / 1.7
-	can_build_momentum = true
 	if can_move:
 		if direction == MoveDirection.LEFT:
 			if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED * momentum:
 				force.x -= WALK_FORCE
 				stop = false
-				if can_build_momentum:
-					for n in direction:
-						momentum += 0.0003
 		elif direction == MoveDirection.RIGHT:
 			if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED * momentum:
 				force.x += WALK_FORCE
 				stop = false
-				if can_build_momentum:
-					for n in direction:
-						momentum += 0.0003
 		
 			
 			
 func jump():
 	jump_count += 1
-	can_build_momentum = false
 	velocity.y = -jump_strength
 	if on_air_time < JUMP_MAX_AIRBORNE_TIME and not prev_jump_pressed and not is_jumping:
 		velocity.y = -jump_strength
@@ -375,7 +364,6 @@ func wall_cling():
 	velocity.y = lerp(velocity.y,0,0.2)
 	jump_strength = 900
 	wallmount = true
-	can_build_momentum = false
 	if can_walljump:
 		jump_count = 0
 		can_walljump = false
