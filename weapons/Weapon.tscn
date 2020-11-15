@@ -47,11 +47,13 @@ rotation = 1.7318e-11
 scale = Vector2( 0.42014, 0.401667 )
 
 [node name="Explosion" type="Sprite" parent="Weapon_Sprite/Muzzle"]
+visible = false
 position = Vector2( 9.11218, 0.557177 )
 scale = Vector2( 0.0717646, 0.0735144 )
 texture = SubResource( 1 )
 
 [node name="Flash" type="Light2D" parent="Weapon_Sprite/Muzzle"]
+visible = false
 position = Vector2( 9.69124, 0.128056 )
 scale = Vector2( 0.468999, 0.382936 )
 texture = ExtResource( 18 )
