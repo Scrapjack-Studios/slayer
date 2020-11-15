@@ -47,28 +47,18 @@ rotation = 1.7318e-11
 scale = Vector2( 0.42014, 0.401667 )
 
 [node name="Explosion" type="Sprite" parent="Weapon_Sprite/Muzzle"]
-visible = false
 position = Vector2( 9.11218, 0.557177 )
 scale = Vector2( 0.0717646, 0.0735144 )
 texture = SubResource( 1 )
 
 [node name="Flash" type="Light2D" parent="Weapon_Sprite/Muzzle"]
-visible = false
-position = Vector2( 5.96899, -0.83184 )
-scale = Vector2( 0.705924, 0.766417 )
+position = Vector2( 9.69124, 0.128056 )
+scale = Vector2( 0.468999, 0.382936 )
 texture = ExtResource( 18 )
 texture_scale = 0.04
 color = Color( 0.968627, 0.545098, 0, 1 )
-energy = 0.5
+energy = 2.0
 shadow_gradient_length = 2933.0
-
-[node name="Light2D" type="Light2D" parent="Weapon_Sprite/Muzzle"]
-visible = false
-position = Vector2( 319.914, -3.05176e-05 )
-scale = Vector2( 0.27625, 0.355007 )
-texture = ExtResource( 18 )
-color = Color( 0.701961, 0.643137, 0.25098, 1 )
-shadow_enabled = true
 
 [node name="GunStats" type="Node2D" parent="."]
 script = ExtResource( 1 )

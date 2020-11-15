@@ -260,8 +260,8 @@ scale = Vector2( 23.308, 17 )
 shape = SubResource( 5 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( -1.18457, 2.38315 )
-scale = Vector2( 0.356763, 0.382021 )
+position = Vector2( 2.38678, -1.58559 )
+scale = Vector2( 0.445874, 0.490555 )
 texture = ExtResource( 14 )
 energy = 0.9
 shadow_enabled = true

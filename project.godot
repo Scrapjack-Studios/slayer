@@ -188,9 +188,10 @@ NextWeapon={
 
 quality/2d/use_pixel_snap=true
 threads/thread_model=2
+quality/directional_shadow/size=2048
 quality/shadows/filter_mode=0
 quality/shading/force_vertex_shading=true
-quality/subsurface_scattering/quality=2
 quality/subsurface_scattering/scale=2
 quality/filters/msaa=1
+quality/depth/hdr=false
 quality/dynamic_fonts/use_oversampling=false

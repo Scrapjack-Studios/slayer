@@ -101,7 +101,7 @@ scale = Vector2( 1.76122, 0.434891 )
 texture = ExtResource( 2 )
 texture_scale = 0.05
 color = Color( 0.980392, 0.572549, 0, 1 )
-energy = 0.6
+energy = 0.7
 shadow_gradient_length = 3084.6
 
 [node name="HitMarker" type="Sprite" parent="."]
