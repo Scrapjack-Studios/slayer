@@ -159,6 +159,7 @@ func _input(event: InputEvent) -> void:
 			$Weapon/GunStats.set_sprite()
 			preweapon = "Weapon1"
 			$Weapon/GunStats.shots_fired = mag_1 
+			$Weapon/GunStats.check()
 			
 		if event.is_action_pressed("Weapon2") or weaponnumb == 2:
 			get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).activate()
@@ -166,6 +167,7 @@ func _input(event: InputEvent) -> void:
 			$Weapon/GunStats.set_sprite() 
 			preweapon = "Weapon2"  
 			$Weapon/GunStats.shots_fired = mag_2
+			$Weapon/GunStats.check()
 			
 		if event.is_action_pressed("Weapon3") or weaponnumb == 3:
 			get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).activate()
@@ -173,6 +175,7 @@ func _input(event: InputEvent) -> void:
 			$Weapon/GunStats.set_sprite() 
 			preweapon = "Weapon3"      
 			$Weapon/GunStats.shots_fired = mag_3
+			$Weapon/GunStats.check()
 			
 		if event.is_action_pressed("Weapon4") or weaponnumb == 4:
 			get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).activate()
@@ -180,7 +183,8 @@ func _input(event: InputEvent) -> void:
 			$Weapon/GunStats.set_sprite() 
 			preweapon = "Weapon4"
 			$Weapon/GunStats.shots_fired = mag_4
-	
+			$Weapon/GunStats.check()
+			
 		if event.is_action_pressed("LastWeapon"):
 			weaponscroll(1)
 	

@@ -113,4 +113,6 @@ func effects():
 
 
 
-
+func check():
+	if shots_fired == 0:
+		can_fire = false
