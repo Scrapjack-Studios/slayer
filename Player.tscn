@@ -52,7 +52,8 @@ texture = ExtResource( 6 )
 region_rect = Rect2( 11, 13, 18, 20 )
 
 [node name="Weapon" parent="." instance=ExtResource( 1 )]
-position = Vector2( 18.4133, -0.000347614 )
+position = Vector2( 18.4133, -0.000347853 )
+scale = Vector2( 0.700347, 0.738675 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = -10000

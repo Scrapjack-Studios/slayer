@@ -87,6 +87,9 @@ func _input(event: InputEvent) -> void:
 		
 		if Input.is_action_just_pressed("reload"):
 				$WeaponMechanics.reload()
+				$Camera2D.add_trauma(0.2)
+				$Camera2D.shake()
+				
 		
 		if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
 			$WeaponMechanics.semi_auto()
@@ -401,6 +404,8 @@ func take_damage(amount, weapon, damager, impact_pos=global_position, weapon_rot
 		get_node("/root/GameController").rpc("who_died", username, weapon, damager)
 		
 sync func die():
+	$Camera2D.add_trauma(0.5)
+	$Camera2D.shake()
 	emit_signal("died")
 	hide()
 	set_physics_process(false)
@@ -410,6 +415,7 @@ sync func die():
 	$CollisionShape2D.disabled = true 
 	# this won't work while flushing queries, but changing it via set_deferred will make the player take 50 damage as soon as they respawn.
 	$BloodGore/GibSound.play()
+	
 	
 sync func spew_blood(pos, rot):
 	var rng = RandomNumberGenerator.new()
