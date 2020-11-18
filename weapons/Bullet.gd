@@ -6,6 +6,7 @@ export (int, 0, 200) var push = 100
 var damage
 var hit_pos
 var weapon_type
+
 func _ready():
 	set_process(true)
 	
