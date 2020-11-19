@@ -1,6 +1,6 @@
 extends Node2D
 
-var Bullet
+var Bullet = load("res://weapons/Bullet.tscn")
 var dmg
 var is_automatic
 var is_burst_fire
@@ -42,7 +42,7 @@ puppet var puppet_shotgun_pellets
 puppet var puppet_shotgun_spread
 puppet var puppet_burst_ammount
 
-sync func fire(type):
+sync func fire(type, pos, rot):
 	rset("puppet_dmg", dmg)
 	rset("puppet_bullet_lifetime", bullet_lifetime)
 	rset("puppet_bullet_size", bullet_size)
@@ -60,8 +60,8 @@ sync func fire(type):
 					shotgun_spread =+ 0.5
 					var pellet = Bullet.instance()
 					pellet.spawn_projectile(
-						get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-						get_parent().global_rotation + rand_range(-0.04,0.04),
+						pos, 
+						rot + rand_range(-0.04,0.04),
 						"black",
 						dmg,
 						bullet_lifetime, 
@@ -78,8 +78,8 @@ sync func fire(type):
 					$Sounds/FireSound.play()
 					var bullet = Bullet.instance()
 					bullet.spawn_projectile(
-						get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-						get_parent().global_rotation,
+						pos,
+						rot,
 						"black",
 						dmg, 
 						bullet_lifetime, 
@@ -95,8 +95,8 @@ sync func fire(type):
 				$Sounds/FireSound.play()
 				var bullet = Bullet.instance()
 				bullet.spawn_projectile(
-					get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-					get_parent().global_rotation,
+					pos,
+					rot,
 					"black",
 					dmg, 
 					bullet_lifetime, 
@@ -112,8 +112,8 @@ sync func fire(type):
 				$Sounds/FireSound.play()
 				var bullet = Bullet.instance()
 				bullet.spawn_projectile(
-					get_parent().get_node("Weapon_Sprite/Muzzle").global_position,
-					get_parent().global_rotation,
+					pos,
+					rot,
 					"black",
 					dmg,
 					bullet_lifetime,

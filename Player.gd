@@ -88,13 +88,13 @@ func _input(event: InputEvent) -> void:
 				$WeaponMechanics.reload()
 		
 		if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
-			$Weapon/GunStats.rpc("fire", "semi_auto")
+			$Weapon/GunStats.rpc("fire", "semi_auto", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
 			GunTimer(false)
 		if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
-			$Weapon/GunStats.rpc("fire", "shotgun")
+			$Weapon/GunStats.rpc("fire", "shotgun", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
 			GunTimer(false)
 		if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_burst_fire:
-			$Weapon/GunStats.rpc("fire", "burst_fire")
+			$Weapon/GunStats.rpc("fire", "burst_fire", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
 			GunTimer(false)
 			
 		if event.is_action_pressed("Graphook") and can_grapple:
@@ -219,8 +219,8 @@ func _physics_process(delta):
 					mantle("left")
 	
 		if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-			$Weapon/GunStats.rpc("fire", "automatic")
-			GunTimer(true)   
+			$Weapon/GunStats.rpc("fire", "automatic", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
+			GunTimer(true)
 	
 		if get_local_mouse_position().x < 0: # mouse is facing left
 			$Weapon.set_position(Vector2(-22,-7))

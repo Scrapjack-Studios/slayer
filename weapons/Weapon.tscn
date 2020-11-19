@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://weapons/GunStats.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/weapons/shotgun.png" type="Texture" id=2]
 [ext_resource path="res://weapons/Weapon_Templates.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sfx/ui/Button1.wav" type="AudioStream" id=4]
-[ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://weapons/FireSound.gd" type="Script" id=10]
 [ext_resource path="res://assets/sprites/muzzle/m_9.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/muzzle/m_11.png" type="Texture" id=14]
@@ -71,7 +70,6 @@ occluder = SubResource( 2 )
 
 [node name="GunStats" type="Node2D" parent="."]
 script = ExtResource( 1 )
-Bullet = ExtResource( 6 )
 
 [node name="Templates" parent="GunStats" instance=ExtResource( 3 )]
 
