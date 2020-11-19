@@ -21,6 +21,8 @@ func spawn_projectile(pos, rot, type, dmg, _lifetime, size, spd):
 	velocity = Vector2(speed, 0).rotated(rot)
 	add_to_group("bullets")
 	speed = spd
+	if not is_network_master():
+		set_collision_layer_bit(6, true)
 
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta, false)
