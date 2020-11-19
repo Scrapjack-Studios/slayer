@@ -88,13 +88,13 @@ func _input(event: InputEvent) -> void:
 				$WeaponMechanics.reload()
 		
 		if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
-			$WeaponMechanics.semi_auto()
+			$Weapon/GunStats.fire("semi_auto")
 			GunTimer(false)
 		if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
-			$WeaponMechanics.shotgun()
+			$Weapon/GunStats.fire("shotgun")
 			GunTimer(false)
 		if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_burst_fire:
-			$WeaponMechanics.burst()
+			$Weapon/GunStats.fire("burst_fire")
 			GunTimer(false)
 			
 		if event.is_action_pressed("Graphook") and can_grapple:
@@ -219,7 +219,7 @@ func _physics_process(delta):
 					mantle("left")
 	
 		if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-			$WeaponMechanics.automatic()
+			$Weapon/GunStats.fire("automatic")
 			GunTimer(true)   
 	
 		if get_local_mouse_position().x < 0: # mouse is facing left

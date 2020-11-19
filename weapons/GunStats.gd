@@ -34,37 +34,38 @@ var can_fire = true
 var ReloadTime = 2
 var bounce
 
-func fire():
+func fire(type):
 	if can_fire:
-		if shotgun:
-			shots_fired -= 1
-			effects()
-			$Sounds/FireSound.play()
-			rpc("spawn_projectile", "shotgun", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation, dmg, bullet_lifetime, bullet_size, bullet_speed)
-			if shots_fired == 0:
-				can_fire = false 
-		elif is_burst_fire:
-			for bullet in burst_ammount: 
+		match type:
+			"shotgun":
 				shots_fired -= 1
 				effects()
 				$Sounds/FireSound.play()
-				rpc("spawn_projectile", "burst_fire", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation, dmg, bullet_lifetime, bullet_size, bullet_speed)
+				rpc("spawn_projectile", "shotgun", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation, dmg, bullet_lifetime, bullet_size, bullet_speed)
 				if shots_fired == 0:
-					can_fire = false    
-		elif is_automatic:
-			shots_fired -= 1
-			effects()
-			$Sounds/FireSound.play()
-			rpc("spawn_projectile", "auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation, dmg, bullet_lifetime, bullet_size, bullet_speed)
-			if shots_fired == 0:
-				can_fire = false
-		elif is_semi_auto:
-			shots_fired -= 1
-			effects()
-			$Sounds/FireSound.play()
-			rpc("spawn_projectile", "semi_auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation, dmg, bullet_lifetime, bullet_size, bullet_speed)
-			if shots_fired == 0:
-				can_fire = false
+					can_fire = false 
+			"burst_fire":
+				for bullet in burst_ammount: 
+					shots_fired -= 1
+					effects()
+					$Sounds/FireSound.play()
+					rpc("spawn_projectile", "burst_fire", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation, dmg, bullet_lifetime, bullet_size, bullet_speed)
+					if shots_fired == 0:
+						can_fire = false    
+			"automatic":
+				shots_fired -= 1
+				effects()
+				$Sounds/FireSound.play()
+				rpc("spawn_projectile", "auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation, dmg, bullet_lifetime, bullet_size, bullet_speed)
+				if shots_fired == 0:
+					can_fire = false
+			"semi_auto":
+				shots_fired -= 1
+				effects()
+				$Sounds/FireSound.play()
+				rpc("spawn_projectile", "semi_auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation, dmg, bullet_lifetime, bullet_size, bullet_speed)
+				if shots_fired == 0:
+					can_fire = false
 
 	  
 sync func spawn_projectile(type, pos, rot, damage, lifetime, size, speed):
