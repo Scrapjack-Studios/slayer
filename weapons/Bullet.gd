@@ -11,16 +11,16 @@ func _ready():
 	set_process(true)
 	
 # warning-ignore:shadowed_variable
-func start_at(pos, dir, type, dmg, _lifetime, size, speed):
+func spawn_projectile(pos, rot, type, dmg, _lifetime, size, spd):
 	$Sprite.animation = type
 	position = pos
-	rotation = dir
+	rotation = rot
 	$Explosion.set_scale(Vector2(0.1,0.1))
 	$Sprite.set_scale(size)
 	damage = dmg
-	velocity = Vector2(speed, 0).rotated(dir)
+	velocity = Vector2(speed, 0).rotated(rot)
 	add_to_group("bullets")
-	speed = speed
+	speed = spd
 
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta, false)
