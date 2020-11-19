@@ -54,8 +54,6 @@ func fire(type):
 						bullet_speed
 					)
 					$Bullets.add_child(pellet)
-					if not is_network_master():
-						pellet.set_collision_layer_bit(6, true)
 				if shots_fired == 0:
 					can_fire = false 
 			"burst_fire":
@@ -80,7 +78,17 @@ func fire(type):
 				shots_fired -= 1
 				effects()
 				$Sounds/FireSound.play()
-				rpc("spawn_projectile", "auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation, dmg, bullet_lifetime, bullet_size, bullet_speed)
+				var bullet = Bullet.instance()
+				bullet.spawn_projectile(
+					get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
+					get_parent().global_rotation,
+					"black",
+					dmg, 
+					bullet_lifetime, 
+					bullet_size, 
+					bullet_speed
+				)
+				$Bullets.add_child(bullet)
 				if shots_fired == 0:
 					can_fire = false
 			"semi_auto":
