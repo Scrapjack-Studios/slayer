@@ -34,7 +34,22 @@ var can_fire = true
 var ReloadTime = 2
 var bounce
 
-func fire(type):
+puppet var puppet_dmg
+puppet var puppet_bullet_lifetime
+puppet var puppet_bullet_size
+puppet var puppet_bullet_speed
+puppet var puppet_shotgun_pellets
+puppet var puppet_shotgun_spread
+puppet var puppet_burst_ammount
+
+sync func fire(type):
+	rset("puppet_dmg", dmg)
+	rset("puppet_bullet_lifetime", bullet_lifetime)
+	rset("puppet_bullet_size", bullet_size)
+	rset("puppet_bullet_speed", bullet_speed)
+	rset("puppet_shotgun_pellets", shotgun_pellets)
+	rset("puppet_shotgun_spread", shotgun_spread)
+	rset("puppet_burst_ammount", burst_ammount)
 	if can_fire:
 		match type:
 			"shotgun":
