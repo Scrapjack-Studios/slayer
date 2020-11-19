@@ -95,39 +95,19 @@ func fire(type):
 				shots_fired -= 1
 				effects()
 				$Sounds/FireSound.play()
-				rpc("spawn_projectile", "semi_auto", get_parent().get_node("Weapon_Sprite/Muzzle").global_position, get_parent().global_rotation, dmg, bullet_lifetime, bullet_size, bullet_speed)
+				var bullet = Bullet.instance()
+				bullet.spawn_projectile(
+					get_parent().get_node("Weapon_Sprite/Muzzle").global_position,
+					get_parent().global_rotation,
+					"black",
+					dmg,
+					bullet_lifetime,
+					bullet_size,
+					bullet_speed
+				)
+				$Bullets.add_child(bullet)
 				if shots_fired == 0:
 					can_fire = false
-
-	  
-sync func spawn_projectile(type, pos, rot, damage, lifetime, size, speed):
-	match type:
-		"shotgun":
-			for shotgun_pellet in shotgun_pellets:
-				shotgun_spread =+ 0.5
-				var pellet = Bullet.instance()
-				pellet.start_at(pos, rot + rand_range(-0.04,0.04),'black', damage, lifetime, size, speed)
-				$Bullets.add_child(pellet)
-				if not is_network_master():
-					pellet.set_collision_layer_bit(6, true)
-		"burst_fire":
-			var bullet = Bullet.instance()
-			bullet.start_at(pos, rot,'black', damage, lifetime, size, speed)
-			$Bullets.add_child(bullet)
-			if not is_network_master():
-				bullet.set_collision_layer_bit(6, true)
-		"auto":
-			var bullet = Bullet.instance()
-			bullet.start_at(pos, rot,'black', damage, lifetime, size, speed)
-			$Bullets.add_child(bullet)
-			if not is_network_master():
-				bullet.set_collision_layer_bit(6, true)
-		"semi_auto":
-			var bullet = Bullet.instance()
-			bullet.start_at(pos, rot,'black', damage, lifetime, size, speed)
-			$Bullets.add_child(bullet)
-			if not is_network_master():
-				bullet.set_collision_layer_bit(6, true)
 
 func set_sprite():
 #    get_parent().get_node("Weapon_Sprite").texture = get_parent().get_node("GunStats").weapon_sprite
@@ -139,8 +119,3 @@ func effects():
 	$EffectsTimer.start(0.1)
 	yield($EffectsTimer, "timeout")
 	get_parent().get_node("Weapon_Sprite/Muzzle/Explosion").hide()
-
-
-
-
-
