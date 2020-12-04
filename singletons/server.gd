@@ -5,7 +5,6 @@ signal received_players_list
 var players = {}
 var old_players = {}
 var self_data = {username = '', position = Vector2(), received_disconnect=false}
-var start_position
 
 func connect_to_server(ip, port, username):
 	var network = NetworkedMultiplayerENet.new()

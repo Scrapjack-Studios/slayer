@@ -3,17 +3,15 @@ extends Node
 signal game_started
 signal respawn_available
 
-var other_player = preload("res://player/OtherPlayer.tscn")
+var player_scene = preload("res://Player.tscn")
+var other_player_scene = preload("res://player/OtherPlayer.tscn")
 var player
 var can_respawn
 var wants_to_respawn
 
 func _ready():
-	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
-	
 	add_child(load("res://maps/" + Global.map + ".tscn").instance())
-	
-	# spawn the player(s) that have already joined the game
+	spawn_self(str(get_tree().get_network_unique_id()), Server.self_data)
 	emit_signal("game_started")
 
 func _process(_delta):
@@ -28,31 +26,37 @@ func _process(_delta):
 
 func _on_RespawnAsker_pressed():
 	if can_respawn:
-		player.rpc("respawn")
+		Global.player_node.rpc("respawn")
 	else:
 		wants_to_respawn = true
 		$CanvasLayer/DeathUI/RespawnAsker.set_text("Queued")
 
+func spawn_self(id, info):
+	player = player_scene.instance()
+	add_child(player)
+	player.position = Vector2(0,0)
+	player.name = str(id)
+	player.username = info.username
+	player.connect("health_changed", self, "on_Player_health_changed")
+	player.connect("died", self, "on_Player_died")
+	player.connect("respawn", self, "on_Player_respawned")   
+	player.health = player.max_health
+	player.get_node("Camera2D").make_current()
+	$CanvasLayer/HUD/HealthBar.value = player.health
+	$CanvasLayer/HUD/HealthBar/HealthBarChange.value = player.health
+	$CanvasLayer/DeathUI/RespawnAsker.hide()
+	$CanvasLayer/DeathUI/RespawnCountdown.hide()
+
 func spawn(id, info, start_position):
 	if get_tree().get_network_unique_id() == id:
 		pass
-#		Global.player_node = get_node(str(id))
-#		player.connect("health_changed", self, "on_Player_health_changed")
-#		player.connect("died", self, "on_Player_died")
-#		player.connect("respawn", self, "on_Player_respawned")   
-#		player.health = player.max_health
-#		player.get_node("Camera2D").make_current()
-#		$CanvasLayer/HUD/HealthBar.value = player.health
-#		$CanvasLayer/HUD/HealthBar/HealthBarChange.value = player.health
-#		$CanvasLayer/DeathUI/RespawnAsker.hide()
-#		$CanvasLayer/DeathUI/RespawnCountdown.hide()
 	else:
-		var new_player = other_player.instance()
+		var new_player = other_player_scene.instance()
 		new_player.position = start_position
 		new_player.name = str(id)
 		new_player.username = info.username
-		$OtherPlayers.add_child(player)
-		player.set_collision_layer_bit(4, true)
+		$OtherPlayers.add_child(new_player)
+#		player.set_collision_layer_bit(4, true)
 
 func despawn(id):
 	$OtherPlayers.get_node(str(id)).queue_free()

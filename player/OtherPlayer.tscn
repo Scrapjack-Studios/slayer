@@ -25,7 +25,6 @@ extents = Vector2( 18.1528, 6.02961 )
 "ChainGang",
 "Players",
 ]]
-position = Vector2( 2.89905, -3.43567 )
 rotation = -0.000230981
 collision_layer = 4
 collision_mask = 0
@@ -50,11 +49,6 @@ shape = SubResource( 1 )
 
 [node name="Weapon" parent="." instance=ExtResource( 9 )]
 position = Vector2( 18.4133, -0.000347614 )
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-enabled = true
-cast_to = Vector2( 5000, 10 )
-collide_with_areas = true
 
 [node name="GrappleTimer" type="Timer" parent="."]
 process_mode = 0

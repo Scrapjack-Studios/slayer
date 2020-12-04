@@ -6,13 +6,6 @@ signal respawn
 
 enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
 
-puppet var puppet_position = Vector2()
-puppet var puppet_movement = MoveDirection.NONE
-puppet var puppet_mouse_position = 0
-puppet var puppet_muzzle_position = Vector2()
-puppet var puppet_weapon_position = Vector2()
-puppet var puppet_weapon_flip = false
-
 export (float) var max_health = 100
 onready var health = max_health
 var username
@@ -83,103 +76,102 @@ func _ready():
 	
 	
 func _input(event: InputEvent) -> void:
-	if is_network_master():
-		if Input.is_action_just_pressed("reload"):
-				$WeaponMechanics.reload()
+	if Input.is_action_just_pressed("reload"):
+			$WeaponMechanics.reload()
+	
+	if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
+		$Weapon/GunStats.rpc("fire", "semi_auto", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
+		GunTimer(false)
+	if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
+		$Weapon/GunStats.rpc("fire", "shotgun", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
+		GunTimer(false)
+	if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_burst_fire:
+		$Weapon/GunStats.rpc("fire", "burst_fire", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
+		GunTimer(false)
 		
-		if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_semi_auto:
-			$Weapon/GunStats.rpc("fire", "semi_auto", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
-			GunTimer(false)
-		if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.shotgun:
-			$Weapon/GunStats.rpc("fire", "shotgun", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
-			GunTimer(false)
-		if event.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_burst_fire:
-			$Weapon/GunStats.rpc("fire", "burst_fire", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
-			GunTimer(false)
+	if event.is_action_pressed("Graphook") and can_grapple:
+			rotation = 0
+			$Chain.rpc("shoot")
+			is_grappling = true
+			$Whip.hide()
+			grapple_count += 1
 			
-		if event.is_action_pressed("Graphook") and can_grapple:
-				rotation = 0
-				$Chain.rpc("shoot")
-				is_grappling = true
-				$Whip.hide()
-				grapple_count += 1
-				
-		elif event.is_action_released("Graphook") and is_grappling:
-			$Chain.rpc("release")
-			$Whip.show()
-			is_grappling = false
-			if grapple_count == 3:
-				can_grapple = false
-				$GrappleTimer.start()
-				get_parent().get_node("CanvasLayer/HUD/GrappleCooldown").show()
-				grapple_count = 0
-			
-				
-		if auto_climb and can_move and InputEventAction:
-			if MoveDirection.LEFT:
-				if $Wall_Raycasts/Left/Wall_Detect_Left4.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding():
-					jump_strength = 500
-					jump()
-					jump_strength = 750
-			if MoveDirection.RIGHT:
-				if $Wall_Raycasts/Right/Wall_Detect_Right4.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding():
-					jump_strength = 500
-					jump()
-					jump_strength = 750
-			
+	elif event.is_action_released("Graphook") and is_grappling:
+		$Chain.rpc("release")
+		$Whip.show()
+		is_grappling = false
+		if grapple_count == 3:
+			can_grapple = false
+			$GrappleTimer.start()
+			get_parent().get_node("CanvasLayer/HUD/GrappleCooldown").show()
+			grapple_count = 0
 		
 			
-			
-		if event.is_action_pressed("Weapon1") or event.is_action_pressed("Weapon2") or event.is_action_pressed("Weapon3") or event.is_action_pressed("Weapon4"):
-			if preweapon == "Weapon1":
-				mag_1 = $Weapon/GunStats.shots_fired
-			if preweapon == "Weapon2":
-				mag_2 = $Weapon/GunStats.shots_fired
-			if preweapon == "Weapon3":
-				mag_3 = $Weapon/GunStats.shots_fired
-			if preweapon == "Weapon4":
-				mag_4 = $Weapon/GunStats.shots_fired
-			if not preweapon:
-				mag_1 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).mag
-				mag_2 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).mag
-				mag_3 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).mag
-				mag_4 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).mag
-				
+	if auto_climb and can_move and InputEventAction:
+		if MoveDirection.LEFT:
+			if $Wall_Raycasts/Left/Wall_Detect_Left4.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding():
+				jump_strength = 500
+				jump()
+				jump_strength = 750
+		if MoveDirection.RIGHT:
+			if $Wall_Raycasts/Right/Wall_Detect_Right4.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding():
+				jump_strength = 500
+				jump()
+				jump_strength = 750
+		
 	
-				
-		if event.is_action_pressed("Weapon1") or weaponnumb == 1:
-			get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
-			$Weapon/GunStats/Sounds/FireSound.activate()
-			$Weapon/GunStats.set_sprite()
-			preweapon = "Weapon1"
-			$Weapon/GunStats.shots_fired = mag_1 
+		
+		
+	if event.is_action_pressed("Weapon1") or event.is_action_pressed("Weapon2") or event.is_action_pressed("Weapon3") or event.is_action_pressed("Weapon4"):
+		if preweapon == "Weapon1":
+			mag_1 = $Weapon/GunStats.shots_fired
+		if preweapon == "Weapon2":
+			mag_2 = $Weapon/GunStats.shots_fired
+		if preweapon == "Weapon3":
+			mag_3 = $Weapon/GunStats.shots_fired
+		if preweapon == "Weapon4":
+			mag_4 = $Weapon/GunStats.shots_fired
+		if not preweapon:
+			mag_1 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).mag
+			mag_2 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).mag
+			mag_3 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).mag
+			mag_4 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).mag
 			
-		if event.is_action_pressed("Weapon2") or weaponnumb == 2:
-			get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).activate()
-			$Weapon/GunStats/Sounds/FireSound.activate()
-			$Weapon/GunStats.set_sprite() 
-			preweapon = "Weapon2"  
-			$Weapon/GunStats.shots_fired = mag_2
+
 			
-		if event.is_action_pressed("Weapon3") or weaponnumb == 3:
-			get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).activate()
-			$Weapon/GunStats/Sounds/FireSound.activate()
-			$Weapon/GunStats.set_sprite() 
-			preweapon = "Weapon3"      
-			$Weapon/GunStats.shots_fired = mag_3
-			
-		if event.is_action_pressed("Weapon4") or weaponnumb == 4:
-			get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).activate()
-			$Weapon/GunStats/Sounds/FireSound.activate()
-			$Weapon/GunStats.set_sprite() 
-			preweapon = "Weapon4"
-			$Weapon/GunStats.shots_fired = mag_4
-	
-		if event.is_action_pressed("LastWeapon"):
-			weaponscroll(1)
-	
-		elif event.is_action_pressed("NextWeapon"):
-			weaponscroll(-1)
+	if event.is_action_pressed("Weapon1") or weaponnumb == 1:
+		get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
+		$Weapon/GunStats/Sounds/FireSound.activate()
+		$Weapon/GunStats.set_sprite()
+		preweapon = "Weapon1"
+		$Weapon/GunStats.shots_fired = mag_1 
+		
+	if event.is_action_pressed("Weapon2") or weaponnumb == 2:
+		get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).activate()
+		$Weapon/GunStats/Sounds/FireSound.activate()
+		$Weapon/GunStats.set_sprite() 
+		preweapon = "Weapon2"  
+		$Weapon/GunStats.shots_fired = mag_2
+		
+	if event.is_action_pressed("Weapon3") or weaponnumb == 3:
+		get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).activate()
+		$Weapon/GunStats/Sounds/FireSound.activate()
+		$Weapon/GunStats.set_sprite() 
+		preweapon = "Weapon3"      
+		$Weapon/GunStats.shots_fired = mag_3
+		
+	if event.is_action_pressed("Weapon4") or weaponnumb == 4:
+		get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).activate()
+		$Weapon/GunStats/Sounds/FireSound.activate()
+		$Weapon/GunStats.set_sprite() 
+		preweapon = "Weapon4"
+		$Weapon/GunStats.shots_fired = mag_4
+
+	if event.is_action_pressed("LastWeapon"):
+		weaponscroll(1)
+
+	elif event.is_action_pressed("NextWeapon"):
+		weaponscroll(-1)
 
 func weaponscroll(dir):
 	weaponnumb += 1 * dir # call the zoom function 
@@ -194,83 +186,49 @@ func _physics_process(delta):
 	$Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
 	on_air_time += delta
 
-	if is_network_master():
-		if Input.is_action_pressed('move_left'):
-			direction = MoveDirection.LEFT
-			is_walking = true
-		elif Input.is_action_pressed('move_right'):
-			direction = MoveDirection.RIGHT
-			is_walking = true 
-			
-		if Input.is_action_just_pressed("hold"):
-			chain_pull = 40
-			
-		if Input.is_action_just_released("hold"):
-			chain_pull = 55
-
-		if Input.is_action_just_pressed("jump") and can_jump:
-			jump()
-			rotation = 0
-			if is_jumping or is_falling:
-				is_climbing = true
-				if direction == MoveDirection.RIGHT and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
-					mantle("right")
-				if direction == MoveDirection.LEFT and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
-					mantle("left")
-	
-		if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
-			$Weapon/GunStats.rpc("fire", "automatic", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
-			GunTimer(true)
-	
-		if get_local_mouse_position().x < 0: # mouse is facing left
-			$Weapon.set_position(Vector2(-22,-7))
-			$Weapon/Weapon_Sprite.set_flip_v(true)
-			$Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(6,1))
-		elif get_local_mouse_position().x > 0: # mouse is facing right
-			$Weapon.set_position(Vector2(15,0))
-			$Weapon/Weapon_Sprite.set_flip_v(false)
-			$Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(6,5))
-	
-
-			
-		rset("puppet_mouse_position", mpos)
-		rset("puppet_weapon_position", weaponpos)
-		rset("puppet_muzzle_position", muzzlepos)
-		rset("puppet_weapon_flip", weaponflip)
-		rset_unreliable('puppet_position', position)
-		rset('puppet_movement', direction)
+	if Input.is_action_pressed('move_left'):
+		direction = MoveDirection.LEFT
 		move(direction)
-		
-		
-	else:
-		move(puppet_movement)
-		position = puppet_position
-		$Weapon.global_rotation = puppet_mouse_position
-		$Weapon.position = puppet_weapon_position
-		$Weapon/Weapon_Sprite.flip_v = puppet_weapon_flip
-		$Weapon/Weapon_Sprite/Muzzle.position = puppet_muzzle_position
-	   
-   
-	var move_left = Input.is_action_pressed("move_left")
-	
-	var move_right = Input.is_action_pressed("move_right")
-	
-	if move_left or move_right:
 		is_walking = true
-	
+	elif Input.is_action_pressed('move_right'):
+		direction = MoveDirection.RIGHT
+		move(direction)
+		is_walking = true 
+		
+	if Input.is_action_just_pressed("hold"):
+		chain_pull = 40
+		
+	if Input.is_action_just_released("hold"):
+		chain_pull = 55
 
-	
+	if Input.is_action_just_pressed("jump") and can_jump:
+		jump()
+		rotation = 0
+		if is_jumping or is_falling:
+			is_climbing = true
+			if direction == MoveDirection.RIGHT and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
+				mantle("right")
+			if direction == MoveDirection.LEFT and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
+				mantle("left")
 
-	
-	
+	if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
+		$Weapon/GunStats.rpc("fire", "automatic", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
+		GunTimer(true)
+
+	if get_local_mouse_position().x < 0: # mouse is facing left
+		$Weapon.set_position(Vector2(-22,-7))
+		$Weapon/Weapon_Sprite.set_flip_v(true)
+		$Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(6,1))
+	elif get_local_mouse_position().x > 0: # mouse is facing right
+		$Weapon.set_position(Vector2(15,0))
+		$Weapon/Weapon_Sprite.set_flip_v(false)
+		$Weapon/Weapon_Sprite/Muzzle.set_position(Vector2(6,5))
+
 	if $Chain.hooked:
 		_ChainHook()
-
-	
 	else:
 		# Not hooked -> no chain velocity
 		chain_velocity = Vector2(0,0)
-		
 	velocity += chain_velocity
 
 	if is_on_floor() and not Global.paused:
@@ -279,14 +237,12 @@ func _physics_process(delta):
 		jump_count = 0
 		grapple_count = 0
 		
-		
 	if stop:
 		var vsign = sign(velocity.x)
 		var vlen = abs(velocity.x)
 		vlen -= STOP_FORCE * delta
 		if vlen < 0:
 			vlen = 0
-		
 		velocity.x = vlen * vsign
 	
 	# Integrate forces to velocity
