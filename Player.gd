@@ -105,23 +105,7 @@ func _input(event: InputEvent) -> void:
 			$GrappleTimer.start()
 			get_parent().get_node("CanvasLayer/HUD/GrappleCooldown").show()
 			grapple_count = 0
-		
-			
-	if auto_climb and can_move and InputEventAction:
-		if MoveDirection.LEFT:
-			if $Wall_Raycasts/Left/Wall_Detect_Left4.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding():
-				jump_strength = 500
-				jump()
-				jump_strength = 750
-		if MoveDirection.RIGHT:
-			if $Wall_Raycasts/Right/Wall_Detect_Right4.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding():
-				jump_strength = 500
-				jump()
-				jump_strength = 750
-		
-	
-		
-		
+
 	if event.is_action_pressed("Weapon1") or event.is_action_pressed("Weapon2") or event.is_action_pressed("Weapon3") or event.is_action_pressed("Weapon4"):
 		if preweapon == "Weapon1":
 			mag_1 = $Weapon/GunStats.shots_fired
@@ -178,22 +162,17 @@ func weaponscroll(dir):
 
 func _physics_process(delta):
 	var direction = MoveDirection.NONE
-	var mpos = get_global_mouse_position().angle_to_point(position)
-	var weaponflip = $Weapon/Weapon_Sprite.flip_v
-	var weaponpos = $Weapon.position
-	var muzzlepos = $Weapon/Weapon_Sprite/Muzzle.position
 	
 	$Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
 	on_air_time += delta
 
 	if Input.is_action_pressed('move_left'):
 		direction = MoveDirection.LEFT
-		move(direction)
 		is_walking = true
 	elif Input.is_action_pressed('move_right'):
 		direction = MoveDirection.RIGHT
-		move(direction)
 		is_walking = true 
+	move(direction)
 		
 	if Input.is_action_just_pressed("hold"):
 		chain_pull = 40
@@ -204,12 +183,6 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and can_jump:
 		jump()
 		rotation = 0
-		if is_jumping or is_falling:
-			is_climbing = true
-			if direction == MoveDirection.RIGHT and $Wall_Raycasts/Right/Wall_Detect_Right.is_colliding() and not $Wall_Raycasts/Right/Wall_Detect_Right3.is_colliding():
-				mantle("right")
-			if direction == MoveDirection.LEFT and $Wall_Raycasts/Left/Wall_Detect_Left.is_colliding() and not $Wall_Raycasts/Left/Wall_Detect_Left3.is_colliding():
-				mantle("left")
 
 	if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
 		$Weapon/GunStats.rpc("fire", "automatic", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
@@ -266,28 +239,14 @@ func _physics_process(delta):
 func move(direction):   
 	force = Vector2(0, gravity)# create forces
 	stop = true
-	if not can_build_momentum:
-		if momentum >= 2:
-			momentum -= momentum / 1.7
-	can_build_momentum = true
 	if can_move:
 		if direction == MoveDirection.LEFT:
-			if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED * momentum:
-				force.x -= WALK_FORCE
-				stop = false
-				if can_build_momentum:
-					for n in direction:
-						momentum += 0.0003
+			force.x -= WALK_FORCE
+			stop = false
 		elif direction == MoveDirection.RIGHT:
-			if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED * momentum:
-				force.x += WALK_FORCE
-				stop = false
-				if can_build_momentum:
-					for n in direction:
-						momentum += 0.0003
-		
-			
-			
+			force.x += WALK_FORCE
+			stop = false
+
 func jump():
 	jump_count += 1
 	can_build_momentum = false
