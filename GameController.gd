@@ -3,33 +3,18 @@ extends Node
 signal game_started
 signal respawn_available
 
+var other_player = preload("res://player/OtherPlayer.tscn")
 var player
 var can_respawn
 var wants_to_respawn
 
 func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
-	Server.connect("received_players_list", self, "on_players_list_received")
 	
 	add_child(load("res://maps/" + Global.map + ".tscn").instance())
 	
 	# spawn the player(s) that have already joined the game
 	emit_signal("game_started")
-	
-func on_players_list_received():
-	var peers = {}
-	# compare old and updated players list
-	if Server.old_players:
-		for new_peer in Server.players:
-			# only store new players
-			if not new_peer in Server.old_players:
-				peers[new_peer] = Server.players[new_peer]
-				print(peers)
-	else:
-		peers = Server.players
-	for peer in peers:
-		if peer != get_tree().get_network_unique_id():
-			spawn(peer, Server.players[peer]) 
 
 func _process(_delta):
 	if $CanvasLayer/DeathUI/RespawnCountdown.visible:
@@ -48,25 +33,29 @@ func _on_RespawnAsker_pressed():
 		wants_to_respawn = true
 		$CanvasLayer/DeathUI/RespawnAsker.set_text("Queued")
 
-remote func spawn(id, info):
-	player = load('res://Player.tscn').instance()
-	player.name = str(id)
-	player.set_network_master(id)
-	add_child(player)
-	player.init(info.username, info.position)
-	if id == get_tree().get_network_unique_id():
-		Global.player_node = get_node(str(id))
-		player.connect("health_changed", self, "on_Player_health_changed")
-		player.connect("died", self, "on_Player_died")
-		player.connect("respawn", self, "on_Player_respawned")   
-		player.health = player.max_health
-		player.get_node("Camera2D").make_current()
-		$CanvasLayer/HUD/HealthBar.value = player.health
-		$CanvasLayer/HUD/HealthBar/HealthBarChange.value = player.health
-		$CanvasLayer/DeathUI/RespawnAsker.hide()
-		$CanvasLayer/DeathUI/RespawnCountdown.hide()
+func spawn(id, info, start_position):
+	if get_tree().get_network_unique_id() == id:
+		pass
+#		Global.player_node = get_node(str(id))
+#		player.connect("health_changed", self, "on_Player_health_changed")
+#		player.connect("died", self, "on_Player_died")
+#		player.connect("respawn", self, "on_Player_respawned")   
+#		player.health = player.max_health
+#		player.get_node("Camera2D").make_current()
+#		$CanvasLayer/HUD/HealthBar.value = player.health
+#		$CanvasLayer/HUD/HealthBar/HealthBarChange.value = player.health
+#		$CanvasLayer/DeathUI/RespawnAsker.hide()
+#		$CanvasLayer/DeathUI/RespawnCountdown.hide()
 	else:
+		var new_player = other_player.instance()
+		new_player.position = start_position
+		new_player.name = str(id)
+		new_player.username = info.username
+		$OtherPlayers.add_child(player)
 		player.set_collision_layer_bit(4, true)
+
+func despawn(id):
+	$OtherPlayers.get_node(str(id)).queue_free()
 
 remote func who_died(victim, weapon_sprite, killer):
 	var obituary_row = load("res://menus/ObituaryRow.tscn").instance()

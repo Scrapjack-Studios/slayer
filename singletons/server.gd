@@ -29,8 +29,11 @@ remote func get_players_list(updated_players_list):
 	players = updated_players_list
 	emit_signal("received_players_list")
 
-remote func get_start_position(start_pos):
-	start_position = start_pos
+remote func spawn_player(id, info, start_position):
+	get_node("/root/GameController").spawn(id, info, start_position)
+
+remote func despawn_player(id):
+	get_node("/root/GameController").despawn(id)
 
 remote func kicked(reason):
 	Global.kick_reason = reason 

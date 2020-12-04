@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://weapons/WeaponMechanics.gd" type="Script" id=1]
 [ext_resource path="res://assets/sfx/player/blood_spurt1.wav" type="AudioStream" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/sfx/player/gib1.wav" type="AudioStream" id=7]
 [ext_resource path="res://player/Chain.tscn" type="PackedScene" id=8]
 [ext_resource path="res://weapons/Weapon.tscn" type="PackedScene" id=9]
+[ext_resource path="res://player/OtherPlayer.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.998139, 2.11467 )
@@ -27,8 +28,9 @@ extents = Vector2( 18.1528, 6.02961 )
 position = Vector2( 2.89905, -3.43567 )
 rotation = -0.000230981
 collision_layer = 4
-collision_mask = 65
+collision_mask = 0
 collision/safe_margin = 0.05
+script = ExtResource( 10 )
 
 [node name="WeaponMechanics" type="Node2D" parent="."]
 script = ExtResource( 1 )
