@@ -165,7 +165,8 @@ margin_top = -1.5874
 margin_bottom = -1.5874
 mouse_filter = 2
 
-[node name="OtherPlayers" type="Node2D" parent="."]
+[node name="Players" type="Node2D" parent="."]
+z_index = 1
 [connection signal="pressed" from="CanvasLayer/DeathUI/RespawnAsker" to="." method="_on_RespawnAsker_pressed"]
 
 [editable path="CanvasLayer/DeathUI/Weapons"]

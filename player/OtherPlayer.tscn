@@ -1,6 +1,5 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://weapons/WeaponMechanics.gd" type="Script" id=1]
 [ext_resource path="res://assets/sfx/player/blood_spurt1.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/sfx/player/blood_spurt3.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sprites/32x32.png" type="Texture" id=4]
@@ -8,7 +7,6 @@
 [ext_resource path="res://assets/sfx/player/blood_spurt2.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/sfx/player/gib1.wav" type="AudioStream" id=7]
 [ext_resource path="res://player/Chain.tscn" type="PackedScene" id=8]
-[ext_resource path="res://weapons/Weapon.tscn" type="PackedScene" id=9]
 [ext_resource path="res://player/OtherPlayer.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -31,9 +29,6 @@ collision_mask = 0
 collision/safe_margin = 0.05
 script = ExtResource( 10 )
 
-[node name="WeaponMechanics" type="Node2D" parent="."]
-script = ExtResource( 1 )
-
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.894118, 0.0862745, 0.0862745, 1 )
 position = Vector2( -4.3709, 4.91209 )
@@ -46,9 +41,6 @@ position = Vector2( -4.38814, 4.89539 )
 rotation = 0.000126217
 scale = Vector2( 23.308, 17 )
 shape = SubResource( 1 )
-
-[node name="Weapon" parent="." instance=ExtResource( 9 )]
-position = Vector2( 18.4133, -0.000347614 )
 
 [node name="GrappleTimer" type="Timer" parent="."]
 process_mode = 0

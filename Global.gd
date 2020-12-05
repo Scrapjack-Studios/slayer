@@ -19,7 +19,7 @@ var just_launched = true
 var wants_splashscreens
 
 func pause_game():
-	var player = get_node("/root/GameController/" + str(get_tree().get_network_unique_id()))
+	var player = get_node("/root/GameController/Players/" + str(get_tree().get_network_unique_id()))
 	Global.paused = true
 	player.can_grapple = false
 	player.can_move = false
@@ -28,7 +28,7 @@ func pause_game():
 	player.get_node("Camera2D").clear_current()
 	
 func resume_game():
-	var player = get_node("/root/GameController/" + str(get_tree().get_network_unique_id()))
+	var player = get_node("/root/GameController/Players/" + str(get_tree().get_network_unique_id()))
 	Global.paused = false
 	player.can_grapple = true
 	player.can_move = true

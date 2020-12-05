@@ -33,7 +33,7 @@ func _on_RespawnAsker_pressed():
 
 func spawn_self(id, info):
 	player = player_scene.instance()
-	add_child(player)
+	$Players.add_child(player)
 	player.position = Vector2(0,0)
 	player.name = str(id)
 	player.username = info.username
@@ -55,11 +55,11 @@ func spawn(id, info, start_position):
 		new_player.position = start_position
 		new_player.name = str(id)
 		new_player.username = info.username
-		$OtherPlayers.add_child(new_player)
+		$Players.add_child(new_player)
 #		player.set_collision_layer_bit(4, true)
 
 func despawn(id):
-	$OtherPlayers.get_node(str(id)).queue_free()
+	$Players.get_node(str(id)).queue_free()
 
 remote func who_died(victim, weapon_sprite, killer):
 	var obituary_row = load("res://menus/ObituaryRow.tscn").instance()
