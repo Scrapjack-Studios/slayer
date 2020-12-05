@@ -56,7 +56,6 @@ func spawn(id, info, start_position):
 		new_player.name = str(id)
 		new_player.username = info.username
 		$Players.add_child(new_player)
-#		player.set_collision_layer_bit(4, true)
 
 func despawn(id):
 	$Players.get_node(str(id)).queue_free()
