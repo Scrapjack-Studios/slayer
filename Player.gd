@@ -6,17 +6,6 @@ signal respawn
 
 enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
 
-export (float) var max_health = 100
-onready var health = max_health
-var username
-
-export (PackedScene) var Bullet
-export (int) var rot_speed
-export (int) var damage
-export (float) var bullet_lifetime
-export (int, 20, 10000) var push
-export (bool) var inertia
-
 const FLOOR_ANGLE_TOLERANCE = 70 # Angle in degrees towards either side that the player can consider "floor"
 const WALK_FORCE = 1600
 const WALK_MIN_SPEED = 10
@@ -27,10 +16,13 @@ const CLIMB_SPEED = 800
 const CLIMB_AMOUNT = 70
 const MAX_JUMP_COUNT = 2
 
+var max_health = 100
+var username
 var velocity = Vector2(0,0) # The velocity of the player (kept over time)
 var chain_velocity := Vector2(0,0)
+var inertia
+var push
 var gravity = 1500.0 # pixels/second/second
-var rot_dir
 var can_shoot = true
 var can_move = true
 var can_jump = true
@@ -65,6 +57,8 @@ var weaponnumb = 0
 var force = Vector2(200, gravity) # create forces 
 var stop = true
 var wallmount = false
+
+onready var health = max_health
 
 func _ready():
 	get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
