@@ -73,8 +73,7 @@ func _ready():
 	get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
 	$Weapon/GunStats/Sounds/FireSound.activate()
 	$Weapon/GunStats.set_sprite()
-	
-	
+
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("reload"):
 			$WeaponMechanics.reload()
@@ -120,9 +119,7 @@ func _input(event: InputEvent) -> void:
 			mag_2 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon2).mag
 			mag_3 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon3).mag
 			mag_4 = get_node("Weapon/GunStats/Templates").get_node(Global.weapon4).mag
-			
 
-			
 	if event.is_action_pressed("Weapon1") or weaponnumb == 1:
 		get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
 		$Weapon/GunStats/Sounds/FireSound.activate()
@@ -235,7 +232,7 @@ func _physics_process(delta):
 		
 #    if $Wall_Raycasts/Upper_Detect.is_colliding():
 #        $Camera2D/ScreenShake.start(0.5, 16, 8)
-		
+
 func move(direction):   
 	force = Vector2(0, gravity)# create forces
 	stop = true
@@ -255,15 +252,10 @@ func jump():
 		velocity.y = -jump_strength
 		is_jumping = true
 	
-	
 	if jump_count >= MAX_JUMP_COUNT:
 		can_jump = false 
 	prev_jump_pressed = Input.is_action_pressed("jump")
 	# Jump must also be allowed to happen if the character left the floor a little bit ago. Makes controls more snappy.
-	
-	
-	
-
 
 func mantle(direction):
 	if direction == "right":
@@ -272,7 +264,6 @@ func mantle(direction):
 		velocity.x = -CLIMB_AMOUNT
 	velocity.y = -CLIMB_SPEED
 	is_climbing = true
-			
 
 func wall_cling():
 	velocity.y = lerp(velocity.y,0,0.2)
@@ -289,8 +280,7 @@ func wall_cling():
 		wallmount = false
 	if velocity.y > 0:
 		rotation = 0
-	
-		
+
 func GunTimer(phy):
 	can_shoot = false
 	var GunTimer = Timer.new()
@@ -362,7 +352,6 @@ func _on_GrappleTimer_timeout():
 
 func _on_WallJumpTimer_timeout():
 	can_doublejump = true
-
 
 func _ChainHook():
 	chain_velocity = to_local($Chain.tip).normalized() * chain_pull
