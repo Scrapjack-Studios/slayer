@@ -64,10 +64,7 @@ var preweapon
 var weaponnumb = 0
 var force = Vector2(200, gravity) # create forces 
 var stop = true
-var momentum = 1.2
-var can_build_momentum = true
 var wallmount = false
-var auto_climb = true
 
 func _ready():
 	get_node("Weapon/GunStats/Templates").get_node(Global.weapon1).activate()
@@ -229,9 +226,6 @@ func _physics_process(delta):
 	else:
 		can_walljump = true
 		wallmount = false
-		
-#    if $Wall_Raycasts/Upper_Detect.is_colliding():
-#        $Camera2D/ScreenShake.start(0.5, 16, 8)
 
 func move(direction):   
 	force = Vector2(0, gravity)# create forces
@@ -246,7 +240,6 @@ func move(direction):
 
 func jump():
 	jump_count += 1
-	can_build_momentum = false
 	velocity.y = -jump_strength
 	if on_air_time < JUMP_MAX_AIRBORNE_TIME and not prev_jump_pressed and not is_jumping:
 		velocity.y = -jump_strength
@@ -257,19 +250,10 @@ func jump():
 	prev_jump_pressed = Input.is_action_pressed("jump")
 	# Jump must also be allowed to happen if the character left the floor a little bit ago. Makes controls more snappy.
 
-func mantle(direction):
-	if direction == "right":
-		velocity.x = +CLIMB_AMOUNT
-	elif direction == "left":
-		velocity.x = -CLIMB_AMOUNT
-	velocity.y = -CLIMB_SPEED
-	is_climbing = true
-
 func wall_cling():
 	velocity.y = lerp(velocity.y,0,0.2)
 	jump_strength = 900
 	wallmount = true
-	can_build_momentum = false
 	if can_walljump:
 		jump_count = 0
 		can_walljump = false
@@ -361,9 +345,3 @@ func _ChainHook():
 	else:
 		# Pulling up is stronger
 		chain_velocity.y *= 1.65
-	rotation = 0
-
-func init(player_username, start_position):
-	username = player_username
-	$Username.text = player_username
-	global_position = start_position
