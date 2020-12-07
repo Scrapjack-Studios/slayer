@@ -45,7 +45,7 @@ func spawn_self(id):
 	$CanvasLayer/DeathUI/RespawnAsker.hide()
 	$CanvasLayer/DeathUI/RespawnCountdown.hide()
 
-func spawn(id, info, start_position):
+func spawn(id, start_position):
 	if get_tree().get_network_unique_id() == id:
 		pass
 	else:
