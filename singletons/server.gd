@@ -12,6 +12,9 @@ func connect_to_server(ip, port, username):
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)
 
+func send_player_state(player_state):
+	rpc_unreliable_id(1, "get_player_state", player_state)
+	
 # gets called by the server when a player connects, and then the player sends their info
 remote func fetch_player_info():	
 	rpc_id(1, "get_player_info", get_tree().get_network_unique_id(), self_data)

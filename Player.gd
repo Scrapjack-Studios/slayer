@@ -137,17 +137,9 @@ func _input(event: InputEvent) -> void:
 		preweapon = "Weapon4"
 		$Weapon/GunStats.shots_fired = mag_4
 
-#	if event.is_action_pressed("LastWeapon"):
-#		weaponscroll(1)
-#
-#	elif event.is_action_pressed("NextWeapon"):
-#		weaponscroll(-1)
-
-#func weaponscroll(dir):
-#	weaponnumb += 1 * dir # call the zoom function 
-
 func _physics_process(delta):
 	move(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), delta)
+	define_player_state()
 	if Input.is_action_just_pressed("jump") and can_jump:
 		jump()
 	if is_jumping and velocity.y > 0:
@@ -203,6 +195,10 @@ func move(direction, delta):
 		var collision = get_slide_collision(slide)
 		if collision.collider.is_in_group("bodies"):
 				collision.collider.apply_central_impulse(-collision.normal * 100)
+
+func define_player_state():
+	player_state = {"T": OS.get_system_time_msecs(), "P": get_global_position()}
+	Server.send_player_state(player_state)
 
 func jump():
 	jump_count += 1
