@@ -19,13 +19,10 @@ const SNAP_LENGTH = 32.0
 var max_health = 100
 var username
 var chain_velocity := Vector2(0,0)
-var inertia
-var push
 var can_shoot = true
 var can_move = true
 var can_jump = true
 var chain_pull = 55
-var on_air_time = 100
 var is_jumping = false
 var can_doublejump = true
 var is_falling = false
@@ -151,23 +148,24 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta):
 	move(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), delta)
+	if Input.is_action_just_pressed("jump") and can_jump:
+		jump()
+	if is_jumping and velocity.y > 0:
+		is_jumping = false
 	
-	$Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
-	on_air_time += delta
-		
+	
+	
 	if Input.is_action_just_pressed("hold"):
 		chain_pull = 40
 		
 	if Input.is_action_just_released("hold"):
 		chain_pull = 55
 
-	if Input.is_action_just_pressed("jump") and can_jump:
-		jump()
-
 	if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
 		$Weapon/GunStats.rpc("fire", "automatic", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
 		GunTimer(true)
 
+	$Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
 	if get_local_mouse_position().x < 0: # mouse is facing left
 		$Weapon.set_position(Vector2(-22,-7))
 		$Weapon/Weapon_Sprite.set_flip_v(true)
@@ -208,15 +206,12 @@ func move(direction, delta):
 
 func jump():
 	jump_count += 1
-	velocity.y = -jump_strength
-	if on_air_time < JUMP_MAX_AIRBORNE_TIME and not prev_jump_pressed and not is_jumping:
+	if not is_jumping:
+		snap_vector = Vector2.ZERO # don't snap if jumping
 		velocity.y = -jump_strength
 		is_jumping = true
-	
 	if jump_count >= MAX_JUMP_COUNT:
 		can_jump = false 
-	prev_jump_pressed = Input.is_action_pressed("jump")
-	# Jump must also be allowed to happen if the character left the floor a little bit ago. Makes controls more snappy.
 
 func wall_cling():
 	velocity.y = lerp(velocity.y,0,0.2)
