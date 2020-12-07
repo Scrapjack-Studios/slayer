@@ -8,6 +8,9 @@ func connect_to_server(ip, port):
 func send_player_state(player_state):
 	rpc_unreliable_id(1, "get_player_state", player_state)
 
+remote func get_world_state(world_state):
+	get_node("/root/GameController").update_world_state(world_state)
+
 remote func get_game_info(map):
 	# Why does this need to be in Global?
 	Global.map = map
