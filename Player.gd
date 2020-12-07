@@ -13,6 +13,8 @@ const JUMP_MAX_AIRBORNE_TIME = 0.4
 const CLIMB_SPEED = 800
 const CLIMB_AMOUNT = 70
 const MAX_JUMP_COUNT = 2
+const SNAP_DIRECTION = Vector2.DOWN
+const SNAP_LENGTH = 32.0
 
 var max_health = 100
 var username
@@ -54,7 +56,6 @@ var stop = true
 var wallmount = false
 var move_speed = 400
 var velocity = Vector2.ZERO
-var direction = Vector2.ZERO
 var player_state
 
 onready var health = max_health
@@ -148,8 +149,7 @@ func weaponscroll(dir):
 	weaponnumb += 1 * dir # call the zoom function 
 
 func _physics_process(delta):
-	direction.x = int(Input.get_action_strength("move_right")) - int(Input.get_action_strength("move_left"))
-	move(direction, delta)
+	move(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), delta)
 	
 	$Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
 	on_air_time += delta
@@ -196,15 +196,14 @@ func _physics_process(delta):
 		wallmount = false
 
 func move(direction, delta):
-	velocity.x = direction.x * move_speed
+	velocity.x = direction * move_speed
 	velocity.y += delta * Global.gravity
-#	move_and_slide(velocity)
 	move_and_slide_with_snap(velocity, Vector2(0,5), Vector2.UP, 1, 4, 0.9, false)
 	
-#	for index in get_slide_count():
-#		var collision = get_slide_collision(index)
-#		if collision.collider.is_in_group("bodies"):
-#				collision.collider.apply_central_impulse(-collision.normal * push)
+	for slide in get_slide_count():
+		var collision = get_slide_collision(slide)
+		if collision.collider.is_in_group("bodies"):
+				collision.collider.apply_central_impulse(-collision.normal * 100)
 
 func jump():
 	jump_count += 1
