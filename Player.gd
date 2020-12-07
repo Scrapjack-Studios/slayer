@@ -4,8 +4,6 @@ signal health_changed(health)
 signal died
 signal respawn
 
-enum MoveDirection { UP, DOWN, LEFT, RIGHT, NONE }
-
 const FLOOR_ANGLE_TOLERANCE = 70 # Angle in degrees towards either side that the player can consider "floor"
 const WALK_FORCE = 1600
 const WALK_MIN_SPEED = 10
@@ -18,11 +16,9 @@ const MAX_JUMP_COUNT = 2
 
 var max_health = 100
 var username
-var velocity = Vector2(0,0) # The velocity of the player (kept over time)
 var chain_velocity := Vector2(0,0)
 var inertia
 var push
-var gravity = 1500.0 # pixels/second/second
 var can_shoot = true
 var can_move = true
 var can_jump = true
@@ -54,9 +50,12 @@ var mag_3
 var mag_4
 var preweapon 
 var weaponnumb = 0
-var force = Vector2(200, gravity) # create forces 
 var stop = true
 var wallmount = false
+var move_speed = 400
+var velocity = Vector2.ZERO
+var direction = Vector2.ZERO
+var player_state
 
 onready var health = max_health
 
@@ -149,18 +148,11 @@ func weaponscroll(dir):
 	weaponnumb += 1 * dir # call the zoom function 
 
 func _physics_process(delta):
-	var direction = MoveDirection.NONE
+	direction.x = int(Input.get_action_strength("move_right")) - int(Input.get_action_strength("move_left"))
+	move(direction, delta)
 	
 	$Weapon.global_rotation = get_global_mouse_position().angle_to_point(position)
 	on_air_time += delta
-
-	if Input.is_action_pressed('move_left'):
-		direction = MoveDirection.LEFT
-		is_walking = true
-	elif Input.is_action_pressed('move_right'):
-		direction = MoveDirection.RIGHT
-		is_walking = true 
-	move(direction)
 		
 	if Input.is_action_just_pressed("hold"):
 		chain_pull = 40
@@ -170,7 +162,6 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("jump") and can_jump:
 		jump()
-		rotation = 0
 
 	if Input.is_action_pressed("gun_fire") and can_shoot and $Weapon/GunStats.is_automatic:
 		$Weapon/GunStats.rpc("fire", "automatic", $Weapon/Weapon_Sprite/Muzzle.global_position, $Weapon.global_rotation)
@@ -197,40 +188,23 @@ func _physics_process(delta):
 		can_jump = true
 		jump_count = 0
 		grapple_count = 0
-		
-	if stop:
-		var vsign = sign(velocity.x)
-		var vlen = abs(velocity.x)
-		vlen -= STOP_FORCE * delta
-		if vlen < 0:
-			vlen = 0
-		velocity.x = vlen * vsign
-	
-	# Integrate forces to velocity
-	velocity += force * delta    
-	# Integrate velocity into motion and move
-	velocity = move_and_slide(velocity, Vector2(0, -1), false, 4, PI/4, inertia)
-	for index in get_slide_count():
-		var collision = get_slide_collision(index)
-		if collision.collider.is_in_group("bodies"):
-				collision.collider.apply_central_impulse(-collision.normal * push)
-				
+
 	if is_on_wall() and not is_climbing:
 		wall_cling()
 	else:
 		can_walljump = true
 		wallmount = false
 
-func move(direction):   
-	force = Vector2(0, gravity)# create forces
-	stop = true
-	if can_move:
-		if direction == MoveDirection.LEFT:
-			force.x -= WALK_FORCE
-			stop = false
-		elif direction == MoveDirection.RIGHT:
-			force.x += WALK_FORCE
-			stop = false
+func move(direction, delta):
+	velocity.x = direction.x * move_speed
+	velocity.y += delta * Global.gravity
+#	move_and_slide(velocity)
+	move_and_slide_with_snap(velocity, Vector2(0,5), Vector2.UP, 1, 4, 0.9, false)
+	
+#	for index in get_slide_count():
+#		var collision = get_slide_collision(index)
+#		if collision.collider.is_in_group("bodies"):
+#				collision.collider.apply_central_impulse(-collision.normal * push)
 
 func jump():
 	jump_count += 1

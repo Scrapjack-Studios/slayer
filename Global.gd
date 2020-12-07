@@ -1,6 +1,7 @@
 extends Node
 
 # Used for miscellaneous variables/functions that need to be accessible from everywhere.
+var gravity = 1500
 
 var weapon1
 var weapon2
