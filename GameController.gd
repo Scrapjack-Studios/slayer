@@ -4,6 +4,7 @@ signal respawn_available
 
 var player_scene = preload("res://Player.tscn")
 var other_player_scene = preload("res://player/OtherPlayer.tscn")
+var last_world_state = 0
 var player
 var can_respawn
 var wants_to_respawn
@@ -22,12 +23,34 @@ func _process(_delta):
 		$CanvasLayer/HUD/AmmoCooldown.max_value
 		player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").wait_time
 
-func _on_RespawnAsker_pressed():
-	if can_respawn:
-		Global.player_node.rpc("respawn")
-	else:
-		wants_to_respawn = true
-		$CanvasLayer/DeathUI/RespawnAsker.set_text("Queued")
+func update_world_state(world_state):
+	# Buffer
+	# Interpolation
+	# Extrapolation
+	# Rubber banding
+	if world_state["T"] > last_world_state: # check if world state is up-to-date
+		last_world_state = world_state["T"]
+		world_state.erase("T")
+		world_state.erase(get_tree().get_network_unique_id()) # we only want to loop through other players' states
+		for player in world_state.keys():
+			if $Players.has_node(str(player)):
+				$Players.get_node(str(player)).set_position(world_state[player]["P"]) # update puppet player's position
+			else:
+				print("Spawning player")
+				spawn(player, world_state[player]["P"]) # spawn players that joined before you
+
+func spawn(id, start_position):
+	if get_tree().get_network_unique_id() == id:
+		pass
+	elif not $Players.has_node(str(id)):
+		var new_player = other_player_scene.instance()
+		new_player.position = start_position
+		new_player.name = str(id)
+		new_player.username = str(id)
+		$Players.add_child(new_player)
+
+func despawn(id):
+	$Players.get_node(str(id)).queue_free()
 
 func spawn_self(id):
 	player = player_scene.instance()
@@ -44,19 +67,6 @@ func spawn_self(id):
 	$CanvasLayer/HUD/HealthBar/HealthBarChange.value = player.health
 	$CanvasLayer/DeathUI/RespawnAsker.hide()
 	$CanvasLayer/DeathUI/RespawnCountdown.hide()
-
-func spawn(id, start_position):
-	if get_tree().get_network_unique_id() == id:
-		pass
-	else:
-		var new_player = other_player_scene.instance()
-		new_player.position = start_position
-		new_player.name = str(id)
-		new_player.username = str(id)
-		$Players.add_child(new_player)
-
-func despawn(id):
-	$Players.get_node(str(id)).queue_free()
 
 remote func who_died(victim, weapon_sprite, killer):
 	var obituary_row = load("res://menus/ObituaryRow.tscn").instance()
@@ -106,7 +116,14 @@ func _on_GameController_respawn_available():
 	if wants_to_respawn:
 		player.rpc("respawn")
 		wants_to_respawn = false
-		
+
+func _on_RespawnAsker_pressed():
+	if can_respawn:
+		Global.player_node.rpc("respawn")
+	else:
+		wants_to_respawn = true
+		$CanvasLayer/DeathUI/RespawnAsker.set_text("Queued")
+
 #func _on_player_disconnected(id):
 #	get_node(str(id)).queue_free()
 #	$CanvasLayer/NetworkUI/DisconnectMessage.set_text(Server.disconnected_player_info["name"] + " has disconnected")
