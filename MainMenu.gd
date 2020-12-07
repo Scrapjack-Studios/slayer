@@ -47,7 +47,7 @@ func _on_Join_pressed():
 	Global.weapon4 = $PlayMenu/JoinGameMenu/Weapons/Weapon4.get_item_text($PlayMenu/JoinGameMenu/Weapons/Weapon4.selected)
 	
 	get_tree().change_scene("res://menus/LoadingScreen.tscn")
-	Server.connect_to_server(ip, port, Global.username)
+	Server.connect_to_server(ip, port)
 
 func _on_EditProfile_pressed():
 	$EditProfileMenu/VBoxContainer/UserName.text = Global.username

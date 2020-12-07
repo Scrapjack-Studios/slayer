@@ -1,6 +1,5 @@
 extends Node
 
-signal game_started
 signal respawn_available
 
 var player_scene = preload("res://Player.tscn")
@@ -11,8 +10,7 @@ var wants_to_respawn
 
 func _ready():
 	add_child(load("res://maps/" + Global.map + ".tscn").instance())
-	spawn_self(str(get_tree().get_network_unique_id()), Server.self_data)
-	emit_signal("game_started")
+	spawn_self(str(get_tree().get_network_unique_id()))
 
 func _process(_delta):
 	if $CanvasLayer/DeathUI/RespawnCountdown.visible:
@@ -31,12 +29,12 @@ func _on_RespawnAsker_pressed():
 		wants_to_respawn = true
 		$CanvasLayer/DeathUI/RespawnAsker.set_text("Queued")
 
-func spawn_self(id, info):
+func spawn_self(id):
 	player = player_scene.instance()
 	$Players.add_child(player)
 	player.position = Vector2(0,0)
 	player.name = str(id)
-	player.username = info.username
+	player.username = str(id)
 	player.connect("health_changed", self, "on_Player_health_changed")
 	player.connect("died", self, "on_Player_died")
 	player.connect("respawn", self, "on_Player_respawned")   
@@ -54,7 +52,7 @@ func spawn(id, info, start_position):
 		var new_player = other_player_scene.instance()
 		new_player.position = start_position
 		new_player.name = str(id)
-		new_player.username = info.username
+		new_player.username = str(id)
 		$Players.add_child(new_player)
 
 func despawn(id):
