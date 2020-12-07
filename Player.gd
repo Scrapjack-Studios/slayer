@@ -4,7 +4,7 @@ signal health_changed(health)
 signal died
 signal respawn
 
-const FLOOR_ANGLE_TOLERANCE = 70 # Angle in degrees towards either side that the player can consider "floor"
+const FLOOR_ANGLE_TOLERANCE = deg2rad(70) # Angle in degrees towards either side that the player can consider "floor"
 const WALK_FORCE = 1600
 const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 400
@@ -56,6 +56,7 @@ var stop = true
 var wallmount = false
 var move_speed = 400
 var velocity = Vector2.ZERO
+var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 var player_state
 
 onready var health = max_health
@@ -139,14 +140,14 @@ func _input(event: InputEvent) -> void:
 		preweapon = "Weapon4"
 		$Weapon/GunStats.shots_fired = mag_4
 
-	if event.is_action_pressed("LastWeapon"):
-		weaponscroll(1)
+#	if event.is_action_pressed("LastWeapon"):
+#		weaponscroll(1)
+#
+#	elif event.is_action_pressed("NextWeapon"):
+#		weaponscroll(-1)
 
-	elif event.is_action_pressed("NextWeapon"):
-		weaponscroll(-1)
-
-func weaponscroll(dir):
-	weaponnumb += 1 * dir # call the zoom function 
+#func weaponscroll(dir):
+#	weaponnumb += 1 * dir # call the zoom function 
 
 func _physics_process(delta):
 	move(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), delta)
@@ -198,7 +199,7 @@ func _physics_process(delta):
 func move(direction, delta):
 	velocity.x = direction * move_speed
 	velocity.y += delta * Global.gravity
-	move_and_slide_with_snap(velocity, Vector2(0,5), Vector2.UP, 1, 4, 0.9, false)
+	move_and_slide_with_snap(velocity, snap_vector, Vector2.UP, true, 4, FLOOR_ANGLE_TOLERANCE, false)
 	
 	for slide in get_slide_count():
 		var collision = get_slide_collision(slide)
