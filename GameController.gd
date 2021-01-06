@@ -2,12 +2,17 @@ extends Node
 
 signal respawn_available
 
+const INTERPOLATION_OFFSET = 100
+
 var player_scene = preload("res://Player.tscn")
 var other_player_scene = preload("res://player/OtherPlayer.tscn")
 var last_world_state = 0
 var player
 var can_respawn
 var wants_to_respawn
+
+# [MostRecentPast, NearestFuture, AnyOtherFuture]
+var world_state_buffer = []
 
 func _ready():
 	add_child(load("res://maps/" + Global.map + ".tscn").instance())
@@ -23,21 +28,45 @@ func _process(_delta):
 		$CanvasLayer/HUD/AmmoCooldown.max_value
 		player.get_node("Weapon").get_node("GunStats").get_node("ReloadTimer").wait_time
 
-func update_world_state(world_state):
-	# Buffer
-	# Interpolation
-	# Extrapolation
-	# Rubber banding
-	if world_state["T"] > last_world_state: # check if world state is up-to-date
-		last_world_state = world_state["T"]
-		world_state.erase("T")
-		world_state.erase(get_tree().get_network_unique_id()) # we only want to loop through other players' states
-		for player in world_state.keys():
-			if $Players.has_node(str(player)):
-				$Players.get_node(str(player)).set_position(world_state[player]["P"]) # update puppet player's position
+func _physics_process(delta: float) -> void:
+	# time of the frame being rendered
+	var render_time = OS.get_system_time_msecs() - INTERPOLATION_OFFSET
+	# check if buffer has at least 2 world states
+	if world_state_buffer.size() > 1:
+		# check if the render time is further along than the nearest future state in the buffer
+		# if the render_time is further along, then the nearest future state is no longer in the future
+		while world_state_buffer.size() > 2 and render_time > world_state_buffer[1].T:
+			# remove most recent past world state, b/c it's no longer no longer useful
+			# this shifts the previous nearest future state to the past in the array
+			world_state_buffer.remove(0)
+		# determine how much time has passed (as %) from past to future state
+		# if we're close to the future state we want the position to be closer to future state
+		# if we're closer to the past world state, we use that instead
+		var past_to_present_lapse = float(render_time - world_state_buffer[0].T)
+		var past_present_difference = float(world_state_buffer[1].T - world_state_buffer[0].T)
+		var interpolation_factor =  past_to_present_lapse / past_present_difference
+		# loop over every player in world state, and determine their position based on render time
+		for player in world_state_buffer[1].keys():
+			if str(player) == "T":
+				continue
+			# don't operate on your own network ID
+			elif player == get_tree().get_network_unique_id():
+				continue
+			# make sure the player actually has a past world state
+			elif not world_state_buffer[0].has(player):
+				continue
+			elif $Players.has_node(str(player)):
+				var new_position = lerp(world_state_buffer[0][player].P, world_state_buffer[1][player].P, interpolation_factor)
+				$Players.get_node(str(player)).set_position(new_position)
 			else:
-				print("Spawning player")
-				spawn(player, world_state[player]["P"]) # spawn players that joined before you
+				print("Spawning new player.")
+				spawn(player, world_state_buffer[1][player].P)
+
+func update_world_state(world_state):
+	# check if world state is up-to-date
+	if world_state["T"] > last_world_state: 
+		last_world_state = world_state["T"]
+		world_state_buffer.append(world_state)
 
 func spawn(id, start_position):
 	if get_tree().get_network_unique_id() == id:
