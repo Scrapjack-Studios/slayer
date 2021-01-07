@@ -35,32 +35,53 @@ func _physics_process(delta: float) -> void:
 	if world_state_buffer.size() > 1:
 		# check if the render time is further along than the nearest future state in the buffer
 		# if the render_time is further along, then the nearest future state is no longer in the future
-		while world_state_buffer.size() > 2 and render_time > world_state_buffer[1].T:
+		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].T:
 			# remove most recent past world state, b/c it's no longer no longer useful
 			# this shifts the previous nearest future state to the past in the array
 			world_state_buffer.remove(0)
-		# determine how much time has passed (as %) from past to future state
-		# if we're close to the future state we want the position to be closer to future state
-		# if we're closer to the past world state, we use that instead
-		var past_to_present_lapse = float(render_time - world_state_buffer[0].T)
-		var past_present_difference = float(world_state_buffer[1].T - world_state_buffer[0].T)
-		var interpolation_factor =  past_to_present_lapse / past_present_difference
-		# loop over every player in world state, and determine their position based on render time
-		for player in world_state_buffer[1].keys():
-			if str(player) == "T":
-				continue
-			# don't operate on your own network ID
-			elif player == get_tree().get_network_unique_id():
-				continue
-			# make sure the player actually has a past world state
-			elif not world_state_buffer[0].has(player):
-				continue
-			elif $Players.has_node(str(player)):
-				var new_position = lerp(world_state_buffer[0][player].P, world_state_buffer[1][player].P, interpolation_factor)
-				$Players.get_node(str(player)).set_position(new_position)
-			else:
-				print("Spawning new player.")
-				spawn(player, world_state_buffer[1][player].P)
+		# if we have a future state
+		if world_state_buffer.size() > 2:
+			interpolate(render_time)
+		# if we don't have a future world state
+		elif render_time > world_state_buffer[1].T:
+			extrapolate(render_time)
+
+func interpolate(render_time):
+	# determine how much time has passed (as %) from past to future state
+	# if we're close to the future state we want the position to be closer to future state
+	# if we're closer to the past world state, we use that instead
+	var interpolation_factor =  float(render_time - world_state_buffer[1].T) / float(world_state_buffer[2].T - world_state_buffer[1].T)
+	# loop over every player in world state, and determine their position based on render time
+	for player in world_state_buffer[2].keys():
+		if str(player) == "T":
+			continue
+		# don't operate on your own network ID
+		elif player == get_tree().get_network_unique_id():
+			continue
+		# make sure the player actually has a past world state
+		elif not world_state_buffer[1].has(player):
+			continue
+		elif $Players.has_node(str(player)):
+			var new_position = lerp(world_state_buffer[1][player].P, world_state_buffer[2][player].P, interpolation_factor)
+			$Players.get_node(str(player)).set_position(new_position)
+		else:
+			print("Spawning new player.")
+			spawn(player, world_state_buffer[2][player].P)
+
+func extrapolate(render_time):
+	# don't want to include time that has passed between both past world states
+	var extrapolation_factor =  float(render_time - world_state_buffer[0].T) / float(world_state_buffer[1].T - world_state_buffer[0].T) - 1.00
+	for player in world_state_buffer[1].keys():
+		if str(player) == "T":
+			continue
+		elif player == get_tree().get_network_unique_id():
+			continue
+		elif not world_state_buffer[0].has(player):
+			continue
+		elif $Players.has_node(str(player)):
+			var position_delta = world_state_buffer[1][player].P - world_state_buffer[0][player].P
+			var new_position = world_state_buffer[1][player].P + (position_delta * extrapolation_factor)
+			$Players.get_node(str(player)).set_position(new_position)
 
 func update_world_state(world_state):
 	# check if world state is up-to-date
