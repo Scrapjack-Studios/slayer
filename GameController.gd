@@ -10,7 +10,6 @@ var last_world_state = 0
 var player
 var can_respawn
 var wants_to_respawn
-
 # [MostRecentPast, NearestFuture, AnyOtherFuture]
 var world_state_buffer = []
 
@@ -85,8 +84,8 @@ func extrapolate(render_time):
 
 func update_world_state(world_state):
 	# check if world state is up-to-date
-	if world_state["T"] > last_world_state: 
-		last_world_state = world_state["T"]
+	if world_state.T > last_world_state: 
+		last_world_state = world_state.T
 		world_state_buffer.append(world_state)
 
 func spawn(id, start_position):

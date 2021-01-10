@@ -37,7 +37,7 @@ FPSCounter="*res://misc/FPSCounter.tscn"
 Global="*res://Global.gd"
 Console="*res://addons/quentincaffeino-console/src/Console.tscn"
 CustomCommands="*res://misc/CustomCommands.gd"
-Server="*res://singletons/server.gd"
+Server="*res://singletons/server.tscn"
 
 [debug]
 
