@@ -9,6 +9,8 @@ func send_player_state(player_state):
 	rpc_unreliable_id(1, "get_player_state", player_state)
 
 remote func get_world_state(world_state):
+	while not get_node("/root").has_node("GameController"):
+		pass
 	get_node("/root/GameController").update_world_state(world_state)
 
 remote func get_game_info(map):
