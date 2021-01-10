@@ -100,6 +100,8 @@ func spawn(id, start_position):
 		$Players.add_child(new_player)
 
 func despawn(id):
+	# allows world state processing to clean out this player's states
+	yield(get_tree().create_timer(0.2), "timeout")
 	$Players.get_node(str(id)).queue_free()
 
 func spawn_self(id):
