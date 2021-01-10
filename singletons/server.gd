@@ -1,6 +1,6 @@
 extends Node
 
-var client_clock
+var client_clock = 0
 var decimal_collector: float = 0
 var latency_array = []
 var latency = 0
