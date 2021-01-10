@@ -50,8 +50,6 @@ remote func return_latency(client_time):
 		# calculate difference in latency from the last time we calculated this
 		delta_latency = (total_latency / latency_array.size()) - latency
 		latency = total_latency / latency_array.size()
-		print("New latency: ", latency)
-		print("Delta latency: ", delta_latency)
 		latency_array.clear()
 
 remote func get_world_state(world_state):
